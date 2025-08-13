@@ -1,0 +1,260 @@
+[복합지능 과제]
+o [개념 구조화 능력 개선을 통한 Entity 관련 추론 능력 향상 연구] 진행
+  * 개념 그래프 지식 추출 및 강화를 통한 추론 성능 개선에 대한 기초 실험 계획
+    1. 한국어 GSM8k 교정본 데이터를 기반으로 수학 문제에 대한 LLM의 개념 그래프 지식 추출 시도
+       - 개념 그래프 지식 추출 대상(LLM): Llama 3.3 70B 및 유사 모델
+    2. LLM의 개념 그래프 지식 추출 결과를 사용한 것과 사용하지 않은 상태에서 sLLM의 수학 추론 능력 비교
+       - 수학 추론 능력 비교 대상(sLLM): Llama 3.1 8B, Llama 3.2 3B 및 EAGLE 모델
+    3. sLLM을 추가로 Instruction Tuning하기 위한 방법 제안 및 개발
+       - 관련 연구 조사 및 우선 파악 필요
+
+
+여기서 [sLLM을 추가로 Instruction Tuning하기 위한 방법 제안 및 개발]을 위해서 관련 연구를 조사하고 있습니다.
+
+
+관련해서 읽어야할 논문을 자연어처리 및 지식 처리 관련 학술대회 및 저널(가급적 SCIE) 논문들을 출처와 함께 추천해주세요. 가능한 현재의 LLM 관련 트렌드에 맞는 논문이거나 LLM 관련 insight가 있는 논문이면 더 좋겠고, Instruction Tuning에 대한 것이나 이것을 확장하거나 다른 대안이 있는 것도 괜찮겠습니다.
+
+- 우리 분야의 주요 학술대회: ACL, EMNLP, NAACL, AAAI, IJCAI, CIKM, SIGIR, COLING, ICLR, KDD, CoNLL, LREC, NeurIPS, EACL, IJCNLP, ECAI, WWW, WSDM, RecSys 등
+- 우리 분야의 주요 저널: Transactions of the Association for Computational Linguistics (TACL), Computational Linguistics, Natural Language Engineering, ACM T. on Asian & Low-Resource Language Information Processing (TALLIP), Artificial Intelligence (AIJ), Journal of Artificial Intelligence Research (JAIR), Journal of Machine Learning Research (JMLR), Machine Learning (Springer), Applied Intelligence, ACM Transactions on Information Systems (TOIS), Information Processing & Management (IP&M), Information Retrieval Journal, Expert Systems with Applications(ESWA), IEEE Access, Knowledge-Based Systems, Information Sciences, Pattern Recognition, Applied Soft Computing, Neural Computing & Applications 등
+
+
+==========================================================================================
+
+
+10B 이하의 LLaMA 등의 소형LLM(sLLM)이 개념 그래프를 더 잘 생성하기 위해서
+50B 이상의 LLaMA 등이나 LLaMA-4 Maverick/Scout이 생성한 개념 그래프를 가지고 모사하도록 학습할 수는 없나요?
+
+이와 유사한 접근으로 접근한 논문들을 다시 한번 주요 학술대회와 저널에서 찾아서 출처와 함께 제공해주세요:
+
+- 우리 분야의 주요 학술대회: ACL, EMNLP, NAACL, AAAI, IJCAI, CIKM, SIGIR, COLING, ICLR, KDD, CoNLL, LREC, NeurIPS, EACL, IJCNLP, ECAI, WWW, WSDM, RecSys 등
+- 우리 분야의 주요 저널: Transactions of the Association for Computational Linguistics (TACL), Computational Linguistics, Natural Language Engineering, ACM T. on Asian & Low-Resource Language Information Processing (TALLIP), Artificial Intelligence (AIJ), Journal of Artificial Intelligence Research (JAIR), Journal of Machine Learning Research (JMLR), Machine Learning (Springer), Applied Intelligence, ACM Transactions on Information Systems (TOIS), Information Processing & Management (IP&M), Information Retrieval Journal, Expert Systems with Applications(ESWA), IEEE Access, Knowledge-Based Systems, Information Sciences, Pattern Recognition, Applied Soft Computing, Neural Computing & Applications 등
+
+
+
+==========================================================================================
+
+
+
+개념 그래프라고 해서 꼭 그래프 형식으로 출력을 하지는 않아도 됩니다.
+아래처럼 MWP(Math Word Problem)과 같은 텍스트가 주어지면 거기에 등장하는 개념들간의 관계를 트리플 형태로 표현해주기만 해도 됩니다.
+다음을 이를 위한 시스템 프롬프트입니다:
+You are a **Concept Graph Extractor**.
+Your job is to convert the given Korean math word‑problem into a logically‑consistent set of <Head, Relation, Tail> triples.
+
+## Workflow  
+1. **Concept Identification** – list every explicit or implicit noun phrase.  
+2. **Relation Mapping** – connect concepts with a single English relation word.  
+3. **Background Knowledge** – record general truths required to solve the problem.  
+4. **Triple Validation** – remove duplicates and fix type mismatches.  
+5. **Serialization** – return the result as *one* JSON object that follows the schema below.
+
+## Output Structure
+Your output must contain exactly these four sections:
+- **concepts**: Flat list of all Korean concepts (nouns/noun phrases) from the problem
+- **background_knowledge**: General-truth triples needed to solve the problem (mathematical facts, unit conversions, etc.)
+- **facts**: Explicit triples directly stated in the problem text
+- **disambiguation**: Hidden constraint triples that clarify implicit relationships or equalities
+
+## JSON Schema  
+```json
+{
+  "type": "object",
+  "properties": {
+    "concepts":              { "type": "array", "items": { "type": "string" } },
+    "background_knowledge":  { "type": "array", "items": { "$ref": "#/$defs/triple" } },
+    "facts":                 { "type": "array", "items": { "$ref": "#/$defs/triple" } },
+    "disambiguation":        { "type": "array", "items": { "$ref": "#/$defs/triple" } }
+  },
+  "required": ["concepts", "background_knowledge", "facts", "disambiguation"],
+  "additionalProperties": false,
+  "$defs": {
+    "triple": {
+      "type": "array",
+      "items": [
+        { "type": "string" },
+        { "type": "string" },
+        { "type": "string" }
+      ],
+      "minItems": 3,
+      "maxItems": 3
+    }
+  }
+}
+```
+
+## Triple Categories Explained
+- **background_knowledge**: Universal mathematical truths (e.g., ["시간", "unit_of", "근무"], ["초과근무", "condition", "40시간_초과"])
+- **facts**: Explicit triples from the problem (e.g., ["엘리자", "earns_per_hour", "10달러"], ["엘리자", "works_hours", "45시간"])
+- **disambiguation**: Implicit constraints / equalities (e.g., ["총_근무시간", "equals", "45시간"], ["초과근무시간", "equals", "5시간"])
+
+## Formatting Rules
+- **Relations** must be in lowercase *snake_case* English.
+- **Concepts** must remain in Korean.
+- Do **not** place a period at the end of any triple.
+- Remove duplicate triples.
+- Return *only* the JSON object – no extra text.
+
+## Prohibited Actions
+- Do **not** calculate or state the numeric answer to the problem.
+- Avoid unnecessary chain‑of‑thought; reason silently.
+- Do **not** translate relation words into Korean.
+
+
+다음은 이를 위한 사용자 프롬프트입니다:
+Read the following Korean math word-problem and, following the System rules, return **one JSON object** that conforms to the prescribed schema.
+
+- **Do NOT** calculate or reveal the numeric answer.
+- Output **only** the JSON object—no Markdown fences, no prose.
+- Keep every relation in lowercase *snake_case* English; keep every concept in Korean.
+
+### Example input
+"엘리자의 매주 첫 40시간 근무에 대한 시간당 급여는 $10입니다. 또한 정규 시간당 임금의 1.2배에 해당하는 초과 근무 수당을 받습니다. 엘리자가 이번 주에 45시간 동안 일했다면 이번 주 수입은 얼마입니까?"
+
+### Example output (illustrative)
+{{
+  "concepts": [
+    "엘리자", "이번주",
+    "정규근무시간", "40시간", "초과근무시간", "5시간", "총근무시간", "45시간",
+    "정규_시급", "10달러", "초과근무_배수", "1.2배", "초과_시급",
+    "정규급여", "초과급여", "총급여"
+  ],
+  "background_knowledge": [
+    ["초과근무시간", "defined_as", "총근무시간_빼기_정규근무시간"],
+    ["초과_시급", "calculated_by", "정규_시급_곱하기_초과근무_배수"],
+    ["정규급여", "calculated_by", "정규근무시간_곱하기_정규_시급"],
+    ["초과급여", "calculated_by", "초과근무시간_곱하기_초과_시급"],
+    ["총급여", "sum_of", "정규급여와_초과급여"]
+  ],
+  "facts": [
+    ["엘리자", "worked_this_week", "총근무시간"],
+    ["총근무시간", "has_value", "45시간"],
+    ["정규근무시간", "threshold", "40시간"],
+    ["정규_시급", "has_value", "10달러"],
+    ["초과근무_배수", "has_value", "1.2배"]
+  ],
+  "disambiguation": [
+    ["초과근무시간", "equals", "45시간_빼기_40시간"],
+    ["초과_시급", "equals", "10달러_곱하기_1.2배"],
+    ["총급여", "includes", "정규급여와_초과급여_모두"],
+    ["이번주", "time_context", "모든_급여_계산"]
+  ]
+}}
+
+### Problem
+"{problem_text}"
+
+
+
+위와 같은 프롬프트로 응답을 생성한다고 했을 때, LLM과 SLM의 생성 품질이 크게 차이가 있는데,
+SLM이 LLM처럼 고품질의 응답을 생성하고 싶은 것입니다.
+
+이를 위한 관련 연구를 다시 한번 주요 학술대회와 저널에서 찾아서 출처와 함께 제공해주세요:
+
+- 우리 분야의 주요 학술대회: ACL, EMNLP, NAACL, AAAI, IJCAI, CIKM, SIGIR, COLING, ICLR, KDD, CoNLL, LREC, NeurIPS, EACL, IJCNLP, ECAI, WWW, WSDM, RecSys 등
+- 우리 분야의 주요 저널: Transactions of the Association for Computational Linguistics (TACL), Computational Linguistics, Natural Language Engineering, ACM T. on Asian & Low-Resource Language Information Processing (TALLIP), Artificial Intelligence (AIJ), Journal of Artificial Intelligence Research (JAIR), Journal of Machine Learning Research (JMLR), Machine Learning (Springer), Applied Intelligence, ACM Transactions on Information Systems (TOIS), Information Processing & Management (IP&M), Information Retrieval Journal, Expert Systems with Applications(ESWA), IEEE Access, Knowledge-Based Systems, Information Sciences, Pattern Recognition, Applied Soft Computing, Neural Computing & Applications 등
+
+
+
+
+==========================================================================================
+
+
+
+
+papers:
+  - title: "DRAG: Distilling RAG for SLMs from LLMs to Transfer Knowledge and Mitigate Hallucination via Evidence and Graph-based Distillation"
+    venue: "ACL 2025 (Long Paper)"
+    link: "https://aclanthology.org/2025.acl-long.358/"
+    idea: "70 B 교사 RAG가 생성한 **증거 순위 + 지식 그래프**를 KL·contrastive 다중 loss 로 7 B 학생에 증류, 사실 일관성 유지·환각 감소"   # :contentReference[oaicite:0]{index=0}
+    relevance: "CG(JSON) 후보와 근거 문장을 함께 loss 항목(L_graph)으로 넣는 설계 참고 – §3 Method, Table 3 (Ablation) 우선 읽기"
+    tips: "문제별 top-k(≤10) triple과 supporting sentence 를 저장해 증류 코퍼스 구축"
+
+  - title: "MAGDi: Structured Distillation of Multi-Agent Interaction Graphs Improves Reasoning in Smaller Language Models"
+    venue: "ICLR 2025 (Spotlight)"
+    link: "https://arxiv.org/abs/2402.01620"
+    idea: "GPT-4 다중 에이전트 토론을 **논증 그래프**로 변환, graph-encoder 추가·3중 loss 로 7 B 학생 학습 → 수학·상식 7벤치 +5 pt"   # :contentReference[oaicite:1]{index=1}
+    relevance: "Beam CoT 로그→그래프 변환 파이프라인( Fig 2 )를 그대로 CG 문제 풀이 로그에 적용"
+    tips: "그래프 노드·엣지 라벨을 triple 스키마와 맞춰야 distillation 안정"
+
+  - title: "Mentor-KD: Making Small Language Models Better Multi-step Reasoners"
+    venue: "EMNLP 2024 (Main)"
+    link: "https://aclanthology.org/2024.emnlp-main.977/"
+    idea: "70 B 교사 → 13 B Mentor → 7 B 학생 **2단계 KD**·soft label 제공, multi-step reasoning 성능 대폭 향상"   # :contentReference[oaicite:2]{index=2}
+    relevance: "데이터 적을 때 Mentor stage가 효과적 – §4 Mentor Generation 참조"
+    tips: "13 B ‘교정용’ 중간 모델로 CG·정답 풀이 둘 다 distill 후 최종 8 B에 압축"
+
+  - title: "Distilling Structured Rationale from Large Language Models to Small Language Models for Abstractive Summarization"
+    venue: "AAAI 2025"
+    link: "https://ojs.aaai.org/index.php/AAAI/article/view/34727"
+    idea: "LLM이 추출한 **EA-AS-TER 구조화 이유**를 학생에 다중-시점 loss 로 증류 → 요약 품질·설명력 동시 상승"   # :contentReference[oaicite:3]{index=3}
+    relevance: "Structured rationale → ‘계산식 triple’로 치환 가능; Table 4 구조 loss 영향 확인"
+    tips: "정규급여·초과급여 계산식을 rationale-triple 형태로 추가 supervision"
+
+  - title: "Contextualization Distillation from Large Language Model for Knowledge Graph Completion"
+    venue: "Findings of EACL 2024"
+    link: "https://aclanthology.org/2024.findings-eacl.32/"
+    idea: "교사 LLM이 triple을 **자연어 문맥**으로 재작성, 학생이 triple+문맥 reconstruction 듀얼-태스크 학습"   # :contentReference[oaicite:4]{index=4}
+    relevance: "BG section 문장화 할 때 문맥 생성·필터 규칙(Algorithm 1) 바로 응용"
+    tips: "CG triple ↔ 설명 문장 세트 생성 스크립트 작성해 데이터 3× 증폭"
+
+  - title: "Improving Recall of Large Language Models: A Model Collaboration Approach for Relational Triple Extraction"
+    venue: "LREC-COLING 2024"
+    link: "https://aclanthology.org/2024.lrec-main.778/"
+    idea: "65 B 평가-교사 + 7 B 추출-학생 협업·re-rank로 복합 문장 triple recall ↑"   # :contentReference[oaicite:5]{index=5}
+    relevance: "Inference-time에 70 B 교사가 학생 Beam 후보 평가·재정렬하는 실험 설계 참고"
+    tips: "GPU 비용 낮추려면 평가-교사를 13 B로 교체하고 score threshold 튜닝"
+
+  - title: "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
+    venue: "ACL 2023"
+    link: "https://arxiv.org/abs/2212.10560"
+    idea: "LM 자체 생성·필터링한 인스트럭션으로 **무라벨 IT** 구현, 데이터 비용 최소화"   # :contentReference[oaicite:6]{index=6}
+    relevance: "Filtering heuristics(Appx B) → CG JSON schema 기반으로 수정해 GSM8K 문제 30 k pseudo-CG 생성"
+    tips: "‘relation_snake_case’·중복 검사 룰을 필터 조건에 포함해야 품질 유지"
+
+  - title: "Phased Instruction Fine-Tuning for Large Language Models"
+    venue: "ACL 2024 (Findings)"
+    link: "https://arxiv.org/abs/2406.04371"
+    idea: "GPT-4 난도 평가로 데이터를 쉬운→어려운 순으로 **두 단계 IFT**, 안정적 수렴"   # :contentReference[oaicite:7]{index=7}
+    relevance: "Phase-1 단일 triple, Phase-2 복합 CG 문제로 커리큘럼 짜면 작은 모델도 형식 오류↓"
+    tips: "Phase 경계 난도는 triple 수(≤3 vs >3) 기준으로 간단히 결정 가능"
+
+  - title: "GraphGPT: Graph Instruction Tuning for Large Language Models"
+    venue: "SIGIR 2024"
+    link: "https://arxiv.org/abs/2310.13023"
+    idea: "텍스트↔그래프 정렬 + dual-stage projector로 그래프 생성·추론 능력 강화"   # :contentReference[oaicite:8]{index=8}
+    relevance: "§3.2 Alignment Projector 로 Llama-8 B의 head 0.5 %만 LoRA-업데이트 → 경량화"
+    tips: "프로젝터 레이어를 YAML-triple embedding에 맞춰 재사용"
+
+  - title: "InstructGraph: Boosting Large Language Models via Graph-centric Instruction Tuning and Preference Alignment"
+    venue: "ACL 2024 (Findings)"
+    link: "https://aclanthology.org/2024.findings-acl.801/"
+    idea: "그래프 중심 IT + preference alignment 로 그래프 생성·추론 동시 개선"   # :contentReference[oaicite:9]{index=9}
+    relevance: "§4 Alignment Loss 식을 참조해 triple 순서·중복 선호도 pair 생성"
+    tips: "Human eval 대신 70 B 교사 점수로 preference pair 자동 생성 가능"
+
+  - title: "SWITCH: Studying WItH TeaCHer for Knowledge Distillation of Large Language Models"
+    venue: "EMNLP 2024"
+    link: "https://arxiv.org/abs/2410.19503"
+    idea: "긴 시퀀스에서 **오차 토큰만 선택적 교사介入** KD, 장문 생성·형식 오류 감소"   # :contentReference[oaicite:10]{index=10}
+    relevance: "JSON 포맷 위반 토큰에만 teacher prob 사용 – Algorithm 2 채택"
+    tips: "CG 출력 길이 600+ 토큰 문제에서 SWITCH KD로 schema 불일치 rate↓"
+
+  - title: "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes"
+    venue: "NeurIPS 2023"
+    link: "https://arxiv.org/abs/2305.02301"
+    idea: "LLM rationales(CoT) 다중-태스크 감독으로 770 M T5가 PaLM 540 B 능력 초과"   # :contentReference[oaicite:11]{index=11}
+    relevance: "§5.3 Rationale Ablation 읽고 ‘계산식 설명 + triple’ 병렬 supervision 설계"
+    tips: "CoT 텍스트를 facts/disambiguation triple comment 로 변환해 멀티-태스크 학습"
+
+
+
+
+==========================================================================================
+
+
+
+
+이와 같은 요청들을 GPT에게 보냈을 때, 결과로 받았던 12개의 논문 목록입니다.
+이 논문들을 효과적으로 읽어보고자 합니다.
+
+논문 읽기 순서와 전략을 합리적인 이유와 함께 제안해보세요.

@@ -1,0 +1,77 @@
+papers:
+  - title: "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
+    venue: "ACL 2023"
+    link: "https://arxiv.org/abs/2212.10560"
+    idea: "LM 자체 생성·필터링한 인스트럭션으로 **무라벨 IT** 구현, 데이터 비용 최소화"   # :contentReference[oaicite:6]{index=6}
+    relevance: "Filtering heuristics(Appx B) → CG JSON schema 기반으로 수정해 GSM8K 문제 30 k pseudo-CG 생성"
+    tips: "'relation_snake_case'·중복 검사 룰을 필터 조건에 포함해야 품질 유지"
+
+  - title: "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes"
+    venue: "NeurIPS 2023"
+    link: "https://arxiv.org/abs/2305.02301"
+    idea: "LLM rationales(CoT) 다중-태스크 감독으로 770 M T5가 PaLM 540 B 능력 초과"   # :contentReference[oaicite:11]{index=11}
+    relevance: "§5.3 Rationale Ablation 읽고 '계산식 설명 + triple' 병렬 supervision 설계"
+    tips: "CoT 텍스트를 facts/disambiguation triple comment 로 변환해 멀티-태스크 학습"
+
+  - title: "Phased Instruction Fine-Tuning for Large Language Models"
+    venue: "ACL 2024 (Findings)"
+    link: "https://arxiv.org/abs/2406.04371"
+    idea: "GPT-4 난도 평가로 데이터를 쉬운→어려운 순으로 **두 단계 IFT**, 안정적 수렴"   # :contentReference[oaicite:7]{index=7}
+    relevance: "Phase-1 단일 triple, Phase-2 복합 CG 문제로 커리큘럼 짜면 작은 모델도 형식 오류↓"
+    tips: "Phase 경계 난도는 triple 수(≤3 vs >3) 기준으로 간단히 결정 가능"
+
+  - title: "GraphGPT: Graph Instruction Tuning for Large Language Models"
+    venue: "SIGIR 2024"
+    link: "https://arxiv.org/abs/2310.13023"
+    idea: "텍스트↔그래프 정렬 + dual-stage projector로 그래프 생성·추론 능력 강화"   # :contentReference[oaicite:8]{index=8}
+    relevance: "§3.2 Alignment Projector 로 Llama-8 B의 head 0.5 %만 LoRA-업데이트 → 경량화"
+    tips: "프로젝터 레이어를 YAML-triple embedding에 맞춰 재사용"
+
+  - title: "InstructGraph: Boosting Large Language Models via Graph-centric Instruction Tuning and Preference Alignment"
+    venue: "ACL 2024 (Findings)"
+    link: "https://arxiv.org/abs/2402.08785"
+    idea: "그래프 중심 IT + preference alignment 로 그래프 생성·추론 동시 개선"   # :contentReference[oaicite:9]{index=9}
+    relevance: "§4 Alignment Loss 식을 참조해 triple 순서·중복 선호도 pair 생성"
+    tips: "Human eval 대신 70 B 교사 점수로 preference pair 자동 생성 가능"
+
+  - title: "MAGDi: Structured Distillation of Multi-Agent Interaction Graphs Improves Reasoning in Smaller Language Models"
+    venue: "ICLR 2025 (Spotlight)"
+    link: "https://arxiv.org/abs/2402.01620"
+    idea: "GPT-4 다중 에이전트 토론을 **논증 그래프**로 변환, graph-encoder 추가·3중 loss 로 7 B 학생 학습 → 수학·상식 7벤치 +5 pt"   # :contentReference[oaicite:1]{index=1}
+    relevance: "Beam CoT 로그→그래프 변환 파이프라인( Fig 2 )를 그대로 CG 문제 풀이 로그에 적용"
+    tips: "그래프 노드·엣지 라벨을 triple 스키마와 맞춰야 distillation 안정"
+
+  - title: "Mentor-KD: Making Small Language Models Better Multi-step Reasoners"
+    venue: "EMNLP 2024 (Main)"
+    link: "https://arxiv.org/abs/2410.09037"
+    idea: "70 B 교사 → 13 B Mentor → 7 B 학생 **2단계 KD**·soft label 제공, multi-step reasoning 성능 대폭 향상"   # :contentReference[oaicite:2]{index=2}
+    relevance: "데이터 적을 때 Mentor stage가 효과적 – §4 Mentor Generation 참조"
+    tips: "13 B '교정용' 중간 모델로 CG·정답 풀이 둘 다 distill 후 최종 8 B에 압축"
+
+  - title: "SWITCH: Studying WItH TeaCHer for Knowledge Distillation of Large Language Models"
+    venue: "EMNLP 2024"
+    link: "https://arxiv.org/abs/2410.19503"
+    idea: "긴 시퀀스에서 **오차 토큰만 선택적 교사介入** KD, 장문 생성·형식 오류 감소"   # :contentReference[oaicite:10]{index=10}
+    relevance: "JSON 포맷 위반 토큰에만 teacher prob 사용 – Algorithm 2 채택"
+    tips: "CG 출력 길이 600+ 토큰 문제에서 SWITCH KD로 schema 불일치 rate↓"
+
+  - title: "DRAG: Distilling RAG for SLMs from LLMs to Transfer Knowledge and Mitigate Hallucination via Evidence and Graph-based Distillation"
+    venue: "ACL 2025 (Long Paper)"
+    link: "https://arxiv.org/abs/2506.01954"
+    idea: "70 B 교사 RAG가 생성한 **증거 순위 + 지식 그래프**를 KL·contrastive 다중 loss 로 7 B 학생에 증류, 사실 일관성 유지·환각 감소"   # :contentReference[oaicite:0]{index=0}
+    relevance: "CG(JSON) 후보와 근거 문장을 함께 loss 항목(L_graph)으로 넣는 설계 참고 – §3 Method, Table 3 (Ablation) 우선 읽기"
+    tips: "문제별 top-k(≤10) triple과 supporting sentence 를 저장해 증류 코퍼스 구축"
+
+  - title: "Contextualization Distillation from Large Language Model for Knowledge Graph Completion"
+    venue: "Findings of EACL 2024"
+    link: "https://arxiv.org/abs/2402.01729v3"
+    idea: "교사 LLM이 triple을 **자연어 문맥**으로 재작성, 학생이 triple+문맥 reconstruction 듀얼-태스크 학습"   # :contentReference[oaicite:4]{index=4}
+    relevance: "BG section 문장화 할 때 문맥 생성·필터 규칙(Algorithm 1) 바로 응용"
+    tips: "CG triple ↔ 설명 문장 세트 생성 스크립트 작성해 데이터 3× 증폭"
+
+  - title: "Improving Recall of Large Language Models: A Model Collaboration Approach for Relational Triple Extraction"
+    venue: "LREC-COLING 2024"
+    link: "https://arxiv.org/abs/2404.09593v1"
+    idea: "65 B 평가-교사 + 7 B 추출-학생 협업·re-rank로 복합 문장 triple recall ↑"   # :contentReference[oaicite:5]{index=5}
+    relevance: "Inference-time에 70 B 교사가 학생 Beam 후보 평가·재정렬하는 실험 설계 참고"
+    tips: "GPU 비용 낮추려면 평가-교사를 13 B로 교체하고 score threshold 튜닝"
