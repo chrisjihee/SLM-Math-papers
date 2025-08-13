@@ -1,3 +1,19 @@
+==========
+[User]
+==========
+이제 첫번째 논문(Self-Instruct: Aligning Language Models with Self-Generated Instructions)에 이어서 읽어볼 다음 논문을 다시 신중하게 정해보고자 합니다.
+
+첫번째 논문을 읽는데 벌써 3일 정도 소모되었으므로, 효과적으로 다음 논문을 정해보려고 합니다.
+왜냐면 실제로 구현하는 과정에서 실험이 진행될 때 다시 시간 내서 못 읽을 논문을 읽을 수도 있다고 생각합니다.
+
+첫번째 논문에 이어서 연구과제에서 달성하려는 목표를 위해 다음으로 읽어야할 논문은 무엇인지 다시 한번 신중하게 생각해보고 추천해주세요.
+@papars.yaml 파일에 각 논문의 abstract를 추가했으니, 각 논문의 abstract와 각 논문 내용까지도 참고하여서 다시 한번 정말 신중하게 추천해주세요.
+
+
+
+==========
+[GPT-5]
+==========
 ### 다음 읽을 1순위
 - **Distilling Step-by-Step! (NeurIPS 2023)**
   - **이유**: CG를 sLLM에 “내재화”하는 최단 경로. LLM의 rationale을 추가 감독으로 멀티태스크 학습(Eq.(3)) → 우리 도메인에선 rationale=CG(facts/disambiguation)로 매핑해 바로 적용 가능.
@@ -29,6 +45,9 @@
 
 
 
+==========
+[Claude-4]
+==========
 현재 상황을 종합적으로 분석한 결과, 다음과 같이 추천드립니다:
 
 ## 🎯 **1순위 추천: Distilling Step-by-Step! (NeurIPS 2023)**
@@ -91,6 +110,9 @@ Output 2 ([rationale]): CG(facts + disambiguation)
 
 
 
+==========
+[Gemini-2.5]
+==========
 안녕하세요. `papars.yaml`의 abstract, `txt` 폴더의 논문 전문, 그리고 `weekly-report.txt`와 `README.md`의 내용을 모두 다시 한번 깊이 있게 분석하여, 현재 시점에서 가장 전략적이고 시간 효율적인 다음 논문을 추천해 드립니다.
 
 ### 최종 결론 요약
@@ -140,6 +162,9 @@ Output 2 ([rationale]): CG(facts + disambiguation)
 
 
 
+==========
+[Grok-4]
+==========
 ### 다음 논문 추천: 신중한 재고려 결과
 
 안녕하세요. 이전 쿼리와 동일한 내용을 반복적으로 보내주셨네요. 제가 이전 응답에서 이미 여러 번 추천드린 바와 같이, `papars.yaml`의 abstract와 `txt` 폴더의 모든 논문 전문(02~11)을 다시 한번 철저히 분석했습니다. 특히, 현재 열린 파일(`txt/02...txt`)의 내용(멀티태스크 증류 프레임워크)을 중점으로 검토하며, `weekly-report.txt`의 "8B급 sLLM 수학추론 강화" 목표와 `README.md`의 로드맵(Day 1: Self-Instruct + Distilling Step-by-Step)을 고려했습니다.
