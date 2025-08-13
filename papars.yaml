@@ -2,9 +2,9 @@ papers:
   - title: "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
     venue: "ACL 2023"
     link: "https://arxiv.org/abs/2212.10560"
-    idea: "LM 자체 생성·필터링한 인스트럭션으로 **무라벨 IT** 구현, 데이터 비용 최소화"   # :contentReference[oaicite:6]{index=6}
-    relevance: "Filtering heuristics(Appx B) → CG JSON schema 기반으로 수정해 GSM8K 문제 30 k pseudo-CG 생성"
-    tips: "'relation_snake_case'·중복 검사 룰을 필터 조건에 포함해야 품질 유지"
+    idea: "175개 seed 지시문에서 시작해 pretrained LM이 4단계(지시문 생성→분류 태스크 여부 판별→instance 생성→filtering)를 거쳐 52k instructions/82k instances를 자동 생성. Filtering 규칙: ROUGE-L 유사도 < 0.7, 비-텍스트 keywords(image/picture/graph) 제외, 동일 instances 및 같은 입력-다른 출력 쌍 제거, 길이·반복 기반 무효화. 분류 태스크는 output-first 방식으로 label bias 완화. 생성 데이터로 동일 LM을 재학습시켜 SuperNI에서 +33% 절대 성능 향상, InstructGPT-001과 5%p 격차."
+    relevance: "우리 목표는 한국어 MWP의 CG(JSON triples) 생성/추론 능력을 sLLM에 이식하는 것으로, Self-Instruct의 범용 52k scale이 필수는 아님. 핵심은 seed→자동 생성→filtering→재학습 cycle을 도메인 특화하는 것. 논문에서 16k 이후 성능 plateau 발견(Figure 7)하므로, MWP-CG 도메인에서는 수백~수천 규모로도 충분할 가능성. 분류 여부 판별 후 관계/연산 타입 선택 과제에 output-first 적용하여 label bias 완화하고, 동일한 filtering 규칙으로 품질 담보."
+    tips: "Self-Instruct 4단계를 MWP-CG 도메인으로 축소 적용: seed 30-50개 CG 생성 지시문 설계→template 변형(문체/슬롯 수)→classification 여부 판별 후 output-first/input-first 선택→filtering(ROUGE-L < 0.7, 비-텍스트 keywords 제외, 중복/충돌 제거, 길이·반복 무효화); 16k 이후 plateau이므로 1-3k 규모로 시작; 한국어 개념/관계 표기 표준화 사전 병행; fine-tuning 시 다양한 prompt formats으로 강건성 확보."
 
   - title: "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes"
     venue: "NeurIPS 2023"

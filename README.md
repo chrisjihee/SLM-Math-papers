@@ -3,8 +3,8 @@
 - **핵심 과제**: (1) 그래프 중심 지식/근거의 구조화, (2) LLM→sLLM 증류(형식 일치·추론 보존), (3) 커리큘럼/지시문 튜닝으로 안정 학습
 
 ### 전체 전략
-- **3축 프레임**으로 읽습니다:  
-  - **A. IFT·커리큘럼·합성 데이터**: 안정적으로 “형식 준수 + 도메인 적합”을 만드는 기반  
+-- **3축 프레임**으로 읽습니다:  
+  - **A. IFT·커리큘럼(curriculum)·합성 데이터(synthetic)**: 안정적으로 “형식 준수 + 도메인 적합”을 만드는 기반  
   - **B. 그래프 중심 정렬/증류**: 개념·관계·근거를 구조화해서 직접 감독  
   - **C. 효율적 KD**: LLM 신호를 sLLM에 손실 없이 이식(멘토/선택적 교사介入/증거-그래프 동시 증류)
 
@@ -12,14 +12,14 @@
 
 ### 0단계(오리엔테이션, 2시간)
 - 모든 논문 초록/그림/방법 개요만 훑고, 당장 쓸 “핵심 산출물 체크리스트”를 정합니다:
-  - 산출물: 손실식(특히 그래프·형식·선호도), 데이터 생성 파이프라인(자연어↔트리플), 커리큘럼 규칙, 평가 지표(스키마 준수율, triple F1, 근거 일치, 최종 MR 정확도 Δ)
+  - 산출물: 손실식(특히 그래프·형식·선호도), 데이터 생성 파이프라인(자연어↔triple), curriculum 규칙, 평가 지표(스키마 준수율, triple F1, 근거 일치, 최종 MR 정확도 Δ)
 
 ---
 
 ### 1단계(기반 IFT·커리큘럼) — Day 1–2
 1) [Self-Instruct: Aligning Language Models with Self-Generated Instructions](https://arxiv.org/abs/2212.10560) — ACL 2023  
-   - **왜 먼저**: 합성 지시문 파이프라인의 표준. CG JSON 스키마 기반 필터링 설계에 직결  
-   - **초점**: Appx B 필터링 규칙 → relation_snake_case·중복 제거·스키마 검증으로 치환  
+   - **읽기 동기**: 소형 LM이 한국어 MWP의 CG 생성·추론을 대형 수준으로 재현하려면 도메인 특화 instruction 데이터가 필요하다. Self-Instruct는 175 seed에서 52k까지 자동 확장하는 4단계 pipeline(지시문 생성→분류 판별→instance 생성→filtering)을 제시하며, 16k 이후 성능 plateau 발견으로 우리 도메인에서는 더 적은 규모로도 충분할 가능성을 시사한다.  
+   - **읽기 전략**: (1) 4단계 pipeline의 도메인 적용: MWP-CG 생성 지시문 패턴으로 축소, (2) 분류 여부 판별 후 관계/연산 타입 선택 과제에 output-first 적용으로 label bias 완화, (3) 정확한 filtering 규칙: ROUGE-L < 0.7, 비-텍스트 keywords(image/picture/graph) 제외, 중복·충돌 제거, 길이·반복 무효화, (4) 데이터 규모 최적화: 16k plateau 근거로 1-3k 수준에서 시작.  
 2) [Distilling Step-by-Step! Outperforming Larger LMs…](https://arxiv.org/abs/2305.02301) — NeurIPS 2023  
    - **왜**: CoT/구조화 근거를 다중-태스크로 증류하는 전범. CG의 facts/disambiguation 병렬 감독 설계에 적합  
    - **초점**: §5.3 Rationale Ablation, 다중-태스크 손실 설계  
