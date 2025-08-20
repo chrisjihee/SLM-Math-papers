@@ -240,7 +240,7 @@ papers:
     tips: "CG 출력 길이 600+ 토큰 문제에서 SWITCH KD로 schema 불일치 rate↓"
 
   - title: "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes"
-    venue: "NeurIPS 2023"
+    venue: "ACL 2023 (Findings)"
     link: "https://arxiv.org/abs/2305.02301"
     idea: "LLM rationales(CoT) 다중-태스크 감독으로 770 M T5가 PaLM 540 B 능력 초과"   # :contentReference[oaicite:11]{index=11}
     relevance: "§5.3 Rationale Ablation 읽고 ‘계산식 설명 + triple’ 병렬 supervision 설계"

@@ -10,7 +10,7 @@
 
 ### 모델: GPT-5
 #### 다음 읽을 1순위
-- **Distilling Step-by-Step! (NeurIPS 2023)**
+- **Distilling Step-by-Step! (ACL 2023, Findings)**
   - **이유**: CG를 sLLM에 “내재화”하는 최단 경로. LLM의 rationale을 추가 감독으로 멀티태스크 학습(Eq.(3)) → 우리 도메인에선 rationale=CG(facts/disambiguation)로 매핑해 바로 적용 가능.
   - **읽기 포인트(최소 발췌)**: §3(메커니즘), Eq.(1)–(4), §4.1–4.4(데이터 효율·어블레이션).
   - **즉시 적용 힌트**: 입력=문제, 출력={answer, concept_graph, rationale} 멀티태스크; `[label]`/`[rationale]` 프리픽스 사용.
@@ -41,7 +41,7 @@
 ### 모델: Claude-4
 현재 상황을 종합적으로 분석한 결과, 다음과 같이 추천드립니다:
 
-#### 🎯 **1순위 추천: Distilling Step-by-Step! (NeurIPS 2023)**
+#### 🎯 **1순위 추천: Distilling Step-by-Step! (ACL 2023, Findings)**
 
 ##### 선택 이유
 1. **현재 과제와 완벽한 매칭**: 주간보고서에서 확인된 "8B급 sLLM의 수학추론 능력 강화"라는 목표와 정확히 일치
@@ -112,7 +112,7 @@ Output 2 ([rationale]): CG(facts + disambiguation)
 
 #### 상세 추천 근거 및 실행 계획
 
-##### **🎯 1순위: Distilling Step-by-Step! (NeurIPS 2023)**
+##### **🎯 1순위: Distilling Step-by-Step! (ACL 2023, Findings)**
 
 `Self-Instruct`가 **"무엇을"** 가르칠 데이터(Instruction)를 만드는 방법이었다면, 이 논문은 그 데이터를 sLLM에 **"어떻게"** 효과적으로 주입할지에 대한 가장 직접적인 해답입니다.
 
@@ -156,7 +156,7 @@ Output 2 ([rationale]): CG(facts + disambiguation)
 
 ---
 
-#### 🎯 **1순위 추천: Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes (NeurIPS 2023)**
+#### 🎯 **1순위 추천: Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes (ACL 2023, Findings)**
 
 ##### **선택 이유 (abstract와 전문 내용 기반 분석)**
 1. **현재 과제와의 완벽한 적합성**: `weekly-report.txt`에서 확인된 "CG 생성 결과 사용 여부에 따른 sLLM 수학 추론 능력 비교" 실험 결과(CG 사용 시 +21.6%)는 CG가 강력한 "Rationale(사고 과정)"임을 보여줍니다. 이 논문은 바로 LLM의 Rationale을 sLLM에 증류하는 방법을 다루며, abstract에서 "LLM rationales를 추가 감독으로 소형 모델 학습"을 강조합니다. 전문(§3)에서 "Rationale = 추가 지식으로 데이터 효율 ↑"를 증명합니다.
