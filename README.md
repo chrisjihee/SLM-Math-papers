@@ -21,8 +21,8 @@
    - **읽기 동기**: 소형 LM이 한국어 MWP의 CG 생성·추론을 대형 수준으로 재현하려면 도메인 특화 instruction 데이터가 필요하다. Self-Instruct는 175 seed에서 52k까지 자동 확장하는 4단계 pipeline(지시문 생성→분류 판별→instance 생성→filtering)을 제시하며, 16k 이후 성능 plateau 발견으로 우리 도메인에서는 더 적은 규모로도 충분할 가능성을 시사한다.  
    - **읽기 전략**: (1) 4단계 pipeline의 도메인 적용: MWP-CG 생성 지시문 패턴으로 축소, (2) 분류 여부 판별 후 관계/연산 타입 선택 과제에 output-first 적용으로 label bias 완화, (3) 정확한 filtering 규칙: ROUGE-L < 0.7, 비-텍스트 keywords(image/picture/graph) 제외, 중복·충돌 제거, 길이·반복 무효화, (4) 데이터 규모 최적화: 16k plateau 근거로 1-3k 수준에서 시작.  
 2) [Distilling Step-by-Step! Outperforming Larger LMs…](https://arxiv.org/abs/2305.02301) — ACL 2023 (Findings)  
-   - **왜**: CoT/구조화 근거를 다중-태스크로 증류하는 전범. CG의 facts/disambiguation 병렬 감독 설계에 적합  
-   - **초점**: §5.3 Rationale Ablation, 다중-태스크 손실 설계  
+   - **왜**: LLM이 생성한 rationale(CoT)을 추가 감독으로 활용해 sLLM을 멀티태스크로 학습하면, 표준 finetuning/증류 대비 데이터 사용량과 모델 규모를 동시에 줄이면서 성능을 향상시킬 수 있다. 우리의 한국어 MWP 목표에서는 CG(JSON triples)를 rationale로 매핑해 “정답(label) + CG(rationale)” 동시 학습으로 내재화하는 것이 직결된다. 특히 학습셋 7K 전량에 대해 LLM(Llama-4-Maveric)으로 생성한 고품질 CG를 기반으로 하면, 작은 모델(≤10B)에서도 LLM 수준 재현 가능성이 높다.  
+   - **초점**: (1) 멀티태스크 손실: \(\mathcal{L}=\mathcal{L}_{label}+\lambda\,\mathcal{L}_{rationale}\) (Eq.3) — \([label]\)/\([rationale]\) 프리픽스로 작업 분리, \(\lambda\) 스케줄/스윕으로 균형 튜닝. (2) 데이터: 교사 LLM이 생성한 7K CG를 주력으로, 부족/경계 사례는 Self-Instruct 합성(1–2k)으로 보강. (3) 커리큘럼: Phase-1(단순 CG, 트리플 ≤3) → Phase-2(복합 CG, >3). (4) 비교군: no-rationale vs multi-task(+rationale). (5) 평가: MR 정확도, 스키마 준수율, triple F1, 형식 오류율, 데이터/모델 효율성. (6) 어블레이션: rationale 품질(교사 모델별)·프리픽스·출력 길이, 단일태스크 조인트 대비 멀티태스크 우위(§4.4).  
 3) [Phased Instruction Fine-Tuning for LLMs](https://arxiv.org/abs/2406.04371) — ACL 2024 (Findings)  
    - **왜**: 쉬운→어려운 **두 단계 커리큘럼**으로 JSON 형식 오류↓ 수렴 안정  
    - **초점**: 난도 기준을 “triple 수(≤3 vs >3)”로 단순화해 2-phase 적용
