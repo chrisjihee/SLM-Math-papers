@@ -24,3 +24,6 @@ ssh -T git@github.com  # GitHub SSH 연결 확인
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install wget
 pip install beautifulsoup4
+
+# My Paper
+git clone https://github.com/chrisjihee/KSC2025.git
