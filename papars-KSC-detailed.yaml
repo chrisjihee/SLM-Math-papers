@@ -143,7 +143,7 @@ papers:
 
   - venue: "KSC 2024"
     title: "생성형 AI의 암묵적 편향 완화를 위한 LLM 기반 학습데이터 자동 구축 방안"
-    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12041964"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12041972"
     keywords: ["암묵적 편향", "CoT", "데이터 증강", "윤리 AI", "KoSBi", "GPT-4o"]
     md_file: "md-KSC/생성형 AI의 암묵적 편향 완화를 위한 LLM 기반 학습데이터 자동 구축 방안.md"
     abstract: |
@@ -204,7 +204,7 @@ papers:
 
   - venue: "KSC 2024"
     title: "고품질 인스트럭션 데이터 구축을 위한 피드백 기반 합성데이터 생성 방법"
-    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12041957"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12041976"
     keywords: ["합성 데이터", "인스트럭션 튜닝", "피드백 루프", "SFT", "Llama-3", "RAGEval", "MT-Bench"]
     md_file: "md-KSC/고품질 인스트럭션 데이터 구축을 위한 피드백 기반 합성데이터 생성 방법.md"
     abstract: |
@@ -261,7 +261,7 @@ papers:
 
   - venue: "KSC 2023"
     title: "한국어 대규모언어모델을 활용한 MMR기반 자가생성 In-Context Learning"
-    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705350"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705103"
     keywords: ["ICL", "Self-generated", "MMR", "KULLM", "Zero-shot", "Few-shot"]
     md_file: "md-KSC/한국어 대규모언어모델을 활용한 MMR기반 자가생성 In-Context Learning.md"
     abstract: |
@@ -333,7 +333,7 @@ papers:
 
   - venue: "KSC 2023"
     title: "대형 언어 모델을 활용한 퓨샷 추론 문제의 데이터 증강"
-    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705345"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705093"
     keywords: ["ARC", "ConceptARC", "데이터 증강", "GPT-4", "역변환", "다대일 대응"]
     md_file: "md-KSC/대형 언어 모델을 활용한 퓨샷 추론 문제의 데이터 증강.md"
     abstract: |
@@ -396,7 +396,7 @@ papers:
 
   - venue: "KSC 2023"
     title: "비한글 발음열 변환을 위한 통합 프레임워크: 숫자 및 영어단어 처리의 최적화"
-    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705352"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705101"
     keywords: ["G2P", "TTS", "숫자 변환", "영어 변환", "CNN+BiLSTM", "Transformer", "IPA-Dict"]
     md_file: "md-KSC/비한글 발음열 변환을 위한 통합 프레임워크 숫자 및 영어단어 처리의 최적화.md"
     abstract: |
@@ -471,7 +471,7 @@ papers:
 
   - venue: "KSC 2023"
     title: "ChatGPT 기반 독해 튜터링 대화 데이터의 구축 타당성 조사"
-    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705348"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705087"
     keywords: ["ChatGPT", "독해 튜터링", "DIRECT", "Few-shot prompting", "RAGEval", "데이터 구축"]
     md_file: "md-KSC/ChatGPT 기반 독해 튜터링 대화 데이터의 구축 타당성 조사.md"
     abstract: |
@@ -531,7 +531,7 @@ papers:
 
   - venue: "KSC 2023"
     title: "ARCLE: 추상화 및 추론을 위한 강화학습 환경"
-    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705346"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705128"
     keywords: ["ARC", "강화학습", "Gymnasium", "O2ARC", "MDP", "DSL", "추상화"]
     md_file: "md-KSC/ARCLE 추상화 및 추론을 위한 강화학습 환경.md"
     abstract: |
