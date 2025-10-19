@@ -1,0 +1,120 @@
+papers:
+  - venue: "KSC 2024"
+    title: "한국어 수학 튜터링 대화 데이터셋"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12041963"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
+
+  - venue: "KSC 2024"
+    title: "한국어 생성문서의 사실성 평가에 대한 연구"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12042006"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
+
+  - venue: "KSC 2024"
+    title: "세분화된 LLM 피드백을 활용한 요약문 평가 모델 학습"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12041959"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
+
+  - venue: "KSC 2024"
+    title: "생성형 AI의 암묵적 편향 완화를 위한 LLM 기반 학습데이터 자동 구축 방안"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12041972"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
+
+  - venue: "KSC 2024"
+    title: "고품질 인스트럭션 데이터 구축을 위한 피드백 기반 합성데이터 생성 방법"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12041976"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
+
+  - venue: "KSC 2023"
+    title: "ChatGPT 기반 독해 튜터링 대화 데이터의 구축 타당성 조사"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705087"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
+
+  - venue: "KSC 2023"
+    title: "대형 언어 모델을 활용한 퓨샷 추론 문제의 데이터 증강"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705093"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
+
+  - venue: "KSC 2023"
+    title: "비한글 발음열 변환을 위한 통합 프레임워크: 숫자 및 영어단어 처리의 최적화"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12041963"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
+
+  - venue: "KSC 2023"
+    title: "한국어 대규모언어모델을 활용한 MMR기반 자가생성 In-Context Learning"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705103"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
+
+  - venue: "KSC 2023"
+    title: "ARCLE: 추상화 및 추론을 위한 강화학습 환경"
+    link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705128"
+    abstract: |
+      ~~~
+    contents: |
+      ~~~
+    relevance: |
+      ~~~
+    tips: |
+      ~~~
