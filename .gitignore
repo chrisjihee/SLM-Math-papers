@@ -180,6 +180,7 @@ progiter
 # reference
 concept-based-reasoning
 LLM-KG
+KSC2025
 
 # output
 mongodb*/
