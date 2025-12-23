@@ -1,0 +1,220 @@
+# 논문 검색 프롬프트 (2025년 12월 기준)
+
+## 연구 배경 및 목표
+
+저는 **소형 언어모델(SLM, 3B~8B)의 추론 능력 향상**을 연구하고 있습니다.
+
+### 핵심 연구 주제
+1. **Structured Rationale Distillation**: LLM(70B+)이 생성한 구조화된 중간표현(Concept Graph, Reasoning Process)을 SLM에 증류
+2. **CoT vs Structured Representation**: 서술형 Chain-of-Thought와 구조화된 표현(JSON Triple, Graph) 간 학습 효율성 비교
+3. **Test-time Scaling for SLMs**: SLM에서 Self-consistency, Best-of-N, Verifier 등을 통한 추론 성능 향상
+4. **Model Merging & Alignment**: 서로 다른 추론 스타일(CoT/CG)로 학습된 Adapter를 병합하고 DPO로 정렬
+
+### 현재 달성 성과
+- LLaMA-8B에서 CG 증류로 GSM8k-kor 성능 +7.0%p 향상 (49.2% → 56.2%)
+- LLaMA-3B에서 RP 증류로 다교과 문제 +16.3%p 향상
+
+### 연구 질문
+- RQ1: SLM에 대해 서술형 CoT와 구조화 CG 중 어떤 중간표현이 더 데이터 효율적인가?
+- RQ2: SLM에서 가장 비용 효율적인 Test-time scaling 방식은 무엇인가?
+- RQ3: 서로 다른 추론 스타일(CoT/CG)을 병합하면 능력이 합산되는가?
+
+---
+
+## 검색 요청 1: Structured Rationale Distillation
+
+**2023년 ~ 2025년**에 발표된 논문 중, 다음 주제와 관련된 연구를 찾아주세요:
+
+### 키워드
+- Knowledge Distillation for LLMs/SLMs
+- Rationale Distillation / Chain-of-Thought Distillation
+- Structured Output Distillation (JSON, Graph, Triple)
+- Multi-task Learning with Rationales
+- Teacher-Student Framework for Reasoning
+
+### 관심 포인트
+- LLM → SLM 증류 시 **구조화된 중간표현**(그래프, 트리플, JSON)을 활용하는 방법
+- CoT/Rationale을 **auxiliary loss**로 사용하는 multi-task 학습
+- **소형 모델(≤10B)**에서의 수학/추론 성능 향상 사례
+
+---
+
+## 검색 요청 2: Test-time Scaling & Inference Optimization
+
+**2023년 ~ 2025년**에 발표된 논문 중, 다음 주제와 관련된 연구를 찾아주세요:
+
+### 키워드
+- Test-time Compute Scaling
+- Self-Consistency / Majority Voting
+- Best-of-N Sampling / Reranking
+- Verifier / Reward Model for Reasoning
+- Process Reward Model (PRM) vs Outcome Reward Model (ORM)
+- Inference-time Scaling Laws
+
+### 관심 포인트
+- **SLM에서의 Test-time scaling** 효과 (LLM 대비 효율성)
+- Verifier/Reward Model을 활용한 **후보 선택** 전략
+- "SLM × N회 추론"이 "LLM × 1회 추론"을 능가하는 **break-even point**
+
+---
+
+## 검색 요청 3: Model Merging & LoRA Composition
+
+**2023년 ~ 2025년**에 발표된 논문 중, 다음 주제와 관련된 연구를 찾아주세요:
+
+### 키워드
+- Model Merging (TIES, DARE, Task Arithmetic)
+- LoRA Merging / Adapter Composition
+- Multi-task LoRA / LoRA Hub
+- Mixture of Experts (MoE) for Reasoning
+- DPO / Preference Optimization after Merging
+
+### 관심 포인트
+- 서로 다른 태스크로 학습된 **Adapter를 병합**하는 기법
+- 병합 후 **성능 간섭(Interference)** 문제 해결 방법
+- 병합된 모델의 **출력 스타일 정렬** (DPO, RLHF)
+
+---
+
+## 검색 요청 4: Math Reasoning & Knowledge Graph for LLMs
+
+**2023년 ~ 2025년**에 발표된 논문 중, 다음 주제와 관련된 연구를 찾아주세요:
+
+### 키워드
+- Math Word Problem Solving with LLMs/SLMs
+- Knowledge Graph + LLM Integration
+- Concept Graph / Relation Extraction for Reasoning
+- Graph-of-Thought / Tree-of-Thought
+- Structured Reasoning (JSON, Graph output)
+
+### 관심 포인트
+- 수학 문제에서 **개념 간 관계를 추출**하여 활용하는 방법
+- **그래프 구조**를 LLM 추론에 통합하는 접근
+- 한국어/다국어 수학 추론 벤치마크
+
+---
+
+## 검색 대상 (2023~2025년)
+
+### 주요 학술대회
+| 학술대회 | 2023 | 2024 | 2025 |
+|----------|------|------|------|
+| **ACL** | ACL 2023 (July) | ACL 2024 (Aug) | ACL 2025 (July) |
+| **EMNLP** | EMNLP 2023 (Dec) | EMNLP 2024 (Nov) | EMNLP 2025 (Nov) |
+| **NAACL** | - | NAACL 2024 (June) | NAACL 2025 (April) |
+| **ICLR** | ICLR 2023 (May) | ICLR 2024 (May) | ICLR 2025 (April) |
+| **NeurIPS** | NeurIPS 2023 (Dec) | NeurIPS 2024 (Dec) | NeurIPS 2025 (Dec) |
+| **AAAI** | AAAI 2023 (Feb) | AAAI 2024 (Feb) | AAAI 2025 (Feb) |
+| **COLING** | - | LREC-COLING 2024 (May) | COLING 2025 (Jan) |
+| **EACL** | EACL 2023 (May) | EACL 2024 (Mar) | - |
+| **SIGIR** | SIGIR 2023 (July) | SIGIR 2024 (July) | SIGIR 2025 (July) |
+| **IJCAI** | IJCAI 2023 (Aug) | IJCAI 2024 (Aug) | IJCAI 2025 (Aug) |
+| **CIKM** | CIKM 2023 (Oct) | CIKM 2024 (Oct) | CIKM 2025 (Nov) |
+| **KDD** | KDD 2023 (Aug) | KDD 2024 (Aug) | KDD 2025 (Aug) |
+| **WWW** | WWW 2023 (May) | WWW 2024 (May) | WWW 2025 (April) |
+
+### 주요 저널 (2024~2025)
+- TACL (Transactions of the Association for Computational Linguistics)
+- Computational Linguistics
+- JMLR (Journal of Machine Learning Research)
+- JAIR (Journal of Artificial Intelligence Research)
+- AIJ (Artificial Intelligence)
+- Knowledge-Based Systems
+- Expert Systems with Applications
+- Information Sciences
+- Neural Computing & Applications
+- IEEE TPAMI / IEEE TKDE
+
+### arXiv Preprints (2023.01 ~ 2025.12)
+- cs.CL (Computation and Language)
+- cs.LG (Machine Learning)
+- cs.AI (Artificial Intelligence)
+
+---
+
+## 출력 형식
+
+각 논문에 대해 다음 정보를 제공해주세요:
+
+```yaml
+- title: "논문 제목"
+  venue: "학술대회/저널명 (연도)"
+  link: "URL (가능하면 공식 링크)"
+  idea: "핵심 아이디어 1-2문장"
+  relevance: "본 연구와의 연관성 및 적용 가능 포인트"
+  tips: "실제 구현 시 참고할 섹션/테이블"
+```
+
+---
+
+## 우선순위
+
+1. **가장 중요**: Rationale/CoT Distillation, Structured Output Distillation
+2. **중요**: Test-time Scaling, Inference Optimization for SLMs
+3. **참고**: Model Merging, LoRA Composition
+4. **배경**: Math Reasoning Benchmarks, Knowledge Graph Integration
+
+---
+
+## 기존 참고 논문 (이미 파악한 논문들)
+
+아래 논문들은 이미 파악했으므로, 이 외의 새로운 논문을 찾아주세요:
+
+1. Distilling Step-by-Step (ACL 2023)
+2. Self-Instruct (ACL 2023)
+3. TIES-Merging (NeurIPS 2023)
+4. DARE (ICML 2024)
+5. DPO (NeurIPS 2023)
+6. Self-Consistency (ICLR 2023)
+7. Scaling LLM Test-Time Compute (arXiv 2024)
+8. Large Language Monkeys (arXiv 2024)
+9. MathScale (arXiv 2024)
+10. DRAG (ACL 2025)
+11. MAGDi (ICLR 2025)
+12. Mentor-KD (EMNLP 2024)
+13. Phased Instruction Fine-Tuning (ACL 2024 Findings)
+14. GraphGPT (SIGIR 2024)
+15. InstructGraph (ACL 2024 Findings)
+16. SWITCH KD (EMNLP 2024)
+
+---
+
+## 추가 검색 키워드 (영문)
+
+### Primary Keywords
+- "knowledge distillation" + "small language model"
+- "chain-of-thought distillation"
+- "structured rationale" + "reasoning"
+- "test-time compute" + "scaling"
+- "model merging" + "LoRA"
+- "math reasoning" + "SLM"
+
+### Secondary Keywords
+- "concept graph" + "language model"
+- "JSON output" + "instruction tuning"
+- "verifier" + "reasoning"
+- "process reward model"
+- "adapter composition"
+
+---
+
+## 검색 플랫폼 추천
+
+1. **Semantic Scholar**: https://www.semanticscholar.org/
+   - 키워드: "rationale distillation small language model"
+   - 필터: 2024-2025, Computer Science
+
+2. **ACL Anthology**: https://aclanthology.org/
+   - 학술대회별 검색 (ACL, EMNLP, NAACL, EACL, COLING)
+
+3. **arXiv**: https://arxiv.org/list/cs.CL/recent
+   - 최신 preprint 확인
+
+4. **Google Scholar**: https://scholar.google.com/
+   - 인용 관계 추적
+
+5. **Papers with Code**: https://paperswithcode.com/
+   - 벤치마크별 SOTA 논문 확인 (GSM8K, MATH 등)
+
+6. **OpenReview**: https://openreview.net/
+   - ICLR, NeurIPS 리뷰 및 최신 제출 논문
