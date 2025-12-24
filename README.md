@@ -1,4 +1,5 @@
 ### 목표 맥락
+- Canonical shortlist + plan: [MUST-READ-PLAN.md](MUST-READ-PLAN.md)
 - **목표**: 10B 이하 sLLM이 한국어 MWP에서 LLM 수준의 개념 그래프(JSON triples) 생성 및 추론 성능을 재현
 - **핵심 과제**: (1) 그래프 중심 지식/근거의 구조화, (2) LLM→sLLM 증류(형식 일치·추론 보존), (3) 커리큘럼/지시문 튜닝으로 안정 학습
 
