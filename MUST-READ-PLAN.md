@@ -98,3 +98,24 @@ Last updated: 2025-12-24
 - 구현 레시피가 거의 없는 “일반론/서베이” 중심 논문
 - 10B 이하 제약으로 전이/증류 프로토콜이 불분명한 “대형 모델 전용” 학습 논문
 - 공식 랜딩 페이지(OpenReview/arXiv/Anthology 등) 정체성이 불명확한 자료
+
+## 부록: 후보 풀(검증됨/검증 필요)
+이 섹션은 정본(shortlist)에 바로 넣지 않는 **후보/초안**을 관리합니다. “정본에는 공식 링크만” 원칙을 유지하기 위해, 아래 항목은 검증/정리 후에만 본문(P0/P1)으로 승격합니다.
+
+### 후보 소스(정본 외)
+- `LM-based-KG-papers/papars.yaml`
+- `LM-based-KG-papers/2nd-recommendation.md`, `LM-based-KG-papers/3rd-recommendation.md`
+- `LM-based-KG-papers/recommended-papers-2025-by-*.md`
+
+### 링크 위생 규칙(정본 반영 전)
+- 추적 파라미터(`utm_*`)는 제거하고 canonical URL만 남깁니다.
+- 블로그/리뷰/모델카드(Hugging Face 등)는 참고용으로만 두고, 논문 링크는 `arXiv/OpenReview/ACL Anthology`로 교체합니다.
+- placeholder(예: `2402.xxxx`)나 “Simulated context”는 **검증 필요**로 남기고 정본에는 넣지 않습니다.
+
+### 현재 확인된 “검증 필요” 항목(정본 제외)
+- `recommended-papers-2025-by-Gemini-pro.md`의 “CoT-Decoding: Chain-of-Thought Decoding with Logic Constraints”는 placeholder 링크였고, 현재 `TBD`로 표시되어 있습니다. (실제 논문명/공식 URL 확인 필요)
+- `recommended-papers-2025-by-GPT-5.2-think.md`에 있는 ThinkPRM(MarkTechPost)·GenPRM(Hugging Face) 링크는 비공식 랜딩이므로, 정본 반영 시에는 해당 논문/프로시딩의 공식 URL로 교체해야 합니다.
+
+### 후보 문서 정리 로그(품질 개선)
+- `recommended-papers-2025-by-GPT-5.2-think.md`: `utm_source` 등 추적 파라미터 제거
+- `recommended-papers-2025-by-GPT-5.2-research.md`: SCoTD 항목의 가정 Anthology 링크를 `arXiv`로 교체
