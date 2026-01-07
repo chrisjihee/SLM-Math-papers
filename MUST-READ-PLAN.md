@@ -1,13 +1,18 @@
 # Must-read(우선순위) + 읽기/구현 계획 (정본)
 
-Last updated: 2025-12-24
+Last updated: 2026-01-07
 
 목표: 10B 이하 sLLM이 한국어 MWP에서 **개념 그래프(CG; JSON triples)**를 안정적으로 생성하고, **최소 테스트타임 비용**으로 추론 성능을 끌어올리는 것.
+
+> **연구 3축 (PLAN.md)**:
+> - **Axis 1**: CoT vs CG — 구조화된 Rationale의 데이터 효율성
+> - **Axis 2**: Test-time Inference Scaling — SLM에서의 비용 효율적 추론
+> - **Axis 3**: Model Merging + DPO — 서로 다른 추론 스타일 병합
 
 선정/운영 원칙:
 - 링크는 **공식 페이지**만 사용합니다 (ACL Anthology / OpenReview / arXiv / 학회 프로시딩/퍼블리셔).
 - 이 문서는 저장소 내 “추천 논문” 자료들의 **정본(canonical) shortlist + 실행 계획**입니다.
-- 후보 풀/초안은 `papars.yaml`, `recommended-papers-2025-by-*.md`에 남아 있을 수 있으나, 이 문서의 링크/메타가 최종입니다.
+- 후보 풀 전체는 [UNIFIED-PAPER-LIST.md](UNIFIED-PAPER-LIST.md)에서 테마별로 관리합니다.
 
 ## 상태: 이미 읽음(완료)
 - Self-Instruct: Aligning Language Models with Self-Generated Instructions — ACL 2023 — https://arxiv.org/abs/2212.10560
@@ -94,28 +99,14 @@ Last updated: 2025-12-24
 - UniCoTT(OpenReview): 유효 링크는 https://openreview.net/forum?id=3baOKeI2EU 입니다. (이전 후보 중 일부 ID는 “Note not found”)
 - LoRA Soups(ACL Anthology): 유효 링크는 https://aclanthology.org/2025.coling-industry.55/ 입니다. (이전 후보 중 하나인 2025.coling-industry.39 는 다른 논문)
 
+
 ## 비추천(현 프로젝트 기준, 지금은 우선순위 낮음)
-- 구현 레시피가 거의 없는 “일반론/서베이” 중심 논문
-- 10B 이하 제약으로 전이/증류 프로토콜이 불분명한 “대형 모델 전용” 학습 논문
+- 구현 레시피가 거의 없는 "일반론/서베이" 중심 논문
+- 10B 이하 제약으로 전이/증류 프로토콜이 불분명한 "대형 모델 전용" 학습 논문
 - 공식 랜딩 페이지(OpenReview/arXiv/Anthology 등) 정체성이 불명확한 자료
+- **연구 방향과 거리가 먼 주제**: 코드 생성, 역방향 증류, Diffusion 모델, Long-context RAG, 양자화 등
 
-## 부록: 후보 풀(검증됨/검증 필요)
-이 섹션은 정본(shortlist)에 바로 넣지 않는 **후보/초안**을 관리합니다. “정본에는 공식 링크만” 원칙을 유지하기 위해, 아래 항목은 검증/정리 후에만 본문(P0/P1)으로 승격합니다.
-
-### 후보 소스(정본 외)
-- `LM-based-KG-papers/papars.yaml`
-- `LM-based-KG-papers/2nd-recommendation.md`, `LM-based-KG-papers/3rd-recommendation.md`
-- `LM-based-KG-papers/recommended-papers-2025-by-*.md`
-
-### 링크 위생 규칙(정본 반영 전)
-- 추적 파라미터(`utm_*`)는 제거하고 canonical URL만 남깁니다.
-- 블로그/리뷰/모델카드(Hugging Face 등)는 참고용으로만 두고, 논문 링크는 `arXiv/OpenReview/ACL Anthology`로 교체합니다.
-- placeholder(예: `2402.xxxx`)나 “Simulated context”는 **검증 필요**로 남기고 정본에는 넣지 않습니다.
-
-### 현재 확인된 “검증 필요” 항목(정본 제외)
-- `recommended-papers-2025-by-Gemini-pro.md`의 “CoT-Decoding: Chain-of-Thought Decoding with Logic Constraints”는 placeholder 링크였고, 현재 `TBD`로 표시되어 있습니다. (실제 논문명/공식 URL 확인 필요)
-- `recommended-papers-2025-by-GPT-5.2-think.md`에 있는 ThinkPRM(MarkTechPost)·GenPRM(Hugging Face) 링크는 비공식 랜딩이므로, 정본 반영 시에는 해당 논문/프로시딩의 공식 URL로 교체해야 합니다.
-
-### 후보 문서 정리 로그(품질 개선)
-- `recommended-papers-2025-by-GPT-5.2-think.md`: `utm_source` 등 추적 파라미터 제거
-- `recommended-papers-2025-by-GPT-5.2-research.md`: SCoTD 항목의 가정 Anthology 링크를 `arXiv`로 교체
+## 관련 문서
+- [UNIFIED-PAPER-LIST.md](UNIFIED-PAPER-LIST.md) — 테마별 전체 후보 풀 (55편)
+- [../PLAN.md](../PLAN.md) — 연구 3축(Axis) 정의
+- `papars.yaml` — 초기 후보 풀 (12편)
