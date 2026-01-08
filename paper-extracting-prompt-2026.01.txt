@@ -1,0 +1,58 @@
+첨부된 파일은 논문의 원문 pdf 파일입니다.
+이 논문을 제 연구에 접목하기 위해 전체 내용을 읽어보려고 합니다.
+논문을 정독해서 제대로 이해하기 위한 것이니 절대로 논문 본문 텍스트를 요약하거나 압축하지 말고 원문 그대로 출력해주세요!
+
+<지시사항>
+영어로 된 본문 텍스트 전체를 누락없이 빠짐없이 모두 텍스트로 출력하는데, 
+텍스트 단락의 단위가 가능한 논문에서 보이는대로 유지되도록 신경써주기 바랍니다!
+
+본문 텍스트를 중간에 빠뜨리거나 건너뛰는 일이 없도록 해주시기 바랍니다.
+논문 내에서 가능한 굵은 글씨, 이탤릭체, 불릿, 수식 등을 읽기 좋게 표현해주시기 바랍니다.
+
+아래에 다른 논문의 예시 출력 형식을 참고하시기 바라며,
+이런 식으로 초록부터 마지막 결론까지 모든 논문 내용에 대해서 출력하시기 바랍니다.
+---
+
+Self-Instruct: Aligning Language Models with Self-Generated Instructions
+
+Abstract
+
+Large “instruction-tuned” language models (i.e., finetuned to respond to instructions) have demonstrated a remarkable ability to generalize zero-shot to new tasks. Nevertheless, they depend heavily on human-written instruction data that is often limited in quantity, diversity, and creativity, therefore hindering the generality of the tuned model. We introduce Self-Instruct, a framework for improving the instruction-following capabilities of pretrained language models by bootstrapping off their own generations. Our pipeline generates instructions, input, and output samples from a language model, then filters invalid or similar ones before using them to finetune the original model. Applying our method to the vanilla GPT3, we demonstrate a 33% absolute improvement over the original model on Super-NaturalInstructions, on par with the performance of InstructGPT\(_{\text{001}}\), which was trained with private user data and human annotations. For further evaluation, we curate a set of expert-written instructions for novel tasks, and show through human evaluation that tuning GPT3 with Self-Instruct outperforms using existing public instruction datasets by a large margin, leaving only a 5% absolute gap behind InstructGPT\(_{\text{001}}\). Self-Instruct provides an almost annotation-free method for aligning pretrained language models with instructions, and we release our large synthetic dataset to facilitate future studies on instruction tuning.
+
+1 Introduction
+
+The recent NLP literature has witnessed a tremendous amount of activity in building models that can follow natural language instructions (Mishra et al., 2022 ; Wei et al., 2022 ; Sanh et al., 2022 ; Wang et al., 2022 ; Ouyang et al., 2022 ; Chung et al., 2022 , i.a.) . These developments are powered by two key components: large pretrained language models (LM) and human-written instruction data (e.g., PromptSource (Bach et al., 2022 ) and Super-NaturalInstructions (Wang et al., 2022 , SuperNI for short) ). However, collecting such instruction data is costly and often suffers limited diversity given that most human generations tend to be popular NLP tasks, falling short of covering a true variety of tasks and different ways to describe them. Continuing to improve the quality and coverage of instruction-tuned models necessitates the development of alternative approaches for supervising the instruction tuning process.
+
+In this work, we introduce Self-Instruct , a semi-automated process for instruction-tuning a pretrained LM using instructional signals from the model itself. The overall process is an iterative bootstrapping algorithm (see Figure 2 ), which starts off with a limited (e.g., 175 in our study) seed set of manually-written tasks that are used to guide the overall generation. In the first phase, the model is prompted to generate instructions for new tasks. This step leverages the existing collection of instructions to create more broad-coverage instructions that define (often new) tasks. Given the newly-generated set of instructions, the framework also creates input-output instances for them, which can be later used for supervising the instruction tuning. Finally, various heuristics are used to automatically filter low-quality or repeated instructions, before adding the remaining valid tasks to the task pool. This process can be repeated for many iterations until reaching a large number of tasks.
+
+To evaluate Self-Instruct empirically, we run this framework on GPT3 Brown et al. ( 2020 ) , which is a vanilla LM (§ 3 ). The iterative Self-Instruct process on this model leads to about 52k instructions, paired with about 82K instance inputs and target outputs. We observe that the resulting data provides a diverse range of creative tasks, as is demonstrated by examples in Figure 1 . These generated tasks deviate from the distribution of typical NLP tasks, and also have fairly small overlap with the seed tasks (§ 3.2 ). On this resulting data, we build GPT3\(_{\text{Self-Inst}}\) by finetuning GPT3 (i.e., the same model used for generating the instruction data). We evaluate GPT3\(_{\text{Self-Inst}}\) in comparison to various other models on both typical NLP tasks included in SuperNI Wang et al. ( 2022 ) , and a set of new instructions that are created for novel usage of instruction-following models (§ 4 ). The results indicate that GPT3\(_{\text{Self-Inst}}\) outperforms GPT3 (the original model) by a large margin (+33.1%) and nearly matches the performance of InstructGPT\(_{\text{001}}\) . Moreover, our human evaluation on the newly-created instruction set shows that GPT3\(_{\text{Self-Inst}}\) demonstrates a broad range of instruction following ability, outperforming models trained on other publicly available instruction datasets and leaving only a 5% gap behind InstructGPT\(_{\text{001}}\) .
+
+In summary, our contributions are: (1) we introduce Self-Instruct , a method for inducing instruction following capabilities with minimal human-labeled data; (2) we demonstrate its effectiveness via extensive instruction-tuning experiments; and (3) we release a large synthetic dataset of 52K instructions and a set of manually-written novel tasks for building and evaluating future instruction-following models.
+
+2 Method
+
+Annotating large-scale instruction data can be challenging for humans because it requires 1) creativity to come up with novel tasks and 2) expertise for writing the solutions to each task. Here, we detail our process for Self-Instruct , which refers to the pipeline of generating tasks with a vanilla pretrained language model itself, filtering the generated data, and then conducting instruction tuning with this generated data in order to align the LM to follow instructions better. This pipeline is depicted in Figure 2 .
+
+2.1 Defining Instruction Data
+
+The instruction data we want to generate contains a set of instructions $ \{I_{t}\} $ , each of which defines a task $ t $ in natural language. Task $ t $ has $ n_{t}\geq 1 $ input-output instances $ \{(X_{t,i},Y_{t,i})\}_{i=1}^{n_{t}} $ . A model $ M $ is expected to produce the output, given the task instruction and the corresponding input: $ M(I_{t},X_{t,i})=Y_{t,i} $ , for $ i\in\{1,\ldots,n_{t}\} $ . Note that the instruction and instance input does not have a strict boundary in many cases. For example, “write an essay about school safety” can be a valid instruction that we expect models to respond to directly, while it can also be formulated as “write an essay about the following topic” as the instruction, and “school safety” as an instance input. To encourage the diversity of the data format, we allow such instructions that do not require additional input (i.e., $ X $ is empty).
+
+2.2 Automatic Instruction Data Generation
+
+Our pipeline for data generation consists of four steps: 1) generating task instructions, 2) determining if the instruction represents a classification task, 3) instance generation with either an input-first or output-first approach, and 4) filtering low-quality data.
+
+Instruction Generation. At the first step, Self-Instruct generates new instructions from a small set of seed human-written instructions in a bootstrapping fashion. We initiate the task pool with 175 tasks (1 instruction and 1 instance for each task). For every step, we sample 8 task instructions from this pool as in-context examples. Of the 8 instructions, 6 are from the human-written tasks, and 2 are from the model-generated tasks in previous steps to promote diversity. The prompting template is shown in Table 5 .
+
+Classification Task Identification. Because we need two different approaches for classification and non-classification tasks, we next identify whether the generated instruction represents a classification task or not. We prompt the LM in a few-shot way to determine this, using 12 classification instructions and 19 non-classification instructions from the seed tasks. The prompting template is shown in Table 6 .
+
+Instance Generation. Given the instructions and their task type, we generate instances for each instruction independently. This is challenging because it requires the model to understand what the target task is, based on the instruction, figure out what additional input fields are needed and generate them, and finally complete the task by producing the output. We found that pretrained LMs can achieve this to a large extent when prompted with instruction-input-output in-context examples from other tasks. A natural way to do this is the Input-first Approach , where we can ask an LM to come up with the input fields first based on the instruction, and then produce the corresponding output. This generation order is similar to how models are used to respond to instruction and input, but here with in-context examples from other tasks. The prompting template is shown in Table 7 .
+
+However, we found that this approach can generate inputs biased toward one label, especially for classification tasks (e.g., for grammar error detection, it usually generates grammatical input). Therefore, we additionally propose an Output-first Approach for classification tasks, where we first generate the possible class labels, and then condition the input generation on each class label. The prompting template is shown in Table 8 . We apply the output-first approach to the classification tasks identified in the former step, and the input-first approach to the remaining non-classification tasks.
+
+Filtering and Postprocessing. To encourage diversity, a new instruction is added to the task pool only when its ROUGE-L similarity with any existing instruction is less than 0.7. We also exclude instructions that contain some specific keywords (e.g., image, picture, graph) that usually can not be processed by LMs. When generating new instances for each instruction, we filter out instances that are exactly the same or those with the same input but different outputs. Invalid generations are identified and filtered out based on heuristics (e.g., instruction is too long or too short, instance output is a repetition of the input).
+
+2.3 Finetuning the LM to Follow Instructions
+
+After creating large-scale instruction data, we use it to finetune the original LM (i.e., Self-Instruct ). To do this, we concatenate the instruction and instance input as a prompt and train the model to generate the instance output in a standard supervised way. To make the model robust to different formats, we use multiple templates to encode the instruction and instance input together. For example, the instruction can be prefixed with “Task:” or not, the input can be prefixed with “Input:” or not, “Output:” can be appended at the end of the prompt or not, and different numbers of break lines can be put in the middle, etc.
+
+---
