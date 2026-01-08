@@ -1,4 +1,7 @@
 papers:
+  # -----------------------------------------------------------
+  # ✅ Already Read (Status: Completed)
+  # -----------------------------------------------------------
   - title: "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
     venue: "ACL 2023"
     link: "https://arxiv.org/abs/2212.10560"
@@ -26,31 +29,56 @@ papers:
     relevance: "한국어 MWP CG 생성에서 형식 준수와 안정적 수렴을 달성하는 핵심 방법론. JSON triple 수(≤3 vs >3)를 난이도 기준으로 설정하여 Phase-1(단순 CG)→Phase-2(복합 CG) 커리큘럼 구성 가능. Distilling Step-by-Step과 결합 시 rationale 품질이 단계별로 향상되어 최종 성능 극대화. 논문의 Progressive Alignment Hypothesis는 sLLM이 복잡한 CG 생성을 점진적으로 학습해야 한다는 우리 가설과 부합하며, permutation 실험 결과는 커리큘럼 설계의 중요성을 입증."
     tips: "다차원적 난이도 평가 체계: (1) 추론 깊이 평가: 1-step 직접 연산(Stage1) → 2-3step 중간 추론(Stage2) → 4+step 복합 추론(Stage3), MWP 텍스트에서 최종 답까지의 논리적 단계 수 측정. (2) 개념 복잡성 평가: 기본 사칙연산(Stage1) → 비율/분수/소수 조합(Stage2) → 다변수 연립/추상적 관계(Stage3), 관련 수학 개념의 추상화 레벨 분석. (3) 혼동 요소 민감성: 단순 정보 추출(Stage1) → 부분적 misleading 정보(Stage2) → 복잡한 distractor 패턴(Stage3), 문제 텍스트의 cognitive load 측정. (4) GPT-4 기반 종합 평가: '이 문제를 풀기 위해 필요한 추론 단계, 수학적 개념 복잡도, 혼동 가능성을 1-5점으로 평가'하는 다차원 프롬프트 설계. (5) 자동 분할 규칙: 3개 차원 점수의 가중 평균(α*추론깊이 + β*개념복잡성 + γ*혼동민감성)으로 최종 난이도 산출, 1.5/3.5 임계값으로 3단계 분할. (6) 검증 메커니즘: 각 stage 내 난이도 분산 최소화, stage 간 명확한 구분성 확보, 인간 전문가 샘플 검증."
 
-  - title: "GraphGPT: Graph Instruction Tuning for Large Language Models"
-    venue: "SIGIR 2024"
-    link: "https://arxiv.org/abs/2310.13023"
-    abstract: |
-      Graph Neural Networks (GNNs) have evolved to understand graph structures through recursive exchanges and aggregations among nodes. To enhance robustness, self-supervised learning (SSL) has become a vital tool for data augmentation. Traditional methods often depend on fine-tuning with task-specific labels, limiting their effectiveness when labeled data is scarce. Our research tackles this by advancing graph model generalization in zero-shot learning environments. Inspired by the success of large language models (LLMs), we aim to create a graph-oriented LLM capable of exceptional generalization across various datasets and tasks without relying on downstream graph data. We introduce the GraphGPT framework, which integrates LLMs with graph structural knowledge through graph instruction tuning. This framework includes a text-graph grounding component to link textual and graph structures and a dual-stage instruction tuning approach with a lightweight graph-text alignment projector. These innovations allow LLMs to comprehend complex graph structures and enhance adaptability across diverse datasets and tasks. Our framework demonstrates superior generalization in both supervised and zero-shot graph learning tasks, surpassing existing benchmarks. The open-sourced model implementation of our GraphGPT is available at this https URL.
-    idea: "텍스트↔그래프 정렬 + dual-stage projector로 그래프 생성·추론 능력 강화"   # :contentReference[oaicite:8]{index=8}
-    relevance: "§3.2 Alignment Projector 로 Llama-8 B의 head 0.5 %만 LoRA-업데이트 → 경량화"
-    tips: "프로젝터 레이어를 YAML-triple embedding에 맞춰 재사용"
+  # -----------------------------------------------------------
+  # 🚀 P0 List (Priority High - Week 1~3)
+  # -----------------------------------------------------------
+  - title: "Scaling LLM Test-Time Compute Optimally Can be More Effective than Scaling Parameters for Reasoning"
+    venue: "ICLR 2025 (Oral)"
+    link: "https://openreview.net/forum?id=4FWAwZtd2n"
+    abstract: "(Pending update: Paper text not yet loaded)"
+    idea: "Test-time compute가 parameter scaling보다 효과적일 수 있음"
+    relevance: "best-of-N/self-consistency/rerank를 '감(heuristic)'이 아니라 compute-optimal 문제로 정의. Axis 2에 직결."
+    tips: "(Pending update)"
 
-  - title: "InstructGraph: Boosting Large Language Models via Graph-centric Instruction Tuning and Preference Alignment"
-    venue: "ACL 2024 (Findings)"
-    link: "https://arxiv.org/abs/2402.08785"
-    abstract: |
-      Do current large language models (LLMs) better solve graph reasoning and generation tasks with parameter updates? In this paper, we propose InstructGraph, a framework that empowers LLMs with the abilities of graph reasoning and generation by instruction tuning and preference alignment. Specifically, we first propose a structured format verbalizer to unify all graph data into a universal code-like format, which can simply represent the graph without any external graph-specific encoders. Furthermore, a graph instruction tuning stage is introduced to guide LLMs in solving graph reasoning and generation tasks. Finally, we identify potential hallucination problems in graph tasks and sample negative instances for preference alignment, the target of which is to enhance the output's reliability of the model. Extensive experiments across multiple graph-centric tasks exhibit that InstructGraph can achieve the best performance and outperform GPT-4 and LLaMA2 by more than 13\% and 38\%, respectively.
-    idea: "그래프 중심 IT + preference alignment 로 그래프 생성·추론 동시 개선"   # :contentReference[oaicite:9]{index=9}
-    relevance: "§4 Alignment Loss 식을 참조해 triple 순서·중복 선호도 pair 생성"
-    tips: "Human eval 대신 70 B 교사 점수로 preference pair 자동 생성 가능"
+  - title: "Rewarding Progress: Scaling Automated Process Verifiers for LLM Reasoning"
+    venue: "ICLR 2025 (Spotlight)"
+    link: "https://openreview.net/forum?id=A6Y7AqlzLW"
+    abstract: "(Pending update: Paper text not yet loaded)"
+    idea: "Progress 기반 prover policy + PRM 스케일링"
+    relevance: "베이스 생성기를 크게 바꾸지 않고도 테스트타임 선택(Selection)만으로 성능을 올리는 가장 직접적인 루트."
+    tips: "(Pending update)"
+
+  - title: "Process Reward Models That Think (ThinkPRM)"
+    venue: "arXiv 2025"
+    link: "https://arxiv.org/abs/2504.16828"
+    abstract: "(Pending update: Paper text not yet loaded)"
+    idea: "생성적 PRM으로 데이터 효율/서치 성능 향상"
+    relevance: "CG 생성 과정/부분 그래프를 점수화하는 verifier 설계 레퍼런스."
+    tips: "(Pending update)"
+
+  - title: "Let's Verify Step by Step"
+    venue: "ICLR 2024"
+    link: "https://arxiv.org/abs/2305.20050"
+    abstract: "(Pending update: Paper text not yet loaded)"
+    idea: "PRM800K + Process vs Outcome supervision"
+    relevance: "Verifier + search/rerank의 고전적 기준선(blueprint). MVP 구현 시 참조."
+    tips: "(Pending update)"
+
+  - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
+    venue: "ICLR 2025"
+    link: "https://openreview.net/forum?id=3baOKeI2EU"
+    abstract: "(Pending update: Paper text not yet loaded)"
+    idea: "Chain/Tree/Graph 형태의 구조적 CoT를 통합 포맷으로 SLM에 증류"
+    relevance: "'구조를 보존하는 증류'의 대표 사례. CG가 구조화된 중간표현이므로 Axis 1/2 브릿지로 유용."
+    tips: "(Pending update)"
 
   - title: "MAGDi: Structured Distillation of Multi-Agent Interaction Graphs Improves Reasoning in Smaller Language Models"
     venue: "ICLR 2025 (Spotlight)"
     link: "https://arxiv.org/abs/2402.01620"
     abstract: |
       Multi-agent interactions between Large Language Model (LLM) agents have shown major improvements on diverse reasoning tasks. However, these involve long generations from multiple models across several rounds, making them expensive. Moreover, these multi-agent approaches fail to provide a final, single model for efficient inference. To address this, we introduce MAGDi, a new method for structured distillation of the reasoning interactions between multiple LLMs into smaller LMs. MAGDi teaches smaller models by representing multi-agent interactions as graphs, augmenting a base student model with a graph encoder, and distilling knowledge using three objective functions: next-token prediction, a contrastive loss between correct and incorrect reasoning, and a graph-based objective to model the interaction structure. Experiments on seven widely used commonsense and math reasoning benchmarks show that MAGDi improves the reasoning capabilities of smaller models, outperforming several methods that distill from a single teacher and multiple teachers. Moreover, MAGDi also demonstrates an order of magnitude higher efficiency over its teachers. We conduct extensive analyses to show that MAGDi (1) enhances the generalizability to out-of-domain tasks, (2) scales positively with the size and strength of the base student model, and (3) obtains larger improvements (via our multi-teacher training) when applying self-consistency -- an inference technique that relies on model diversity.
-    idea: "GPT-4 다중 에이전트 토론을 **논증 그래프**로 변환, graph-encoder 추가·3중 loss 로 7 B 학생 학습 → 수학·상식 7벤치 +5 pt"   # :contentReference[oaicite:1]{index=1}
-    relevance: "Beam CoT 로그→그래프 변환 파이프라인( Fig 2 )를 그대로 CG 문제 풀이 로그에 적용"
+    idea: "GPT-4 다중 에이전트 토론을 **논증 그래프**로 변환, graph-encoder 추가·3중 loss 로 7 B 학생 학습 → 수학·상식 7벤치 +5 pt"
+    relevance: "그래프 자체를 증류 타겟으로 두는 설계가 CG 증류 방향성과 강하게 맞닿음. Beam CoT 로그→그래프 변환 파이프라인 참조."
     tips: "그래프 노드·엣지 라벨을 triple 스키마와 맞춰야 distillation 안정"
 
   - title: "Mentor-KD: Making Small Language Models Better Multi-step Reasoners"
@@ -58,8 +86,8 @@ papers:
     link: "https://arxiv.org/abs/2410.09037"
     abstract: |
       Large Language Models (LLMs) have displayed remarkable performances across various complex tasks by leveraging Chain-of-Thought (CoT) prompting. Recently, studies have proposed a Knowledge Distillation (KD) approach, reasoning distillation, which transfers such reasoning ability of LLMs through fine-tuning language models of multi-step rationales generated by LLM teachers. However, they have inadequately considered two challenges regarding insufficient distillation sets from the LLM teacher model, in terms of 1) data quality and 2) soft label provision. In this paper, we propose Mentor-KD, which effectively distills the multi-step reasoning capability of LLMs to smaller LMs while addressing the aforementioned challenges. Specifically, we exploit a mentor, intermediate-sized task-specific fine-tuned model, to augment additional CoT annotations and provide soft labels for the student model during reasoning distillation. We conduct extensive experiments and confirm Mentor-KD's effectiveness across various models and complex reasoning tasks.
-    idea: "70 B 교사 → 13 B Mentor → 7 B 학생 **2단계 KD**·soft label 제공, multi-step reasoning 성능 대폭 향상"   # :contentReference[oaicite:2]{index=2}
-    relevance: "데이터 적을 때 Mentor stage가 효과적 – §4 Mentor Generation 참조"
+    idea: "70 B 교사 → 13 B Mentor → 7 B 학생 **2단계 KD**·soft label 제공, multi-step reasoning 성능 대폭 향상"
+    relevance: "Teacher 데이터가 제한적/노이즈가 있을 때의 '멘토-학생' 2단계 KD 템플릿 제공. 데이터 적을 때 Mentor stage 효과적."
     tips: "13 B '교정용' 중간 모델로 CG·정답 풀이 둘 다 distill 후 최종 8 B에 압축"
 
   - title: "SWITCH: Studying WItH TeaCHer for Knowledge Distillation of Large Language Models"
@@ -67,33 +95,71 @@ papers:
     link: "https://arxiv.org/abs/2410.19503"
     abstract: |
       Despite the success of Large Language Models (LLMs), they still face challenges related to high inference costs and memory requirements. To address these issues, Knowledge Distillation (KD) has emerged as a popular method for model compression, with student-generated outputs (SGOs) as training data being particularly notable for reducing the mismatch between training and inference. However, SGOs often produce noisy and biased sequences, which can lead to misguidance from the teacher model, especially in long sequences. To mitigate these challenges, we propose SWITCH (Studying WIth TeaCHer for Knowledge Distillation), a novel approach that strategically incorporates the teacher model during the student's sequence generation. SWITCH identifies discrepancies between the token probabilities of the teacher and student models, allowing the teacher to intervene selectively, particularly in long sequences that are more prone to teacher misguidance. Extensive experimental results across three model families and five instruction-following datasets show that SWITCH surpasses traditional KD methods, particularly excelling in the generation of long sequential data.
-    idea: "긴 시퀀스에서 **오차 토큰만 선택적 교사介入** KD, 장문 생성·형식 오류 감소"   # :contentReference[oaicite:10]{index=10}
-    relevance: "JSON 포맷 위반 토큰에만 teacher prob 사용 – Algorithm 2 채택"
+    idea: "긴 시퀀스에서 **오차 토큰만 선택적 교사介入** KD, 장문 생성·형식 오류 감소"
+    relevance: "선택적 교사介入으로 **긴 출력의 노이즈/스키마 위반(JSON 깨짐)**을 줄이는 데 직접적."
     tips: "CG 출력 길이 600+ 토큰 문제에서 SWITCH KD로 schema 불일치 rate↓"
 
-  - title: "DRAG: Distilling RAG for SLMs from LLMs to Transfer Knowledge and Mitigate Hallucination via Evidence and Graph-based Distillation"
-    venue: "ACL 2025 (Long Paper)"
+  # -----------------------------------------------------------
+  # 🌊 P1 List (Priority Medium - Week 4+)
+  # -----------------------------------------------------------
+  - title: "LoRA Soups: Merging LoRAs for Practical Skill Composition"
+    venue: "COLING 2025"
+    link: "https://aclanthology.org/2025.coling-industry.55/"
+    abstract: "(Pending update: Paper text not yet loaded)"
+    idea: "CAT 방식으로 LoRA 가중치 최적 조합 학습"
+    relevance: "CG/MR/QA/RP 태스크별 LoRA를 운용할 때 조합(composition) 레퍼런스. Axis 3 직결."
+    tips: "(Pending update)"
+
+  - title: "Unraveling LoRA Interference: Orthogonal Subspaces"
+    venue: "ACL 2025"
+    link: "https://arxiv.org/abs/2505.22934"
+    abstract: "(Pending update: Paper text not yet loaded)"
+    idea: "업데이트 서브스페이스 직교화로 간섭 완화"
+    relevance: "왜 naive merge가 깨지는지(간섭/서브스페이스)와 완화 방향 제공."
+    tips: "(Pending update)"
+
+  - title: "InstructGraph: Boosting Large Language Models via Graph-centric Instruction Tuning and Preference Alignment"
+    venue: "ACL 2024 (Findings)"
+    link: "https://arxiv.org/abs/2402.08785"
+    abstract: |
+      Do current large language models (LLMs) better solve graph reasoning and generation tasks with parameter updates? In this paper, we propose InstructGraph, a framework that empowers LLMs with the abilities of graph reasoning and generation by instruction tuning and preference alignment. Specifically, we first propose a structured format verbalizer to unify all graph data into a universal code-like format, which can simply represent the graph without any external graph-specific encoders. Furthermore, a graph instruction tuning stage is introduced to guide LLMs in solving graph reasoning and generation tasks. Finally, we identify potential hallucination problems in graph tasks and sample negative instances for preference alignment, the target of which is to enhance the output's reliability of the model. Extensive experiments across multiple graph-centric tasks exhibit that InstructGraph can achieve the best performance and outperform GPT-4 and LLaMA2 by more than 13\% and 38\%, respectively.
+    idea: "그래프 중심 IT + preference alignment 로 그래프 생성·추론 동시 개선"
+    relevance: "그래프 포맷을 중심으로 한 instruction + preference alignment. CG 출력의 '좋은/나쁜' 페어를 만드는 관점."
+    tips: "Human eval 대신 70 B 교사 점수로 preference pair 자동 생성 가능"
+
+  - title: "DRAG: Distilling RAG for SLMs via Evidence and Graph-based Distillation"
+    venue: "ACL 2025"
     link: "https://arxiv.org/abs/2506.01954"
     abstract: |
       Retrieval-Augmented Generation (RAG) methods have proven highly effective for tasks requiring factual consistency and robust knowledge retrieval. However, large-scale RAG systems consume significant computational resources and are prone to generating hallucinated content from Humans. In this work, we introduce \texttt{DRAG}, a novel framework for distilling RAG knowledge from large-scale Language Models (LLMs) into small LMs (SLMs). Our approach leverages evidence- and knowledge graph-based distillation, ensuring that the distilled model retains critical factual knowledge while significantly reducing model size and computational cost. By aligning the smaller model's predictions with a structured knowledge graph and ranked evidence, \texttt{DRAG} effectively mitigates hallucinations and improves factual accuracy. We further present a case demonstrating how our framework mitigates user privacy risks and introduce a corresponding benchmark. Experimental evaluations on multiple benchmarks demonstrate that our method outperforms the prior competitive RAG methods like MiniRAG for SLMs by up to 27.7% using the same models, preserving high-level efficiency and reliability. With \texttt{DRAG}, we provide a practical and resource-efficient roadmap to deploying enhanced retrieval and generation capabilities in small-sized LLMs.
-    idea: "70 B 교사 RAG가 생성한 **증거 순위 + 지식 그래프**를 KL·contrastive 다중 loss 로 7 B 학생에 증류, 사실 일관성 유지·환각 감소"   # :contentReference[oaicite:0]{index=0}
-    relevance: "CG(JSON) 후보와 근거 문장을 함께 loss 항목(L_graph)으로 넣는 설계 참고 – §3 Method, Table 3 (Ablation) 우선 읽기"
+    idea: "증거 순위 + KG를 다중 loss로 증류"
+    relevance: "KG/증거 기반으로 hallucination을 줄이려는 경우 증류 설계 참고. Evidence and Graph-based Distillation."
     tips: "문제별 top-k(≤10) triple과 supporting sentence 를 저장해 증류 코퍼스 구축"
 
+  - title: "Quantification of Large Language Model Distillation"
+    venue: "ACL 2025"
+    link: "https://aclanthology.org/2025.acl-long.248/"
+    abstract: "(Pending update: Paper text not yet loaded)"
+    idea: "LLM 증류 효과 정량화 방법론"
+    relevance: "KD 성능을 '정답률'만이 아니라 무엇이 좋아졌는지(지표/분해) 보고하는 데 도움."
+    tips: "(Pending update)"
+
+  - title: "Learning from Committee: Reasoning Distillation from a Mixture of Teachers"
+    venue: "ACL 2025 (Findings)"
+    link: "https://aclanthology.org/2025.findings-acl.217/"
+    abstract: "(Pending update: Paper text not yet loaded)"
+    idea: "여러 Teacher 모델의 Reasoning 통합 증류"
+    relevance: "여러 teacher/API/체크포인트를 쓸 때의 aggregation 레퍼런스."
+    tips: "(Pending update)"
+
+  # -----------------------------------------------------------
+  # 📂 Other Relevant Candidates
+  # -----------------------------------------------------------
   - title: "Contextualization Distillation from Large Language Model for Knowledge Graph Completion"
     venue: "Findings of EACL 2024"
-    link: "https://arxiv.org/abs/2402.01729v3"
+    link: "https://arxiv.org/abs/2402.01729"
     abstract: |
       While textual information significantly enhances the performance of pre-trained language models (PLMs) in knowledge graph completion (KGC), the static and noisy nature of existing corpora collected from Wikipedia articles or synsets definitions often limits the potential of PLM-based KGC models. To surmount these challenges, we introduce the Contextualization Distillation strategy, a versatile plug-in-and-play approach compatible with both discriminative and generative KGC frameworks. Our method begins by instructing large language models (LLMs) to transform compact, structural triplets into context-rich segments. Subsequently, we introduce two tailored auxiliary tasks, reconstruction and contextualization, allowing smaller KGC models to assimilate insights from these enriched triplets. Comprehensive evaluations across diverse datasets and KGC techniques highlight the efficacy and adaptability of our approach, revealing consistent performance enhancements irrespective of underlying pipelines or architectures. Moreover, our analysis makes our method more explainable and provides insight into generating path selection, as well as the choosing of suitable distillation tasks. All the code and data in this work will be released at this https URL.
-    idea: "교사 LLM이 triple을 **자연어 문맥**으로 재작성, 학생이 triple+문맥 reconstruction 듀얼-태스크 학습"   # :contentReference[oaicite:4]{index=4}
-    relevance: "BG section 문장화 할 때 문맥 생성·필터 규칙(Algorithm 1) 바로 응용"
+    idea: "교사 LLM이 triple을 **자연어 문맥**으로 재작성, 학생이 triple+문맥 reconstruction 듀얼-태스크 학습"
+    relevance: "BG section 문장화 할 때 문맥 생성·필터 규칙 응용"
     tips: "CG triple ↔ 설명 문장 세트 생성 스크립트 작성해 데이터 3× 증폭"
-
-  - title: "Improving Recall of Large Language Models: A Model Collaboration Approach for Relational Triple Extraction"
-    venue: "LREC-COLING 2024"
-    link: "https://arxiv.org/abs/2404.09593v1"
-    abstract: |
-      Relation triple extraction, which outputs a set of triples from long sentences, plays a vital role in knowledge acquisition. Large language models can accurately extract triples from simple sentences through few-shot learning or fine-tuning when given appropriate instructions. However, they often miss out when extracting from complex sentences. In this paper, we design an evaluation-filtering framework that integrates large language models with small models for relational triple extraction tasks. The framework includes an evaluation model that can extract related entity pairs with high precision. We propose a simple labeling principle and a deep neural network to build the model, embedding the outputs as prompts into the extraction process of the large model. We conduct extensive experiments to demonstrate that the proposed method can assist large language models in obtaining more accurate extraction results, especially from complex sentences containing multiple relational triples. Our evaluation model can also be embedded into traditional extraction models to enhance their extraction precision from complex sentences.
-    idea: "65 B 평가-교사 + 7 B 추출-학생 협업·re-rank로 복합 문장 triple recall ↑"   # :contentReference[oaicite:5]{index=5}
-    relevance: "Inference-time에 70 B 교사가 학생 Beam 후보 평가·재정렬하는 실험 설계 참고"
-    tips: "GPU 비용 낮추려면 평가-교사를 13 B로 교체하고 score threshold 튜닝"
