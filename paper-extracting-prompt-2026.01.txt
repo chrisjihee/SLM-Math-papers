@@ -6,18 +6,21 @@
 영어로 된 본문 텍스트 전체를 누락없이 빠짐없이 모두 텍스트로 출력하는데, 
 텍스트 단락의 단위가 가능한 논문에서 보이는대로 유지되도록 신경써주기 바랍니다!
 
-본문 텍스트를 중간에 빠뜨리거나 건너뛰는 일이 없도록 해주시기 바랍니다.
+본문 텍스트를 중간에 빠뜨리거나 건너뛰는 일이 결코 생기지 않도록 해주시기 바랍니다.
 논문 내에서 가능한 굵은 글씨, 이탤릭체, 불릿, 수식 등을 읽기 좋게 표현해주시기 바랍니다.
+단, 저자 정보, 각주 숫자 및 텍스트, 논문 citation 표현, 표/그림 캡션 등 논문의 본문 해석에 필요없어도 되는 부분은 제외해주시기 바랍니다.
 
-아래에 다른 논문의 예시 출력 형식을 참고하시기 바라며,
-이런 식으로 초록부터 마지막 결론까지 모든 논문 내용에 대해서 출력하시기 바랍니다.
+이런 식으로 섹션 사이의 구분을 하면서 초록부터 마지막 결론 섹션까지의 논문 전체 내용에 대해서 출력하시기 바랍니다.
+단, 감사의 글, 참고문헌 및 그 이후의 내용은 제외해주시기 바랍니다.
+아래에 다른 논문의 예시 출력 형식을 참고하되, 이 예시도 완벽한 것은 아닙니다.
+
 ---
-
-Self-Instruct: Aligning Language Models with Self-Generated Instructions
 
 Abstract
 
 Large “instruction-tuned” language models (i.e., finetuned to respond to instructions) have demonstrated a remarkable ability to generalize zero-shot to new tasks. Nevertheless, they depend heavily on human-written instruction data that is often limited in quantity, diversity, and creativity, therefore hindering the generality of the tuned model. We introduce Self-Instruct, a framework for improving the instruction-following capabilities of pretrained language models by bootstrapping off their own generations. Our pipeline generates instructions, input, and output samples from a language model, then filters invalid or similar ones before using them to finetune the original model. Applying our method to the vanilla GPT3, we demonstrate a 33% absolute improvement over the original model on Super-NaturalInstructions, on par with the performance of InstructGPT\(_{\text{001}}\), which was trained with private user data and human annotations. For further evaluation, we curate a set of expert-written instructions for novel tasks, and show through human evaluation that tuning GPT3 with Self-Instruct outperforms using existing public instruction datasets by a large margin, leaving only a 5% absolute gap behind InstructGPT\(_{\text{001}}\). Self-Instruct provides an almost annotation-free method for aligning pretrained language models with instructions, and we release our large synthetic dataset to facilitate future studies on instruction tuning.
+
+---
 
 1 Introduction
 
@@ -28,6 +31,8 @@ In this work, we introduce Self-Instruct , a semi-automated process for instruct
 To evaluate Self-Instruct empirically, we run this framework on GPT3 Brown et al. ( 2020 ) , which is a vanilla LM (§ 3 ). The iterative Self-Instruct process on this model leads to about 52k instructions, paired with about 82K instance inputs and target outputs. We observe that the resulting data provides a diverse range of creative tasks, as is demonstrated by examples in Figure 1 . These generated tasks deviate from the distribution of typical NLP tasks, and also have fairly small overlap with the seed tasks (§ 3.2 ). On this resulting data, we build GPT3\(_{\text{Self-Inst}}\) by finetuning GPT3 (i.e., the same model used for generating the instruction data). We evaluate GPT3\(_{\text{Self-Inst}}\) in comparison to various other models on both typical NLP tasks included in SuperNI Wang et al. ( 2022 ) , and a set of new instructions that are created for novel usage of instruction-following models (§ 4 ). The results indicate that GPT3\(_{\text{Self-Inst}}\) outperforms GPT3 (the original model) by a large margin (+33.1%) and nearly matches the performance of InstructGPT\(_{\text{001}}\) . Moreover, our human evaluation on the newly-created instruction set shows that GPT3\(_{\text{Self-Inst}}\) demonstrates a broad range of instruction following ability, outperforming models trained on other publicly available instruction datasets and leaving only a 5% gap behind InstructGPT\(_{\text{001}}\) .
 
 In summary, our contributions are: (1) we introduce Self-Instruct , a method for inducing instruction following capabilities with minimal human-labeled data; (2) we demonstrate its effectiveness via extensive instruction-tuning experiments; and (3) we release a large synthetic dataset of 52K instructions and a set of manually-written novel tasks for building and evaluating future instruction-following models.
+
+---
 
 2 Method
 
