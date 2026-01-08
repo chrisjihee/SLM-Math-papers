@@ -4,7 +4,7 @@ papers:
   # -----------------------------------------------------------
   - title: "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
     venue: "ACL 2023"
-    link: "https://arxiv.org/abs/2212.10560"
+    link: "https://aclanthology.org/2023.acl-long.754/"
     abstract: |
       Large "instruction-tuned" language models (i.e., finetuned to respond to instructions) have demonstrated a remarkable ability to generalize zero-shot to new tasks. Nevertheless, they depend heavily on human-written instruction data that is often limited in quantity, diversity, and creativity, therefore hindering the generality of the tuned model. We introduce Self-Instruct, a framework for improving the instruction-following capabilities of pretrained language models by bootstrapping off their own generations. Our pipeline generates instructions, input, and output samples from a language model, then filters invalid or similar ones before using them to finetune the original model. Applying our method to the vanilla GPT3, we demonstrate a 33% absolute improvement over the original model on Super-NaturalInstructions, on par with the performance of InstructGPT-001, which was trained with private user data and human annotations. For further evaluation, we curate a set of expert-written instructions for novel tasks, and show through human evaluation that tuning GPT3 with Self-Instruct outperforms using existing public instruction datasets by a large margin, leaving only a 5% absolute gap behind InstructGPT-001. Self-Instruct provides an almost annotation-free method for aligning pre-trained language models with instructions, and we release our large synthetic dataset to facilitate future studies on instruction tuning. Our code and data are available at this https URL.
     idea: "175개 seed instruction에서 시작하여 LM이 스스로 4단계 pipeline을 통해 52k instructions를 자동 생성: (1) 기존 instruction pool에서 새로운 instruction 생성, (2) classification task 여부 판별, (3) input-output instance 생성, (4) 품질 filtering. 핵심 기법은 output-first 방식으로 label bias 완화, ROUGE-L < 0.7 유사도 기준 중복 제거, 비-텍스트 keywords 필터링. 16k 이후 성능 plateau 발견으로 데이터 효율성 입증. SuperNI에서 vanilla GPT3 대비 +33% 절대 성능 향상, InstructGPT-001과 5%p 격차까지 도달."
@@ -13,7 +13,7 @@ papers:
 
   - title: "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes"
     venue: "ACL 2023 (Findings)"
-    link: "https://arxiv.org/abs/2305.02301"
+    link: "https://aclanthology.org/2023.findings-acl.507/"
     abstract: |
       Deploying large language models (LLMs) is challenging because they are memory inefficient and compute-intensive for practical applications. In reaction, researchers train smaller task-specific models by either finetuning with human labels or distilling using LLM-generated labels. However, finetuning and distillation require large amounts of training data to achieve comparable performance to LLMs. We introduce Distilling step-by-step, a new mechanism that (a) trains smaller models that outperform LLMs, and (b) achieves so by leveraging less training data needed by finetuning or distillation. Our method extracts LLM rationales as additional supervision for training small models within a multi-task framework. We present three findings across 4 NLP benchmarks: First, compared to both finetuning and distillation, our mechanism achieves better performance with much fewer labeled/unlabeled training examples. Second, compared to few-shot prompted LLMs, we achieve better performance using substantially smaller model sizes. Third, we reduce both the model size and the amount of data required to outperform LLMs; our finetuned 770M T5 model outperforms the few-shot prompted 540B PaLM model using only 80% of available data on a benchmark, whereas standard finetuning the same T5 model struggles to match even by using 100% of the dataset. We release the code at: this https URL.
     idea: "LLM이 생성한 rationale(추론 과정)을 추가 감독 신호로 활용하여 작은 모델을 멀티태스크로 학습시키는 새로운 증류 방법. 핵심은 L = L_label + λ L_rationale 손실 함수로 정답 예측과 rationale 생성을 동시 학습. [label]/[rationale] 프리픽스로 작업 분리하여 같은 모델이 두 태스크를 수행. 770M T5가 540B PaLM Few-shot CoT를 초과하는 성능을 보이며, 표준 finetuning/distillation 대비 데이터 사용량과 모델 크기를 동시에 절약. 4개 NLP 벤치마크에서 더 적은 데이터와 더 작은 모델로 더 나은 성능 달성."
@@ -22,7 +22,7 @@ papers:
 
   - title: "Phased Instruction Fine-Tuning for Large Language Models"
     venue: "ACL 2024 (Findings)"
-    link: "https://arxiv.org/abs/2406.04371"
+    link: "https://aclanthology.org/2024.findings-acl.341/"
     abstract: |
       Instruction Fine-Tuning enhances pre-trained language models from basic next-word prediction to complex instruction-following. However, existing One-off Instruction Fine-Tuning (One-off IFT) method, applied on a diverse instruction, may not effectively boost models' adherence to instructions due to the simultaneous handling of varying instruction complexities. To improve this, Phased Instruction Fine-Tuning (Phased IFT) is proposed, based on the idea that learning to follow instructions is a gradual process. It assesses instruction difficulty using GPT-4, divides the instruction data into subsets of increasing difficulty, and uptrains the model sequentially on these subsets. Experiments with Llama-2 7B/13B/70B, Llama3 8/70B and Mistral-7B models using Alpaca data show that Phased IFT significantly outperforms One-off IFT, supporting the progressive alignment hypothesis and providing a simple and efficient way to enhance large language models. Codes and datasets from our experiments are freely available at this https URL.
     idea: "Progressive Alignment Hypothesis에 기반한 단계적 instruction fine-tuning 방법. GPT-4를 활용해 instruction 난이도를 1-5점으로 평가하고, 누적 확률 분포를 통해 데이터셋을 쉬운(Stage 1)→중간(Stage 2)→어려운(Stage 3) 3단계로 분할. 각 단계를 순차적으로 uptraining하여 모델이 점진적으로 복잡한 instruction을 학습하도록 유도. Llama2/3, Mistral 등 다양한 모델에서 One-off IFT 대비 일관된 성능 향상. 6가지 permutation 실험을 통해 '쉬운→어려운' 순서가 최적임을 증명하고, ablation study로 각 단계의 기여도 분석."
@@ -57,15 +57,15 @@ papers:
     tips: "(Pending update)"
 
   - title: "Let's Verify Step by Step"
-    venue: "ICLR 2024"
-    link: "https://arxiv.org/abs/2305.20050"
+    venue: "ICLR 2024 (Poster)"
+    link: "https://openreview.net/forum?id=v8L0pN6EOi"
     abstract: "(Pending update: Paper text not yet loaded)"
     idea: "PRM800K + Process vs Outcome supervision"
     relevance: "Verifier + search/rerank의 고전적 기준선(blueprint). MVP 구현 시 참조."
     tips: "(Pending update)"
 
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
-    venue: "ICLR 2025"
+    venue: "ICLR 2025 (Poster)"
     link: "https://openreview.net/forum?id=3baOKeI2EU"
     abstract: "(Pending update: Paper text not yet loaded)"
     idea: "Chain/Tree/Graph 형태의 구조적 CoT를 통합 포맷으로 SLM에 증류"
@@ -74,7 +74,7 @@ papers:
 
   - title: "MAGDi: Structured Distillation of Multi-Agent Interaction Graphs Improves Reasoning in Smaller Language Models"
     venue: "ICLR 2025 (Spotlight)"
-    link: "https://arxiv.org/abs/2402.01620"
+    link: "https://openreview.net/forum?id=ffLblkoCw8"
     abstract: |
       Multi-agent interactions between Large Language Model (LLM) agents have shown major improvements on diverse reasoning tasks. However, these involve long generations from multiple models across several rounds, making them expensive. Moreover, these multi-agent approaches fail to provide a final, single model for efficient inference. To address this, we introduce MAGDi, a new method for structured distillation of the reasoning interactions between multiple LLMs into smaller LMs. MAGDi teaches smaller models by representing multi-agent interactions as graphs, augmenting a base student model with a graph encoder, and distilling knowledge using three objective functions: next-token prediction, a contrastive loss between correct and incorrect reasoning, and a graph-based objective to model the interaction structure. Experiments on seven widely used commonsense and math reasoning benchmarks show that MAGDi improves the reasoning capabilities of smaller models, outperforming several methods that distill from a single teacher and multiple teachers. Moreover, MAGDi also demonstrates an order of magnitude higher efficiency over its teachers. We conduct extensive analyses to show that MAGDi (1) enhances the generalizability to out-of-domain tasks, (2) scales positively with the size and strength of the base student model, and (3) obtains larger improvements (via our multi-teacher training) when applying self-consistency -- an inference technique that relies on model diversity.
     idea: "GPT-4 다중 에이전트 토론을 **논증 그래프**로 변환, graph-encoder 추가·3중 loss 로 7 B 학생 학습 → 수학·상식 7벤치 +5 pt"
@@ -83,7 +83,7 @@ papers:
 
   - title: "Mentor-KD: Making Small Language Models Better Multi-step Reasoners"
     venue: "EMNLP 2024 (Main)"
-    link: "https://arxiv.org/abs/2410.09037"
+    link: "https://aclanthology.org/2024.emnlp-main.977/"
     abstract: |
       Large Language Models (LLMs) have displayed remarkable performances across various complex tasks by leveraging Chain-of-Thought (CoT) prompting. Recently, studies have proposed a Knowledge Distillation (KD) approach, reasoning distillation, which transfers such reasoning ability of LLMs through fine-tuning language models of multi-step rationales generated by LLM teachers. However, they have inadequately considered two challenges regarding insufficient distillation sets from the LLM teacher model, in terms of 1) data quality and 2) soft label provision. In this paper, we propose Mentor-KD, which effectively distills the multi-step reasoning capability of LLMs to smaller LMs while addressing the aforementioned challenges. Specifically, we exploit a mentor, intermediate-sized task-specific fine-tuned model, to augment additional CoT annotations and provide soft labels for the student model during reasoning distillation. We conduct extensive experiments and confirm Mentor-KD's effectiveness across various models and complex reasoning tasks.
     idea: "70 B 교사 → 13 B Mentor → 7 B 학생 **2단계 KD**·soft label 제공, multi-step reasoning 성능 대폭 향상"
@@ -91,8 +91,8 @@ papers:
     tips: "13 B '교정용' 중간 모델로 CG·정답 풀이 둘 다 distill 후 최종 8 B에 압축"
 
   - title: "SWITCH: Studying WItH TeaCHer for Knowledge Distillation of Large Language Models"
-    venue: "EMNLP 2024"
-    link: "https://arxiv.org/abs/2410.19503"
+    venue: "EMNLP 2024 (Findings)"
+    link: "https://aclanthology.org/2025.findings-naacl.206/"
     abstract: |
       Despite the success of Large Language Models (LLMs), they still face challenges related to high inference costs and memory requirements. To address these issues, Knowledge Distillation (KD) has emerged as a popular method for model compression, with student-generated outputs (SGOs) as training data being particularly notable for reducing the mismatch between training and inference. However, SGOs often produce noisy and biased sequences, which can lead to misguidance from the teacher model, especially in long sequences. To mitigate these challenges, we propose SWITCH (Studying WIth TeaCHer for Knowledge Distillation), a novel approach that strategically incorporates the teacher model during the student's sequence generation. SWITCH identifies discrepancies between the token probabilities of the teacher and student models, allowing the teacher to intervene selectively, particularly in long sequences that are more prone to teacher misguidance. Extensive experimental results across three model families and five instruction-following datasets show that SWITCH surpasses traditional KD methods, particularly excelling in the generation of long sequential data.
     idea: "긴 시퀀스에서 **오차 토큰만 선택적 교사介入** KD, 장문 생성·형식 오류 감소"
