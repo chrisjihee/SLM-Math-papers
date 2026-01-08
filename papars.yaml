@@ -110,9 +110,9 @@ papers:
     relevance: "CG/MR/QA/RP 태스크별 LoRA를 운용할 때 조합(composition) 레퍼런스. Axis 3 직결."
     tips: "(Pending update)"
 
-  - title: "Unraveling LoRA Interference: Orthogonal Subspaces"
+  - title: "Unraveling LoRA Interference: Orthogonal Subspaces for Robust Model Merging"
     venue: "ACL 2025"
-    link: "https://arxiv.org/abs/2505.22934"
+    link: "https://aclanthology.org/2025.acl-long.1284/"
     abstract: "(Pending update: Paper text not yet loaded)"
     idea: "업데이트 서브스페이스 직교화로 간섭 완화"
     relevance: "왜 naive merge가 깨지는지(간섭/서브스페이스)와 완화 방향 제공."
@@ -120,7 +120,7 @@ papers:
 
   - title: "InstructGraph: Boosting Large Language Models via Graph-centric Instruction Tuning and Preference Alignment"
     venue: "ACL 2024 (Findings)"
-    link: "https://arxiv.org/abs/2402.08785"
+    link: "https://aclanthology.org/2024.findings-acl.801/"
     abstract: |
       Do current large language models (LLMs) better solve graph reasoning and generation tasks with parameter updates? In this paper, we propose InstructGraph, a framework that empowers LLMs with the abilities of graph reasoning and generation by instruction tuning and preference alignment. Specifically, we first propose a structured format verbalizer to unify all graph data into a universal code-like format, which can simply represent the graph without any external graph-specific encoders. Furthermore, a graph instruction tuning stage is introduced to guide LLMs in solving graph reasoning and generation tasks. Finally, we identify potential hallucination problems in graph tasks and sample negative instances for preference alignment, the target of which is to enhance the output's reliability of the model. Extensive experiments across multiple graph-centric tasks exhibit that InstructGraph can achieve the best performance and outperform GPT-4 and LLaMA2 by more than 13\% and 38\%, respectively.
     idea: "그래프 중심 IT + preference alignment 로 그래프 생성·추론 동시 개선"
@@ -129,7 +129,7 @@ papers:
 
   - title: "DRAG: Distilling RAG for SLMs via Evidence and Graph-based Distillation"
     venue: "ACL 2025"
-    link: "https://arxiv.org/abs/2506.01954"
+    link: "https://aclanthology.org/2025.acl-long.358/"
     abstract: |
       Retrieval-Augmented Generation (RAG) methods have proven highly effective for tasks requiring factual consistency and robust knowledge retrieval. However, large-scale RAG systems consume significant computational resources and are prone to generating hallucinated content from Humans. In this work, we introduce \texttt{DRAG}, a novel framework for distilling RAG knowledge from large-scale Language Models (LLMs) into small LMs (SLMs). Our approach leverages evidence- and knowledge graph-based distillation, ensuring that the distilled model retains critical factual knowledge while significantly reducing model size and computational cost. By aligning the smaller model's predictions with a structured knowledge graph and ranked evidence, \texttt{DRAG} effectively mitigates hallucinations and improves factual accuracy. We further present a case demonstrating how our framework mitigates user privacy risks and introduce a corresponding benchmark. Experimental evaluations on multiple benchmarks demonstrate that our method outperforms the prior competitive RAG methods like MiniRAG for SLMs by up to 27.7% using the same models, preserving high-level efficiency and reliability. With \texttt{DRAG}, we provide a practical and resource-efficient roadmap to deploying enhanced retrieval and generation capabilities in small-sized LLMs.
     idea: "증거 순위 + KG를 다중 loss로 증류"
@@ -156,8 +156,8 @@ papers:
   # 📂 Other Relevant Candidates
   # -----------------------------------------------------------
   - title: "Contextualization Distillation from Large Language Model for Knowledge Graph Completion"
-    venue: "Findings of EACL 2024"
-    link: "https://arxiv.org/abs/2402.01729"
+    venue: "EACL 2024 (Findings)"
+    link: "https://aclanthology.org/2024.findings-eacl.32/"
     abstract: |
       While textual information significantly enhances the performance of pre-trained language models (PLMs) in knowledge graph completion (KGC), the static and noisy nature of existing corpora collected from Wikipedia articles or synsets definitions often limits the potential of PLM-based KGC models. To surmount these challenges, we introduce the Contextualization Distillation strategy, a versatile plug-in-and-play approach compatible with both discriminative and generative KGC frameworks. Our method begins by instructing large language models (LLMs) to transform compact, structural triplets into context-rich segments. Subsequently, we introduce two tailored auxiliary tasks, reconstruction and contextualization, allowing smaller KGC models to assimilate insights from these enriched triplets. Comprehensive evaluations across diverse datasets and KGC techniques highlight the efficacy and adaptability of our approach, revealing consistent performance enhancements irrespective of underlying pipelines or architectures. Moreover, our analysis makes our method more explainable and provides insight into generating path selection, as well as the choosing of suitable distillation tasks. All the code and data in this work will be released at this https URL.
     idea: "교사 LLM이 triple을 **자연어 문맥**으로 재작성, 학생이 triple+문맥 reconstruction 듀얼-태스크 학습"
