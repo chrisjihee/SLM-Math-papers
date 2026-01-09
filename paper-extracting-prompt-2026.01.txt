@@ -1,48 +1,123 @@
-첨부된 파일은 논문의 원문 pdf 파일입니다.
-이 논문을 제 연구에 접목하기 위해 전체 내용을 읽어보려고 합니다.
-논문을 정독해서 제대로 이해하기 위한 것이니 절대로 논문 본문 텍스트를 요약하거나 압축하지 말고 원문 그대로 출력해주세요!
+첨부된 파일은 논문의 원문 pdf 파일이며, 본 논문을 연구에 접목하기 위해 전체 내용을 철저하게 읽어보고자 합니다.
+논문의 내용을 제대로 이해하기 위한 것이니 절대로 논문 본문 텍스트를 요약하거나 압축하지 말고 원문 그대로 출력하는 것이 무엇보다 중요합니다.
 
 <지시사항>
 영어로 된 본문 텍스트 전체를 누락없이 빠짐없이 모두 텍스트로 출력하는데, 
-텍스트 단락의 단위가 가능한 논문에서 보이는대로 유지되도록 신경써주기 바랍니다!
-
+텍스트 단락의 단위가 가능한 논문에서 구분한대로 유지되도록 특별히 신경써주기 바랍니다!
 본문 텍스트를 중간에 빠뜨리거나 건너뛰는 일이 결코 생기지 않도록 해주시기 바랍니다.
+
 논문에서 표현한 강조(Bold/Italic), 불릿, 수식 등을 살려서 읽기 좋게 표현해주시기 바랍니다.
-단, 저자 정보, 각주 숫자, 각주 내용, 논문 citation 표현, 표/그림 캡션 등 논문 본문이 아닌 부분은 제외해주시기 바랍니다.
-그렇다고해서 그림, 표, 다른 논문 등을 참고하라는 말까지도 제외하는 것은 아닙니다. 본문에 포함된 이러한 언급은 본문 그대로 살려주시기 바랍니다.
+단, 저자 정보, 인용 표현, 각주 숫자, 각주 내용, 표/그림 캡션, 표/그림 내용 등 논문 본문이 아닌 부분은 제외해주시기 바랍니다.
+그러나 그림, 표, 다른 문헌 등을 참고하라는 말까지도 제외하는 것은 아닙니다. 본문에 포함된 이러한 언급은 본문 그대로 살려주시기 바랍니다.
 
-이런 식으로 섹션 사이에는 "---"(긴 줄)로 구분을 하면서 초록부터 마지막 결론 섹션까지의 논문 전체 내용에 대해서 출력하시기 바랍니다.
-단, 감사의 글, 참고문헌 및 그 이후의 내용은 제외해주시기 바랍니다.
+섹션 사이는 Line으로 구분을 하고, 섹션 제목과 서브 섹션은 Heading 형식으로 출력하면서, 초록부터 마지막 결론 섹션까지의 논문 전체 내용에 대해서 출력하시기 바랍니다.
+단, 감사의 글, 참고문헌 및 그 이후의 부록 등은 제외해주시기 바랍니다.
 
-캔바스에 출력할 때는 개행 문자가 소실되어 텍스트 편집기에 붙여넣을 때 단락 구분이 명확히 유지되도록, 각 단락 사이에 두 번의 줄바꿈(\n\n)을 적용한 마크다운 형식의 전문으로 생성해주세요.
-아래에 다른 논문의 예시 출력 형식을 참고하되, 이 예시도 완벽한 것은 아닐 수 있음을 유의해주세요.
+출력할 때는 텍스트 편집기에 붙여넣을 때 단락 구분이 명확하게 유지되고 개행 문자가 소실되는 것을 방지하기 위해 각 단락 사이에 두 번의 줄바꿈(\n\n)을 적용한 마크다운 형식의 전문으로 생성해주세요.
+단, 논문처럼 수식이 많은 글을 텍스트 편집기로 옮기려면, 렌더링되지 않은 Raw Markdown(원시 마크다운) 형태가 필요하므로, '코드 블록' 안에 전체 내용을 담아 주시기 바랍니다.
 
----
+아래에 다른 논문의 예시 출력 형식을 참고하되, 이 예시도 완벽하지 않음을 유념하세요.
 
-Abstract
+<예시 출력>
+# Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes
 
-Large “instruction-tuned” language models (i.e., finetuned to respond to instructions) have demonstrated a remarkable ability to generalize zero-shot to new tasks. Nevertheless, they depend heavily on human-written instruction data that is often limited in quantity, diversity, and creativity, therefore hindering the generality of the tuned model. We introduce Self-Instruct, a framework for improving the instruction-following capabilities of pretrained language models by bootstrapping off their own generations. Our pipeline generates instructions, input, and output samples from a language model, then filters invalid or similar ones before using them to finetune the original model. Applying our method to the vanilla GPT3, we demonstrate a 33% absolute improvement over the original model on Super-NaturalInstructions, on par with the performance of InstructGPT\(_{\text{001}}\), which was trained with private user data and human annotations. For further evaluation, we curate a set of expert-written instructions for novel tasks, and show through human evaluation that tuning GPT3 with Self-Instruct outperforms using existing public instruction datasets by a large margin, leaving only a 5% absolute gap behind InstructGPT\(_{\text{001}}\). Self-Instruct provides an almost annotation-free method for aligning pretrained language models with instructions, and we release our large synthetic dataset to facilitate future studies on instruction tuning.
+## Abstract
 
----
-
-1 Introduction
-
-The recent NLP literature has witnessed a tremendous amount of activity in building models that can follow natural language instructions (Mishra et al., 2022 ; Wei et al., 2022 ; Sanh et al., 2022 ; Wang et al., 2022 ; Ouyang et al., 2022 ; Chung et al., 2022 , i.a.) . These developments are powered by two key components: large pretrained language models (LM) and human-written instruction data (e.g., PromptSource (Bach et al., 2022 ) and Super-NaturalInstructions (Wang et al., 2022 , SuperNI for short) ). However, collecting such instruction data is costly and often suffers limited diversity given that most human generations tend to be popular NLP tasks, falling short of covering a true variety of tasks and different ways to describe them. Continuing to improve the quality and coverage of instruction-tuned models necessitates the development of alternative approaches for supervising the instruction tuning process.
-
-In this work, we introduce Self-Instruct , a semi-automated process for instruction-tuning a pretrained LM using instructional signals from the model itself. The overall process is an iterative bootstrapping algorithm (see Figure 2 ), which starts off with a limited (e.g., 175 in our study) seed set of manually-written tasks that are used to guide the overall generation. In the first phase, the model is prompted to generate instructions for new tasks. This step leverages the existing collection of instructions to create more broad-coverage instructions that define (often new) tasks. Given the newly-generated set of instructions, the framework also creates input-output instances for them, which can be later used for supervising the instruction tuning. Finally, various heuristics are used to automatically filter low-quality or repeated instructions, before adding the remaining valid tasks to the task pool. This process can be repeated for many iterations until reaching a large number of tasks.
-
-To evaluate Self-Instruct empirically, we run this framework on GPT3 Brown et al. ( 2020 ) , which is a vanilla LM (§ 3 ). The iterative Self-Instruct process on this model leads to about 52k instructions, paired with about 82K instance inputs and target outputs. We observe that the resulting data provides a diverse range of creative tasks, as is demonstrated by examples in Figure 1 . These generated tasks deviate from the distribution of typical NLP tasks, and also have fairly small overlap with the seed tasks (§ 3.2 ). On this resulting data, we build GPT3\(_{\text{Self-Inst}}\) by finetuning GPT3 (i.e., the same model used for generating the instruction data). We evaluate GPT3\(_{\text{Self-Inst}}\) in comparison to various other models on both typical NLP tasks included in SuperNI Wang et al. ( 2022 ) , and a set of new instructions that are created for novel usage of instruction-following models (§ 4 ). The results indicate that GPT3\(_{\text{Self-Inst}}\) outperforms GPT3 (the original model) by a large margin (+33.1%) and nearly matches the performance of InstructGPT\(_{\text{001}}\) . Moreover, our human evaluation on the newly-created instruction set shows that GPT3\(_{\text{Self-Inst}}\) demonstrates a broad range of instruction following ability, outperforming models trained on other publicly available instruction datasets and leaving only a 5% gap behind InstructGPT\(_{\text{001}}\) .
-
-In summary, our contributions are: (1) we introduce Self-Instruct , a method for inducing instruction following capabilities with minimal human-labeled data; (2) we demonstrate its effectiveness via extensive instruction-tuning experiments; and (3) we release a large synthetic dataset of 52K instructions and a set of manually-written novel tasks for building and evaluating future instruction-following models.
+Deploying large language models (LLMs) is challenging because they are memory inefficient and compute-intensive for practical applications. In reaction, researchers train smaller task-specific models by either finetuning with human labels or distilling using LLM-generated labels. However, finetuning and distillation require large amounts of training data to achieve comparable performance to LLMs. We introduce **Distilling step-by-step**, a new mechanism that (a) trains smaller models that outperform LLMs, and (b) achieves so by leveraging less training data needed by finetuning or distillation. Our method extracts LLM rationales as additional supervision for training small models within a multi-task framework. We present three findings across 4 NLP benchmarks: First, compared to both finetuning and distillation, our mechanism achieves better performance with much fewer labeled/unlabeled training examples. Second, compared to few-shot prompted LLMs, we achieve better performance using substantially smaller model sizes. Third, we reduce both the model size and the amount of data required to outperform LLMs; our finetuned 770M T5 model outperforms the few-shot prompted 540B PaLM model using only 80% of available data on a benchmark, whereas standard finetuning the same T5 model struggles to match even by using 100% of the dataset.
 
 ---
 
-2 Method
+## 1 Introduction
 
-Annotating large-scale instruction data can be challenging for humans because it requires 1) creativity to come up with novel tasks and 2) expertise for writing the solutions to each task. Here, we detail our process for Self-Instruct , which refers to the pipeline of generating tasks with a vanilla pretrained language model itself, filtering the generated data, and then conducting instruction tuning with this generated data in order to align the LM to follow instructions better. This pipeline is depicted in Figure 2 .
+Despite the impressive few-shot ability offered by large language models (LLMs) (Brown et al., 2020; Chowdhery et al., 2022; Thoppilan et al., 2022; Hoffmann et al., 2022; Smith et al., 2022b; Zhang et al., 2022), these models are challenging to deploy in real world applications due to their sheer size. Serving a single 175 billion LLM requires at least 350GB GPU memory using specialized infrastructure (Zheng et al., 2022). To make matters worse, today’s state-of-the-art LLMs are composed of over 500B parameters (Chowdhery et al., 2022), requiring significantly more memory and compute. Such computational requirements are far beyond affordable for most product teams, especially for applications that require low latency performance.
 
-2.1 Defining Instruction Data
 
-The instruction data we want to generate contains a set of instructions $ \{I_{t}\} $ , each of which defines a task $ t $ in natural language. Task $ t $ has $ n_{t}\geq 1 $ input-output instances $ \{(X_{t,i},Y_{t,i})\}_{i=1}^{n_{t}} $ . A model $ M $ is expected to produce the output, given the task instruction and the corresponding input: $ M(I_{t},X_{t,i})=Y_{t,i} $ , for $ i\in\{1,\ldots,n_{t}\} $ . Note that the instruction and instance input does not have a strict boundary in many cases. For example, “write an essay about school safety” can be a valid instruction that we expect models to respond to directly, while it can also be formulated as “write an essay about the following topic” as the instruction, and “school safety” as an instance input. To encourage the diversity of the data format, we allow such instructions that do not require additional input (i.e., $ X $ is empty).
+To circumvent these deployment challenges of large models, practitioners often choose to deploy smaller specialized models instead. These smaller models are trained using one of two common paradigms: finetuning or distillation. Finetuning updates a pretrained smaller model (e.g. BERT (Devlin et al., 2018) or T5 (Raffel et al., 2020)) using downstream human annotated data (Howard and Ruder, 2018). Distillation trains the same smaller models with labels generated by a larger LLM (Tang et al., 2019; Wang et al., 2021; Smith et al., 2022a; Arora et al., 2022). Unfortunately, these paradigms reduce model size at a cost: to achieve comparable performance to LLMs, finetuning requires expensive human labels, and distillation requires large amounts of unlabeled data which can be hard to obtain (Tang et al., 2019; Liang et al., 2020).
 
-...
+
+In this work, we introduce **Distilling step-by-step**, a new simple mechanism for training smaller models with less training data. Our mechanism reduces the amount of training data required for both finetuning and distillation of LLMs into smaller model sizes.
+
+
+Core to our mechanism is changing our perspective from viewing LLMs as a source of noisy labels to viewing them as agents that can reason: LLMs can produce natural language rationales justifying their predicted labels (Wei et al., 2022; Kojima et al., 2022). For example, when asked “Jesse’s room is 11 feet long and 15 feet wide. If she already has 16 square feet of carpet. How much more carpet does she need to cover the whole floor?”, an LLM can be prompted by chain-of-thought (CoT) technique (Wei et al., 2022) to provide intermediate rationales “Area = length $\times$ width. Jesse’s room has $11 \times 15$ square feet.” that better connects the input to the final answer “$(11 \times 15) - 16$”. These rationales can contain relevant task knowledge, such as “Area = length $\times$ width”, that may originally require many data for small task-specific models to learn. We thus utilize these extracted rationales as additional, richer information to train small models through a multi-task training setup, with both label prediction and rationale prediction tasks (Raffel et al., 2020; Narang et al., 2020).
+
+
+Distilling step-by-step allows us to learn task-specific smaller models that outperform LLMs using over 500x less model parameters, and it does so with far fewer training examples compared to traditional finetuning or distillation. Our results show three promising empirical conclusions across 4 NLP benchmarks.
+
+
+First, compared to both finetuning and distillation, our resulting models achieve better performance with over 50% less training examples on average across datasets (and up to over 85% reduction).
+
+
+Second, our models outperform LLMs with much smaller model sizes (up to 2000x smaller), drastically reducing the computation cost required for model deployment.
+
+
+Third, we simultaneously reduce the model size as well as the amount of data required to outperform LLMs. We surpass the performance of 540B parameter LLMs using a 770M T5 model; this smaller model only uses 80% of a labeled dataset that would otherwise be required if using an existing finetuning method. When only unlabeled data is present, our small models still perform on par or better than LLMs. We outperform 540B PaLM’s performance with only a 11B T5 model. We further show that when a smaller model performs worse than an LLM, Distilling step-by-step can more efficiently leverage additional unlabeled data to match the LLM performance compared to the standard distillation approach.
+
+---
+
+## 2 Related work
+
+Our work distills task-specific knowledge of LLMs into smaller specialist models by leveraging the emergent reasoning capabilities of today’s LLMs. We draw on recent knowledge distillation research and other methods that learn from both human-generated rationales and LLM-generated rationales.
+
+
+**Knowledge distillation from large models.** Knowledge distillation has been successfully used to transfer knowledge from larger, more competent teacher models into smaller student models affordable for practical applications (Buciluă et al., 2006; Hinton et al., 2015; Beyer et al., 2022; West et al., 2021). It supports learning from limited labeled data, since the larger teacher model is often used to generate a training dataset with noisy pseudo labels (Chen et al., 2020; Iliopoulos et al., 2022; Wang et al., 2021; Smith et al., 2022a; Arora et al., 2022; Agrawal et al., 2022). The one limitation that knowledge distillation often faces is its reliance on large amounts of unlabelled data required to create a useful noisy training dataset. Although prior work has explored using data augmentation techniques to reduce this hunger for data (Tang et al., 2019; Liang et al., 2020; Srinivas and Fleuret, 2018; Milli et al., 2019), we propose an alternative approach: we reduce the need for large unlabeled data by distilling not just labels but also the teacher’s rationales.
+
+
+**Learning with human rationales.** While utilizing LLM-generated rationales is a new exciting area of investigation, using human-generated rationales has a rich history (Hase and Bansal, 2021). For instance, human rationales can be used to regularize model behavior (Ross et al., 2017); it can be used as additional inputs to guide a model’s predictions (Rajani et al., 2019); it can be used to improve overall model performance (Zaidan et al., 2007; Zhang et al., 2016; Camburu et al., 2018; Hancock et al., 2019; Pruthi et al., 2022); and human rationales can be used as gold standard labels to make models more interpretable by generating similar rationales (Wiegreffe et al., 2021; Narang et al., 2020; Eisenstein et al., 2022). Unfortunately, human rationales are expensive.
+
+
+**Learning with LLM generated rationales.** Today’s LLMs are capable of explaining their predictions by generating high-quality reasoning steps (Wei et al., 2022; Kojima et al., 2022). These reasoning steps have been used to augment input prompts to LLMs, improving their few-shot or zero-shot performance (Wei et al., 2022; Kojima et al., 2022; Wang et al., 2022b); reasoning steps have also been used as additional finetuning data “self-improve” LLMs (Zelikman et al., 2022; Huang et al., 2022). Unfortunately, regardless of how LLMs are improved, their large size limits their utility in most test-time applications. By contrast, we leverage generated rationales as informative supervision to train smaller task-specific models, i.e. models that can be deployed without incurring large computation or memory costs.
+
+
+In the past few months, three concurrent works have also proposed a similar idea to ours—that of using extracted rationales as supervision (Wang et al., 2022a; Ho et al., 2022; Magister et al., 2022). Amongst them, PINTO (Wang et al., 2022a) relies on an LLM to generate rationales at test-time, and thus does not fully solve deployment challenges. Compared with Ho et al. (2022) and Magister et al. (2022), we go beyond their experiments to provide a granular study by varying training dataset size, exploring downstream model sizes, and demonstrating the effectiveness of our method on fully unlabeled datasets.
+
+---
+
+## 3 Distilling step-by-step
+
+We propose a new paradigm, **Distilling step-by-step**, that leverages the ability of LLMs to reason about their predictions to train smaller models in a data-efficient way. Our overall framework is illustrated in Figure 2. Our paradigm has two simple steps: First, given an LLM and an unlabeled dataset, we prompt the LLM to generate output labels along with rationales to justify the labels. Rationales are natural language explanations that provide support for the model’s predicted label. Second, we leverage these rationales in addition to the task labels to train smaller downstream models. Intuitively, rationales provide richer, more detailed information about why an input is mapped to a specific output label, and often contain relevant task knowledge that may be hard to infer solely from the original inputs.
+
+### 3.1 Extracting rationales from LLMs
+
+Recent studies observe one intriguing emerging property of LLMs: their ability to generate rationales that support their predictions (Wei et al., 2022; Kojima et al., 2022). While the studies have largely focused on how to elicit such reasoning capability from LLMs (Nye et al., 2021; Wei et al., 2022; Kojima et al., 2022), we use them in training smaller downstream models.
+
+
+Specifically, we utilize Chain-of-Thought (CoT) prompting (Wei et al., 2022) to elicit and extract rationales from LLMs. As illustrated in Figure 3, given an unlabeled dataset $x_i \in D$, we first curate a prompt template $p$ that articulates how the task should be solved. Each prompt is a triplet $(x^p, r^p, y^p)$, where $x^p$ is an example input, $y^p$ is its corresponding label and $r^p$ is a user-provided rationale that explains why $x^p$ can be categorized as $y^p$. We append each input $x_i$ to $p$ and use it as an input to prompt the LLM to generate rationales and labels for each $x_i \in D$. With the demonstrations seen in $p$, the LLM is able to mimic the triplet demonstration to generate the rationale $\hat{r}_i$ and output $\hat{y}_i$ for $x_i$.
+
+### 3.2 Training smaller models with rationales
+
+We first describe the current framework for learning task-specific models. With this framework in place, we extend it to incorporate rationales into the training process. Formally, we denote a dataset as $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^N$ where each $x_i$ represents an input and $y_i$ is the corresponding desired output label. While our framework supports inputs and outputs of any modality, our experiments limits $x$ and $y$ to be natural language. This text-to-text framework (Raffel et al., 2020) encompasses a variety of NLP tasks: classification, natural language inference, question answering and more.
+
+
+**Standard finetuning and task distillation.** The most common practice to train a task-specific model is to finetune a pretrained model with supervised data (Howard and Ruder, 2018). In the absence of human-annotated labels, task-specific distillation (Hinton et al., 2015; Tang et al., 2019) uses LLM teachers to generates pseudo noisy training labels, $\hat{y}_i$ in place of $y_i$ (Wang et al., 2021; Smith et al., 2022a; Arora et al., 2022). For both scenarios, the smaller model $f$ is trained to minimize the label prediction loss:
+
+$$
+\mathcal{L}_{label} = \frac{1}{N} \sum_{i=1}^N \ell(f(x_i), \hat{y}_i), \quad (1)
+$$
+
+where $\ell$ is the cross-entropy loss between the predicted and target tokens. Note that for ease of exposition, we overload $\hat{y}_i$ in Eq. 1 to be either human-annotated labels $y_i$ for the standard finetuning case, or LLM-predicted labels $\hat{y}_i$ for the model distillation case.
+
+
+**Multi-task learning with rationales.** To create a more explicit connection between $x_i$ to $\hat{y}_i$, we use extracted rationales $\hat{r}_i$ as additional supervision. There are several ways to incorporate rationales into the downstream model’s training process. One straightforward approach is feed $\hat{r}_i$ as an additional input—as proposed by other concurrent research (Rajani et al., 2019; Wang et al., 2022a). In other words, the $f(x_i, \hat{r}_i) \rightarrow \hat{y}_i$ is trained with both text and rationale $[x, r]$ as inputs:
+
+$$
+\mathcal{L} = \frac{1}{N} \sum_{i=1}^N \ell(f(x_i, \hat{r}_i), \hat{y}_i). \quad (2)
+$$
+
+Unfortunately, this design requires an LLM to first generate a rationale before the $f$ can make a prediction. The LLM is still necessary during deployment, limited its deployability.
+
+
+In this work, instead of using rationales as additional model inputs, we frame learning with rationales as a multi-task problem. Specifically, we train the model $f(x_i) \rightarrow (\hat{y}_i, \hat{r}_i)$ to not only predict the task labels but also generate the corresponding rationales given the text inputs:
+
+$$
+\mathcal{L} = \mathcal{L}_{label} + \lambda \mathcal{L}_{rationale}, \quad (3)
+$$
+
+where $\mathcal{L}_{label}$ is the label prediction loss in Eq. 1 and $\mathcal{L}_{rationale}$ is the rationale generation loss:
+
+$$
+\mathcal{L}_{rationale} = \frac{1}{N} \sum_{i=1}^N \ell(f(x_i), \hat{r}_i). \quad (4)
+$$
+
+The rationale generation loss enables the model to learn to generate the intermediate reasoning steps for the prediction, and could therefore guide the model in better predicting the resultant label. This is our proposed Distilling step-by-step. Compared with Eq. 2, the rationale $\hat{r}_i$ is not required in the test time, which removes the need for an LLM at test-time. We prepend “task prefixes” (`[label]`, `[rationale]`) to the input examples and train the smaller model to output $\hat{y}_i$ when `[label]` is provided and to produce $\hat{r}_i$ with `[rationale]` (Raffel et al., 2020).
+
+(후략)
