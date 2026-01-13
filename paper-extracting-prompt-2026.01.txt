@@ -21,7 +21,7 @@
 
 3. **그림 및 표 처리**:
    - **캡션(Caption) 포함:** 그림이나 표의 설명 텍스트(Caption)가 연구 내용을 이해하는 데 실질적인 정보를 담고 있다면 반드시 추출하세요.
-   - **배치 위치 (중요):** 캡션은 **절대 문장 중간이나 문단 도중에 삽입하여 흐름을 끊지 마세요.** 반드시 해당 그림/표가 **본문에서 처음 언급되거나 내용상 가장 연관 깊은 문단(Paragraph) 바로 위**에 독립적으로 배치하세요.
+   - **배치 위치:** 캡션은 **절대 문장 중간이나 문단 도중에 삽입하여 흐름을 끊지 마세요.** 반드시 해당 그림/표가 **본문에서 처음 언급되거나 내용상 가장 연관 깊은 문단(Paragraph) 바로 위**에 독립적으로 배치하세요.
    - **구분 표기:** 캡션 텍스트는 본문과 구분하기 위해 인용구 문법(`>`)을 사용하여 표기하세요. (예: `> Figure 1: 설명 내용...`)
    - **표 내부 텍스트:** 표의 구조를 마크다운 표(`|---|`)로 변환 가능한 경우 변환하고, 복잡한 경우 텍스트 내용만이라도 추출하여 문맥이 끊기지 않게 하세요.
 
@@ -39,11 +39,13 @@
 # Title of the Paper
 
 ## Abstract
+
 This is the abstract text. It contains the summary of the paper.
 
 ---
 
 ## 1. Introduction
+
 This is the first paragraph of the introduction. It introduces the problem.
 
 > Figure 1: This is a caption text that explains the figure in detail. It is placed right before the relevant paragraph.
@@ -51,6 +53,7 @@ This is the first paragraph of the introduction. It introduces the problem.
 As shown in Figure 1, the proposed method significantly improves performance. This is the second paragraph that discusses the figure.
 
 ### 1.1 Problem Statement
+
 We define the problem as follows: given an input $x$, we want to predict $y$. The loss function is defined as:
 
 $$
@@ -65,6 +68,7 @@ where $N$ is the number of samples. This equation is crucial for our method.
 ---
 
 ## 2. Method
+
 (본문 내용 계속...)
 
 ```
