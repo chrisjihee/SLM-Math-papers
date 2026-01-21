@@ -1,258 +1,50 @@
-# SCALING LLM TEST-TIME COMPUTE OPTIMALLY CAN BE MORE EFFECTIVE THAN SCALING PARAMETERS FOR REASONING
+당신은 학술 논문을 문장 단위로 해체하여 깊이 있는 이해를 돕는 **'AI 리서치 튜터(AI Research Tutor)'**입니다.
+사용자가 **[정제된 텍스트]**와 **[PDF 원본 파일]**을 함께 제공하면, 아래 지침에 따라 **한 번에 2개의 메인 섹션** 분량만큼 끊어서 분석 결과를 출력하세요.
 
-## ABSTRACT
+**<핵심 원칙>**
+1.  **하이브리드 참조 (Hybrid Reference):**
+    - 기본 분석은 **제공된 텍스트**를 기반으로 진행하세요.
+    - 단, 수식(Math), 도표(Figures), 그래프가 언급될 때는 반드시 **첨부된 PDF 파일의 해당 영역을 시각적으로 참조**하여 정보의 정확성을 교차 검증하세요.
+2.  **계층적 문장 번호 (Hierarchical Numbering):**
+    - 문장 번호는 반드시 **`[섹션번호]-[순번]`** 형식을 따르세요.
+    - **Abstract**는 `0`번 섹션으로 간주합니다. (예: `0-1`, `0-2`...)
+    - **서브 섹션**도 포함합니다. (예: Section 3.1의 첫 문장 -> `3.1-1`)
+3.  **Raw Markdown Code Block 출력:** 모든 출력 결과는 복사/붙여넣기가 용이하도록 **단일 코드 블록(```markdown ... ```)** 안에 담아서 출력하세요.
+4.  **단락 원문 생략 & 원문 100% 보존:** '단락 전체'는 출력하지 말고, 문장 단위 분석 시 영어 원문은 단어/수식 변경 없이 그대로 출력하세요.
+5.  **수식 LaTeX 유지:** `$ \theta $`, `$$\mathcal{L}$$` 등 LaTeX 포맷을 절대 일반 텍스트로 변환하지 마세요.
 
-Enabling LLMs to improve their outputs by using more test-time compute is a critical step towards building self-improving agents that can operate on open-ended natural language. In this paper, we scale up inference-time computation in LLMs, with a focus on answering: if an LLM is allowed to use a fixed but non-trivial amount of inference-time compute, how much can it improve its performance on a challenging prompt? Answering this question has implications not only on performance, but also on the future of LLM pretraining and how to tradeoff inference-time and pre-training compute. Little research has attempted to understand the scaling behaviors of test-time inference methods, with current work largely providing negative results for a number of these strategies. In this work, we analyze two primary mechanisms to scale test-time computation: (1) searching against dense, process-based verifier reward models (PRMs); and (2) updating the model's distribution over a response adaptively, given the prompt at test time. We find that in both cases, the effectiveness of different approaches to scaling test-time compute critically varies depending on the difficulty of the prompt. This observation motivates applying a "compute-optimal" scaling strategy, which acts to, as effectively as possible, allocate test-time compute per prompt in an adaptive manner. Using this compute-optimal strategy, we can improve the efficiency of test-time compute scaling for math reasoning problems by more than 4x compared to a best-of-N baseline. Additionally, in a FLOPs-matched evaluation, we find that on problems where a smaller base model attains somewhat non-trivial success rates, test-time compute can be used to outperform a 14x larger model.
+**<출력 포맷 (Template)>**
 
----
+코드 블록 내부의 내용은 아래 형식을 엄격히 따릅니다.
 
-## 1 INTRODUCTION
-
-Given a challenging input, can we enable LLMs to most effectively make use of additional computation at test-time to improve their responses? In theory, additional test-time compute should enable an LLM to do better than what it was trained to do in zero-shot. Such a capability at test-time bears the potential to unlock agentic and reasoning abilities. Additionally, if pre-trained model size can be traded off for additional inference compute, this would enable the deployment of smaller on-device models in place of datacenter scale LLMs. Automating the inference-time improvement of model outputs also provides a path towards a general self-improvement algorithm that can function with reduced human supervision.
-
-Prior work studying inference-time computation provides mixed results. On the one hand, some prior work shows that current LLMs can use test-time computation to improve their outputs, on the other hand, several other works show that the effectiveness of these methods on complex tasks such as math reasoning remains limited. However, reasoning is a domain we should expect to benefit from test-time compute, since reasoning involves drawing inferences from existing knowledge as opposed to acquiring new knowledge. Therefore, the disagreement in these prior findings motivates the need for a systematic analysis of different approaches for scaling test-time compute.
-
-In this paper we understand the pros and cons of scaling up test-time compute, and how it compares with scaling up pre-training compute. While the simplest approach for scaling test-time compute is best-of-N sampling — sampling N outputs in "parallel" from a base LLM and selecting the one that scores the highest per a learned verifier or a reward model — there are many other ways we could conceivably scale up test-time compute. We unify methods into those that modify either the proposal distribution from which responses are sampled (for e.g., by asking the base model to revise its responses) or those that alter how the verifier is used for searching directly in the output space (e.g. by training a PRM).
-
-To understand the benefits of scaling up test-time compute, we carry out experiments on MATH using PaLM-2 models fine-tuned to either revise incorrect answers (e.g. improving the proposal distribution; Section 6) or verify the correctness of individual steps in an answer using a process-based reward model (PRM) (Section 5). We find that the efficacy of different test-time strategies depends on both the nature of the specific problem at hand and the base LLM used. For example, on "easier" problems, for which the base LLM can already produce reasonable-looking responses, allowing the model to sequentially revise its initial answer (i.e., modifying the proposal distribution) is a more effective use of compute than reranking N independent answers sampled in parallel. On the other hand, on difficult problems which require searching over many high-level strategies, re-sampling new responses independently in parallel or deploying tree-search against a process reward model is more effective. This underscores the need to deploy an adaptive "compute-optimal" strategy for scaling test-time compute, wherein the specific approach for utilizing test-time compute is selected depending on the prompt, so as to make the best use of additional computation. We also show that a notion of question difficulty (Section 4) from the perspective of the base LLM can be used to predict the efficacy of test-time computation, enabling us to practically instantiate this "compute-optimal" scaling. By appropriately allocating test-time compute in this way, we are able to greatly improve test-time compute scaling, surpassing the performance of a best-of-N baseline while only using ~4x less computation with both revisions and search (Sections 5 and 6).
-
-Using our scaling strategy, we then study to what extent test-time computation can substitute for additional pretraining. Specifically, we conduct a FLOPs-matched comparison between a smaller model with test-time compute and pretraining a 14x larger model. We find that on easy and intermediate questions, additional test-time compute is often preferable to scaling pretraining. This finding suggests that rather than focusing purely on scaling pretraining, in some settings it is more efficient to pretrain smaller models with less compute, and then apply test-time compute to improve outputs. That said, with the most challenging questions, we observe few benefits from scaling up test-time compute. Instead, on these questions, it is more effective to make progress by applying additional pretraining, demonstrating that current approaches to scaling test-time compute may not be 1-to-1 exchangeable with scaling pretraining. Overall, this suggests that even with a fairly naïve methodology, scaling up test-time computation can already be preferable to pretraining in some settings, with only more improvements as test-time strategies mature. Longer term, this hints at a future where fewer FLOPs are spent during pretraining and more FLOPs are spent at inference.
-
-> Figure 1: Summary of results. Left: Compute-optimal scaling for revisions and search. We compare the compute-optimal scaling policy with PaLM 2-S* against baselines in the revision (top) and PRM search (bottom) settings. In the revision setting, we find that compute-optimal scaling outperforms best-of-N with 4x less compute. Similarly, with PRM search, compute-optimal scaling shows large early improvements over best-of-N, nearly outperforming best-of-N with 4x less compute at points (see Sec. 5 and 6). Right: Comparing test-time compute and parameter scaling. We compare compute-optimal test-time scaling with PaLM 2-S* against a $\sim 14$x larger model without additional test-time compute. We expect X tokens of pretraining for both models and Y tokens of inference. A larger model, multiplies the FLOPs for both. If we were to apply additional test-time compute to the smaller model, to match this FLOPs multiplier, we see that for the revisions (top) when $Y \ll X$, test-time compute is preferable to pretraining. As inference to pretraining ratio increases, test-time compute is preferable on easy questions. However, on hard questions, pretraining is preferable.
-
----
-
-## 2 UNIFIED PERSPECTIVE ON TEST-TIME COMPUTE: PROPOSER & VERIFIER
-
-We first provide an unified abstraction of test-time compute to situate contemporary approaches. We view the use of test-time compute through the lens of modifying the model's distribution on a given prompt, adaptively at test-time. Ideally, test-time compute should allow for the ability to express more complex distributions than naïvely sampling from the LLM. In general, there are two knobs to modify an LLM's distribution: (1) at the input level: by augmenting the given prompt with an additional set of tokens that the LLM conditions on to obtain a modified proposal distribution, or (2) at the output level: by sampling multiple candidates from the standard LLM and performing surgery on them, using some post-hoc verifiers or scorers. This process is reminiscent of Markov chain Monte Carlo (MCMC) sampling from a complex distribution by combining a simple proposal distribution and a score function. Modifying the proposal distribution by altering inputs tokens and using a verifier form the two independent axes of our study.
-
-**(1) Modifying the proposal distribution.** One way to improve the proposal distribution is to directly optimize the model for a given reasoning task via RL-inspired finetuning methods such as STaR or $ReST^{EM}$. These techniques specifically finetune the model to directly improve the proposal distribution, rather than generating additional tokens at test-time. Instead, techniques such as self-critique enable the model to improve its own proposals at test time by instructing it to critique and revise its outputs iteratively. Since prompting off-the-shelf models is not effective at enabling effective revisions at test time, we specifically finetune models to iteratively revise their answers for complex reasoning, using Best-of-N guidance.
-
-**(2) Optimizing the verifier.** The verifier selects the best answer from the proposal distribution. The most canonical way to use such a verifier is by applying best-of-N sampling, wherein we sample N solutions and then select the best one with a verifier. This approach can be further improved by training a process-based reward model (PRM), which produces a prediction of the correctness of each intermediate step in a solution. We can then utilize these per-step predictions to perform tree search over the solution space, enabling a more effective modification of the proposal distribution.
+```markdown
+# [섹션 번호] [섹션 제목]
 
 ---
 
-## 3 HOW TO SCALE TEST-TIME COMPUTATION OPTIMALLY
+### ✅ [섹션번호-순번] (예: 1-1, 3.1-5)
+> (원문 문장 인용. 수식 LaTeX 유지)
 
-Using this unified view of different methods, we would like to understand and characterize how to most effectively use test-time computation to improve performance on a given prompt by answering the question below. When either refining the proposal distribution or searching against a verifier, there are numerous choices on how to allocate test-time compute. For example, when using a model finetuned for revisions as the proposal distribution and an ORM verifier, we could either spend the full test-time budget on generating N independent samples in parallel from the model and then apply best-of-N, or we could sample N revisions in sequence using a revision model and then select the best answer in the sequence with an ORM, or strike a balance between these extremes. Intuitively, we might expect that problems where the initial samples are more likely to be on the right track to benefit more from revisions. On the other hand, problems that require exploration over high-level problem solving strategies might benefit from sampling more independent answers in parallel. Finally, in the case of verifiers, we also can choose between different search algorithms (e.g. beam-search, lookahead-search, best-of-N), each of which may exhibit different properties depending on the quality of the verifier and proposal distribution at hand. More sophisticated search procedures might be more useful in harder problems compared to a much simpler best-of-N or majority baseline.
+**🔍 단위 해석**
+(문맥을 고려한 전문적 한국어 해석)
 
-> **Problem setup.** We are given a prompt and a test-time compute budget within which to solve the problem. Under the abstraction above, there are different knobs we can tune when utilizing test-time computation. How can we determine the most effective way to utilize test-time compute for a given prompt? And how well would this do against simply utilizing a much bigger pretrained model?
-
-### 3.1 COMPUTE-OPTIMAL TEST-TIME SCALING STRATEGY
-
-Per the discussion above, we would like to prescribe the optimal allocation of our test-time compute budget onto a given problem. To this end, for any given approach of utilizing test-time compute (e.g., revisions and search against a verifier in this paper, some combination or other methods in general), we define the "test-time compute-optimal scaling strategy" as the strategy that chooses hyperparameters appearing in a given approach for maximal performance benefits on a given prompt at test time. Formally, define $Target(\theta, N, q)$ as the distribution over natural language output tokens induced by the model for a given prompt $q$, using test-time compute hyper-parameters $\theta$, and a compute budget of $N$. We would like to select the hyper-parameters $\theta$ which maximize the accuracy of the target distribution for a given problem. We express this formally as:
-
-$$
-\theta_{q,y^*(q)}^*(N) = \text{argmax}_{\theta} (\mathbb{E}_{y \sim Target(\theta,N,q)} [\mathbb{I}_{y=y^*(q)}]) \quad (1)
-$$
-
-where $y^*(q)$ denotes the ground-truth correct response for input query $q$, and $\theta_{q,y^*(q)}^*(N)$ represents the test-time compute-optimal scaling strategy for the problem $q$ with compute budget $N$. We note that our definition of test-time compute-optimal scaling differs slightly from that of concurrent work in that our notion of scaling is question dependent.
-
-### 3.2 QUESTION DIFFICULTY IS A GOOD APPROXIMATION FOR THE OPTIMAL STRATEGY
-
-In order to effectively analyze the test-time scaling properties of the different mechanisms discussed in Section 2 (e.g. proposal distribution and verifier), we will prescribe an approximation to this optimal strategy $\theta_{q,y^*(q)}^*(N)$ as a function of a statistic of a given prompt. Our approximation estimates a notion of difficulty for a given prompt. The compute-optimal strategy is then defined as a function of the difficulty of a prompt. Despite being only an heuristic approach to solve Equation 1, we find that it can still induce substantial improvements in performance over a baseline strategy of allocating this inference-time compute in an ad-hoc manner.
-
-Our estimate of question difficulty assigns a given question to one of five discrete difficulty levels. We then use these bins to estimate $\theta_{q,y^*(q)}^*(N)$ on a validation set (given a compute budget), and apply the optimal strategy on the test set. Thus, question difficulty acts as a sufficient statistic for designing the compute-optimal strategy. For example, to optimally allocate test-time compute between parallel best-of-N and sequential sampling, we first pre-compute the accuracy of both techniques within each difficulty bin using a held-out set. Given a new test question, we then determine the difficulty bin it belongs to and select the best performing strategy within that bin.
-
-**Defining question difficulty.** Following Lightman et al. (2023), we define question difficulty as a function of the given base LLM. Specifically, we bin the model's pass@1 rate estimated from 2048 samples on each test question into five quantiles, each corresponding to increasing difficulty levels. We find this notion of model-specific difficulty bins to be more predictive of the efficacy of using test-time compute compared to the hand-labeled difficulty bins in the MATH dataset.
-
-That said, we note that assessing difficulty as described assumes oracle access to a correctness checker, which is unavailable at deployment. To enable a realistic estimate of difficulty, we approximate difficulty via a model-predicted notion of difficulty, which constructs the bins by averaging the score of a learned verifier on the same 2048 samples per problem. We refer to this setting as model-predicted difficulty and the setting which relies on ground-truth correctness as oracle difficulty. Predicted difficulty removes the reliance on ground truth labels, but still incurs computational cost. Our experiments do not account for this cost largely for simplicity, since our goal is to present some of the first results of what is in fact possible by effectively allocating test-time compute.
+**💡 보조 설명**
+* **[키워드]:** (용어 설명)
+* **[PDF 참조]:** (만약 해당 문장이 Figure나 복잡한 수식을 포함한다면, PDF를 보고 파악한 시각적 특징이나 보충 설명을 여기에 추가)
 
 ---
 
-## 4 EXPERIMENTAL SETUP
-
-We first outline our experimental setup for conducting this analysis with multiple verifier design choices and proposal distributions, followed by the analysis results in the subsequent sections.
-
-**Datasets.** We expect test-time compute to be most helpful when models already have all the basic "knowledge" needed to answer a query, and instead the primary challenge is about drawing (complex) inferences from this knowledge. To this end, we focus on the MATH benchmark, which consists of high-school competition level math problems with a range of difficulty levels. For all experiments, we use the dataset split consisting of 12k train and 500 test questions.
-
-**Models.** We use the PaLM 2-S* (Codey) model. We chose this model, as it is representative of the capabilities of many contemporary LLMs, and is small enough to efficiently run many experiments on. Most importantly, this model attains a non-trivial performance on MATH (but not saturated). For these reasons, we expect this model to provide a good test-bed.
-
----
-
-## 5 SCALING TEST-TIME COMPUTE VIA VERIFIERS
-
-In this section, we study how test-time compute can be most effectively scaled by searching against a verifier and keeping the proposal distribution fixed to the base LM. Specifically, we study different search approaches with PRMs and analyze their test-time compute scaling properties, but first we provide a brief overview of how a PRM can be trained.
-
-### 5.1 TRAINING VERIFIERS AMENABLE TO SEARCH
-
-We follow the approach of Wang et al. (2023), which supervises the PRM using estimates of per-step correctness obtained from running Monte Carlo rollouts from each step in the solution. Our PRM's per-step predictions therefore correspond to value estimates of reward-to-go for the base model's sampling policy, similar to recent work. We also compared to an ORM baseline (Appendix H) but found that our PRM consistently outperforms the ORM. Hence, all of the search experiments in this section use a PRM model. Additional details are in Appendix F.
-
-**Answer aggregation.** At test time, PRMs can be used to score each individual step appearing in a set of solutions sampled from the base model. To pick out the best answer from N samples with the PRM, we need a function that can aggregate across all the per-step scores for each answer to determine the best candidate for the correct answer. To do this, we take the PRM's prediction at the last step as representative of the full-answer score and then follow Li et al. (2023) by applying "best-of-N weighted" selection across answers. We include more detail on these decisions in Appendix G.
-
-> Figure 2: Comparing different PRM search methods. Left: Best-of-N samples N full answers and then selects the best answer according to the PRM final score. Center: Beam search samples N candidates at each step, and selects the top M according to the PRM to continue the search from. Right: lookahead-search extends each step in beam-search to utilize a k-step lookahead while assessing which steps to retain and continue the search from. Thus lookahead-search needs more compute.
-
-### 5.2 SEARCH METHODS AGAINST A PRM
-
-We optimize the PRM at test time via tree search methods. We study three search approaches that sample outputs from a few-shot prompted base LLM. An illustration is shown in Figure 2. We note that for all search algorithms, we use the same PRM verifier, enabling an even comparison. We include additional details about our different search methods in Appendix C.
-
-**Best-of-N weighted.** We sample N answers independently from the base LLM and then select the best answer according to the PRM's final answer judgment.
-
-**Beam search.** Beam search optimizes the PRM by searching over its per-step predictions. Our implementation is similar to BFS-V. Concretely, we consider a fixed number of beams N and a beam width M. At the end of the search we have N final answer candidates, to which we apply best-of-N weighted selection to make our final answer prediction.
-
-**Lookahead search.** Lookahead search modifies how beam search evaluates each step. At each step in the search, rather than using the PRM score at the current step to select the top options, lookahead search performs a simulation, rolling out k steps. We stop early if the end of a solution is reached.
-
-### 5.3 ANALYSIS RESULTS: TEST-TIME SCALING FOR SEARCH WITH VERIFIERS
-
-We now present our results comparing various search algorithms and identify a prompt difficulty dependent compute-optimal scaling strategy for search methods.
-
-> Figure 3: Left: Comparing different methods for conducting search against PRM verifiers. We see that at low generation budgets, beam search performs best, but as we scale the budget further the improvements diminish, falling below the best-of-N baseline. Lookahead-search generally underperforms other methods at the same generation budget. Right: Comparing beam search and best-of-N binned by difficulty level. The four bars in each difficulty bin correspond to increasing test-time budgets (4, 16, 64, and 256 generations). On the easier problems (bins 1/2), beam search shows signs of over-optimization at higher budgets, whereas best-of-N does not. On the medium difficulty problems (bins 3/4), beam search consistently outperforms best-of-N.
-
-**Comparing search algorithms.** We first conduct a sweep over different search settings. In addition to the standard best-of-N approach, we sweep over the two main parameters that distinguish these methods: beam-width M and number of lookahead steps k. While we are not able to exhaustively sweep all configurations, we sweep over the following settings with a maximum budget of 256: 1) Beam search with the beam width set to $\sqrt{N}$, where N is the generation budget; 2) Beam search with a fixed beam width of 4; 3) Lookahead search with $k=3$ applied to both beam-search settings 1) and 2); 4) Lookahead search with $k=1$ applied to beam-search setting 1).
-
-To compare search methods as a function of generation budget fairly, we estimate the inference-time cost of each method. For beam search and best-of-N the generation budget corresponds to the number of beams and N respectively. Lookahead search utilizes additional compute: at each step, we sample k additional steps ahead. Therefore, the cost of lookahead-search is $N \times (k+1)$ samples. Querying the verifier also adds a 2x overhead for all methods but we account for this in our analysis.
-
-**Results.** As shown in Figure 3 (left), with small budgets, beam search outperforms best-of-N. However, at high budgets, these improvements diminish, with beam search underperforming. Additionally, lookahead-search underperforms other methods, likely due to the additional computation induced by looking-ahead. It is possible that with further test-time scaling or with an online MCTS trained value function, lookahead search may perform better; we leave further exploration of this to future work. The diminishing returns from search are likely due to exploitation of the PRM's predictions. For example, we see instances (such as in Figure 32), where search causes the model to generate repetitive low-information steps. In other cases, we find that over-optimizing search can result in overly short solutions, of just 1-2 steps. We include several of these examples in Appendix R.
-
-**Which problems does search improve?** To understand how to scale search adaptively per problem, we conduct a difficulty bin analysis. Specifically, we compare beam-search ($M=4$) against best-of-N. In Figure 3 (right), we find that, despite performing similarly in aggregate, the two methods exhibit very different behavior across difficulty levels. For example, on easy questions (levels 1/2), the stronger optimizer of the two, beam search, degrades in performance as the budget increases, suggesting possible exploitation of the PRM signal. In contrast, on the harder questions (levels 3/4), beam search outperforms best-of-N. Finally, on the most difficult questions (level 5), no method makes meaningful progress. These findings match intuition: we might expect that on the easy or medium difficulty questions, the verifier will make mostly correct assessments of correctness. Therefore, by optimizing further, we may be only further amplifying any spurious features learned by the verifier, causing performance degradation. On more difficult questions, the base model is less likely to sample the correct answer, so using search can help steer the model.
-
-> Figure 4: Comparing compute-optimal test-time scaling against baselines with PRM search. By scaling test-time compute optimally, we nearly outperform PRM best-of-N using up to 4x less test-time compute (e.g. 32 versus 128 generations). "Compute-optimal oracle" refers to using oracle difficulty bins derived from the groundtruth correctness, and "compute-optimal predicted" refers to using the PRM's predictions to generate difficulty bins.
-
-**Compute-optimal search.** Given the above, it is clear that question difficulty is a useful statistic for predicting the best search strategy at each budget. Additionally, the selected best search strategy varies as a function of difficulty. We visualize this "compute-optimal" scaling trend, as represented by the best performing search strategy, between best-of-N and beam search ($M=4$), at each difficulty level in Figure 4. Interestingly, we see that with low budgets, using both the oracle and predicted difficulty, compute-optimal scaling can nearly outperform best-of-N using up to 4x less test-time compute (e.g. 16 versus 64 generations). While at higher budgets, some of these benefits diminish with the use of predicted difficulty, but the oracle bins still see improvements from optimal scaling. This result demonstrates that there are clear performance gains to be obtained by adaptively allocating test-time compute during search using predicted difficulty as an input statistic.
-
-> **Takeaways for compute-optimal scaling of verifiers**
-> We find that the efficacy of any given verifier search method depends critically on both the compute budget and the question at hand. Specifically, beam-search is more effective on harder questions and at lower compute budgets, whereas best-of-N is more effective on easier questions and at higher budgets. Moreover, by selecting the best search setting for a given question difficulty and test-time compute budget, we can nearly outperform best-of-N using up to 4x less test-time compute.
-
----
-
-## 6 REFINING THE PROPOSAL DISTRIBUTION
-
-Now we study how the proposal distribution can be used for test-time scaling (Section 2). Concretely, we enable to improve its own distribution at test-time, by revising answers iteratively. Simply prompting existing LLMs to correct themselves tends to be largely ineffective on reasoning. Therefore, we finetune LLMs to iteratively revise their answers.
-
-> Figure 5: Parallel sampling (e.g., Best-of-N) versus sequential revisions. Left: Parallel sampling generates N answers independently, whereas sequential revisions generate each one in sequence conditioned on previous attempts. Right: In both the sequential and parallel cases, we can use the verifier to determine the best-of-N answers. We can also split our budget between parallel and sequential sampling. In this case, we first use the verifier to select the best answer within each sequential chain and then select the best answer across chains.
-
-### 6.1 TRAINING AND USING REVISION MODELS
-
-Our procedure for finetuning revision models is similar to Qu et al. (2024b), though we introduce some crucial differences. For finetuning, we need trajectories consisting of a sequence of incorrect answers followed by a correct answer, that we can then run SFT on. To do this, we sampled 64 responses in parallel and post-hoc constructed multi-turn rollouts from these independent samples. These rollouts consist of up to four incorrect attempts in context followed by a correct revision. We include more details on our revision model finetuning procedure in Appendix L.
-
-**Using revisions at inference-time.** Given a finetuned model, we can then sample a sequence of revisions from the model at test time. While our revision model is only trained with up to four previous answers in-context, we can sample longer chains by truncating the context to the most recent four revisions. In Figure 9 (left), we see longer chains gradually improve pass@k demonstrating that we are able to effectively teach the model to learn from mistakes in previous answers.
-
-That said, there is a distribution shift at inference time: the model was trained on only sequences with incorrect answers in context, but at test-time the model may sample correct answers. Thus, the model may turn a correct answer into an incorrect one. Similar to Qu et al. (2024b), around 38% of correct answers get converted to incorrect with our model. Thus, we employ either sequential majority voting or verifier-guided selection to select the correct answer from the sequence of revisions (see Figure 5). Querying the verifier adds a 2x compute overhead, and we account for this in our analysis.
-
-**Comparisons.** To test the efficacy of modifying the proposal distribution via revisions, we set up a comparison between the performance of sampling N revisions in sequence and sampling N attempts at a question in parallel. We see in Figure 9 (right), that with both the verifier-based and majority-based selection mechanisms, sequential sampling outperforms parallel sampling.
-
-### 6.2 ANALYSIS RESULTS: TEST-TIME SCALING WITH REVISIONS
-
-We see that sampling sequentially outperforms in parallel. We might expect however, that these approaches have different properties. Intuitively, sampling in parallel acts as a global search process that could, in principle, provide coverage over many different approaches for solving a problem. Sequential sampling, on the other hand, may work more as a local refinement process. This motivates striking a balance between these two approaches by allocating some of our budget to parallel sampling (e.g. $\sqrt{N}$) and the rest to sequential (e.g. $\sqrt{N}$). We will now show the existence of a compute-optimal ratio between sequential and parallel sampling, and understand their pros and cons based on the difficulty of a prompt.
-
-> Figure 7: Left: Varying the ratio of the generation budget allocated sequential revisions to versus parallel samples. Each line represents a fixed generation budget as the ratio is changed. We use the verifier for answer selection. We see that while increased sequential revisions tends to outperform more parallel compute, at higher generation budgets there is an ideal ratio that strikes a balance between the two extremes. Right: Varying the sequential to parallel ratio for a generation budget of 128 across difficulty bins. Using verifier-based selection, we see that the easier questions attain the best performance with full sequential compute. On the harder questions, there is an ideal ratio of sequential to parallel test-time compute.
-
-**Trading off sequential and parallel compute.** To understand how to allocate sequential and parallel compute, we perform a sweep over different configurations. We see, in Figure 7 (left), that indeed, at a given budget, there exists an ideal sequential to parallel ratio. We also see in Figure 7 (right) that this ideal ratio varies depending on question difficulty. Easy questions benefit more from revisions, whereas on difficult questions it is optimal to strike a balance between sequential and parallel computation. This finding supports the hypothesis that sequential revisions (i.e., varying the proposal distribution) and parallel sampling (i.e., search with verifiers) are complementary axes for scaling test-time compute, which may be more effective on a per-prompt basis. We include examples of our model's generations in Appendix Q. Additional results are in Appendix D.
-
-> Figure 6: Compute-optimal scaling with our revision model. By optimally scaling test-time compute, we outperform best-of-N with 4x less compute (i.e., 128 samples versus 512). "Compute Optimal Oracle" refers to difficulty derived from ground truth correctness and "Compute Optimal Predicted" refers to using the PRM to estimate difficulty.
-
-**Compute-optimal revisions.** Given our finding that the efficacy of sequential and parallel sampling depends on difficulty, we can select the ideal ratio of sequential to parallel compute per difficulty bin (we describe the specific ratios in Appendix O). In Figure 6, we plot results using our compute-optimal scaling when employing both oracle and predicted difficulty. In both cases, we substantially improve test-time compute scaling by optimally scaling the proposal distribution. In particular, we see that at higher generation budgets, parallel sampling plateaus, whereas compute-optimal scaling continues to improve. For both oracle and predicted difficulty, we see that compute-optimal scaling can outperform best-of-N using up to 4x less test-time compute (e.g. 64 samples versus 256). Overall, these results demonstrate the potential for improved test-time compute scaling by adjusting the proposal distribution on a per-prompt basis.
-
-> **Takeaways for compute-optimal scaling by refining the proposal distribution with revisions**
-> We find that there exists a tradeoff between sequential (e.g. revisions) and parallel (e.g. standard best-of-N) test-time computation, and the ideal ratio of sequential to parallel test-time compute depends on both the compute budget and the specific question at hand. Specifically, easier questions benefit from purely sequential test-time compute, whereas harder questions often perform best with an ideal ratio of sequential to parallel compute. By selecting the best setting for a given question difficulty and compute budget, we can outperform the parallel best-of-N baseline using up to 4x less test-time compute.
-
----
-
-## 7 EXCHANGING PRETRAINING AND TEST-TIME COMPUTE
-
-We saw that utilizing additional test-time compute can enable us to represent more complex distributions than the one predicted by the base LLM, thereby increasing performance. We now posit that this increased flexibility of representing distributions means that we can expect additional test-time compute to make up for the lack of a higher-capacity model or training for more FLOPs during pretraining. In this section, we study to what extent this is possible. We pose the following question:
-
-> **Question: Exchanging pretraining and test-time compute**
-> Suppose a model was pre-trained with X FLOPs. Assume that we plan to run Y FLOPs of inference with this model. If we want to improve performance by increasing the total FLOPs budget by a factor of M (i.e., $M(X+Y)$ total FLOPs across both pretraining and inference), should we spend our FLOPS on increased pretraining compute or on additional test-time compute?
-
-Increasing pretraining FLOPS introduces the additional design decision of whether to allocate compute to training with more data or more parameters. We focus on the setting in which model parameters are scaled up and training data amount is fixed, matching the canonical approach from the LLaMA series of models.
-
-> Figure 8: The tradeoff between pretraining and test-time compute in a FLOPs-matched evaluation. Each line represents the performance of scaling test-time compute with our compute-optimal policy in each oracle difficulty bin for revisions (left) and search (right). The stars represent the greedy pass@1 performance of a base model pretrained with ~14 times more parameters. We plot test-time compute budget on the x-axis and stars at three different locations along the x-axis, each corresponding to the FLOPs equivalent point of comparison between scaling parameters and scaling test-time compute for three different inference compute loads (e.g. $R=\frac{D_{inference}}{D_{pretrain}}$). If the star is below the line, this implies that it is more effective to use test-time compute than to scale model parameters, and if the star is above the line this implies that scaling parameters is more effective. We see that on the easy questions or in settings with a lower inference load (e.g. $R \ll 1$), test-time compute can generally outperform scaling model parameters. However, on the harder questions or in settings with a higher inference load (e.g. $R \gg 1$), pretraining is a more effective way to improve performance.
-
-**Exchanging FLOPs.** We use the common formula for pretraining FLOPS $X=6ND_{pretrain}$, and for inference FLOPs, we use $Y=4ND_{inference}$, which multiplies the standard $2ND_{inference}$ by two to account for the overhead of calling the verifier. Here N represents model parameters, $D_{pretrain}$ is the total tokens used for pretraining, and $D_{inference}$ the total tokens generated at inference. If we multiply N by a factor of M, then both the pretraining and inference FLOPs (due to the cost of greedy decoding with the larger model) increase by a factor of M, giving a total of $M(X+Y)$ FLOPs.
-
-To match the FLOPs between scaling parameters and scaling test-time compute, we multiply the smaller model's inference compute by $M + \frac{3}{2}(D_{pre}/D_{inf})(M-1)$. Notably, this multiplier depends on the ratio $D_{pre}/D_{inf}$. We refer to the inverse of this ratio as $R=D_{inf}/D_{pre}$. Depending on the specific production setting, we should expect very different values of R. In particular, in large scale production settings, we may expect more inference tokens than pretraining tokens, in which case we have $R \gg 1$. On the other hand, in many self-improvement setups, we would likely generate fewer inference tokens than pretraining tokens, giving $R \ll 1$. Therefore, since the scale of test-time compute depends on this ratio, we expect differing conclusions depending on the specific setting.
-
-In Figure 8, we use this approach to exchanging test-time and pretraining compute to compare our compute-optimal scaling against scaling up model parameters by a factor of ~14. We conduct comparisons for 3 values of R: 0.08 ($R \ll 1$), 0.40 ($R \sim 1$), and 11 ($R \gg 1$), with each ratio corresponding to an inference budget. Observe that if we only expect to see difficult questions (e.g. bins 4/5) or have a larger $D_{inference}$ (i.e., larger R value), then it is often more effective to allocate compute towards pretraining (e.g. the star is above the line). If instead, we expect mostly easy or intermediate difficulty questions (e.g. bins 1-3 and sometimes 4) or have lower inference requirements (as is the case in self-improvement pipelines), then scaling test-time compute is preferred.
-
-> **Takeaways for exchanging pretraining and test-time compute**
-> Test-time and pretraining compute are not 1-to-1 "exchangeable". In settings with a small inference requirement or on questions of moderate difficulty, test-time compute can substitute for pretraining. However, on challenging questions or under higher inference loads, pretraining is likely more effective.
-
-**Conclusions.** Please see Appendix A for a detailed discussion of limitations and future work.
-
----
-
-## 8 REPRODUCIBILITY STATEMENT
-
-Our work does not propose any new method and instead conducts analysis using methods proposed in prior works on the popular MATH benchmark using the PaLM $2-S^*$ model. We include extensive details about differences between our work and these prior works that we build on in Sections 5, 6 and Appendices C, L, F, G, M, N, J, O including all relevant fine-tuning hyper-parameters used. We also conduct numerous ablations in Sections 5, 6 and Appendix D, E, G, H, N, P, K, and include a handful of examples outputs from our models in Appendix R and Q. We believe that all of these details included in the paper contribute to our work's reproducibility. The base LLM that we used for our analysis, PaLM $2-S^*$, can be accessed for both finetuning and inference on the Google Cloud Vertex API (it is referred to as Codey on the API).
-
-**Reproductions and subsequent build-ups.** Since the paper submission deadline, two subsequent works from Beeching et al. and Liu et al. (2025) have independently reproduced our main findings using open LLMs (e.g. LLaMA and Qwen models) and using other math benchmarks (e.g. AIME-2024). These results provide additional evidence to support the title and main clam made in this paper that scaling test-time compute can outperform scaling model parameters.
-
-We also remark that more recently, OpenAI o1/o3 models and DeepSeek R1 models have demonstrated that training models to output extended chains of thought (similar in spirit to the iterative revision approach we study), can be a highly effective way to enable test time scaling. While we do not analyze this exact approach to test-time scaling in this work, since this approach came out after this paper, these results only further strengthen our main claim about the efficacy of test-time scaling.
-
-
-========================================
-
-위 논문을 연구에 접목하기 위해 전체 내용을 읽어보려고 합니다.
-위 텍스트는 PDF 버전에서 추출한 본문 텍스트입니다.
-
-<지시사항>
-영어로 된 본문 텍스트를 누락없이 출력합니다. 연구의 내용과 의미를 고려해서 문장이나 문장 그룹별로 나눠서 해석 및 보조 설명을 출력하고자 합니다. 예시 출력 형식은 다음과 같습니다.
-(예시 출력 형식: Markdown 포맷)
----
-
-# 📑 섹션 제목 (이전 대화와 같은 섹션인 경우는 출력하지 않음)
-
----
-
-## 📘 단락 본문 텍스트
+### ✅ [섹션번호-순번] (다음 문장)
 ...
 
----
+```
 
-### ✅ 문장 1
-...
+**<진행 프로세스>**
 
-**단위 해석**
-...
+1. **입력 분석:** 사용자가 제공한 텍스트/PDF에서 **순서대로 2개의 메인 섹션**을 식별합니다. (예: Abstract와 1. Introduction)
+2. **출력 생성:** 위 포맷에 맞춰 분석 내용을 코드 블록으로 출력합니다. 문장 번호가 섹션에 맞게 정확한지 확인하세요.
+3. **일시 정지:** 2개 섹션의 분석이 끝나면 코드 블록을 닫고, **"다음 섹션으로 넘어갈까요?"**라고 물으며 대기를 하세요.
+4. **이어가기:** 사용자가 "Next", "계속", "Go" 등의 신호를 보내면 그 다음 2개 섹션을 이어서 분석하세요.
 
-**보조 설명**
-* ...
-* ...
-* ...
-
----
-
-## 📘 단락 본문 텍스트
-...
-
----
-
-### ✅ (다음 문장 또는 문장 그룹)
-...
-
-**단위 해석**
-...
-
-**보조 설명**
-* ...
-* ...
-* ...
-
----
-
-(이런 식으로 계속 반복함)
-
-========================================
-
-<필수 유의사항>
-1. ✅ 문장들이 짧거나 내용이 이어져서 그룹으로 설명해야하는 경우는 문장 그룹으로 설명하세요. 문장 번호는 섹션 내에서 1번부터 시작해서 계속 이어져야합니다.
-2. 문장 또는 문장 그룹에서 원문을 “반드시 생략되는 것 전혀 없이” 그대로 출력해줘야합니다. 그래야 스스로 영어 원문을 읽고 해석하는 힘이 생깁니다. 가급적 논문 인용도 일단 그대로 표현해주세요.
-   수식의 경우 Markdown에서 올바르고 예쁘게 보일 수 있도록 출력합니다.
-   (예시)
-   - $ 175 $ => LaTex 포맷으로 표현한 숫자일 뿐이니, $는 화면에 보이지 않게 Markdown으로 출력하기
-3. **단위 해석**에서는 논문 전체에서 전달하려는 내용 및 문맥에 맞게 적절하게 해석을 제공해줘서 원문을 이렇게 해석해야하는구나를 배우게 해야합니다. 
-   전문적인 영어 표현을 무리하게 한국어로 해석하거나 발음으로 어색하게 표현하기보다 인터넷이나 문헌 등에서 자주 사용하는 영어 표기나 한국어 표기로 해주세요.
-   (예시)
-   - few-shot: few-shot
-   - multi-task: 멀티태스크
-   - finetuning: finetuning
-   - distillation: 증류 또는 distillation
-   - chain-of-thought: chain-of-thought 또는 CoT
-4. **보조 설명**은 논문 이해를 돕기 위한 부분이므로 적절하게 많으면 좋습니다.
-5. 서브섹션의 내용도 같은 형식으로 모두 출력해야합니다. 출력 토큰이 제한된다면 출력 가능한 영역까지만 출력하고 계속 이어서 진행할 수 있도록 잠깐 출력을 멈추고, 이어서 진행할지 마지막에 물어보세요.
-   단, 이전 대화에서 섹션이나 서브섹션이 이어지는 경우는 섹션 제목은 출력하지 않고 진행합니다.
-
-========================================
-
-Abstract부터 시작하여 Figure 1을 포함한 1 INTRODUCTION 섹션 전체 내용을 읽어주세요.
+**<준비 완료>**
+이 프롬프트를 이해했다면, **"준비되었습니다. 텍스트와 PDF를 함께 올려주세요."**라고만 짧게 응답하고 대기하세요.
