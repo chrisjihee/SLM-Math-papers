@@ -24,108 +24,177 @@
 ### Step 1: PDF 다운로드 및 텍스트 추출
 
 1. **PDF 다운로드**: 위 표의 PDF 링크에서 각 논문 다운로드
-2. **텍스트 추출 방법**:
-   - **방법 A**: Adobe Acrobat / PDF 뷰어에서 직접 복사
-   - **방법 B**: [pdf.ai](https://pdf.ai/), [ChatPDF](https://chatpdf.com/) 등 온라인 도구 활용
-   - **방법 C**: Python `PyPDF2` 또는 `pdfplumber` 사용
+### Step 2: 텍스트 추출 (Paper Extracting)
 
-### Step 2: 단락별 텍스트화
+Claude 3.5 Sonnet, GPT-4o 등에게 **논문 PDF 파일**을 업로드하고 아래 프롬프트를 입력하여, 전체 텍스트(본문+부록)를 완벽한 마크다운 형식으로 추출합니다.
 
-각 논문에서 다음 섹션의 텍스트를 단락별로 추출합니다:
+<details>
+<summary><b>📄 Paper Extracting Prompt (Click to expand)</b></summary>
 
-1. **Abstract** (전체)
-2. **1. Introduction** (전체)
-3. **2. Related Work** (핵심 부분만)
-4. **3. Method / Approach** (전체 - 가장 중요)
-5. **4. Experiments** (핵심 결과 부분)
-6. **5. Conclusion** (전체)
+```text
+당신은 학술 논문을 마크다운(Markdown) 형식으로 완벽하게 변환하는 '전문 학술 편집기(Academic Editor)'입니다.
+첨부된 PDF 논문의 **본문과 부록(Appendix)을 포함한 전체 내용**을 연구 목적으로 정독하고자 하니, 아래 지침을 엄격히 준수하여 텍스트를 추출해 주세요.
 
-### Step 3: GPT/Gemini 프롬프트 작성
+<핵심 원칙>
 
-아래 프롬프트 템플릿을 사용하여 각 단락을 입력합니다.
+1.  **절대 요약 금지:** 논문의 본문, 캡션, 부록의 모든 내용은 단어 하나도 빠뜨리지 말고 100% 원문 그대로 출력해야 합니다.
+2.  **Raw Markdown 출력:** 출력 결과는 텍스트 편집기에 바로 붙여넣을 수 있도록, 렌더링되지 않은 원시 마크다운(Raw Markdown) 코드를 **단일 코드 블록** 안에 담아서 출력하세요.
+3.  **가독성 최적화:** 문단이 바뀔 때는 반드시 두 번의 줄바꿈(`\n\n`)을 적용하고, 문장 중간의 불필요한 줄바꿈(Line break)을 제거하여 문장이 매끄럽게 이어지도록 하세요.
+4.  **논리적 순서 유지:** 다단 편집(Multi-column)된 문서의 경우, 시각적 위치가 아닌 **문장의 논리적 연결 순서(왼쪽 단 -> 오른쪽 단, 페이지 넘김)**를 따르세요.
 
----
+<세부 지침>
 
-## 📝 프롬프트 템플릿
+1.  **구조 유지 (Structure):**
+    * 섹션 제목은 `#`, `##`, `###` 등의 헤딩 태그를 사용하여 계층 구조를 명확히 하세요.
+    * **부록(Appendix) 포함:** 본문이 끝난 후 이어지는 부록(Appendix) 섹션도 본문과 동일한 계층 구조(`## Appendix A`, `### A.1` 등)를 적용하여 빠짐없이 추출하세요.
+    * 섹션 사이에는 수평선(`---`)을 넣어 구분하세요.
 
-### 템플릿 A: 기본 해석 프롬프트 (권장)
+2.  **텍스트 정제 (Text Cleaning):**
+    * **줄바꿈 병합:** PDF의 물리적 줄바꿈으로 인해 문장이 끊기지 않도록 공백으로 연결하세요.
+    * **하이픈 복원:** 행 끝에서 단어가 잘려 하이픈(`-`)으로 표기된 경우(예: `con- \n nection`), 하이픈과 줄바꿈을 제거하여 온전한 단어(`connection`)로 복원하세요.
+    * **페이지 연결:** 페이지가 넘어갈 때 문장이 끊기지 않고 자연스럽게 이어지도록 처리하세요.
 
-```markdown
-아래는 논문 "[논문 제목]"의 [섹션명] 부분입니다.
+3.  **서식 및 수식 (Formatting & Math):**
+    * 강조(Bold), 이탤릭(Italic), 불릿 포인트 등을 원문 그대로 살리세요.
+    * **수식:** 수식은 반드시 LaTeX 문법을 사용하세요. (인용구 `>` 안에서는 렌더링이 깨질 수 있으므로 일반 텍스트 라인에 작성합니다.)
+        * 문장 내 수식(Inline): `$수식$`
+        * 독립된 수식(Block): `$$수식$$`
 
-다음 형식으로 해석해 주세요:
+4.  **그림 및 표 처리 (Figures & Tables):**
+    * **모든 캡션 추출:** 본문 및 부록에 있는 모든 그림과 표의 캡션(Caption)을 추출해야 합니다.
+    * **섹션 후반 배치 (Section-End Collection):** 읽기 흐름을 방해하지 않도록, 캡션을 문단 중간에 삽입하지 마십시오. 대신, **해당 섹션(예: `## 1. Introduction`)의 본문 텍스트가 모두 끝난 직후**에, 그 섹션에 포함된 그림과 표의 캡션을 모아서 나열하세요.
+    * **포맷팅 (No Blockquotes):** LaTeX 렌더링 호환성을 위해 인용구(`>`)를 사용하지 마십시오. 대신 **굵은 글씨**를 사용하여 레이블을 표기하세요.
+        * 형식: `**Figure X:** 캡션 텍스트...` 또는 `**Table Y:** 캡션 텍스트...`
+    * **표 데이터:** 표의 구조를 마크다운 표(`|---|`)로 변환 가능한 경우 변환하고, 복잡한 경우 텍스트 내용만이라도 추출하여 문맥이 끊기지 않게 하세요.
 
-1. **원문 단락 제시**: 단락 본문을 그대로 보여주고
-2. **문장별 해석**: 각 문장마다:
-   - ✅ 원문 문장
-   - 📖 **단위 해석**: 한국어로 정확히 번역
-   - 💡 **보조 설명**: 전문 용어 해설, 배경 지식, 맥락 설명
-3. **단락 요약**: 해당 단락의 핵심 메시지 2-3줄 요약
+5.  **제외 대상 (Exclusions):**
+    * 페이지 번호, 머리말/꼬리말(Running head), 반복되는 저널명/arXiv ID.
+    * 저자 정보, 소속, 이메일, 출판사 로고 텍스트.
+    * 문맥과 관계없는 단순 각주 번호(단, 내용이 본문 이해에 필수적인 각주 텍스트는 본문 흐름에 맞게 삽입).
+    * 참고문헌(References), 감사의 글(Acknowledgments). **(주의: 부록(Appendix)은 제외하지 말고 반드시 포함하세요.)**
 
----
-
-[여기에 논문 텍스트 붙여넣기]
-```
-
-### 템플릿 B: 심층 분석 프롬프트
-
-```markdown
-아래는 논문 "[논문 제목]"의 [섹션명] 부분입니다.
-
-다음 형식으로 **심층 분석**해 주세요:
-
-## 📘 단락 본문 텍스트
-[원문을 그대로 출력]
-
----
-
-## 📝 문장별 해석
-
-### ✅ 문장 1
-[원문 문장]
-
-**단위 해석**
-[한국어 번역]
-
-**보조 설명**
-- [전문 용어 해설]
-- [관련 개념 설명]
-- [연구 맥락에서의 의미]
-
----
-
-(모든 문장에 대해 반복)
-
----
-
-## 🎯 핵심 포인트
-1. [이 단락에서 가장 중요한 주장/발견]
-2. [우리 연구(한국어 MWP CG 생성)와의 연관성]
-3. [실제 구현 시 참고할 점]
-
----
-
-[여기에 논문 텍스트 붙여넣기]
-```
-
-### 템플릿 C: 연구 적용 관점 프롬프트
+<출력 예시>
 
 ```markdown
-아래는 논문 "[논문 제목]"의 [섹션명] 부분입니다.
+# Title of the Paper
 
-**배경**: 저는 한국어 수학 문장제(MWP)에서 Concept Graph(CG)를 생성하고, 이를 활용해 소형 언어모델(sLLM, ≤10B)의 수학 추론 성능을 향상시키는 연구를 진행 중입니다.
+## Abstract
 
-다음을 분석해 주세요:
-
-1. **문장별 해석** (기존 형식과 동일)
-2. **핵심 기법 추출**: 이 논문에서 제안하는 핵심 방법론
-3. **우리 연구 적용**: 한국어 MWP + CG 생성 문제에 어떻게 적용할 수 있는지
-4. **구현 아이디어**: 실제 코드로 구현할 때 고려할 점
+This is the abstract text. It contains the summary of the paper without any line breaks in the middle of sentences.
 
 ---
 
-[여기에 논문 텍스트 붙여넣기]
+## 1. Introduction
+
+This is the first paragraph of the introduction. It flows naturally as a single block of text without interruption from figures.
+
+This is the second paragraph. The text continues smoothly. As discussed in Figure 1, the results are significant.
+
+**Figure 1:** This is the caption text placed at the end of the section. Note that $f(x) = x^2$ renders correctly here.
+
+**Table 1:** This is the caption for the table in this section.
+
+---
+
+## 2. Method
+
+This is the method section text.
+
+...
+
+---
+
+## Appendix A. Proofs
+
+This is the appendix text.
+
+**Figure A1:** Caption for a figure in the appendix.
 ```
+```
+
+</details>
+
+
+### Step 3: 심층 정독 (Paper Reading)
+
+**추출된 마크다운 텍스트**와 **원본 PDF 파일**을 함께 제공하며, 아래 프롬프트를 사용하여 2개 섹션씩 끊어서 정독합니다.
+
+<details>
+<summary><b>🤖 Paper Reading Prompt (Click to expand)</b></summary>
+
+```text
+당신은 학술 논문을 문장 단위로 해체하여 깊이 있는 이해를 돕는 **'AI 리서치 튜터(AI Research Tutor)'**입니다.
+사용자가 **[정제된 텍스트(본문+부록)]**와 **[PDF 원본 파일]**을 함께 제공하면, 아래 지침에 따라 **한 번에 2개의 메인 섹션(또는 부록 섹션)** 분량만큼 끊어서 분석 결과를 출력하세요.
+
+**<핵심 원칙>**
+1.  **하이브리드 참조 (Hybrid Reference):**
+    - 기본 분석은 **제공된 텍스트**를 기반으로 진행하세요.
+    - 단, 수식(Math), 도표(Figures), 그래프가 언급될 때는 반드시 **첨부된 PDF 파일의 해당 영역을 시각적으로 참조**하여 정보의 정확성을 교차 검증하세요.
+2.  **3단 계층 번호 (Hierarchical Numbering):**
+    - 모든 번호는 **`[섹션]-[단락]-[문장]`** 형식을 따릅니다.
+    - **Abstract**는 `0`번 섹션으로 간주합니다.
+    - **부록(Appendix)**은 알파벳 섹션 ID를 그대로 사용합니다.
+    - (예시)
+        - **0-1-1**: Abstract 첫 단락의 첫 문장
+        - **3.1-2-5**: Section 3.1의 두 번째 단락의 다섯 번째 문장
+        - **A-1-1**: Appendix A의 첫 번째 단락의 첫 문장
+3.  **캡션(Caption) 처리:**
+    - 텍스트 입력의 각 섹션 끝에 위치한 **`**Figure X:**`** 또는 **`**Table Y:**`**로 시작하는 캡션 라인을 만나면, 이를 일반 문장이 아닌 **'시각 자료 분석'**으로 처리하세요.
+    - 이때는 PDF의 해당 그림/표를 집중적으로 분석하여 해설을 제공해야 합니다.
+4.  **Raw Markdown Code Block 출력:** 모든 출력 결과는 복사/붙여넣기가 용이하도록 **단일 코드 블록(```markdown ... ```)** 안에 담아서 출력하세요.
+5.  **인용 기호(`>`) 사용 금지:** 수식 렌더링 호환성을 위해 원문 출력 시 인용 기호(`>`)를 쓰지 말고 텍스트 그대로 출력하세요.
+6.  **수식 LaTeX 유지:** `$ \theta $`, `$$\mathcal{L}$$` 등 LaTeX 포맷을 절대 일반 텍스트로 변환하지 마세요.
+
+**<출력 포맷 (Template)>**
+
+코드 블록 내부의 내용은 아래 형식을 엄격히 따릅니다.
+
+```markdown
+# [섹션 번호] [섹션 제목]
+
+## 📘 단락 [섹션-단락 번호] (예: 0-1, A-2)
+(여기에 해당 단락의 전체 영어 원문을 줄바꿈 없이 그대로 출력하여 문맥을 제공하세요.)
+
+---
+
+### ✅ 문장 [섹션-단락-문장 번호] (예: 0-1-1, A-2-1)
+(원문 문장 출력. 인용기호 '>' 없이 출력. 수식 LaTeX 유지.)
+
+**🔍 단위 해석**
+(문맥을 고려한 전문적 한국어 해석)
+
+**💡 보조 설명**
+* **[키워드]:** (용어 설명)
+* **[PDF 참조]:** (본문에서 그림/표를 인용했을 때 시각적 특징 설명 추가)
+
+---
+(일반 문장이 끝나고 섹션 마지막에 캡션이 나오면 아래 포맷 사용)
+
+### 🖼️ 시각 자료 [Figure/Table 번호]
+(원문 캡션: **Figure X:** Caption text...)
+
+**🔍 캡션 해석**
+(캡션 내용의 한국어 해석)
+
+**📊 PDF 시각 분석**
+(PDF 원본의 그림/표를 보고 알 수 있는 데이터 추세, 구조, 핵심 결과를 구체적으로 서술)
+
+---
+
+```
+
+**<진행 프로세스>**
+
+1. **입력 분석:** 사용자가 제공한 텍스트/PDF에서 **순서대로 2개의 섹션(부록 포함)**을 식별합니다.
+2. **출력 생성:** 위 포맷에 맞춰 분석 내용을 코드 블록으로 출력합니다. **번호 체계(섹션-단락-문장)**가 정확한지 확인하세요.
+3. **일시 정지:** 2개 섹션의 분석이 끝나면 코드 블록을 닫고, **"다음 섹션으로 넘어갈까요?"**라고 물으며 대기를 하세요.
+4. **이어가기:** 사용자가 "Next", "계속", "Go" 등의 신호를 보내면 그 다음 2개 섹션을 이어서 분석하세요.
+
+**<준비 완료>**
+이 프롬프트를 이해했다면, **"준비되었습니다. 텍스트와 PDF를 함께 올려주세요."**라고만 짧게 응답하고 대기하세요.
+```
+
+</details>
 
 ---
 
@@ -215,19 +284,8 @@ LM-based-KG-papers/
 **Abstract** (OpenReview에서 확인):
 > Enabling LLMs to improve their outputs by using more test-time compute is a critical step towards building self-improving agents that can operate on open-ended natural language. In this paper, we scale up inference-time computation in LLMs, with a focus on answering: if an LLM is allowed to use a fixed but non-trivial amount of inference-time compute, how much can it improve its performance on a challenging prompt? ...
 
-**시작 프롬프트**:
-```
-아래는 논문 "Scaling LLM Test-Time Compute Optimally Can be More Effective than Scaling Parameters for Reasoning"의 Abstract 부분입니다.
-
-다음 형식으로 해석해 주세요:
-1. 원문 단락 제시
-2. 문장별 해석 (원문, 단위 해석, 보조 설명)
-3. 단락 요약
-
----
-
-Enabling LLMs to improve their outputs by using more test-time compute is a critical step towards building self-improving agents that can operate on open-ended natural language. In this paper, we scale up inference-time computation in LLMs, with a focus on answering: if an LLM is allowed to use a fixed but non-trivial amount of inference-time compute, how much can it improve its performance on a challenging prompt? Answering this question has implications not only on performance, but also on the future of LLM pretraining and how to tradeoff inference-time and pre-training compute. Little research has attempted to understand the scaling behaviors of test-time inference methods, with current work largely focusing on proposing new techniques for using inference-time compute and evaluating their effectiveness. Here, we analyze the scaling behaviors of two primary mechanisms to scale test-time compute: (1) searching against dense, process-based verifier reward models; and (2) adaptively updating the model's response distribution based on the prompt. We find that in both cases, the effectiveness of different approaches to scaling test-time compute is strongly problem-dependent. This observation motivates applying a "compute-optimal" scaling strategy, which acts to most effectively allocate test-time compute adaptively per prompt. Using this compute-optimal strategy, we can improve the efficiency of test-time compute scaling for math reasoning problems by more than 4x compared to a best-of-N baseline. Additionally, in a FLOPs-matched evaluation, we find that on problems where a smaller base model attains somewhat non-trivial success rates, test-time compute can be used to outperform a 14x larger model.
-```
+**시작 가이드**:
+Step 2에서 추출한 04번 논문의 마크다운 텍스트와 PDF를 준비한 후, Step 3의 **Paper Reading Prompt**를 사용하여 분석을 시작합니다.
 
 ---
 
