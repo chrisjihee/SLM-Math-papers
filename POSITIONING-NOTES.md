@@ -19,53 +19,67 @@
 - graph reasoning 자체의 근본적 돌파
 - telecom foundation model 전체를 새로 만드는 것
 
-## 4. rStar-Math / strong math SLM papers와의 포지셔닝
+## 4. 현재 safe claim
 
-- 경쟁점:
-  같은 "math reasoning" 축에 있다.
+- `CG`는 여러 reasoning path family 중 하나다.
+- 현재 strongest student result는 multiple-CoT 축에 있다.
+- 다음 병목은 route generation보다 route/budget selection과 answer/path verification이다.
+- adaptive TTC는 여전히 중요하지만, novelty는 단순 budget allocation보다 path-family / strategy-level allocation 쪽에 있어야 한다.
 
-- 차이점:
-  rStar-Math는 `MCTS + PPM + self-evolution + massive synthesized trajectories`에 가깝다.
-  우리는 **lighter-weight inference orchestration / path selection / budget allocation** 문제를 다룬다.
+## 5. 현재 forbidden claim
 
-- 안전한 문장:
-  "본 연구는 rStar-Math류의 대규모 search/self-evolution을 재현하려는 것이 아니라, 더 가벼운 compute budget 아래에서 heterogeneous reasoning path를 선택하는 문제를 다룬다."
+- "CG가 CoT보다 우수하다"
+- "graph reasoning superiority"
+- "sequential routing is solved"
+- "reflection is ineffective in general"
+- "NFM에서 곧바로 SOTA를 낼 수 있다"
+- "이 연구의 main novelty는 CG 자체다"
 
-- 피해야 할 문장:
-  "우리 방법이 rStar-Math보다 더 강하다."
+## 제출 전략상 가장 위험한 선행연구
 
-## 5. self-consistency papers와의 포지셔닝
+### rStar-Math
 
-- baseline:
-  `Self-Consistency`는 반드시 baseline이다.
+- risk:
+  full MCTS + PPM + self-evolution이 현재 우리 line보다 훨씬 강한 math frontier다.
+- response:
+  우리는 raw frontier performance 경쟁이 아니라, 제한된 TTC 안에서 lightweight path/strategy selection을 다룬다.
 
-- 차이점:
-  우리는 단순 `same-prompt repeated sampling`이 아니라 **path family 자체가 이질적인 후보 풀**을 다룬다.
+### Learning How Hard to Think
 
-- 메시지:
-  "Self-consistency를 부정하는 것이 아니라, self-consistency의 후보 풀을 더 잘 구성하고, 문제별로 샘플 수와 path family를 다르게 배정하는 문제로 확장한다."
+- risk:
+  adaptive TTC 자체는 새롭지 않다.
+- response:
+  우리의 contribution은 단순 budget allocation이 아니라 path-family / strategy-level allocation이어야 한다.
 
-## 6. verifier / PRM papers와의 포지셔닝
+### Reasoning-Aware Self-Consistency / Confidence Improves Self-Consistency
 
-- baseline:
-  `Training Verifiers`, `Let's Verify Step by Step`, `Math-Shepherd`, `ThinkPRM`은 verifier 축의 정석이다.
+- risk:
+  SC efficiency, early stopping, confidence-weighted voting은 이미 연구되어 있다.
+- response:
+  우리는 homogeneous SC가 아니라 heterogeneous path pool construction과 state-conditioned strategy selection을 강조해야 한다.
 
-- 차이점:
-  우리는 full step-level verifier를 새로 만드는 것보다, **path-level / strategy-level selection과 lightweight reranking**에 더 가깝다.
+### Self-Discover / Automatic Model Selection
 
-- 메시지:
-  "정답 후보나 step을 직접 검증하는 PRM과 달리, 본 연구는 어떤 reasoning path family를 더 샘플링할지 결정하는 policy/value estimator에 가깝다."
+- risk:
+  reasoning strategy selection 자체도 새롭지 않다.
+- response:
+  우리는 dynamic budgeted path acquisition, stopping, verifier/reranker를 결합한 방향으로 차별화해야 한다.
 
-## 7. Self-Discover / strategy selection papers와의 포지셔닝
+### Verifier / PRM papers
 
-- 공통점:
-  reasoning strategy를 고정하지 않고 선택한다.
+- risk:
+  answer/path selection은 verifier/PRM literature에서 강하게 다뤄졌다.
+- response:
+  우리의 route/strategy reranker는 step-level PRM과 다르게 path acquisition 전/중간의 lightweight policy/value estimator로 위치시킨다.
 
-- 차이점:
-  Self-Discover는 주로 **reasoning structure composition**이고, 우리는 **budgeted path acquisition and stopping**을 본다.
+## 정보과학회 S/A 우수학술대회 기준 제출 전략
 
-- 메시지:
-  "전략을 한 번 정하고 끝내는 것이 아니라, 현재까지의 상태를 보고 다음 샘플/다음 전략을 고르는 sequential allocation에 가깝다."
+- 현재 연구의 1차 target은 `ACL / EMNLP / NAACL / AAAI`다.
+- `ICLR / ICML / NeurIPS`는 stretch target이다.
+- `ACL Findings / EMNLP Findings / NAACL Findings / COLING / EACL / IJCAI`는 realistic fallback이다.
+- `SIGIR / KDD / WSDM / CIKM / WWW`는 ranking, retrieval, evidence-grounding이 중심이 될 때만 고려한다.
+- NFM bridge는 처음부터 `SIGCOMM / NSDI / INFOCOM`을 노리지 말고, `TeleMath` 중심의 domain reasoning application을 NLP/AI venue에 붙이는 것이 우선이다.
+- network venue는 실제 network-system contribution이 생겼을 때만 고려한다.
 
 ## 8. graph / structured reasoning papers와의 포지셔닝
 
@@ -73,7 +87,7 @@
   structured intermediate representation에 관심이 있다.
 
 - 차이점:
-  현재 우리 CG는 graph-preserving traversal보다 **linearized structured rationale**에 가깝다.
+  현재 우리 `CG`는 graph-preserving traversal보다 **linearized structured rationale**에 가깝다.
 
 - 안전한 문장:
   "CG-style rationale은 structured path family 중 하나로 평가된다."
@@ -84,29 +98,11 @@
 ## 9. NFM를 어떻게 붙일 것인가
 
 - NFM는 메인 thesis topic이 아니라 application/bridge다.
-- 가장 좋은 연결은 `TeleMath -> TeleTables -> TeleLogs` 순이다.
-- `TeleQnA`는 retrieval/knowledge anchor로는 좋지만 thesis core novelty로는 약하다.
-- NFM paper는 메인 math paper 이후의 확장 또는 parallel bridge paper로 두는 편이 안전하다.
+- 가장 좋은 immediate bridge는 `TeleMath`다.
+- `TeleTables`, `TeleLogs`는 second-phase candidate다.
+- `TeleQnA`는 retrieval/knowledge anchor로는 유용하지만 thesis core novelty로는 약하다.
 
-## 10. Forbidden claims
-
-- "CG가 CoT보다 우수하다"
-- "graph reasoning superiority"
-- "sequential routing is solved"
-- "reflection is ineffective in general"
-- "listwise failed, so ranking은 끝났다"
-- "NFM에서 SOTA를 달성할 수 있다"
-- "teacher-level search 없이도 rStar류와 직접 경쟁 가능하다"
-
-## 11. Safer claims
-
-- "CG는 여러 path family 중 하나이며 utility는 조건부다."
-- "현재 strongest student result는 multiple-CoT이지만, structured path family는 auxiliary diversity source로 남아 있다."
-- "문제별 route/budget allocation이 다음 핵심 병목이다."
-- "path-level reranking과 stopping policy는 lightweight but meaningful contribution이 될 수 있다."
-- "NFM는 math mainline을 해치지 않는 범위에서 selective bridge domain으로 유효하다."
-
-## 12. paper title 방향
+## 10. paper title 방향
 
 - State-Conditioned Test-Time Compute Allocation for Small Language Model Reasoning
 - Budget-Aware Reasoning Path Pool Construction for Small Language Models
@@ -115,11 +111,15 @@
 - Strategy-Card Reranking for Small Language Model Reasoning
 - Domain-Aware Reasoning Strategy Selection for Telecom Mathematical Reasoning
 
-## 13. blunt recommendation
+## 11. blunt recommendation
 
 첫 논문은 **math reasoning mainline**으로 가야 한다.
 
-- 주제: path pool + TTC allocation + reranking/verification
-- 벤치마크: `GSM8K-kor`, `GSM8K`, 가능하면 `MATH500`
-- CG: auxiliary structured family
-- NFM: 후속 bridge paper
+- 주제:
+  path pool + TTC allocation + reranking/verification
+- 벤치마크:
+  `GSM8K-kor`, `GSM8K`, 가능하면 `MATH500`
+- CG:
+  auxiliary structured family
+- NFM:
+  후속 bridge paper
