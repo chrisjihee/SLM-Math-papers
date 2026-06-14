@@ -1,166 +1,581 @@
+schema_version: "2026-06"
+canonical_note: "legacy filename `papars.yaml` is intentionally kept to avoid breaking old references."
+focus:
+  mainline: "math reasoning + test-time compute allocation + reasoning path selection"
+  bridge: "selective NFM application on TeleMath/TeleTables/TeleLogs"
+
 papers:
-  # -----------------------------------------------------------
-  # ✅ Already Read (Status: Completed)
-  # -----------------------------------------------------------
-  - title: "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
-    venue: "ACL 2023"
-    link: "https://aclanthology.org/2023.acl-long.754/"
-    abstract: |
-      Large "instruction-tuned" language models (i.e., finetuned to respond to instructions) have demonstrated a remarkable ability to generalize zero-shot to new tasks. Nevertheless, they depend heavily on human-written instruction data that is often limited in quantity, diversity, and creativity, therefore hindering the generality of the tuned model. We introduce Self-Instruct, a framework for improving the instruction-following capabilities of pretrained language models by bootstrapping off their own generations. Our pipeline generates instructions, input, and output samples from a language model, then filters invalid or similar ones before using them to finetune the original model. Applying our method to the vanilla GPT3, we demonstrate a 33% absolute improvement over the original model on Super-NaturalInstructions, on par with the performance of InstructGPT-001, which was trained with private user data and human annotations. For further evaluation, we curate a set of expert-written instructions for novel tasks, and show through human evaluation that tuning GPT3 with Self-Instruct outperforms using existing public instruction datasets by a large margin, leaving only a 5% absolute gap behind InstructGPT-001. Self-Instruct provides an almost annotation-free method for aligning pre-trained language models with instructions, and we release our large synthetic dataset to facilitate future studies on instruction tuning. Our code and data are available at this https URL.
-    idea: "175개 seed instruction에서 시작하여 LM이 스스로 4단계 pipeline을 통해 52k instructions를 자동 생성: (1) 기존 instruction pool에서 새로운 instruction 생성, (2) classification task 여부 판별, (3) input-output instance 생성, (4) 품질 filtering. 핵심 기법은 output-first 방식으로 label bias 완화, ROUGE-L < 0.7 유사도 기준 중복 제거, 비-텍스트 keywords 필터링. 16k 이후 성능 plateau 발견으로 데이터 효율성 입증. SuperNI에서 vanilla GPT3 대비 +33% 절대 성능 향상, InstructGPT-001과 5%p 격차까지 도달."
-    relevance: "한국어 MWP CG 생성/추론을 위한 도메인 특화 instruction 데이터 자동 생성 프레임워크로 직접 활용 가능. 52k 범용 규모가 아닌 MWP-CG 특화 1-3k 규모로 축소하여 교사 LLM(Llama-4-Maveric)의 데이터 생성 비용 절감. Self-Instruct의 16k plateau 발견은 우리 도메인에서 소규모 고품질 데이터로도 충분한 성능 달성 가능성을 시사. CG triple 생성 과제의 구조적 특성(관계/연산 타입 선택)에 output-first 기법 적용으로 형식 준수율 향상 기대."
-    tips: "구현 전략: (1) Seed 설계: 한국어 MWP의 대표적 CG 생성 패턴 30-50개 수작업 작성 (단순 관계 추출→복합 추론→다단계 연산), (2) Template 확장: 문체 변형(존댓말/반말), 슬롯 수 조정(1-5개 entity), 난이도 조절(직접/간접 관계), (3) Classification 최적화: CG 생성 vs 추론 vs 검증 태스크 판별 후 output-first 적용, (4) Filtering 강화: ROUGE-L < 0.7, JSON format 검증, 한국어 개념/관계 표기 표준화, (5) 규모 최적화: 1k→2k→3k 점진적 확장하며 성능 saturation 지점 탐지, (6) 품질 검증: 생성된 instruction의 CG triple 정확성을 교사 LLM으로 재검증."
+  - title: "rStar-Math: Small LLMs Can Master Math Reasoning with Self-Evolved Deep Thinking"
+    year: 2025
+    venue: "ICML 2025"
+    url: "https://proceedings.mlr.press/v267/guan25f.html"
+    code_url: "https://github.com/microsoft/rStar"
+    status: "unread"
+    priority: "P0"
+    theme: ["math_slm_frontier", "search_reflection_rl", "verifier_prm"]
+    method_type: ["training", "inference_time", "verifier", "search"]
+    reasoning_path_family: ["cot", "verifier_guided"]
+    selection_unit: ["step", "rationale"]
+    compute_control:
+      adaptive_budget: true
+      stopping: true
+      reranking: true
+      search: "mcts"
+    verifier:
+      uses_verifier: true
+      verifier_type: "process"
+    relation_to_ours: ["contrastive_positioning", "upper_bound_reference"]
+    what_to_borrow: "heavy search/PPM recipe보다는 paper positioning과 frontier reference."
+    what_not_to_claim: "우리 방법이 rStar-Math류 frontier math search보다 강하다고 주장하지 말 것."
+    implementation_candidate: "direct implementation candidate 아님"
+    notes_for_coding_agent: "math frontier capstone reference로만 쓰고, immediate next step으로 재현 제안 금지."
 
-  - title: "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes"
-    venue: "ACL 2023 (Findings)"
-    link: "https://aclanthology.org/2023.findings-acl.507/"
-    abstract: |
-      Deploying large language models (LLMs) is challenging because they are memory inefficient and compute-intensive for practical applications. In reaction, researchers train smaller task-specific models by either finetuning with human labels or distilling using LLM-generated labels. However, finetuning and distillation require large amounts of training data to achieve comparable performance to LLMs. We introduce Distilling step-by-step, a new mechanism that (a) trains smaller models that outperform LLMs, and (b) achieves so by leveraging less training data needed by finetuning or distillation. Our method extracts LLM rationales as additional supervision for training small models within a multi-task framework. We present three findings across 4 NLP benchmarks: First, compared to both finetuning and distillation, our mechanism achieves better performance with much fewer labeled/unlabeled training examples. Second, compared to few-shot prompted LLMs, we achieve better performance using substantially smaller model sizes. Third, we reduce both the model size and the amount of data required to outperform LLMs; our finetuned 770M T5 model outperforms the few-shot prompted 540B PaLM model using only 80% of available data on a benchmark, whereas standard finetuning the same T5 model struggles to match even by using 100% of the dataset. We release the code at: this https URL.
-    idea: "LLM이 생성한 rationale(추론 과정)을 추가 감독 신호로 활용하여 작은 모델을 멀티태스크로 학습시키는 새로운 증류 방법. 핵심은 L = L_label + λ L_rationale 손실 함수로 정답 예측과 rationale 생성을 동시 학습. [label]/[rationale] 프리픽스로 작업 분리하여 같은 모델이 두 태스크를 수행. 770M T5가 540B PaLM Few-shot CoT를 초과하는 성능을 보이며, 표준 finetuning/distillation 대비 데이터 사용량과 모델 크기를 동시에 절약. 4개 NLP 벤치마크에서 더 적은 데이터와 더 작은 모델로 더 나은 성능 달성."
-    relevance: "한국어 MWP의 CG(JSON triples) 생성이 rationale 역할을 하므로 직접 적용 가능한 핵심 방법론. 교사 LLM(Llama-4-Maveric)이 생성한 7K 학습셋에서 '정답 + CG'를 동시 감독하여 sLLM(≤10B)이 추론 과정을 내재화하도록 유도. Self-Instruct로 생성한 1-2k 보강 데이터와 결합하여 데이터 효율성 극대화. 논문의 데이터/모델 효율성 결과는 우리 목표인 'LLM 수준 성능을 작은 모델로 재현'에 직접 부합하며, CG 생성 과정 자체가 수학적 추론의 중간 단계를 구조화한 rationale 형태."
-    tips: "구현 방법: (1) 데이터 구성: 입력=한국어 MWP, 출력1([label])=최종 정답, 출력2([rationale])=CG facts+disambiguation JSON, (2) 손실 균형: λ∈{0.3,0.5,0.7} 스윕하여 CG 품질과 정답 정확도 균형점 탐지, (3) 커리큘럼 연계: Phased IFT와 결합하여 Phase-1(단순 CG, triple≤3)→Phase-2(복합 CG, >3) 순차 학습, (4) 품질 검증: 교사 LLM별(GPT-4, Llama-4-Maveric) rationale 품질 비교 실험, (5) 평가 지표: MR 정확도, 스키마 준수율, triple F1, 형식 오류율, 추론 일관성, (6) 어블레이션: no-rationale vs single-task vs multi-task, 프리픽스 유무, CG 길이 제한 효과 분석."
+  - title: "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models"
+    year: 2024
+    venue: "arXiv"
+    url: "https://arxiv.org/abs/2402.03300"
+    code_url: "https://github.com/deepseek-ai/deepseek-math"
+    status: "unread"
+    priority: "P0"
+    theme: ["math_slm_frontier"]
+    method_type: ["training", "inference_time"]
+    reasoning_path_family: ["cot"]
+    selection_unit: ["answer"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["direct_baseline", "contrastive_positioning"]
+    what_to_borrow: "math-specific pretraining과 self-consistency reference."
+    what_not_to_claim: "raw math performance에서 simple TTC/path selection만으로 DeepSeekMath류 training gains를 대체한다고 과장하지 말 것."
+    implementation_candidate: "baseline comparison"
+    notes_for_coding_agent: "math frontier 서술에서 자주 인용될 가능성이 높다."
 
-  - title: "Phased Instruction Fine-Tuning for Large Language Models"
-    venue: "ACL 2024 (Findings)"
-    link: "https://aclanthology.org/2024.findings-acl.341/"
-    abstract: |
-      Instruction Fine-Tuning enhances pre-trained language models from basic next-word prediction to complex instruction-following. However, existing One-off Instruction Fine-Tuning (One-off IFT) method, applied on a diverse instruction, may not effectively boost models' adherence to instructions due to the simultaneous handling of varying instruction complexities. To improve this, Phased Instruction Fine-Tuning (Phased IFT) is proposed, based on the idea that learning to follow instructions is a gradual process. It assesses instruction difficulty using GPT-4, divides the instruction data into subsets of increasing difficulty, and uptrains the model sequentially on these subsets. Experiments with Llama-2 7B/13B/70B, Llama3 8/70B and Mistral-7B models using Alpaca data show that Phased IFT significantly outperforms One-off IFT, supporting the progressive alignment hypothesis and providing a simple and efficient way to enhance large language models. Codes and datasets from our experiments are freely available at this https URL.
-    idea: "Progressive Alignment Hypothesis에 기반한 단계적 instruction fine-tuning 방법. GPT-4를 활용해 instruction 난이도를 1-5점으로 평가하고, 누적 확률 분포를 통해 데이터셋을 쉬운(Stage 1)→중간(Stage 2)→어려운(Stage 3) 3단계로 분할. 각 단계를 순차적으로 uptraining하여 모델이 점진적으로 복잡한 instruction을 학습하도록 유도. Llama2/3, Mistral 등 다양한 모델에서 One-off IFT 대비 일관된 성능 향상. 6가지 permutation 실험을 통해 '쉬운→어려운' 순서가 최적임을 증명하고, ablation study로 각 단계의 기여도 분석."
-    relevance: "한국어 MWP CG 생성에서 형식 준수와 안정적 수렴을 달성하는 핵심 방법론. JSON triple 수(≤3 vs >3)를 난이도 기준으로 설정하여 Phase-1(단순 CG)→Phase-2(복합 CG) 커리큘럼 구성 가능. Distilling Step-by-Step과 결합 시 rationale 품질이 단계별로 향상되어 최종 성능 극대화. 논문의 Progressive Alignment Hypothesis는 sLLM이 복잡한 CG 생성을 점진적으로 학습해야 한다는 우리 가설과 부합하며, permutation 실험 결과는 커리큘럼 설계의 중요성을 입증."
-    tips: "다차원적 난이도 평가 체계: (1) 추론 깊이 평가: 1-step 직접 연산(Stage1) → 2-3step 중간 추론(Stage2) → 4+step 복합 추론(Stage3), MWP 텍스트에서 최종 답까지의 논리적 단계 수 측정. (2) 개념 복잡성 평가: 기본 사칙연산(Stage1) → 비율/분수/소수 조합(Stage2) → 다변수 연립/추상적 관계(Stage3), 관련 수학 개념의 추상화 레벨 분석. (3) 혼동 요소 민감성: 단순 정보 추출(Stage1) → 부분적 misleading 정보(Stage2) → 복잡한 distractor 패턴(Stage3), 문제 텍스트의 cognitive load 측정. (4) GPT-4 기반 종합 평가: '이 문제를 풀기 위해 필요한 추론 단계, 수학적 개념 복잡도, 혼동 가능성을 1-5점으로 평가'하는 다차원 프롬프트 설계. (5) 자동 분할 규칙: 3개 차원 점수의 가중 평균(α*추론깊이 + β*개념복잡성 + γ*혼동민감성)으로 최종 난이도 산출, 1.5/3.5 임계값으로 3단계 분할. (6) 검증 메커니즘: 각 stage 내 난이도 분산 최소화, stage 간 명확한 구분성 확보, 인간 전문가 샘플 검증."
+  - title: "s1: Simple test-time scaling"
+    year: 2025
+    venue: "EMNLP 2025"
+    url: "https://aclanthology.org/2025.emnlp-main.1025/"
+    code_url: "https://github.com/simplescaling/s1"
+    status: "unread"
+    priority: "P0"
+    theme: ["adaptive_ttc", "sc_efficiency", "math_slm_frontier"]
+    method_type: ["inference_time", "prompting"]
+    reasoning_path_family: ["long_cot"]
+    selection_unit: ["sample"]
+    compute_control:
+      adaptive_budget: true
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["direct_baseline", "method_inspiration"]
+    what_to_borrow: "simple TTC baseline, budget forcing framing."
+    what_not_to_claim: "복잡한 routing 없이도 나오는 gain을 우리 novelty로 착각하지 말 것."
+    implementation_candidate: "strong sequential/long-thought baseline"
+    notes_for_coding_agent: "current route-family mainline과 별도로 minimal TTC baseline을 설명할 때 중요."
 
-  # -----------------------------------------------------------
-  # 🚀 P0 List (Priority High - Week 1~3)
-  # -----------------------------------------------------------
+  - title: "Self-Consistency Improves Chain of Thought Reasoning in Language Models"
+    year: 2023
+    venue: "ICLR 2023"
+    url: "https://openreview.net/forum?id=1PL1NIMMrw"
+    code_url: ""
+    status: "read"
+    priority: "P0"
+    theme: ["sc_efficiency"]
+    method_type: ["inference_time", "prompting"]
+    reasoning_path_family: ["cot"]
+    selection_unit: ["answer"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "best_of_n"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["direct_baseline"]
+    what_to_borrow: "majority-vote baseline, diverse reasoning paths intuition."
+    what_not_to_claim: "heterogeneous path selection을 same-prompt SC와 혼동하지 말 것."
+    implementation_candidate: "already baseline"
+    notes_for_coding_agent: "모든 TTC/path-selection 문서에서 baseline으로 언급."
+
+  - title: "Reasoning-Aware Self-Consistency: Leveraging Reasoning Paths for Efficient LLM Sampling"
+    year: 2025
+    venue: "NAACL 2025"
+    url: "https://aclanthology.org/2025.naacl-long.184/"
+    code_url: ""
+    status: "unread"
+    priority: "P0"
+    theme: ["sc_efficiency", "adaptive_ttc", "path_pool_construction"]
+    method_type: ["inference_time", "routing", "prompting"]
+    reasoning_path_family: ["cot"]
+    selection_unit: ["rationale", "answer"]
+    compute_control:
+      adaptive_budget: true
+      stopping: true
+      reranking: true
+      search: "best_of_n"
+    verifier:
+      uses_verifier: true
+      verifier_type: "preference"
+    relation_to_ours: ["direct_baseline", "method_inspiration"]
+    what_to_borrow: "rationale-aware stopping과 sample-efficiency framing."
+    what_not_to_claim: "SC efficiency novelty를 그대로 가져오지 말 것."
+    implementation_candidate: "stopping baseline"
+    notes_for_coding_agent: "ours와 매우 가까운 recent baseline."
+
+  - title: "Confidence Improves Self-Consistency in LLMs"
+    year: 2025
+    venue: "ACL 2025 Findings"
+    url: "https://aclanthology.org/2025.findings-acl.1030/"
+    code_url: "https://github.com/taubenfeld/CISC"
+    status: "unread"
+    priority: "P0"
+    theme: ["sc_efficiency", "adaptive_ttc"]
+    method_type: ["inference_time", "routing"]
+    reasoning_path_family: ["cot"]
+    selection_unit: ["answer"]
+    compute_control:
+      adaptive_budget: true
+      stopping: false
+      reranking: true
+      search: "best_of_n"
+    verifier:
+      uses_verifier: true
+      verifier_type: "preference"
+    relation_to_ours: ["direct_baseline", "method_inspiration"]
+    what_to_borrow: "confidence-weighted vote."
+    what_not_to_claim: "answer weighting만으로 path-family selection을 대체할 수 있다고 말하지 말 것."
+    implementation_candidate: "weighted voting baseline"
+    notes_for_coding_agent: "answer-level weighting과 route-level selection을 분리할 때 중요."
+
+  - title: "Learning How Hard to Think: Input-Adaptive Allocation of LM Computation"
+    year: 2025
+    venue: "ICLR 2025"
+    url: "https://openreview.net/forum?id=6qUUgw9bAZ"
+    code_url: ""
+    status: "unread"
+    priority: "P0"
+    theme: ["adaptive_ttc"]
+    method_type: ["inference_time", "routing"]
+    reasoning_path_family: ["cot", "reflection", "verifier_guided"]
+    selection_unit: ["sample", "strategy"]
+    compute_control:
+      adaptive_budget: true
+      stopping: true
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "input-adaptive compute allocation framing."
+    what_not_to_claim: "adaptive TTC framing 전체를 우리가 처음 한다고 주장하지 말 것."
+    implementation_candidate: "held-out budget allocation baseline"
+    notes_for_coding_agent: "introduction과 problem statement에서 매우 중요."
+
   - title: "Scaling LLM Test-Time Compute Optimally Can be More Effective than Scaling Parameters for Reasoning"
-    venue: "ICLR 2025 (Oral)"
-    link: "https://openreview.net/forum?id=4FWAwZtd2n"
-    abstract: |
-      Enabling LLMs to improve their outputs by using more test-time compute is a critical step towards building self-improving agents that can operate on open-ended natural language. In this paper, we scale up inference-time computation in LLMs, with a focus on answering: if an LLM is allowed to use a fixed but non-trivial amount of inference-time compute, how much can it improve its performance on a challenging prompt? Answering this question has implications not only on performance, but also on the future of LLM pretraining and how to tradeoff inference-time and pre-training compute. Little research has attempted to understand the scaling behaviors of test-time inference methods, with current work largely focusing on proposing new techniques for using inference-time compute and evaluating their effectiveness. Here, we analyze the scaling behaviors of two primary mechanisms to scale test-time compute: (1) searching against dense, process-based verifier reward models; and (2) adaptively updating the model's response distribution based on the prompt. We find that in both cases, the effectiveness of different approaches to scaling test-time compute is strongly problem-dependent. This observation motivates applying a "compute-optimal" scaling strategy, which acts to most effectively allocate test-time compute adaptively per prompt. Using this compute-optimal strategy, we can improve the efficiency of test-time compute scaling for math reasoning problems by more than 4x compared to a best-of-N baseline. Additionally, in a FLOPs-matched evaluation, we find that on problems where a smaller base model attains somewhat non-trivial success rates, test-time compute can be used to outperform a 14x larger model.
-    idea: "모델 파라미터를 키우지 않고 추론 시점(Inference-time) 연산을 확장하여 성능을 극대화하는 'Compute-Optimal' 전략 제안. 핵심 메커니즘은 (1) Process Verifier를 활용한 '탐색(Search)'과 (2) 프롬프트 기반 분포 수정을 통한 '수정(Revision)'. 문제 난이도에 따라 이 둘을 적응적으로 할당하는 것이 핵심이며, 단순 Best-of-N 대비 4배 효율적임. FLOPs-matched 평가에서 작은 모델 + 최적 추론 연산이 14배 큰 모델을 능가함을 입증."
-    relevance: "Axis 2(Test-time Inference Scaling) 연구의 핵심 이론적 근거. sLLM(10B 이하)이 거대 모델(70B+) 수준의 수학 추론 성능을 내기 위해, 단순히 모델을 키우는 것이 아니라 '생각하는 시간'을 효율적으로 배분해야 한다는 논리 제공. 우리 파이프라인(CG-infer)에서 단순 생성 대신 Verifier 루프나 Self-Correction을 도입해야 하는 당위성을 부여하며, 난이도별 차등 전략(Hybrid Strategy) 구현의 힌트 제공."
-    tips: "구현 전략: (1) 난이도 추정기(Difficulty Estimator): 입력 텍스트 길이, entity 수, 혹은 초기 생성 CG의 복잡도(Triple 수/Depth)를 지표로 활용. (2) 하이브리드 추론 파이프라인: 쉬운 문제(<3 triples)는 Greedy/1-step Revision, 어려운 문제(>3 triples)는 Parallel Sampling + Verifier Selection 적용. (3) Verifier 개발: Process-based Verifier(PRM)를 위해 Teacher LLM이 생성한 CG의 구조적 정합성을 평가하는 분류기를 별도 학습하거나 sLLM 자체를 활용. (4) Self-Correction 프롬프트: '누락된 조건이 있는가?', 'Triple 간 모순이 있는가?' 등의 질문으로 Revision 유도."
-
-  - title: "Rewarding Progress: Scaling Automated Process Verifiers for LLM Reasoning"
-    venue: "ICLR 2025 (Spotlight)"
-    link: "https://openreview.net/forum?id=A6Y7AqlzLW"
-    abstract: "(Pending update: Paper text not yet loaded)"
-    idea: "Progress 기반 prover policy + PRM 스케일링"
-    relevance: "베이스 생성기를 크게 바꾸지 않고도 테스트타임 선택(Selection)만으로 성능을 올리는 가장 직접적인 루트."
-    tips: "(Pending update)"
-
-  - title: "Process Reward Models That Think (ThinkPRM)"
-    venue: "arXiv 2025"
-    link: "https://arxiv.org/abs/2504.16828"
-    abstract: "(Pending update: Paper text not yet loaded)"
-    idea: "생성적 PRM으로 데이터 효율/서치 성능 향상"
-    relevance: "CG 생성 과정/부분 그래프를 점수화하는 verifier 설계 레퍼런스."
-    tips: "(Pending update)"
+    year: 2025
+    venue: "ICLR 2025"
+    url: "https://openreview.net/forum?id=4FWAwZtd2n"
+    code_url: ""
+    status: "read"
+    priority: "P0"
+    theme: ["adaptive_ttc", "verifier_prm"]
+    method_type: ["inference_time", "verifier", "search"]
+    reasoning_path_family: ["cot", "verifier_guided", "reflection"]
+    selection_unit: ["sample", "strategy"]
+    compute_control:
+      adaptive_budget: true
+      stopping: true
+      reranking: true
+      search: "best_of_n"
+    verifier:
+      uses_verifier: true
+      verifier_type: "process"
+    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "compute-optimal framing, search vs revision decomposition."
+    what_not_to_claim: "compute-optimal TTC framing 자체를 새로 제안한다고 말하지 말 것."
+    implementation_candidate: "paper framing reference"
+    notes_for_coding_agent: "mainline framing anchor."
 
   - title: "Let's Verify Step by Step"
-    venue: "ICLR 2024 (Poster)"
-    link: "https://openreview.net/forum?id=v8L0pN6EOi"
-    abstract: "(Pending update: Paper text not yet loaded)"
-    idea: "PRM800K + Process vs Outcome supervision"
-    relevance: "Verifier + search/rerank의 고전적 기준선(blueprint). MVP 구현 시 참조."
-    tips: "(Pending update)"
+    year: 2024
+    venue: "ICLR 2024"
+    url: "https://openreview.net/forum?id=v8L0pN6EOi"
+    code_url: "https://github.com/openai/prm800k"
+    status: "read"
+    priority: "P0"
+    theme: ["verifier_prm"]
+    method_type: ["verifier", "training", "inference_time"]
+    reasoning_path_family: ["verifier_guided"]
+    selection_unit: ["step", "answer"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: true
+      search: "best_of_n"
+    verifier:
+      uses_verifier: true
+      verifier_type: "process"
+    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "process supervision vs outcome supervision distinction."
+    what_not_to_claim: "path-level reranking과 PRM을 동일시하지 말 것."
+    implementation_candidate: "verifier background only"
+    notes_for_coding_agent: "verifier section canonical citation."
+
+  - title: "Math-Shepherd: Verify and Reinforce LLMs Step-by-step without Human Annotations"
+    year: 2024
+    venue: "ACL 2024"
+    url: "https://aclanthology.org/2024.acl-long.510/"
+    code_url: ""
+    status: "unread"
+    priority: "P0"
+    theme: ["verifier_prm", "search_reflection_rl"]
+    method_type: ["verifier", "training", "search"]
+    reasoning_path_family: ["verifier_guided"]
+    selection_unit: ["step", "answer"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: true
+      search: "best_of_n"
+    verifier:
+      uses_verifier: true
+      verifier_type: "process"
+    relation_to_ours: ["method_inspiration"]
+    what_to_borrow: "auto process supervision recipe."
+    what_not_to_claim: "human-free PRM novelty를 그대로 가져오지 말 것."
+    implementation_candidate: "future verifier extension"
+    notes_for_coding_agent: "lightweight verifier vs full PRM comparison에 유용."
+
+  - title: "Process Reward Models That Think"
+    year: 2025
+    venue: "arXiv"
+    url: "https://arxiv.org/abs/2504.16828"
+    code_url: "https://github.com/mukhal/thinkprm"
+    status: "unread"
+    priority: "P1"
+    theme: ["verifier_prm"]
+    method_type: ["verifier", "inference_time"]
+    reasoning_path_family: ["verifier_guided"]
+    selection_unit: ["step", "answer"]
+    compute_control:
+      adaptive_budget: true
+      stopping: false
+      reranking: true
+      search: "best_of_n"
+    verifier:
+      uses_verifier: true
+      verifier_type: "generative"
+    relation_to_ours: ["method_inspiration"]
+    what_to_borrow: "generative verifier framing, data-efficient PRM."
+    what_not_to_claim: "long-CoT generative verifier를 immediate mainline처럼 과장하지 말 것."
+    implementation_candidate: "future verifier extension"
+    notes_for_coding_agent: "route-level verifier와 step-level generative verifier 차이를 강조."
+
+  - title: "Self-Discover: Large Language Models Self-Compose Reasoning Structures"
+    year: 2024
+    venue: "official paper page"
+    url: "https://openreview.net/forum?id=BROvXhmzYK"
+    code_url: ""
+    status: "unread"
+    priority: "P0"
+    theme: ["path_pool_construction"]
+    method_type: ["prompting", "routing"]
+    reasoning_path_family: ["cot", "prompt_diverse_cot", "structured_rationale"]
+    selection_unit: ["strategy"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "reasoning structure composition language."
+    what_not_to_claim: "strategy selection general idea를 우리가 처음 한다고 주장하지 말 것."
+    implementation_candidate: "strategy-card framing"
+    notes_for_coding_agent: "graph/KG가 아니라 strategy selection bucket에 둘 것."
+
+  - title: "Automatic Model Selection with Large Language Models for Reasoning"
+    year: 2023
+    venue: "EMNLP 2023 Findings"
+    url: "https://aclanthology.org/2023.findings-emnlp.55/"
+    code_url: ""
+    status: "unread"
+    priority: "P1"
+    theme: ["path_pool_construction"]
+    method_type: ["routing", "prompting"]
+    reasoning_path_family: ["cot", "pal"]
+    selection_unit: ["strategy", "model"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "method routing framing."
+    what_not_to_claim: "method selection problem 자체를 새로 발견했다고 말하지 말 것."
+    implementation_candidate: "path-family router background"
+    notes_for_coding_agent: "CoT vs PAL routing example."
+
+  - title: "PAL: Program-aided Language Models"
+    year: 2022
+    venue: "arXiv"
+    url: "https://arxiv.org/abs/2211.10435"
+    code_url: "https://reasonwithpal.com/"
+    status: "skimming"
+    priority: "P1"
+    theme: ["path_pool_construction"]
+    method_type: ["prompting", "tool_use"]
+    reasoning_path_family: ["pal"]
+    selection_unit: ["tool", "strategy"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["method_inspiration"]
+    what_to_borrow: "alternative path family definition."
+    what_not_to_claim: "tool-use novelty over PAL/PoT."
+    implementation_candidate: "future path-pool extension"
+    notes_for_coding_agent: "tool-assisted path family 예시."
+
+  - title: "Program of Thoughts Prompting: Disentangling Computation from Reasoning for Numerical Reasoning Tasks"
+    year: 2022
+    venue: "arXiv"
+    url: "https://arxiv.org/abs/2211.12588"
+    code_url: "https://github.com/wenhuchen/Program-of-Thoughts"
+    status: "skimming"
+    priority: "P1"
+    theme: ["path_pool_construction"]
+    method_type: ["prompting", "tool_use"]
+    reasoning_path_family: ["pot"]
+    selection_unit: ["tool", "strategy"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["method_inspiration"]
+    what_to_borrow: "PoT family definition."
+    what_not_to_claim: "computation offloading novelty."
+    implementation_candidate: "future path-pool extension"
+    notes_for_coding_agent: "PoT를 route taxonomy에 넣을 때 사용."
 
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
-    venue: "ICLR 2025 (Poster)"
-    link: "https://openreview.net/forum?id=3baOKeI2EU"
-    abstract: "(Pending update: Paper text not yet loaded)"
-    idea: "Chain/Tree/Graph 형태의 구조적 CoT를 통합 포맷으로 SLM에 증류"
-    relevance: "'구조를 보존하는 증류'의 대표 사례. CG가 구조화된 중간표현이므로 Axis 1/2 브릿지로 유용."
-    tips: "(Pending update)"
+    year: 2025
+    venue: "ICLR 2025"
+    url: "https://openreview.net/forum?id=3baOKeI2EU"
+    code_url: ""
+    status: "unread"
+    priority: "P1"
+    theme: ["structured_graph_reasoning"]
+    method_type: ["distillation", "training"]
+    reasoning_path_family: ["structured_rationale", "graph"]
+    selection_unit: ["rationale"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["background_only", "contrastive_positioning"]
+    what_to_borrow: "structured rationale distillation language."
+    what_not_to_claim: "CG structured distillation novelty over UniCoTT."
+    implementation_candidate: "background only"
+    notes_for_coding_agent: "CG를 structured family로 reposition할 때 중요."
 
   - title: "MAGDi: Structured Distillation of Multi-Agent Interaction Graphs Improves Reasoning in Smaller Language Models"
-    venue: "ICLR 2025 (Spotlight)"
-    link: "https://openreview.net/forum?id=ffLblkoCw8"
-    abstract: |
-      Multi-agent interactions between Large Language Model (LLM) agents have shown major improvements on diverse reasoning tasks. However, these involve long generations from multiple models across several rounds, making them expensive. Moreover, these multi-agent approaches fail to provide a final, single model for efficient inference. To address this, we introduce MAGDi, a new method for structured distillation of the reasoning interactions between multiple LLMs into smaller LMs. MAGDi teaches smaller models by representing multi-agent interactions as graphs, augmenting a base student model with a graph encoder, and distilling knowledge using three objective functions: next-token prediction, a contrastive loss between correct and incorrect reasoning, and a graph-based objective to model the interaction structure. Experiments on seven widely used commonsense and math reasoning benchmarks show that MAGDi improves the reasoning capabilities of smaller models, outperforming several methods that distill from a single teacher and multiple teachers. Moreover, MAGDi also demonstrates an order of magnitude higher efficiency over its teachers. We conduct extensive analyses to show that MAGDi (1) enhances the generalizability to out-of-domain tasks, (2) scales positively with the size and strength of the base student model, and (3) obtains larger improvements (via our multi-teacher training) when applying self-consistency -- an inference technique that relies on model diversity.
-    idea: "GPT-4 다중 에이전트 토론을 **논증 그래프**로 변환, graph-encoder 추가·3중 loss 로 7 B 학생 학습 → 수학·상식 7벤치 +5 pt"
-    relevance: "그래프 자체를 증류 타겟으로 두는 설계가 CG 증류 방향성과 강하게 맞닿음. Beam CoT 로그→그래프 변환 파이프라인 참조."
-    tips: "그래프 노드·엣지 라벨을 triple 스키마와 맞춰야 distillation 안정"
+    year: 2025
+    venue: "ICLR 2025 Spotlight"
+    url: "https://openreview.net/forum?id=ffLblkoCw8"
+    code_url: ""
+    status: "unread"
+    priority: "P1"
+    theme: ["structured_graph_reasoning"]
+    method_type: ["distillation", "training"]
+    reasoning_path_family: ["graph", "structured_rationale"]
+    selection_unit: ["rationale"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["background_only", "contrastive_positioning"]
+    what_to_borrow: "graph distillation as true structured target."
+    what_not_to_claim: "우리 current CG가 graph-preserving reasoning이라고 주장하지 말 것."
+    implementation_candidate: "background only"
+    notes_for_coding_agent: "graph claim 절제에 도움."
 
-  - title: "Mentor-KD: Making Small Language Models Better Multi-step Reasoners"
-    venue: "EMNLP 2024 (Main)"
-    link: "https://aclanthology.org/2024.emnlp-main.977/"
-    abstract: |
-      Large Language Models (LLMs) have displayed remarkable performances across various complex tasks by leveraging Chain-of-Thought (CoT) prompting. Recently, studies have proposed a Knowledge Distillation (KD) approach, reasoning distillation, which transfers such reasoning ability of LLMs through fine-tuning language models of multi-step rationales generated by LLM teachers. However, they have inadequately considered two challenges regarding insufficient distillation sets from the LLM teacher model, in terms of 1) data quality and 2) soft label provision. In this paper, we propose Mentor-KD, which effectively distills the multi-step reasoning capability of LLMs to smaller LMs while addressing the aforementioned challenges. Specifically, we exploit a mentor, intermediate-sized task-specific fine-tuned model, to augment additional CoT annotations and provide soft labels for the student model during reasoning distillation. We conduct extensive experiments and confirm Mentor-KD's effectiveness across various models and complex reasoning tasks.
-    idea: "70 B 교사 → 13 B Mentor → 7 B 학생 **2단계 KD**·soft label 제공, multi-step reasoning 성능 대폭 향상"
-    relevance: "Teacher 데이터가 제한적/노이즈가 있을 때의 '멘토-학생' 2단계 KD 템플릿 제공. 데이터 적을 때 Mentor stage 효과적."
-    tips: "13 B '교정용' 중간 모델로 CG·정답 풀이 둘 다 distill 후 최종 8 B에 압축"
+  - title: "TeleMath: A Benchmark for Large Language Models in Telecom Mathematical Problem Solving"
+    year: 2025
+    venue: "arXiv"
+    url: "https://arxiv.org/abs/2506.10674"
+    code_url: "https://huggingface.co/datasets/netop/TeleMath"
+    status: "unread"
+    priority: "P0"
+    theme: ["nfm_telco_bridge"]
+    method_type: ["inference_time", "prompting"]
+    reasoning_path_family: ["direct", "cot", "pot", "rag"]
+    selection_unit: ["sample", "strategy"]
+    compute_control:
+      adaptive_budget: true
+      stopping: false
+      reranking: false
+      search: "best_of_n"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["nfm_bridge"]
+    what_to_borrow: "math mainline을 telecom domain으로 옮기는 첫 benchmark."
+    what_not_to_claim: "NFM 전체를 대표한다고 과장하지 말 것."
+    implementation_candidate: "bridge experiment stage 1"
+    notes_for_coding_agent: "NFM bridge 1순위."
 
-  - title: "SWITCH: Studying WItH TeaCHer for Knowledge Distillation of Large Language Models"
-    venue: "EMNLP 2024 (Findings)"
-    link: "https://aclanthology.org/2025.findings-naacl.206/"
-    abstract: |
-      Despite the success of Large Language Models (LLMs), they still face challenges related to high inference costs and memory requirements. To address these issues, Knowledge Distillation (KD) has emerged as a popular method for model compression, with student-generated outputs (SGOs) as training data being particularly notable for reducing the mismatch between training and inference. However, SGOs often produce noisy and biased sequences, which can lead to misguidance from the teacher model, especially in long sequences. To mitigate these challenges, we propose SWITCH (Studying WIth TeaCHer for Knowledge Distillation), a novel approach that strategically incorporates the teacher model during the student's sequence generation. SWITCH identifies discrepancies between the token probabilities of the teacher and student models, allowing the teacher to intervene selectively, particularly in long sequences that are more prone to teacher misguidance. Extensive experimental results across three model families and five instruction-following datasets show that SWITCH surpasses traditional KD methods, particularly excelling in the generation of long sequential data.
-    idea: "긴 시퀀스에서 **오차 토큰만 선택적 교사介入** KD, 장문 생성·형식 오류 감소"
-    relevance: "선택적 교사介入으로 **긴 출력의 노이즈/스키마 위반(JSON 깨짐)**을 줄이는 데 직접적."
-    tips: "CG 출력 길이 600+ 토큰 문제에서 SWITCH KD로 schema 불일치 rate↓"
+  - title: "TeleTables"
+    year: 2025
+    venue: "dataset + paper"
+    url: "https://huggingface.co/datasets/netop/TeleTables"
+    code_url: ""
+    status: "unread"
+    priority: "P1"
+    theme: ["nfm_telco_bridge"]
+    method_type: ["inference_time", "prompting", "tool_use"]
+    reasoning_path_family: ["direct", "rag", "table_reasoning"]
+    selection_unit: ["strategy", "tool"]
+    compute_control:
+      adaptive_budget: true
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: true
+      verifier_type: "schema"
+    relation_to_ours: ["nfm_bridge"]
+    what_to_borrow: "table-specific path family framing."
+    what_not_to_claim: "math reasoning과 완전히 같은 task라고 말하지 말 것."
+    implementation_candidate: "bridge experiment stage 2"
+    notes_for_coding_agent: "strategy-card를 table-card로 확장하기 좋은 benchmark."
 
-  # -----------------------------------------------------------
-  # 🌊 P1 List (Priority Medium - Week 4+)
-  # -----------------------------------------------------------
-  - title: "LoRA Soups: Merging LoRAs for Practical Skill Composition"
-    venue: "COLING 2025"
-    link: "https://aclanthology.org/2025.coling-industry.55/"
-    abstract: "(Pending update: Paper text not yet loaded)"
-    idea: "CAT 방식으로 LoRA 가중치 최적 조합 학습"
-    relevance: "CG/MR/QA/RP 태스크별 LoRA를 운용할 때 조합(composition) 레퍼런스. Axis 3 직결."
-    tips: "(Pending update)"
+  - title: "TeleLogs"
+    year: 2025
+    venue: "dataset + paper"
+    url: "https://huggingface.co/datasets/netop/TeleLogs"
+    code_url: ""
+    status: "unread"
+    priority: "P1"
+    theme: ["nfm_telco_bridge"]
+    method_type: ["inference_time", "routing", "verifier"]
+    reasoning_path_family: ["direct", "rag", "log_rca", "structured_rationale"]
+    selection_unit: ["strategy", "answer"]
+    compute_control:
+      adaptive_budget: true
+      stopping: false
+      reranking: true
+      search: "none"
+    verifier:
+      uses_verifier: true
+      verifier_type: "schema"
+    relation_to_ours: ["nfm_bridge"]
+    what_to_borrow: "RCA consistency, majority-vote RCA framing."
+    what_not_to_claim: "main thesis core를 RCA로 바꾸지 말 것."
+    implementation_candidate: "bridge experiment stage 3"
+    notes_for_coding_agent: "verifier-style bridge task."
 
-  - title: "Unraveling LoRA Interference: Orthogonal Subspaces for Robust Model Merging"
-    venue: "ACL 2025"
-    link: "https://aclanthology.org/2025.acl-long.1284/"
-    abstract: "(Pending update: Paper text not yet loaded)"
-    idea: "업데이트 서브스페이스 직교화로 간섭 완화"
-    relevance: "왜 naive merge가 깨지는지(간섭/서브스페이스)와 완화 방향 제공."
-    tips: "(Pending update)"
+  - title: "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
+    year: 2023
+    venue: "ACL 2023"
+    url: "https://aclanthology.org/2023.acl-long.754/"
+    code_url: ""
+    status: "summarized"
+    priority: "background"
+    theme: ["path_pool_construction"]
+    method_type: ["training"]
+    reasoning_path_family: ["direct"]
+    selection_unit: ["none"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["background_only"]
+    what_to_borrow: "synthetic instruction generation background."
+    what_not_to_claim: "current main novelty와 직접 연결된다고 과장하지 말 것."
+    implementation_candidate: "background only"
+    notes_for_coding_agent: "legacy background."
 
-  - title: "InstructGraph: Boosting Large Language Models via Graph-centric Instruction Tuning and Preference Alignment"
-    venue: "ACL 2024 (Findings)"
-    link: "https://aclanthology.org/2024.findings-acl.801/"
-    abstract: |
-      Do current large language models (LLMs) better solve graph reasoning and generation tasks with parameter updates? In this paper, we propose InstructGraph, a framework that empowers LLMs with the abilities of graph reasoning and generation by instruction tuning and preference alignment. Specifically, we first propose a structured format verbalizer to unify all graph data into a universal code-like format, which can simply represent the graph without any external graph-specific encoders. Furthermore, a graph instruction tuning stage is introduced to guide LLMs in solving graph reasoning and generation tasks. Finally, we identify potential hallucination problems in graph tasks and sample negative instances for preference alignment, the target of which is to enhance the output's reliability of the model. Extensive experiments across multiple graph-centric tasks exhibit that InstructGraph can achieve the best performance and outperform GPT-4 and LLaMA2 by more than 13\% and 38\%, respectively.
-    idea: "그래프 중심 IT + preference alignment 로 그래프 생성·추론 동시 개선"
-    relevance: "그래프 포맷을 중심으로 한 instruction + preference alignment. CG 출력의 '좋은/나쁜' 페어를 만드는 관점."
-    tips: "Human eval 대신 70 B 교사 점수로 preference pair 자동 생성 가능"
+  - title: "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes"
+    year: 2023
+    venue: "ACL 2023 Findings"
+    url: "https://aclanthology.org/2023.findings-acl.507/"
+    code_url: ""
+    status: "summarized"
+    priority: "background"
+    theme: ["structured_graph_reasoning"]
+    method_type: ["distillation", "training"]
+    reasoning_path_family: ["cot", "structured_rationale"]
+    selection_unit: ["rationale"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["background_only"]
+    what_to_borrow: "rationale distillation background."
+    what_not_to_claim: "current TTC/path-selection novelty와 혼동하지 말 것."
+    implementation_candidate: "background only"
+    notes_for_coding_agent: "legacy distillation background."
 
-  - title: "DRAG: Distilling RAG for SLMs via Evidence and Graph-based Distillation"
-    venue: "ACL 2025"
-    link: "https://aclanthology.org/2025.acl-long.358/"
-    abstract: |
-      Retrieval-Augmented Generation (RAG) methods have proven highly effective for tasks requiring factual consistency and robust knowledge retrieval. However, large-scale RAG systems consume significant computational resources and are prone to generating hallucinated content from Humans. In this work, we introduce \texttt{DRAG}, a novel framework for distilling RAG knowledge from large-scale Language Models (LLMs) into small LMs (SLMs). Our approach leverages evidence- and knowledge graph-based distillation, ensuring that the distilled model retains critical factual knowledge while significantly reducing model size and computational cost. By aligning the smaller model's predictions with a structured knowledge graph and ranked evidence, \texttt{DRAG} effectively mitigates hallucinations and improves factual accuracy. We further present a case demonstrating how our framework mitigates user privacy risks and introduce a corresponding benchmark. Experimental evaluations on multiple benchmarks demonstrate that our method outperforms the prior competitive RAG methods like MiniRAG for SLMs by up to 27.7% using the same models, preserving high-level efficiency and reliability. With \texttt{DRAG}, we provide a practical and resource-efficient roadmap to deploying enhanced retrieval and generation capabilities in small-sized LLMs.
-    idea: "증거 순위 + KG를 다중 loss로 증류"
-    relevance: "KG/증거 기반으로 hallucination을 줄이려는 경우 증류 설계 참고. Evidence and Graph-based Distillation."
-    tips: "문제별 top-k(≤10) triple과 supporting sentence 를 저장해 증류 코퍼스 구축"
-
-  - title: "Quantification of Large Language Model Distillation"
-    venue: "ACL 2025"
-    link: "https://aclanthology.org/2025.acl-long.248/"
-    abstract: "(Pending update: Paper text not yet loaded)"
-    idea: "LLM 증류 효과 정량화 방법론"
-    relevance: "KD 성능을 '정답률'만이 아니라 무엇이 좋아졌는지(지표/분해) 보고하는 데 도움."
-    tips: "(Pending update)"
-
-  - title: "Learning from Committee: Reasoning Distillation from a Mixture of Teachers"
-    venue: "ACL 2025 (Findings)"
-    link: "https://aclanthology.org/2025.findings-acl.217/"
-    abstract: "(Pending update: Paper text not yet loaded)"
-    idea: "여러 Teacher 모델의 Reasoning 통합 증류"
-    relevance: "여러 teacher/API/체크포인트를 쓸 때의 aggregation 레퍼런스."
-    tips: "(Pending update)"
-
-  # -----------------------------------------------------------
-  # 📂 Other Relevant Candidates
-  # -----------------------------------------------------------
-  - title: "Contextualization Distillation from Large Language Model for Knowledge Graph Completion"
-    venue: "EACL 2024 (Findings)"
-    link: "https://aclanthology.org/2024.findings-eacl.32/"
-    abstract: |
-      While textual information significantly enhances the performance of pre-trained language models (PLMs) in knowledge graph completion (KGC), the static and noisy nature of existing corpora collected from Wikipedia articles or synsets definitions often limits the potential of PLM-based KGC models. To surmount these challenges, we introduce the Contextualization Distillation strategy, a versatile plug-in-and-play approach compatible with both discriminative and generative KGC frameworks. Our method begins by instructing large language models (LLMs) to transform compact, structural triplets into context-rich segments. Subsequently, we introduce two tailored auxiliary tasks, reconstruction and contextualization, allowing smaller KGC models to assimilate insights from these enriched triplets. Comprehensive evaluations across diverse datasets and KGC techniques highlight the efficacy and adaptability of our approach, revealing consistent performance enhancements irrespective of underlying pipelines or architectures. Moreover, our analysis makes our method more explainable and provides insight into generating path selection, as well as the choosing of suitable distillation tasks. All the code and data in this work will be released at this https URL.
-    idea: "교사 LLM이 triple을 **자연어 문맥**으로 재작성, 학생이 triple+문맥 reconstruction 듀얼-태스크 학습"
-    relevance: "BG section 문장화 할 때 문맥 생성·필터 규칙 응용"
-    tips: "CG triple ↔ 설명 문장 세트 생성 스크립트 작성해 데이터 3× 증폭"
+  - title: "Phased Instruction Fine-Tuning for Large Language Models"
+    year: 2024
+    venue: "ACL 2024 Findings"
+    url: "https://aclanthology.org/2024.findings-acl.341/"
+    code_url: ""
+    status: "summarized"
+    priority: "background"
+    theme: ["math_slm_frontier"]
+    method_type: ["training"]
+    reasoning_path_family: ["direct"]
+    selection_unit: ["none"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["background_only"]
+    what_to_borrow: "curriculum training background."
+    what_not_to_claim: "current mainline의 직접 novelty라고 과장하지 말 것."
+    implementation_candidate: "background only"
+    notes_for_coding_agent: "legacy training background."
