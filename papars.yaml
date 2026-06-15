@@ -356,16 +356,16 @@ papers:
     notes_for_coding_agent: "PAL is a strong path family, not a routing method. Position it as a tool-executed candidate in a heterogeneous path pool and account for generation + execution cost."
 
   - title: "Program of Thoughts Prompting: Disentangling Computation from Reasoning for Numerical Reasoning Tasks"
-    year: 2022
-    venue: "arXiv"
-    url: "https://arxiv.org/abs/2211.12588"
+    year: 2023
+    venue: "TMLR"
+    url: "https://openreview.net/forum?id=YfZ4ZPt8zd"
     code_url: "https://github.com/wenhuchen/Program-of-Thoughts"
-    status: "skimming"
-    priority: "P1"
-    theme: ["path_pool_construction"]
-    method_type: ["prompting", "tool_use"]
-    reasoning_path_family: ["pot"]
-    selection_unit: ["tool", "strategy"]
+    status: "strategically-read"
+    priority: "P0"
+    theme: ["path_pool_construction", "tool_use"]
+    method_type: ["inference_time", "prompting", "tool_use"]
+    reasoning_path_family: ["pot", "programmatic_rationale", "tool_use"]
+    selection_unit: ["path", "sample", "tool"]
     compute_control:
       adaptive_budget: false
       stopping: false
@@ -374,11 +374,11 @@ papers:
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["method_inspiration"]
-    what_to_borrow: "PoT family definition."
-    what_not_to_claim: "computation offloading novelty."
-    implementation_candidate: "future path-pool extension"
-    notes_for_coding_agent: "PoT를 route taxonomy에 넣을 때 사용."
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "tool-executed path family definition, computation vs reasoning split, budget-matched PoT baseline, symbolic/state-tracking robustness."
+    what_not_to_claim: "tool-use novelty, computation offloading novelty, CoT 계산 오류 발견을 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "RUN_POT / SC-PoT / mixed CoT+PoT baseline"
+    notes_for_coding_agent: "PoT is a strong executable path family, not a selector. Position it as a candidate in a heterogeneous pool and account for generation + execution cost."
 
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025

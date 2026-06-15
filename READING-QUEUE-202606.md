@@ -226,13 +226,14 @@
 
 ### 20. Program of Thoughts Prompting
 
-- Year / Venue: 2022 / arXiv-only
-- Link: https://arxiv.org/abs/2211.12588
+- Year / Venue: 2023 / TMLR
+- Link: https://openreview.net/forum?id=YfZ4ZPt8zd
+- Status: strategically-read
 - Theme: path_pool_construction, tool_use
-- 왜 중요한가: PoT 계열의 대표 prompt-level baseline이다.
-- 뽑을 것: computation offloading, SC와의 결합.
-- 우리와의 관계: `PoT`를 path family taxonomy에 넣을 근거.
-- Priority: P1
+- 왜 중요한가: executable program path인 `PoT`를 numerical reasoning의 핵심 baseline으로 고정해주는 대표 tool-use prompt다.
+- 뽑을 것: computation offloading, `SC-PoT`, mixed CoT+PoT budget comparison, state-tracking / equation-heavy utility.
+- 우리와의 관계: `PoT`를 path family taxonomy에 넣고, CoT/PAL/CG와 함께 heterogeneous pool을 구성해야 한다는 근거를 준다.
+- Priority: P0
 - Track: main math research
 
 ### 21. Process Reward Models That Think

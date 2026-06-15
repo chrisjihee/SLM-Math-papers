@@ -95,6 +95,16 @@
 - wording caution:
   `tool-use reasoning`, `natural language + symbolic execution`, `structured path가 CoT보다 낫다`만으로 기여를 쓰면 PAL과 바로 겹친다. `tool-executed path는 강한 baseline family`이고, 우리의 기여는 `state-conditioned path acquisition / stopping`이라는 점을 분리해서 써야 한다.
 
+### PoT / executable paths
+
+- risk:
+  executable program path, computation offloading, `SC-PoT`, arithmetic/state-tracking utility는 이미 PoT가 canonical하게 보여줬다.
+- response:
+  우리는 PoT를 강한 executable path family로 수용하고, 그 위에서 CoT / PAL / CG / direct와의 budget-aware allocation을 다뤄야 한다.
+
+- wording caution:
+  `program-based reasoning`, `computation offloading`, `PoT가 CoT보다 낫다`만 전면에 두면 PoT와 지나치게 겹친다. `PoT는 path family`, `우리 기여는 state-conditioned path-family allocation`으로 분리해야 한다.
+
 ### s1
 
 - risk:
