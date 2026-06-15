@@ -185,25 +185,25 @@ papers:
     venue: "ICLR 2025"
     url: "https://openreview.net/forum?id=4FWAwZtd2n"
     code_url: ""
-    status: "read"
+    status: "strategically-read"
     priority: "P0"
-    theme: ["adaptive_ttc", "verifier_prm"]
-    method_type: ["inference_time", "verifier", "search"]
-    reasoning_path_family: ["cot", "verifier_guided", "reflection"]
-    selection_unit: ["sample", "strategy"]
+    theme: ["adaptive_ttc", "verifier_prm", "strategy_selection"]
+    method_type: ["inference_time", "verifier", "search", "routing"]
+    reasoning_path_family: ["homogeneous_sampling", "verifier_guided", "sequential_revision"]
+    selection_unit: ["budget", "strategy", "path"]
     compute_control:
       adaptive_budget: true
-      stopping: true
+      stopping: false
       reranking: true
-      search: "best_of_n"
+      search: "best_of_n_beam_lookahead_revision"
     verifier:
       uses_verifier: true
       verifier_type: "process"
-    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
-    what_to_borrow: "compute-optimal framing, search vs revision decomposition."
-    what_not_to_claim: "compute-optimal TTC framing 자체를 새로 제안한다고 말하지 말 것."
-    implementation_candidate: "paper framing reference"
-    notes_for_coding_agent: "mainline framing anchor."
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "compute-optimal framing, difficulty-conditioned baseline, search vs revision decomposition, verifier-overhead accounting."
+    what_not_to_claim: "adaptive TTC, problem-level strategy selection, compute-optimal allocation framing을 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "difficulty-only compute-optimal baseline"
+    notes_for_coding_agent: "not a heterogeneous path-family method. difficulty-conditioned strategy selection을 state-conditioned heterogeneous path-family / macro-strategy allocation과 분리해서 비교할 것."
 
   - title: "Let's Verify Step by Step"
     year: 2024

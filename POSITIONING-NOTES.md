@@ -55,6 +55,16 @@
 - wording caution:
   `adaptive test-time compute allocation for mathematical reasoning`만 전면에 두면 정면충돌 위험이 크다. `state-conditioned allocation over heterogeneous reasoning path families`처럼 더 좁고 구체적으로 써야 한다.
 
+### Scaling LLM Test-Time Compute Optimally
+
+- risk:
+  difficulty-conditioned compute-optimal scaling, sequential vs parallel trade-off, verifier / PRM search, revision strategy selection까지 이미 강하게 정리되어 있다.
+- response:
+  우리는 difficulty-only strategy selection이 아니라 current reasoning state를 보고 heterogeneous path family 또는 macro strategy를 다음에 무엇으로 확장할지, 그리고 언제 stop할지를 다뤄야 한다.
+
+- wording caution:
+  `problem-dependent TTC strategy selection`, `compute-optimal inference`, `best-of-N보다 효율적인 adaptive allocation`만으로 contribution을 쓰면 이 논문과 지나치게 겹친다. `state-conditioned reasoning path pool construction`과 `path-family / strategy-level acquisition`을 더 앞에 둬야 한다.
+
 ### Reasoning-Aware Self-Consistency / Confidence Improves Self-Consistency
 
 - risk:

@@ -90,9 +90,10 @@
 - Year / Venue: 2025 / ICLR 2025
 - Link: https://openreview.net/forum?id=4FWAwZtd2n
 - Theme: adaptive_ttc, verifier_prm
-- 왜 중요한가: compute-optimal TTC framing을 제공한다.
-- 뽑을 것: search vs revision, compute-optimal allocation, small-vs-large tradeoff.
-- 우리와의 관계: 메인 framing reference. 논문 introduction과 related work에서 핵심.
+- Status: strategically-read
+- 왜 중요한가: difficulty-conditioned compute-optimal TTC와 verifier/search/revision trade-off를 가장 직접적으로 정리한 핵심 framing paper다.
+- 뽑을 것: search vs revision decomposition, difficulty-only compute-optimal baseline, verifier overhead accounting, budget-accuracy curve.
+- 우리와의 관계: 메인 framing reference지만, 이 논문은 problem difficulty 기반 strategy selection이고 우리는 current reasoning state 기반 heterogeneous path-family / macro-strategy allocation으로 차별화해야 한다.
 - Priority: P0
 - Track: main math research
 
