@@ -119,12 +119,13 @@
 
 ### 11. Self-Discover: Large Language Models Self-Compose Reasoning Structures
 
-- Year / Venue: 2024 / official paper page
+- Year / Venue: 2024 / NeurIPS 2024
 - Link: https://openreview.net/forum?id=BROvXhmzYK
+- Status: strategically-read
 - Theme: path_pool_construction
 - 왜 중요한가: reasoning structure 자체를 선택/조합하는 대표 paper다.
 - 뽑을 것: module selection, structure composition, inference cost comparison.
-- 우리와의 관계: strategy-card / path-family framing의 직접 참고문헌.
+- 우리와의 관계: strategy-card / path-family framing의 직접 참고문헌이자 P0 related work다. 다만 이 논문은 task-level one-shot structure composition에 가깝고, 우리는 state-conditioned path-family / macro strategy acquisition으로 차별화해야 한다.
 - Priority: P0
 - Track: main math research
 

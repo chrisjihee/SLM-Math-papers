@@ -68,9 +68,12 @@
 ### Self-Discover / Automatic Model Selection
 
 - risk:
-  reasoning strategy selection 자체도 새롭지 않다.
+  reasoning strategy selection 자체도 새롭지 않고, Self-Discover는 task-level reasoning-structure composition과 structured prompting efficiency를 이미 강하게 제시했다.
 - response:
-  우리는 dynamic budgeted path acquisition, stopping, verifier/reranker를 결합한 방향으로 차별화해야 한다.
+  우리는 dynamic budgeted path acquisition, stopping, verifier/reranker를 결합한 방향으로 차별화해야 하며, one-shot structure composition이 아니라 current reasoning state를 읽는 sequential decision problem이라는 점을 전면에 세워야 한다.
+
+- wording caution:
+  `self-compose reasoning structure`, `structured prompting over CoT`, `strategy composition`만으로 기여를 쓰면 Self-Discover와 지나치게 겹친다.
 
 ### Verifier / PRM papers
 

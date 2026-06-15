@@ -282,15 +282,15 @@ papers:
 
   - title: "Self-Discover: Large Language Models Self-Compose Reasoning Structures"
     year: 2024
-    venue: "official paper page"
+    venue: "NeurIPS 2024"
     url: "https://openreview.net/forum?id=BROvXhmzYK"
     code_url: ""
-    status: "unread"
+    status: "strategically-read"
     priority: "P0"
     theme: ["path_pool_construction"]
     method_type: ["prompting", "routing"]
-    reasoning_path_family: ["cot", "prompt_diverse_cot", "structured_rationale"]
-    selection_unit: ["strategy"]
+    reasoning_path_family: ["structured_rationale", "strategy_composition", "task_level_structure"]
+    selection_unit: ["reasoning_module", "structure", "strategy"]
     compute_control:
       adaptive_budget: false
       stopping: false
@@ -299,11 +299,11 @@ papers:
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
-    what_to_borrow: "reasoning structure composition language."
-    what_not_to_claim: "strategy selection general idea를 우리가 처음 한다고 주장하지 말 것."
-    implementation_candidate: "strategy-card framing"
-    notes_for_coding_agent: "graph/KG가 아니라 strategy selection bucket에 둘 것."
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "reasoning structure composition language, SELECT-ADAPT-IMPLEMENT framing, task-level vs instance-level strategy distinction."
+    what_not_to_claim: "structured reasoning이 CoT보다 낫다, 여러 reasoning strategy를 조합하는 것이 새롭다, strategy selection 자체가 novelty라고 주장하지 말 것."
+    implementation_candidate: "Self-Discover-style structured prompting baseline"
+    notes_for_coding_agent: "not a state-conditioned path-acquisition method. graph/KG가 아니라 strategy selection / structured prompting bucket에 두고, 핵심 차별점은 sequential macro-strategy allocation으로 잡을 것."
 
   - title: "Automatic Model Selection with Large Language Models for Reasoning"
     year: 2023
