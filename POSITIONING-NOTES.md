@@ -75,6 +75,16 @@
 - wording caution:
   `self-compose reasoning structure`, `structured prompting over CoT`, `strategy composition`만으로 기여를 쓰면 Self-Discover와 지나치게 겹친다.
 
+### s1
+
+- risk:
+  single-path sequential test-time scaling, thinking-length control, sequential vs parallel scaling 비교는 이미 강하게 제시되었다.
+- response:
+  우리는 얼마나 오래 같은 path를 생각하게 할지보다, 현재 reasoning state를 보고 어떤 path family를 더 샘플링할지와 언제 stop/diversify할지를 다뤄야 한다.
+
+- wording caution:
+  `test-time scaling`, `simple inference-time reasoning improvement`, `longer thinking helps`만 전면에 두면 s1과 지나치게 겹친다.
+
 ### Verifier / PRM papers
 
 - risk:

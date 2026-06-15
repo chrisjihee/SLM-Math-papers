@@ -60,25 +60,25 @@ papers:
     venue: "EMNLP 2025"
     url: "https://aclanthology.org/2025.emnlp-main.1025/"
     code_url: "https://github.com/simplescaling/s1"
-    status: "unread"
+    status: "strategically-read"
     priority: "P0"
-    theme: ["adaptive_ttc", "sc_efficiency", "math_slm_frontier"]
-    method_type: ["inference_time", "prompting"]
-    reasoning_path_family: ["long_cot"]
-    selection_unit: ["sample"]
+    theme: ["adaptive_ttc", "sequential_ttc", "math_slm_frontier"]
+    method_type: ["inference_time", "prompting", "training"]
+    reasoning_path_family: ["long_cot", "single_path_sequential_scaling"]
+    selection_unit: ["budget", "thinking_length"]
     compute_control:
-      adaptive_budget: true
+      adaptive_budget: false
       stopping: false
       reranking: false
       search: "none"
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["direct_baseline", "method_inspiration"]
-    what_to_borrow: "simple TTC baseline, budget forcing framing."
-    what_not_to_claim: "복잡한 routing 없이도 나오는 gain을 우리 novelty로 착각하지 말 것."
-    implementation_candidate: "strong sequential/long-thought baseline"
-    notes_for_coding_agent: "current route-family mainline과 별도로 minimal TTC baseline을 설명할 때 중요."
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "budget forcing, sequential-vs-parallel TTC framing, Control/Scaling/Performance metric, token-budget comparison."
+    what_not_to_claim: "test-time scaling, thinking length control, simple TTC improvement, small curated reasoning-SFT novelty를 우리가 처음 한다고 주장하지 말 것."
+    implementation_candidate: "single CoT + budget forcing baseline"
+    notes_for_coding_agent: "not a heterogeneous path-family method. 단일 reasoning trace의 길이를 제어하는 single-path sequential scaling baseline으로 취급하고, 핵심 차별점은 path-family / strategy-level allocation으로 잡을 것."
 
   - title: "Self-Consistency Improves Chain of Thought Reasoning in Language Models"
     year: 2023

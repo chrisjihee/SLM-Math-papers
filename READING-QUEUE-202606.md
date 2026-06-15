@@ -30,10 +30,11 @@
 
 - Year / Venue: 2025 / EMNLP 2025
 - Link: https://aclanthology.org/2025.emnlp-main.1025/
+- Status: strategically-read
 - Theme: adaptive_ttc, sc_efficiency
 - 왜 중요한가: 가장 단순한 test-time scaling replication line이다.
 - 뽑을 것: budget forcing, simple long-thinking recipe, minimal TTC recipe.
-- 우리와의 관계: direct TTC baseline. "복잡한 search 없이도 TTC gain이 나오는가"를 보는 기준.
+- 우리와의 관계: direct TTC baseline이자 single-path sequential scaling의 강한 기준선이다. 우리는 single long reasoning이 아니라 heterogeneous path family / strategy-level allocation으로 차별화해야 한다.
 - Priority: P0
 - Track: main math research
 
