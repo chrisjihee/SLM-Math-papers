@@ -85,6 +85,16 @@
 - wording caution:
   `self-compose reasoning structure`, `structured prompting over CoT`, `strategy composition`, `method selection`만으로 기여를 쓰면 Self-Discover / Automatic Model Selection과 지나치게 겹친다. `state-conditioned acquisition before full generation`을 더 앞에 둬야 한다.
 
+### PAL / Tool-use paths
+
+- risk:
+  program-aided reasoning, Python interpreter execution, CoT의 arithmetic/state-tracking failure 보완, `SC-PAL`류 tool-use path 강화는 이미 PAL/PoT 계열이 대표적으로 제시했다.
+- response:
+  우리는 PAL 자체를 새로 제안하는 것이 아니라, `CoT`, `CG`, `direct`, `PAL/PoT`, verifier-guided path 중 어떤 family를 현재 reasoning state와 남은 budget에서 더 호출할지 결정하는 orchestration 문제로 가야 한다.
+
+- wording caution:
+  `tool-use reasoning`, `natural language + symbolic execution`, `structured path가 CoT보다 낫다`만으로 기여를 쓰면 PAL과 바로 겹친다. `tool-executed path는 강한 baseline family`이고, 우리의 기여는 `state-conditioned path acquisition / stopping`이라는 점을 분리해서 써야 한다.
+
 ### s1
 
 - risk:

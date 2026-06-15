@@ -214,13 +214,14 @@
 
 ### 19. PAL
 
-- Year / Venue: 2022 / arXiv-only
-- Link: https://arxiv.org/abs/2211.10435
+- Year / Venue: 2023 / ICML 2023
+- Link: https://openreview.net/forum?id=M1fd9Z00sj
+- Status: strategically-read
 - Theme: path_pool_construction, tool_use
-- 왜 중요한가: code-as-reasoning 계열의 고전이다.
-- 뽑을 것: natural language reasoning vs runtime execution 분리.
-- 우리와의 관계: direct/CoT와 다른 path family의 정의 기준을 준다.
-- Priority: P1
+- 왜 중요한가: `PAL / PoT / code-interpreter` route를 heterogeneous reasoning path pool의 필수 family로 고정하게 만드는 canonical tool-use baseline이다.
+- 뽑을 것: natural language decomposition과 runtime execution 분리, arithmetic/state-tracking 강점, `SC-PAL` 및 mixed path budget 비교 축.
+- 우리와의 관계: direct/CoT/CG와 다른 tool-executed path family를 언제 추가 샘플링할지 결정해야 한다는 점을 선명하게 만든다.
+- Priority: P0
 - Track: main math research
 
 ### 20. Program of Thoughts Prompting
