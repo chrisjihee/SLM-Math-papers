@@ -250,11 +250,12 @@
 
 - Year / Venue: 2023 / EMNLP 2023 Findings
 - Link: https://aclanthology.org/2023.findings-emnlp.55/
-- Theme: path_pool_construction, routing
-- 왜 중요한가: CoT와 PAL 사이의 method routing을 다룬다.
-- 뽑을 것: selection signal, method choice framing, failure cases.
-- 우리와의 관계: reasoning strategy selection의 직접 선행연구다.
-- Priority: P1
+- Status: strategically-read
+- Theme: path_pool_construction, routing, sc_efficiency
+- 왜 중요한가: `CoT`와 `PAL`처럼 서로 다른 reasoning method를 post-hoc으로 선택하는 대표 selection baseline이며, heterogeneous method selection이 homogeneous SC보다 cost-efficient할 수 있음을 보여준다.
+- 뽑을 것: `Delta UpperBound`, `Success Rate`, heterogeneous-vs-similar method contrast, option-order bias, selection+SC 결합.
+- 우리와의 관계: reasoning strategy selection의 직접 선행연구지만, 이 논문은 full generation 이후의 one-shot selection이고 우리는 state-conditioned path acquisition / stopping으로 차별화해야 한다.
+- Priority: P0
 - Track: main math research
 
 ### 23. TeleTables

@@ -309,26 +309,26 @@ papers:
     year: 2023
     venue: "EMNLP 2023 Findings"
     url: "https://aclanthology.org/2023.findings-emnlp.55/"
-    code_url: ""
-    status: "unread"
-    priority: "P1"
-    theme: ["path_pool_construction"]
-    method_type: ["routing", "prompting"]
-    reasoning_path_family: ["cot", "pal"]
-    selection_unit: ["strategy", "model"]
+    code_url: "https://github.com/XuZhao0/Model-Selection-Reasoning"
+    status: "strategically-read"
+    priority: "P0"
+    theme: ["path_pool_construction", "routing", "sc_efficiency"]
+    method_type: ["routing", "prompting", "inference_time", "tool_use"]
+    reasoning_path_family: ["cot", "pal", "tool_use"]
+    selection_unit: ["strategy", "model", "answer"]
     compute_control:
       adaptive_budget: false
       stopping: false
-      reranking: false
+      reranking: true
       search: "none"
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
-    what_to_borrow: "method routing framing."
-    what_not_to_claim: "method selection problem 자체를 새로 발견했다고 말하지 말 것."
-    implementation_candidate: "path-family router background"
-    notes_for_coding_agent: "CoT vs PAL routing example."
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "method routing framing, Delta UpperBound / Success Rate analysis, heterogeneous-vs-similar method contrast, option-order randomization."
+    what_not_to_claim: "reasoning method selection, heterogeneous selection efficiency, LLM selector novelty를 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "CoT-PAL one-shot selector baseline"
+    notes_for_coding_agent: "not a state-conditioned acquisition method. This is one-shot post-hoc selection after full generation; our contribution should be sequential path acquisition / stopping."
 
   - title: "PAL: Program-aided Language Models"
     year: 2022
