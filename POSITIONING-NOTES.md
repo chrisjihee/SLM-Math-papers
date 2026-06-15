@@ -115,6 +115,16 @@
 - wording caution:
   `best-of-N verification`, `process supervision`, `automatic process annotation`만으로 기여를 쓰면 Math-Shepherd와 너무 겹친다. `candidate pool construction before verification`을 전면에 둬야 한다.
 
+### Process Reward Models That Think
+
+- risk:
+  generative PRM, long verification CoT, compute-matched verifier scaling, best-of-N verifier selection까지 이미 강한 최신 reference가 있다.
+- response:
+  우리는 verifier를 새로 제안하지 말고, generation budget과 verification budget을 어떻게 나눌지, 그리고 verifier가 평가할 pool을 어떻게 만들지에 집중해야 한다.
+
+- wording caution:
+  `generative verifier`, `verifier compute scaling`, `best-of-N verification`만으로 기여를 쓰면 ThinkPRM과 너무 겹친다. `state-conditioned path acquisition before verification`을 전면에 둬야 한다.
+
 ## 정보과학회 S/A 우수학술대회 기준 제출 전략
 
 - 현재 연구의 1차 target은 `ACL / EMNLP / NAACL / AAAI`다.

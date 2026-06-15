@@ -260,25 +260,25 @@ papers:
     venue: "arXiv"
     url: "https://arxiv.org/abs/2504.16828"
     code_url: "https://github.com/mukhal/thinkprm"
-    status: "unread"
+    status: "strategically-read"
     priority: "P1"
-    theme: ["verifier_prm"]
-    method_type: ["verifier", "inference_time"]
-    reasoning_path_family: ["verifier_guided"]
-    selection_unit: ["step", "answer"]
+    theme: ["verifier_prm", "adaptive_ttc", "generative_verifier"]
+    method_type: ["verifier", "inference_time", "search", "training"]
+    reasoning_path_family: ["verification_chain", "generative_verifier", "verifier_guided_selection"]
+    selection_unit: ["step", "path", "answer"]
     compute_control:
       adaptive_budget: true
       stopping: false
       reranking: true
-      search: "best_of_n"
+      search: "best_of_n_beam_verifier_rounds"
     verifier:
       uses_verifier: true
       verifier_type: "generative"
-    relation_to_ours: ["method_inspiration"]
-    what_to_borrow: "generative verifier framing, data-efficient PRM."
-    what_not_to_claim: "long-CoT generative verifier를 immediate mainline처럼 과장하지 말 것."
-    implementation_candidate: "future verifier extension"
-    notes_for_coding_agent: "route-level verifier와 step-level generative verifier 차이를 강조."
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "generative verifier framing, data-efficient PRM, compute-matched verifier scaling, long verification CoT."
+    what_not_to_claim: "generative verifier, verifier compute scaling, best-of-N selection을 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "generative verifier baseline"
+    notes_for_coding_agent: "not a path-acquisition method. ThinkPRM is a downstream verifier baseline; our contribution is upstream path-family acquisition and generation-verification budget split."
 
   - title: "Self-Discover: Large Language Models Self-Compose Reasoning Structures"
     year: 2024

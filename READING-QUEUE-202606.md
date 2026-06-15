@@ -236,12 +236,13 @@
 
 ### 21. Process Reward Models That Think
 
-- Year / Venue: 2025 / arXiv-only
+- Year / Venue: 2025 / preprint; GitHub metadata TMLR / unverified
 - Link: https://arxiv.org/abs/2504.16828
-- Theme: verifier_prm
-- 왜 중요한가: generative PRM / verbalized verifier의 최근 강한 reference다.
-- 뽑을 것: data efficiency, long-CoT verifier, same-token-budget comparison.
-- 우리와의 관계: lightweight verifier를 path-level에 어떻게 붙일지 아이디어를 준다.
+- Status: strategically-read
+- Theme: verifier_prm, adaptive_ttc, generative_verifier
+- 왜 중요한가: generative PRM과 verifier compute scaling을 결합해, generation compute뿐 아니라 verification compute도 TTC에 포함해야 함을 보여주는 최근 강한 reference다.
+- 뽑을 것: data efficiency, long verification CoT, best-of-N verifier selection, compute-matched comparison, verifier budget split.
+- 우리와의 관계: lightweight verifier를 path-level에 붙일 아이디어를 주지만, 이 논문은 verifier가 이미 있는 상황의 downstream selector이며 우리는 state-conditioned path acquisition before verification으로 차별화해야 한다.
 - Priority: P1
 - Track: main math research
 
