@@ -64,10 +64,11 @@
 
 - Year / Venue: 2025 / ACL 2025 Findings
 - Link: https://aclanthology.org/2025.findings-acl.1030/
+- Status: strategically-read
 - Theme: sc_efficiency, adaptive_ttc
 - 왜 중요한가: confidence-weighted voting으로 SC cost를 줄이는 strong recent baseline이다.
-- 뽑을 것: confidence signal 종류, within-question confidence, weighted voting.
-- 우리와의 관계: route-level selection 전에 answer-level weighting baseline으로 유용하다.
+- 뽑을 것: confidence signal 종류, P(True), within-question confidence, weighted voting.
+- 우리와의 관계: 필수 aggregation baseline이다. 다만 이 논문은 homogeneous path pool 위의 confidence-weighted aggregation을 다루고, 우리는 heterogeneous path-family / macro strategy allocation으로 차별화해야 한다.
 - Priority: P0
 - Track: main math research
 

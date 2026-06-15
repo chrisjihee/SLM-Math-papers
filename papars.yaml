@@ -135,25 +135,25 @@ papers:
     venue: "ACL 2025 Findings"
     url: "https://aclanthology.org/2025.findings-acl.1030/"
     code_url: "https://github.com/taubenfeld/CISC"
-    status: "unread"
+    status: "strategically-read"
     priority: "P0"
     theme: ["sc_efficiency", "adaptive_ttc"]
-    method_type: ["inference_time", "routing"]
-    reasoning_path_family: ["cot"]
-    selection_unit: ["answer"]
+    method_type: ["inference_time", "verifier"]
+    reasoning_path_family: ["homogeneous_sampling", "cot", "verifier_guided_selection"]
+    selection_unit: ["sample", "path", "answer"]
     compute_control:
-      adaptive_budget: true
+      adaptive_budget: false
       stopping: false
       reranking: true
       search: "best_of_n"
     verifier:
       uses_verifier: true
-      verifier_type: "preference"
-    relation_to_ours: ["direct_baseline", "method_inspiration"]
-    what_to_borrow: "confidence-weighted vote."
-    what_not_to_claim: "answer weighting만으로 path-family selection을 대체할 수 있다고 말하지 말 것."
-    implementation_candidate: "weighted voting baseline"
-    notes_for_coding_agent: "answer-level weighting과 route-level selection을 분리할 때 중요."
+      verifier_type: "self_confidence"
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "confidence-weighted vote, P(True), WQD, budget-accuracy curve, cost-reduction reporting."
+    what_not_to_claim: "SC cost reduction, confidence-based aggregation, self-confidence 기반 path scoring을 우리가 처음 한다고 주장하지 말 것."
+    implementation_candidate: "CISC with P(True) aggregation baseline"
+    notes_for_coding_agent: "not a heterogeneous path-family method. path-family selection이 아니라 homogeneous path pool 위의 confidence-informed aggregation baseline으로 취급할 것."
 
   - title: "Learning How Hard to Think: Input-Adaptive Allocation of LM Computation"
     year: 2025

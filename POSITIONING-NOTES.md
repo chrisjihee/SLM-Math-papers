@@ -63,7 +63,7 @@
   우리는 homogeneous SC가 아니라 heterogeneous path pool construction과 state-conditioned strategy selection을 강조해야 하며, sample-level stopping이 아니라 path-family / macro-strategy acquisition 문제를 전면에 세워야 한다.
 
 - wording caution:
-  `efficient self-consistency`, `reasoning-aware stopping`, `weighted voting`, `rationale quality scoring`만 전면에 두면 RASC와 지나치게 겹친다.
+  `efficient self-consistency`, `reasoning-aware stopping`, `weighted voting`, `rationale quality scoring`, `confidence-based aggregation`만 전면에 두면 RASC/CISC와 지나치게 겹친다.
 
 ### Self-Discover / Automatic Model Selection
 
