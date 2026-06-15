@@ -52,10 +52,11 @@
 
 - Year / Venue: 2025 / NAACL 2025
 - Link: https://aclanthology.org/2025.naacl-long.184/
-- Theme: sc_efficiency, adaptive_ttc, path_pool_construction
+- Status: strategically-read
+- Theme: sc_efficiency, adaptive_ttc
 - 왜 중요한가: sample 수를 고정하지 않고 rationale quality까지 보며 SC를 조정한다.
 - 뽑을 것: early stopping rule, rationale-aware weighting, sample-efficiency framing.
-- 우리와의 관계: 매우 가깝다. 단, 우리는 path diversity와 strategy-level selection이 더 넓다.
+- 우리와의 관계: 매우 가깝고 필수 baseline이다. 다만 이 논문은 homogeneous CoT-style sample scoring과 stopping에 초점이 있고, 우리는 heterogeneous path family / macro strategy allocation으로 차별화해야 한다.
 - Priority: P0
 - Track: main math research
 

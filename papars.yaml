@@ -110,12 +110,12 @@ papers:
     venue: "NAACL 2025"
     url: "https://aclanthology.org/2025.naacl-long.184/"
     code_url: ""
-    status: "unread"
+    status: "strategically-read"
     priority: "P0"
-    theme: ["sc_efficiency", "adaptive_ttc", "path_pool_construction"]
-    method_type: ["inference_time", "routing", "prompting"]
-    reasoning_path_family: ["cot"]
-    selection_unit: ["rationale", "answer"]
+    theme: ["sc_efficiency", "adaptive_ttc"]
+    method_type: ["inference_time", "routing", "prompting", "verifier"]
+    reasoning_path_family: ["homogeneous_sampling", "cot", "verifier_guided_selection"]
+    selection_unit: ["sample", "rationale", "answer"]
     compute_control:
       adaptive_budget: true
       stopping: true
@@ -123,12 +123,12 @@ papers:
       search: "best_of_n"
     verifier:
       uses_verifier: true
-      verifier_type: "preference"
-    relation_to_ours: ["direct_baseline", "method_inspiration"]
-    what_to_borrow: "rationale-aware stopping과 sample-efficiency framing."
-    what_not_to_claim: "SC efficiency novelty를 그대로 가져오지 말 것."
-    implementation_candidate: "stopping baseline"
-    notes_for_coding_agent: "ours와 매우 가까운 recent baseline."
+      verifier_type: "outcome"
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "rationale-aware stopping, weighted voting, sample-efficiency framing, answer-level vs reasoning-level feature ablation."
+    what_not_to_claim: "SC efficiency, reasoning-aware stopping, weighted voting, rationale quality scoring을 우리가 처음 한다고 주장하지 말 것."
+    implementation_candidate: "RASC-style sample-level stopping baseline"
+    notes_for_coding_agent: "not a heterogeneous path-family method. 핵심 차별점은 sample-level homogeneous SC stopping이 아니라 state-conditioned heterogeneous path-family / macro-strategy allocation으로 잡을 것."
 
   - title: "Confidence Improves Self-Consistency in LLMs"
     year: 2025
