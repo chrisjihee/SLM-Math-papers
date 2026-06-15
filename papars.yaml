@@ -267,7 +267,7 @@ papers:
     reasoning_path_family: ["verification_chain", "generative_verifier", "verifier_guided_selection"]
     selection_unit: ["step", "path", "answer"]
     compute_control:
-      adaptive_budget: true
+      adaptive_budget: false
       stopping: false
       reranking: true
       search: "best_of_n_beam_verifier_rounds"
