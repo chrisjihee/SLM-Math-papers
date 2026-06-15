@@ -74,10 +74,11 @@
 
 - Year / Venue: 2025 / ICLR 2025
 - Link: https://openreview.net/forum?id=6qUUgw9bAZ
+- Status: strategically-read
 - Theme: adaptive_ttc
 - 왜 중요한가: 입력별로 computation budget을 적응적으로 배정하는 가장 직접적인 reference다.
 - 뽑을 것: allocation policy, reward prediction, fixed-budget vs adaptive-budget comparison.
-- 우리와의 관계: 우리 framing과 매우 가깝다. 다만 우리는 reasoning path family까지 제어한다.
+- 우리와의 관계: 우리 framing과 매우 가깝지만, 이 논문은 query-level budget allocation과 weak/strong routing에 초점이 있고 우리는 state-conditioned reasoning path family / macro strategy allocation으로 차별화해야 한다.
 - Priority: P0
 - Track: main math research
 

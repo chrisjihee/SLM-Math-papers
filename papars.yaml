@@ -160,25 +160,25 @@ papers:
     venue: "ICLR 2025"
     url: "https://openreview.net/forum?id=6qUUgw9bAZ"
     code_url: ""
-    status: "unread"
+    status: "strategically-read"
     priority: "P0"
-    theme: ["adaptive_ttc"]
-    method_type: ["inference_time", "routing"]
-    reasoning_path_family: ["cot", "reflection", "verifier_guided"]
-    selection_unit: ["sample", "strategy"]
+    theme: ["adaptive_ttc", "sc_efficiency"]
+    method_type: ["inference_time", "routing", "verifier"]
+    reasoning_path_family: ["cot", "verifier_guided"]
+    selection_unit: ["budget", "sample", "model"]
     compute_control:
       adaptive_budget: true
       stopping: true
-      reranking: false
+      reranking: true
       search: "none"
     verifier:
-      uses_verifier: false
-      verifier_type: "none"
-    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
-    what_to_borrow: "input-adaptive compute allocation framing."
-    what_not_to_claim: "adaptive TTC framing 전체를 우리가 처음 한다고 주장하지 말 것."
-    implementation_candidate: "held-out budget allocation baseline"
-    notes_for_coding_agent: "introduction과 problem statement에서 매우 중요."
+      uses_verifier: true
+      verifier_type: "outcome"
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "query-level marginal reward prediction, uniform-vs-adaptive baseline, oracle allocation framing, query-only difficulty predictor baseline."
+    what_not_to_claim: "adaptive TTC, difficulty prediction, math adaptive best-of-k, weak/strong routing을 우리가 처음 한다고 주장하지 말 것."
+    implementation_candidate: "query-only budget predictor baseline"
+    notes_for_coding_agent: "핵심 차별점은 query-only allocation이 아니라 current reasoning pool을 보는 state-conditioned heterogeneous path-family allocation으로 잡을 것."
 
   - title: "Scaling LLM Test-Time Compute Optimally Can be More Effective than Scaling Parameters for Reasoning"
     year: 2025

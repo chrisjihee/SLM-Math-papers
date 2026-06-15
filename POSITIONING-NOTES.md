@@ -25,6 +25,7 @@
 - 현재 strongest student result는 multiple-CoT 축에 있다.
 - 다음 병목은 route generation보다 route/budget selection과 answer/path verification이다.
 - adaptive TTC는 여전히 중요하지만, novelty는 단순 budget allocation보다 path-family / strategy-level allocation 쪽에 있어야 한다.
+- query-only difficulty prediction보다 current reasoning state를 읽는 policy가 필요하다는 점을 전면에 세우는 것은 안전하다.
 
 ## 5. 현재 forbidden claim
 
@@ -47,9 +48,12 @@
 ### Learning How Hard to Think
 
 - risk:
-  adaptive TTC 자체는 새롭지 않다.
+  adaptive TTC 자체는 새롭지 않고, query-level difficulty prediction 기반 compute allocation도 이미 수행되었다.
 - response:
-  우리의 contribution은 단순 budget allocation이 아니라 path-family / strategy-level allocation이어야 한다.
+  우리의 contribution은 단순 budget allocation이 아니라 path-family / strategy-level allocation이어야 하며, query-only predictor가 아니라 current reasoning pool을 보는 state-conditioned policy여야 한다.
+
+- wording caution:
+  `adaptive test-time compute allocation for mathematical reasoning`만 전면에 두면 정면충돌 위험이 크다. `state-conditioned allocation over heterogeneous reasoning path families`처럼 더 좁고 구체적으로 써야 한다.
 
 ### Reasoning-Aware Self-Consistency / Confidence Improves Self-Consistency
 
