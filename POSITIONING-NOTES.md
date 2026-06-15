@@ -98,9 +98,12 @@
 ### Verifier / PRM papers
 
 - risk:
-  answer/path selection은 verifier/PRM literature에서 강하게 다뤄졌다.
+  answer/path selection은 verifier/PRM literature에서 강하게 다뤄졌고, `Let's Verify Step by Step`은 process-supervised PRM이 majority voting 및 outcome-style verifier보다 강할 수 있음을 canonical하게 보여준다.
 - response:
   우리의 route/strategy reranker는 step-level PRM과 다르게 path acquisition 전/중간의 lightweight policy/value estimator로 위치시킨다.
+
+- wording caution:
+  `verifier로 후보를 고른다`, `reward model reranking을 도입한다`, `candidate selection을 개선한다`만으로 contribution을 쓰면 PRM literature와 지나치게 겹친다. `fixed pool after generation`과 `state-conditioned pool construction before verification`을 분리해서 써야 한다.
 
 ## 정보과학회 S/A 우수학술대회 기준 제출 전략
 

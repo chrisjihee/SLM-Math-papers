@@ -210,12 +210,12 @@ papers:
     venue: "ICLR 2024"
     url: "https://openreview.net/forum?id=v8L0pN6EOi"
     code_url: "https://github.com/openai/prm800k"
-    status: "read"
+    status: "strategically-read"
     priority: "P0"
     theme: ["verifier_prm"]
     method_type: ["verifier", "training", "inference_time"]
-    reasoning_path_family: ["verifier_guided"]
-    selection_unit: ["step", "answer"]
+    reasoning_path_family: ["homogeneous_sampling", "verifier_guided_selection"]
+    selection_unit: ["step", "path", "answer"]
     compute_control:
       adaptive_budget: false
       stopping: false
@@ -224,11 +224,11 @@ papers:
     verifier:
       uses_verifier: true
       verifier_type: "process"
-    relation_to_ours: ["method_inspiration", "contrastive_positioning"]
-    what_to_borrow: "process supervision vs outcome supervision distinction."
-    what_not_to_claim: "path-level reranking과 PRM을 동일시하지 말 것."
-    implementation_candidate: "verifier background only"
-    notes_for_coding_agent: "verifier section canonical citation."
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "process supervision vs outcome supervision distinction, PRM800K, fixed-pool verifier selection framing."
+    what_not_to_claim: "verifier/reranker 도입 자체, best-of-N verifier selection, candidate selection 문제를 우리가 처음 다룬다고 주장하지 말 것."
+    implementation_candidate: "fixed-pool verifier selection baseline"
+    notes_for_coding_agent: "not a path-acquisition method. PRM은 downstream selector baseline으로 두고, 우리의 contribution은 upstream path-family acquisition / stopping controller로 위치시킬 것."
 
   - title: "Math-Shepherd: Verify and Reinforce LLMs Step-by-step without Human Annotations"
     year: 2024

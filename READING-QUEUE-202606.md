@@ -102,9 +102,10 @@
 - Year / Venue: 2024 / ICLR 2024
 - Link: https://openreview.net/forum?id=v8L0pN6EOi
 - Theme: verifier_prm
-- 왜 중요한가: process supervision / PRM의 canonical paper다.
-- 뽑을 것: step-level supervision이 왜 outcome-level보다 강한지, PRM800K의 역할.
-- 우리와의 관계: full PRM을 안 하더라도 verifier-related positioning의 기준선이다.
+- Status: strategically-read
+- 왜 중요한가: process-supervised PRM이 majority voting과 outcome-style verifier보다 강한 downstream selector가 될 수 있음을 보여주는 canonical paper다.
+- 뽑을 것: process vs outcome supervision, PRM800K, best-of-N + verifier selection, fixed-pool-after-generation framing.
+- 우리와의 관계: verifier-related positioning의 기준선이며, 우리는 PRM 자체보다 upstream path acquisition / heterogeneous pool construction 쪽으로 차별화해야 한다.
 - Priority: P0
 - Track: main math research
 
