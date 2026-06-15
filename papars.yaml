@@ -10,25 +10,25 @@ papers:
     venue: "ICML 2025"
     url: "https://proceedings.mlr.press/v267/guan25f.html"
     code_url: "https://github.com/microsoft/rStar"
-    status: "unread"
+    status: "strategically-read"
     priority: "P0"
-    theme: ["math_slm_frontier", "search_reflection_rl", "verifier_prm"]
-    method_type: ["training", "inference_time", "verifier", "search"]
-    reasoning_path_family: ["cot", "verifier_guided"]
-    selection_unit: ["step", "rationale"]
+    theme: ["math_slm_frontier", "search_reflection_rl", "verifier_prm", "adaptive_ttc", "tool_use"]
+    method_type: ["training", "inference_time", "verifier", "search", "tool_use"]
+    reasoning_path_family: ["code_augmented_cot", "tool_use", "verifier_guided"]
+    selection_unit: ["step", "trajectory"]
     compute_control:
       adaptive_budget: true
-      stopping: true
+      stopping: false
       reranking: true
       search: "mcts"
     verifier:
       uses_verifier: true
       verifier_type: "process"
-    relation_to_ours: ["contrastive_positioning", "upper_bound_reference"]
-    what_to_borrow: "heavy search/PPM recipe보다는 paper positioning과 frontier reference."
-    what_not_to_claim: "우리 방법이 rStar-Math류 frontier math search보다 강하다고 주장하지 말 것."
-    implementation_candidate: "direct implementation candidate 아님"
-    notes_for_coding_agent: "math frontier capstone reference로만 쓰고, immediate next step으로 재현 제안 금지."
+    relation_to_ours: ["contrastive_positioning", "upper_bound_reference", "threatening_related_work"]
+    what_to_borrow: "System 1 vs System 2 framing, trajectory-scaling curve, PPM-style pairwise preference supervision, heavy-search contrast for positioning."
+    what_not_to_claim: "SLM+TTC math improvement, MCTS math search, verifier-guided candidate selection, heavy System 2 reasoning novelty를 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "heavy upper/reference baseline only; no direct reproduction"
+    notes_for_coding_agent: "Treat as a high-risk frontier reference. Our safe differentiation is lightweight state-conditioned path-family allocation, not step-level MCTS or self-evolution reproduction."
 
   - title: "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models"
     year: 2024

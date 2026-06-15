@@ -41,9 +41,12 @@
 ### rStar-Math
 
 - risk:
-  full MCTS + PPM + self-evolution이 현재 우리 line보다 훨씬 강한 math frontier다.
+  full MCTS + PPM + self-evolution이 현재 우리 line보다 훨씬 강한 math frontier고, `SLM + TTC로 math reasoning을 밀어올린다`는 넓은 claim은 이미 사실상 선점되어 있다.
 - response:
-  우리는 raw frontier performance 경쟁이 아니라, 제한된 TTC 안에서 lightweight path/strategy selection을 다룬다.
+  우리는 raw frontier performance 경쟁이 아니라, 제한된 TTC 안에서 heterogeneous reasoning path family를 어떻게 선택·검증·중단할지 다루는 lightweight orchestration으로 가야 한다.
+
+- wording caution:
+  `SLM math reasoning with test-time compute`, `search-based reasoning`, `verifier-guided selection`, `small models can do deep thinking`만으로 contribution을 쓰면 rStar-Math와 정면충돌한다. `step-level MCTS/PPM`이 아니라 `path-family / macro-strategy allocation under limited budget`을 더 앞에 둬야 한다.
 
 ### Learning How Hard to Think
 

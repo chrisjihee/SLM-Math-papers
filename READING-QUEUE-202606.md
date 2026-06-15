@@ -8,10 +8,11 @@
 
 - Year / Venue: 2025 / ICML 2025
 - Link: https://proceedings.mlr.press/v267/guan25f.html
+- Status: strategically-read
 - Theme: math_slm_frontier, search_reflection_rl, verifier_prm
-- 왜 중요한가: 현재 small-model math frontier에서 가장 강한 reference 중 하나다.
-- 뽑을 것: policy model, PPM, MCTS, self-evolution이 각각 얼마나 무거운지와 무엇이 main gain인지.
-- 우리와의 관계: 직접 경쟁보다는 contrastive positioning. 우리는 lighter-weight orchestration 쪽.
+- 왜 중요한가: small-model math frontier에서 가장 강한 heavy System 2 reference 중 하나이며, `MCTS + PPM + self-evolution`이 어디까지 밀어올릴 수 있는지 보여준다.
+- 뽑을 것: trajectory scaling curve, step-level verifier/PPM, pairwise preference supervision, heavy search와 lightweight orchestration의 경계.
+- 우리와의 관계: direct 경쟁보다는 contrastive positioning. 우리는 heavy search reproduction이 아니라 lighter-weight path-family / strategy-level allocation 쪽으로 가야 한다.
 - Priority: P0
 - Track: main math research
 
