@@ -114,9 +114,10 @@
 - Year / Venue: 2024 / ACL 2024
 - Link: https://aclanthology.org/2024.acl-long.510/
 - Theme: verifier_prm, search_reflection_rl
-- 왜 중요한가: human step labels 없이 math PRM을 만드는 대표 사례다.
-- 뽑을 것: auto process supervision, reranking vs PPO usage.
-- 우리와의 관계: verifier line의 현실적인 자동화 reference.
+- Status: strategically-read
+- 왜 중요한가: human step labels 없이 자동 process supervision으로 strong PRM을 만들고 best-of-N verification / step-level PPO까지 연결한 대표 verifier baseline이다.
+- 뽑을 것: automatic process supervision, best-of-N verification, PRM final-score aggregation, verifier cost accounting.
+- 우리와의 관계: verifier line의 현실적인 자동화 reference이자, 우리는 PRM 자체보다 candidate pool construction / upstream path acquisition 쪽으로 차별화해야 한다.
 - Priority: P0
 - Track: main math research
 

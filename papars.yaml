@@ -235,12 +235,12 @@ papers:
     venue: "ACL 2024"
     url: "https://aclanthology.org/2024.acl-long.510/"
     code_url: ""
-    status: "unread"
+    status: "strategically-read"
     priority: "P0"
     theme: ["verifier_prm", "search_reflection_rl"]
     method_type: ["verifier", "training", "search"]
-    reasoning_path_family: ["verifier_guided"]
-    selection_unit: ["step", "answer"]
+    reasoning_path_family: ["homogeneous_sampling", "verifier_guided_selection"]
+    selection_unit: ["step", "path", "answer"]
     compute_control:
       adaptive_budget: false
       stopping: false
@@ -249,11 +249,11 @@ papers:
     verifier:
       uses_verifier: true
       verifier_type: "process"
-    relation_to_ours: ["method_inspiration"]
-    what_to_borrow: "auto process supervision recipe."
-    what_not_to_claim: "human-free PRM novelty를 그대로 가져오지 말 것."
-    implementation_candidate: "future verifier extension"
-    notes_for_coding_agent: "lightweight verifier vs full PRM comparison에 유용."
+    relation_to_ours: ["direct_baseline", "method_inspiration", "contrastive_positioning"]
+    what_to_borrow: "automatic process supervision, best-of-N verification, PRM final-score aggregation, verifier cost accounting."
+    what_not_to_claim: "verifier/reranker 도입 자체, best-of-N verification, automatic process annotation을 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "fixed-pool verifier selection baseline"
+    notes_for_coding_agent: "not a path-acquisition method. PRM은 downstream selector baseline으로 두고, 우리의 contribution은 upstream path-family acquisition / stopping controller로 위치시킬 것."
 
   - title: "Process Reward Models That Think"
     year: 2025

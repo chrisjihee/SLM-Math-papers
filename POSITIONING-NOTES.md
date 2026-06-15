@@ -105,6 +105,16 @@
 - wording caution:
   `verifier로 후보를 고른다`, `reward model reranking을 도입한다`, `candidate selection을 개선한다`만으로 contribution을 쓰면 PRM literature와 지나치게 겹친다. `fixed pool after generation`과 `state-conditioned pool construction before verification`을 분리해서 써야 한다.
 
+### Math-Shepherd
+
+- risk:
+  automatic process supervision, step-level PRM, best-of-N verification, step-level PPO까지 이미 강한 verifier baseline이 있다.
+- response:
+  우리는 PRM을 새 contribution으로 주장하지 말고, PRM이 평가할 candidate pool을 어떻게 state-conditionally 만들지에 집중해야 한다.
+
+- wording caution:
+  `best-of-N verification`, `process supervision`, `automatic process annotation`만으로 기여를 쓰면 Math-Shepherd와 너무 겹친다. `candidate pool construction before verification`을 전면에 둬야 한다.
+
 ## 정보과학회 S/A 우수학술대회 기준 제출 전략
 
 - 현재 연구의 1차 target은 `ACL / EMNLP / NAACL / AAAI`다.
