@@ -20,10 +20,11 @@
 
 - Year / Venue: 2024 / arXiv-only
 - Link: https://arxiv.org/abs/2402.03300
-- Theme: math_slm_frontier
-- 왜 중요한가: strong math pretraining + GRPO + self-consistency의 대표 baseline이다.
-- 뽑을 것: 7B scale에서 pretraining, RL, SC가 각각 얼마나 기여하는지.
-- 우리와의 관계: direct baseline reference. "math SOTA"를 노리지 말아야 하는 이유를 준다.
+- Status: strategically-read
+- Theme: math_slm_frontier, sc_efficiency, tool_use
+- 왜 중요한가: strong 7B math backbone과 homogeneous self-consistency baseline, 그리고 `Pass@K / Maj@K` 해석 기준을 함께 제공하는 training-heavy frontier reference다.
+- 뽑을 것: math-specialized pretraining, GRPO, CoT/PoT/tool-integrated SFT, `Pass@K`와 `Maj@K`의 분리.
+- 우리와의 관계: direct baseline reference이자 backbone reference. 우리는 training recipe보다 heterogeneous path pool allocation과 stopping으로 차별화해야 한다.
 - Priority: P0
 - Track: main math research
 

@@ -48,6 +48,16 @@
 - wording caution:
   `SLM math reasoning with test-time compute`, `search-based reasoning`, `verifier-guided selection`, `small models can do deep thinking`만으로 contribution을 쓰면 rStar-Math와 정면충돌한다. `step-level MCTS/PPM`이 아니라 `path-family / macro-strategy allocation under limited budget`을 더 앞에 둬야 한다.
 
+### DeepSeekMath
+
+- risk:
+  strong 7B math backbone, CoT/PoT/tool-integrated training, GRPO, SC@64, `Pass@K / Maj@K` 분석까지 이미 제시되어 있어 `small model math improvement`나 `SC gain` 자체를 novelty로 쓰기 어렵다.
+- response:
+  우리는 더 강한 math-specialized model을 학습하는 대신, 주어진 backbone 위에서 heterogeneous reasoning path pool을 제한된 TTC 안에서 어떻게 구성하고 멈출지에 집중해야 한다.
+
+- wording caution:
+  `sLLM math reasoning improvement`, `self-consistency helps`, `tool-integrated reasoning is useful`만으로 기여를 쓰면 DeepSeekMath와 지나치게 겹친다. `fixed homogeneous SC`와 구분되는 `state-conditioned path-pool construction and stopping`을 더 앞에 둬야 한다.
+
 ### Learning How Hard to Think
 
 - risk:

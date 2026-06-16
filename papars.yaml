@@ -35,12 +35,12 @@ papers:
     venue: "arXiv"
     url: "https://arxiv.org/abs/2402.03300"
     code_url: "https://github.com/deepseek-ai/deepseek-math"
-    status: "unread"
+    status: "strategically-read"
     priority: "P0"
-    theme: ["math_slm_frontier"]
+    theme: ["math_slm_frontier", "sc_efficiency", "tool_use"]
     method_type: ["training", "inference_time"]
-    reasoning_path_family: ["cot"]
-    selection_unit: ["answer"]
+    reasoning_path_family: ["cot", "pot", "tool_use", "homogeneous_sampling"]
+    selection_unit: ["answer", "sample"]
     compute_control:
       adaptive_budget: false
       stopping: false
@@ -49,11 +49,11 @@ papers:
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["direct_baseline", "contrastive_positioning"]
-    what_to_borrow: "math-specific pretraining과 self-consistency reference."
-    what_not_to_claim: "raw math performance에서 simple TTC/path selection만으로 DeepSeekMath류 training gains를 대체한다고 과장하지 말 것."
-    implementation_candidate: "baseline comparison"
-    notes_for_coding_agent: "math frontier 서술에서 자주 인용될 가능성이 높다."
+    relation_to_ours: ["direct_baseline", "contrastive_positioning", "backbone_reference"]
+    what_to_borrow: "strong 7B math backbone reference, Pass@K vs Maj@K analysis, homogeneous SC baseline, CoT/PoT/tool-use family prior, GRPO가 distribution robustness에 미치는 해석."
+    what_not_to_claim: "sLLM math improvement, CoT/PoT/tool-use mixing, self-consistency gain, or training-heavy math gains를 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "fixed SC@K and Pass@K/Maj@K baseline comparison"
+    notes_for_coding_agent: "Treat as a strong training-heavy frontier and homogeneous SC baseline. Our safe differentiation is heterogeneous path-pool construction and test-time allocation, not further math-specific training."
 
   - title: "s1: Simple test-time scaling"
     year: 2025
