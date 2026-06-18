@@ -2,7 +2,7 @@
 
 이 문서는 **2026-01 전후 CG-centric phase의 historical record**를 보존하기 위한 문서다.
 
-- 현재 canonical frame은 [CURRENT-FRAME-202606.md](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/CURRENT-FRAME-202606.md)다.
+- 현재 canonical frame은 [CURRENT-FRAME-202606.md](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/CURRENT-FRAME-202606.md)다.
 - legacy 자료는 삭제하지 않는다.
 - legacy 자료는 현재 연구의 출발점과 배경을 보여 주는 기록으로 보존한다.
 - 현재 연구에서는 `CG`를 predefined winner가 아니라 **여러 reasoning path family 중 하나**로 재위치시킨다.
@@ -23,9 +23,9 @@
 
 ### Self-Instruct
 
-- 원문 PDF: [paper/01. (ACL23) Self-Instruct; Aligning Language Models with Self-Generated Instructions.pdf](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/paper/01.%20%28ACL23%29%20Self-Instruct%3B%20Aligning%20Language%20Models%20with%20Self-Generated%20Instructions.pdf)
-- 읽기 요약: [reading/01. (ACL23) Self-Instruct; Aligning Language Models with Self-Generated Instructions.md](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/reading/01.%20%28ACL23%29%20Self-Instruct%3B%20Aligning%20Language%20Models%20with%20Self-Generated%20Instructions.md)
-- 원문 추출 텍스트: [contents/01. (ACL23) Self-Instruct; Aligning Language Models with Self-Generated Instructions.txt](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/contents/01.%20%28ACL23%29%20Self-Instruct%3B%20Aligning%20Language%20Models%20with%20Self-Generated%20Instructions.txt)
+- 원문 PDF: [paper/01. (ACL23) Self-Instruct; Aligning Language Models with Self-Generated Instructions.pdf](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/paper/01.%20%28ACL23%29%20Self-Instruct%3B%20Aligning%20Language%20Models%20with%20Self-Generated%20Instructions.pdf)
+- 읽기 요약: [reading/01. (ACL23) Self-Instruct; Aligning Language Models with Self-Generated Instructions.md](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/reading/01.%20%28ACL23%29%20Self-Instruct%3B%20Aligning%20Language%20Models%20with%20Self-Generated%20Instructions.md)
+- 원문 추출 텍스트: [contents/01. (ACL23) Self-Instruct; Aligning Language Models with Self-Generated Instructions.txt](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/contents/01.%20%28ACL23%29%20Self-Instruct%3B%20Aligning%20Language%20Models%20with%20Self-Generated%20Instructions.txt)
 - 당시 의미:
   self-generated instruction, synthetic data bootstrapping, instruction diversity를 보는 출발점이었다.
 - 현재 위치:
@@ -33,9 +33,9 @@
 
 ### Distilling Step-by-Step!
 
-- 원문 PDF: [paper/02. (ACL23) Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes.pdf](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/paper/02.%20%28ACL23%29%20Distilling%20Step-by-Step%21%20Outperforming%20Larger%20Language%20Models%20with%20Less%20Training%20Data%20and%20Smaller%20Model%20Sizes.pdf)
-- 읽기 요약: [reading/02. (ACL23) Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes.md](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/reading/02.%20%28ACL23%29%20Distilling%20Step-by-Step%21%20Outperforming%20Larger%20Language%20Models%20with%20Less%20Training%20Data%20and%20Smaller%20Model%20Sizes.md)
-- 원문 추출 텍스트: [contents/02. (ACL23) Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes.txt](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/contents/02.%20%28ACL23%29%20Distilling%20Step-by-Step%21%20Outperforming%20Larger%20Language%20Models%20with%20Less%20Training%20Data%20and%20Smaller%20Model%20Sizes.txt)
+- 원문 PDF: [paper/02. (ACL23) Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes.pdf](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/paper/02.%20%28ACL23%29%20Distilling%20Step-by-Step%21%20Outperforming%20Larger%20Language%20Models%20with%20Less%20Training%20Data%20and%20Smaller%20Model%20Sizes.pdf)
+- 읽기 요약: [reading/02. (ACL23) Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes.md](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/reading/02.%20%28ACL23%29%20Distilling%20Step-by-Step%21%20Outperforming%20Larger%20Language%20Models%20with%20Less%20Training%20Data%20and%20Smaller%20Model%20Sizes.md)
+- 원문 추출 텍스트: [contents/02. (ACL23) Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes.txt](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/contents/02.%20%28ACL23%29%20Distilling%20Step-by-Step%21%20Outperforming%20Larger%20Language%20Models%20with%20Less%20Training%20Data%20and%20Smaller%20Model%20Sizes.txt)
 - 당시 의미:
   rationale distillation이 SLM reasoning을 밀어 올릴 수 있다는 가장 직접적인 근거였다.
 - 현재 위치:
@@ -43,9 +43,9 @@
 
 ### Phased Instruction Fine-Tuning
 
-- 원문 PDF: [paper/03. (ACL24) Phased Instruction Fine-Tuning for Large Language Models.pdf](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/paper/03.%20%28ACL24%29%20Phased%20Instruction%20Fine-Tuning%20for%20Large%20Language%20Models.pdf)
-- 읽기 요약: [reading/03. (ACL24) Phased Instruction Fine-Tuning for Large Language Models.md](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/reading/03.%20%28ACL24%29%20Phased%20Instruction%20Fine-Tuning%20for%20Large%20Language%20Models.md)
-- 원문 추출 텍스트: [contents/03. (ACL24) Phased Instruction Fine-Tuning for Large Language Models.txt](/home/chrisjihee/code/SLM-Math/related-repo/SLM-Math-papers/contents/03.%20%28ACL24%29%20Phased%20Instruction%20Fine-Tuning%20for%20Large%20Language%20Models.txt)
+- 원문 PDF: [paper/03. (ACL24) Phased Instruction Fine-Tuning for Large Language Models.pdf](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/paper/03.%20%28ACL24%29%20Phased%20Instruction%20Fine-Tuning%20for%20Large%20Language%20Models.pdf)
+- 읽기 요약: [reading/03. (ACL24) Phased Instruction Fine-Tuning for Large Language Models.md](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/reading/03.%20%28ACL24%29%20Phased%20Instruction%20Fine-Tuning%20for%20Large%20Language%20Models.md)
+- 원문 추출 텍스트: [contents/03. (ACL24) Phased Instruction Fine-Tuning for Large Language Models.txt](/home/chrisjihee/code/SLM-Math/SLM-Math-papers/contents/03.%20%28ACL24%29%20Phased%20Instruction%20Fine-Tuning%20for%20Large%20Language%20Models.txt)
 - 당시 의미:
   difficulty-aware curriculum, staged uptraining, progressive alignment를 정당화하는 문헌이었다.
 - 현재 위치:
