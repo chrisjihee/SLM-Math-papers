@@ -14,7 +14,7 @@ For each paper update, usually modify:
 - `RELATED-WORK-MATRIX.md`
 - `POSITIONING-NOTES.md`
 - `READING-QUEUE-202606.md`
-- `papars.yaml`
+- `papers.yaml`
 
 Before editing, read:
 
@@ -26,7 +26,7 @@ Before editing, read:
 - `RELATED-WORK-MATRIX.md`
 - `POSITIONING-NOTES.md`
 - `READING-QUEUE-202606.md`
-- `papars.yaml`
+- `papers.yaml`
 
 Rules:
 

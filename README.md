@@ -42,14 +42,6 @@
 - [PAPER-REVIEW-TEMPLATE.md](PAPER-REVIEW-TEMPLATE.md)
   새 논문을 읽을 때 바로 복사해 쓸 수 있는 템플릿이다.
 
-## 메타데이터 파일
-
-- `papars.yaml`
-  과거 오탈자 파일명이지만, 기존 참조를 깨지 않기 위해 **당분간 이 이름을 유지**한다.
-  2026-06 리프레시 이후에는 새 schema를 담는 canonical 메타데이터 파일로 계속 사용한다.
-
-- 필요하면 나중에 `papers.yaml`을 추가할 수 있지만, 현재는 transition을 단순하게 유지한다.
-
 ## 현재 권장 사용 순서
 
 1. `CURRENT-FRAME-202606.md`로 현재 연구 질문과 금지 주장부터 맞춘다.

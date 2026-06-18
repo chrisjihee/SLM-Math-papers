@@ -1,5 +1,4 @@
 schema_version: "2026-06"
-canonical_note: "legacy filename `papars.yaml` is intentionally kept to avoid breaking old references."
 focus:
   mainline: "math reasoning + test-time compute allocation + reasoning path selection"
   bridge: "selective NFM application on TeleMath/TeleTables/TeleLogs"
