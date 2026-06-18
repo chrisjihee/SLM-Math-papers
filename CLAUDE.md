@@ -19,6 +19,7 @@ For each paper update, usually modify:
 Before editing, read:
 
 - `../CLAUDE.md`
+- `../CURRENT-READING.md`
 - `../prompts/paper-reading-context.md`
 - `../prompts/paper-strategic-note-template.md`
 - `../prompts/paper-repo-update.md`
@@ -34,3 +35,4 @@ Rules:
 - Do not mark `verifier`, `search`, `adaptive_budget`, `stopping`, or `reranking` as true unless the paper really supports that taxonomy.
 - Do not commit unless the user explicitly asks.
 - After edits, show `git status --short` and `git diff --stat`.
+- When selecting the next paper to read, prefer `../CURRENT-READING.md` as the active queue and use `READING-QUEUE-202606.md` as the accumulated paper-repo record.
