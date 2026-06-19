@@ -387,6 +387,20 @@
 - Priority: P1
 - Track: main math research
 
+### 32. Large Language Models are Zero-Shot Reasoners
+
+- Year / Venue: 2022 / NeurIPS 2022 (arXiv 2205.11916)
+- Link: https://arxiv.org/abs/2205.11916
+- Status: strategically-read
+- Target file: `md/2022-zero-shot-reasoners.md`
+- Source PDF: `paper/2022-zero-shot-reasoners.pdf`
+- Theme: path_pool_construction
+- 왜 중요한가: 답 앞에 "Let's think step by step"를 붙이는 Zero-shot-CoT의 원형. minimal CoT/prompt-diversity anchor baseline이다.
+- 뽑을 것: zero-shot-CoT anchor baseline, prompt-diversity 축(zero-shot vs few-shot vs prompt-diverse), small-LM 이득 약화 곡선, 2단계 generation cost accounting.
+- 우리와의 관계: 직접 baseline이 아니라 origin/anchor reference. 우리 기여는 zero-shot-CoT 자체가 아니라 budget 하 heterogeneous path-family acquisition·STOP이며, zero-shot-CoT는 path family의 anchor baseline. (모델 InstructGPT text-davinci-002/PaLM.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R

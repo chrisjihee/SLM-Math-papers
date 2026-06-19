@@ -616,6 +616,33 @@ papers:
     implementation_candidate: "plan_first macro strategy card(PS/PS+); no full reproduction"
     notes_for_coding_agent: "Plan-and-Solve replaces 'Let's think step by step' with a plan-then-solve zero-shot trigger (PS) plus detailed instructions (PS+) to cut calculation/missing-step errors, GPT-3 text-davinci-003. 우리는 단일 plan-first 고정이 아니라 budget 하 macro strategy allocation이며 plan-first는 strategy card 후보. positioning은 Least-to-Most와 공통 decomposition/planning 항목으로 처리."
 
+  - title: "Large Language Models are Zero-Shot Reasoners"
+    year: 2022
+    venue: "NeurIPS 2022"
+    url: "https://arxiv.org/abs/2205.11916"
+    code_url: "https://github.com/kojima-takeshi188/zero_shot_cot"
+    source_pdf: "paper/2022-zero-shot-reasoners.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "InstructGPT text-davinci-002 / PaLM"
+    theme: ["path_pool_construction"]
+    method_type: ["prompting", "inference_time"]
+    reasoning_path_family: ["zero_shot_cot", "cot"]
+    selection_unit: ["prompt", "path"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["contrastive_positioning", "origin_baseline", "claim_boundary"]
+    what_to_borrow: "zero-shot-CoT anchor baseline, prompt-diversity 축(zero-shot vs few-shot vs prompt-diverse), small-LM 이득 약화 곡선, 2단계 generation cost accounting, terminology(Let's think step by step, task-agnostic prompt)."
+    what_not_to_claim: "zero-shot step-by-step prompting, exemplar 없는 reasoning 유도를 우리가 처음 제안한다고 주장하지 말 것; prompt family를 단순 prompt engineering으로 정당화하지 말 것; raw SOTA 경쟁 금지."
+    implementation_candidate: "zero-shot-CoT anchor/minimal baseline"
+    notes_for_coding_agent: "Zero-shot-CoT origin: appends 'Let's think step by step' (2-stage reasoning+answer extraction), task-agnostic, InstructGPT text-davinci-002/PaLM, GSM8K/MultiArith 등. 우리는 zero-shot-CoT를 path family anchor baseline으로 고정하고 budget 하 heterogeneous path-family acquisition·STOP으로 차별화. small LM에선 zero-shot-CoT 이득이 약화될 수 있음. positioning은 decomposition/planning 공통 항목으로 처리."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"
