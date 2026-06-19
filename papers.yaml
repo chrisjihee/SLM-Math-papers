@@ -104,6 +104,31 @@ papers:
     implementation_candidate: "single CoT + budget forcing baseline"
     notes_for_coding_agent: "not a heterogeneous path-family method. 단일 reasoning trace의 길이를 제어하는 single-path sequential scaling baseline으로 취급하고, 핵심 차별점은 path-family / strategy-level allocation으로 잡을 것."
 
+  - title: "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
+    year: 2022
+    venue: "NeurIPS 2022"
+    url: "https://arxiv.org/abs/2201.11903"
+    code_url: ""
+    status: "strategically-read"
+    priority: "P0"
+    theme: ["math_reasoning", "prompting", "reasoning_path_baseline"]
+    method_type: ["prompting", "inference_time"]
+    reasoning_path_family: ["cot", "natural_language_rationale"]
+    selection_unit: ["prompt", "path"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["origin_baseline", "path_family_reference", "claim_boundary"]
+    what_to_borrow: "origin few-shot CoT greedy baseline, direct vs CoT 기준선, GSM8K/SVAMP/ASDiv/AQuA/MAWPS, prompt-diversity vs structural(CG) 분리 ablation, emergent-ability-at-scale framing, intermediate reasoning steps terminology."
+    what_not_to_claim: "CoT/중간 추론 단계 유도 자체 novelty, CoT prompting 개선이 핵심 기여, CG > CoT, prompt에 reasoning을 넣으면 좋아진다를 새 관찰처럼 쓰지 말 것; raw GSM8K/MATH SOTA 경쟁 금지."
+    implementation_candidate: "few-shot CoT greedy origin baseline"
+    notes_for_coding_agent: "CoT is the origin baseline / claim boundary, not a target to beat. 모든 실험표에서 few-shot CoT greedy를 origin baseline으로 고정하고, CG는 auxiliary structured family로 둔다. prompt-diversity 이득과 structural 이득을 분리하는 ablation을 둘 것. 우리 기여는 CoT 포함 heterogeneous path family의 state-conditioned acquisition / STOP이다."
+
   - title: "Self-Consistency Improves Chain of Thought Reasoning in Language Models"
     year: 2023
     venue: "ICLR 2023"

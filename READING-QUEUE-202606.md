@@ -158,9 +158,22 @@
 - Priority: P0
 - Track: main math research
 
+### 14. Chain-of-Thought Prompting Elicits Reasoning in Large Language Models
+
+- Year / Venue: 2022 / NeurIPS 2022 (arXiv 2201.11903는 2022-01 공개)
+- Link: https://arxiv.org/abs/2201.11903
+- Status: strategically-read
+- Target file: `md/2022-chain-of-thought.md` (CURRENT-READING.md target_file 우선)
+- Theme: math_reasoning, prompting, reasoning_path_baseline
+- 왜 중요한가: 중간 추론 단계(rationale)를 유도하는 reasoning prompting의 canonical origin이며, 모든 reasoning path-family 비교의 기준점이다.
+- 뽑을 것: few-shot CoT greedy origin baseline, direct vs CoT 기준선, GSM8K/SVAMP/ASDiv/AQuA/MAWPS, prompt-diversity vs structural(CG) 분리 ablation, emergent-ability-at-scale framing.
+- 우리와의 관계: 개선/대체 대상이 아니라 P0 origin baseline / claim boundary. 우리 기여는 CoT 포함 heterogeneous path family를 제한된 TTC 안에서 state-conditioned하게 acquire/STOP하는 것이고, CG는 auxiliary structured family로 둔다. `CG > CoT`, `CoT prompting novelty` 주장 금지.
+- Priority: P0
+- Track: main math research
+
 ## P1: 포지셔닝과 baseline 보강에 중요
 
-### 14. LIMO: Less is More for Reasoning
+### 15. LIMO: Less is More for Reasoning
 
 - Year / Venue: 2025 / arXiv-only
 - Link: https://arxiv.org/abs/2502.03387
@@ -171,7 +184,7 @@
 - Priority: P1
 - Track: main math research
 
-### 15. WizardMath
+### 16. WizardMath
 
 - Year / Venue: 2023 / arXiv-only
 - Link: https://arxiv.org/abs/2308.09583
@@ -182,7 +195,7 @@
 - Priority: P1
 - Track: main math research
 
-### 16. MetaMath
+### 17. MetaMath
 
 - Year / Venue: 2023 / arXiv-only
 - Link: https://arxiv.org/abs/2309.12284
@@ -193,7 +206,7 @@
 - Priority: P1
 - Track: thesis background
 
-### 17. MAmmoTH
+### 18. MAmmoTH
 
 - Year / Venue: 2023 / arXiv-only
 - Link: https://arxiv.org/abs/2309.05653
@@ -204,7 +217,7 @@
 - Priority: P1
 - Track: main math research
 
-### 18. ToRA: A Tool-Integrated Reasoning Agent for Mathematical Problem Solving
+### 19. ToRA: A Tool-Integrated Reasoning Agent for Mathematical Problem Solving
 
 - Year / Venue: 2024 / ICLR 2024 (arXiv 2309.17452는 2023-09 공개)
 - Link: https://arxiv.org/abs/2309.17452
@@ -217,7 +230,7 @@
 - Priority: P0
 - Track: main math research
 
-### 19. PAL
+### 20. PAL
 
 - Year / Venue: 2023 / ICML 2023
 - Link: https://openreview.net/forum?id=M1fd9Z00sj
@@ -229,7 +242,7 @@
 - Priority: P0
 - Track: main math research
 
-### 20. Program of Thoughts Prompting
+### 21. Program of Thoughts Prompting
 
 - Year / Venue: 2023 / TMLR
 - Link: https://openreview.net/forum?id=YfZ4ZPt8zd
@@ -241,7 +254,7 @@
 - Priority: P0
 - Track: main math research
 
-### 21. Process Reward Models That Think
+### 22. Process Reward Models That Think
 
 - Year / Venue: 2025 / preprint; GitHub metadata TMLR / unverified
 - Link: https://arxiv.org/abs/2504.16828
@@ -253,7 +266,7 @@
 - Priority: P1
 - Track: main math research
 
-### 22. Automatic Model Selection with Large Language Models for Reasoning
+### 23. Automatic Model Selection with Large Language Models for Reasoning
 
 - Year / Venue: 2023 / EMNLP 2023 Findings
 - Link: https://aclanthology.org/2023.findings-emnlp.55/
@@ -265,7 +278,7 @@
 - Priority: P0
 - Track: main math research
 
-### 23. TeleTables
+### 24. TeleTables
 
 - Year / Venue: 2025 / dataset page + paper link
 - Link: https://huggingface.co/datasets/netop/TeleTables
@@ -276,7 +289,7 @@
 - Priority: P1
 - Track: NFM bridge
 
-### 24. TeleLogs
+### 25. TeleLogs
 
 - Year / Venue: 2025 / dataset page + paper link
 - Link: https://huggingface.co/datasets/netop/TeleLogs

@@ -38,6 +38,16 @@
 
 ## 제출 전략상 가장 위험한 선행연구
 
+### Chain-of-Thought Prompting (origin baseline / claim boundary)
+
+- risk:
+  CoT는 직접적 위협이라기보다, 중간 추론 단계(rationale) 유도라는 가장 기본 형태를 이미 확립한 origin이다. 따라서 `CG > CoT`나 `prompt에 reasoning을 넣으면 좋아진다`, `CoT prompting을 개선한다`를 새 발견·핵심 기여처럼 쓰면 바로 충돌한다.
+- response:
+  CoT를 모든 path-family 비교의 origin baseline(few-shot CoT greedy)으로 고정하고, CG는 CoT의 replacement가 아니라 auxiliary / structured family 중 하나로 둔다. 우리 기여는 CoT 개선이 아니라 CoT를 포함한 heterogeneous path family의 state-conditioned acquisition과 STOP이다. 특히 prompt-diversity 효과(여러 CoT 변형)와 structural rationale(CG) 효과를 분리하는 ablation을 두어 "다양성 이득"을 "구조 이득"으로 오인하지 않게 한다.
+
+- wording caution:
+  `CoT prompting을 개선한다`, `중간 추론 단계 유도가 새롭다`, `CG가 CoT보다 우월하다`, `prompt에 reasoning을 넣으면 좋아진다`만으로 기여를 쓰면 안 된다. raw GSM8K/MATH SOTA 경쟁 프레임도 피한다.
+
 ### rStar-Math
 
 - risk:
