@@ -698,22 +698,24 @@ papers:
     venue: "arXiv"
     url: "https://arxiv.org/abs/2506.10674"
     code_url: "https://huggingface.co/datasets/netop/TeleMath"
-    status: "unread"
+    source_pdf: "paper/2025-telemath.pdf"
+    status: "strategically-read"
     priority: "P0"
+    eval_model: "reasoning vs non-reasoning LLMs (e.g., Qwen3-32B, DeepSeek-R1-Distill-Llama-70B); reference solutions by Qwen2.5-72B-Instruct"
     theme: ["nfm_telco_bridge"]
-    method_type: ["inference_time", "prompting"]
+    method_type: ["benchmark", "inference_time"]
     reasoning_path_family: ["direct", "cot", "pot", "rag"]
-    selection_unit: ["sample", "strategy"]
+    selection_unit: ["answer", "strategy"]
     compute_control:
-      adaptive_budget: true
+      adaptive_budget: false
       stopping: false
       reranking: false
-      search: "best_of_n"
+      search: "none"
     verifier:
       uses_verifier: false
       verifier_type: "none"
     relation_to_ours: ["nfm_bridge"]
-    what_to_borrow: "math mainline을 telecom domain으로 옮기는 첫 benchmark."
+    what_to_borrow: "math mainline을 telecom domain으로 옮기는 첫 benchmark(500 QnA: signal processing/network optimization/performance analysis); pass@1 및 cons@16(=Self-Consistency majority vote@16) metric은 우리 fixed SC@K·budget-matched 비교와 직접 정렬."
     what_not_to_claim: "NFM 전체를 대표한다고 과장하지 말 것."
     implementation_candidate: "bridge experiment stage 1"
     notes_for_coding_agent: "NFM bridge 1순위."

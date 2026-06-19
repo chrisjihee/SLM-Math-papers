@@ -139,12 +139,15 @@
 
 ### 12. TeleMath: A Benchmark for Large Language Models in Telecom Mathematical Problem Solving
 
-- Year / Venue: 2025 / arXiv-only
+- Year / Venue: 2025 / arXiv 2506.10674 (정식 venue 미확인)
 - Link: https://arxiv.org/abs/2506.10674
+- Status: strategically-read
+- Target file: `md/2025-telemath.md`
+- Source PDF: `paper/2025-telemath.pdf`
 - Theme: nfm_telco_bridge
-- 왜 중요한가: math mainline을 NFM로 연결하는 가장 자연스러운 첫 benchmark다.
-- 뽑을 것: task type, answer format, pass@1 vs majority-vote 성격, direct/CoT 차이.
-- 우리와의 관계: NFM bridge의 1순위.
+- 왜 중요한가: math mainline을 NFM로 연결하는 가장 자연스러운 첫 benchmark다(500 QnA: signal processing/network optimization/performance analysis).
+- 뽑을 것: task type, answer format, **pass@1 vs cons@16(=SC majority vote@16)** 성격, direct/CoT/PoT/RAG 차이.
+- 우리와의 관계: NFM bridge의 1순위. cons@16이 SC majority vote이므로 우리 fixed SC@K·heterogeneous pool 비교축으로 직접 정렬. (benchmark; 평가 모델 reasoning vs non-reasoning, reference solution은 Qwen2.5-72B-Instruct.)
 - Priority: P0
 - Track: NFM bridge
 
