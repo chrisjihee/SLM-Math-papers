@@ -302,10 +302,21 @@
 - Priority: P1
 - Track: NFM bridge
 
-## P2: 유용한 배경
+### 26. Tree of Thoughts: Deliberate Problem Solving with Large Language Models
 
-- Tree of Thoughts — 2023 / NeurIPS 2023 / https://arxiv.org/abs/2305.10601
-  왜: search framing reference. 우리와는 heavier search 대비군.
+- Year / Venue: 2023 / NeurIPS 2023 (arXiv 2305.10601는 2023-05 공개)
+- Link: https://arxiv.org/abs/2305.10601
+- Status: strategically-read
+- Target file: `md/2023-tree-of-thoughts.md`
+- Source PDF: `paper/2023-tree-of-thoughts.pdf`
+- Theme: search_reflection_rl, path_pool_construction
+- 왜 중요한가: thought/node 단위 explicit BFS/DFS search + self-evaluation(value/vote)의 search-heavy deliberate reasoning 대표. GoT·MCTS류(rStar-Math)와 같은 search cluster다.
+- 뽑을 것: IO/CoT/CoT-SC/ToT(-lite) deliberation-spectrum baseline, generation(sample/propose)·evaluation(value/vote) framing, LM-call/tree-node cost accounting, budget-matched comparison.
+- 우리와의 관계: 직접 baseline이 아니라 search-boundary contrastive reference. 우리는 thought-level search가 아니라 heterogeneous path-family acquisition + STOP의 lightweight orchestration으로 분리하고, search/eval cost를 TTC budget에 계상한다. full reproduction 비대상(필요 시 budget-matched ToT-lite).
+- Priority: P1
+- Track: main math research
+
+## P2: 유용한 배경
 
 - Graph of Thoughts — 2023 / arXiv-only / https://arxiv.org/abs/2308.09687
   왜: graph claim을 어디까지 해야 하는지 구분하는 데 도움.

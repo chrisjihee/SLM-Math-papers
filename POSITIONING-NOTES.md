@@ -58,6 +58,16 @@
 - wording caution:
   `self-consistency를 도입한다 / 처음 쓴다`, `majority voting으로 답을 고른다`, `여러 path를 샘플링하면 좋아진다`, `sample 수를 늘리면 좋아진다`만으로 기여를 쓰면 안 된다. `fixed homogeneous SC`와 `heterogeneous path-family allocation + STOP`을 명확히 분리하고, SC를 폄하하는 wording도 피한다(필수 baseline).
 
+### Tree of Thoughts / search-based deliberate reasoning
+
+- risk:
+  ToT는 thought를 노드로 한 트리에서 self-evaluation(value/vote)과 BFS/DFS(+backtracking/lookahead) explicit search로 deliberate problem solving을 수행해, `reasoning search`, `tree search`, `lookahead/backtracking`, `state self-evaluation`, `deliberate problem solving`, `multi-path exploration`을 이미 선점했다. GoT, MCTS류(rStar-Math)와 함께 search-heavy cluster를 이룬다.
+- response:
+  우리는 thought-level explicit tree search가 아니라, 제한된 TTC 안에서 heterogeneous path family를 어떤 순서·budget으로 획득하고 언제 STOP할지 결정하는 lightweight orchestration(route-family / strategy-card / macro action routing)으로 간다. ToT의 state-evaluation은 우리 route/family-level estimator의 개념적 조상으로만 차용하되 node-level이 아니라 route-level로, 그리고 search/evaluation cost를 TTC budget에 명시 계상한다. ToT는 full reproduction 대상이 아니라 search-heavy contrastive boundary reference로 둔다.
+
+- wording caution:
+  `reasoning search`, `tree/graph search`, `BFS/DFS`, `lookahead`, `backtracking`, `self-evaluation`, `deliberate problem solving`을 우리 novelty로 쓰면 ToT/GoT와 정면충돌한다. CG를 ToT/GoT식 tree/graph search처럼 과장하지 말고, 우리를 "search over a reasoning tree"로 서술하지 말 것. ToT 대비 raw SOTA 경쟁 프레임도 피한다.
+
 ### rStar-Math
 
 - risk:

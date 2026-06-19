@@ -454,6 +454,32 @@ papers:
     implementation_candidate: "tool-interleaved path family baseline only; no imitation-learning reproduction initially"
     notes_for_coding_agent: "ToRA is a strong tool-interleaved path family, not a routing/selection method. Position ToRA-like trajectory as one candidate in a heterogeneous pool, and account for generation + tool execution cost in the TTC budget. 우리 차별점은 state-conditioned path acquisition / STOP과 tool-cost-aware allocation이다."
 
+  - title: "Tree of Thoughts: Deliberate Problem Solving with Large Language Models"
+    year: 2023
+    venue: "NeurIPS 2023"
+    url: "https://arxiv.org/abs/2305.10601"
+    code_url: "https://github.com/princeton-nlp/tree-of-thought-llm"
+    source_pdf: "paper/2023-tree-of-thoughts.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    theme: ["search_reflection_rl", "path_pool_construction"]
+    method_type: ["prompting", "inference_time", "search"]
+    reasoning_path_family: ["thought_tree", "deliberate_reasoning"]
+    selection_unit: ["thought", "state", "node"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "tree_bfs_dfs"
+    verifier:
+      uses_verifier: false
+      verifier_type: "self_eval"
+    relation_to_ours: ["contrastive_positioning", "search_boundary_reference", "claim_boundary"]
+    what_to_borrow: "IO/CoT/CoT-SC/ToT(-lite) deliberation-spectrum baseline, thought generation(sample/propose)·state evaluation(value/vote) framing, LM-call/tree-node cost accounting, budget-matched comparison, terminology(deliberate problem solving, lookahead, backtracking, BFS/DFS)."
+    what_not_to_claim: "reasoning search, tree search, BFS/DFS, lookahead/backtracking, state self-evaluation, deliberate problem solving, multi-path exploration을 우리가 처음 한다고 주장하지 말 것; CG를 ToT/GoT식 tree/graph search처럼 과장하지 말 것; ToT 대비 raw SOTA 경쟁 금지."
+    implementation_candidate: "search-heavy contrastive reference only; no full reproduction. 필요 시 budget-matched ToT-lite 1개를 상한 대비군으로."
+    notes_for_coding_agent: "ToT is a thought/node-level explicit tree search (BFS/DFS + self-evaluation), GPT-4 + puzzle tasks(Game of 24/Creative Writing/Mini Crosswords). 우리 차별점은 thought-level search가 아니라 heterogeneous path-family acquisition + STOP + macro strategy allocation under limited TTC이며, search/evaluation cost(LM calls/tree nodes)를 TTC budget에 계상한다. state-evaluation은 route/family-level estimator의 개념적 조상으로만 차용."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"
