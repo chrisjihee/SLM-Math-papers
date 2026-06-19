@@ -102,6 +102,16 @@
 - wording caution:
   `verbal feedback / episodic memory / self-reflection 기반 개선을 우리가 처음 제안한다`로 쓰면 안 된다. reflection 무효 일반화 금지, Reflexion 대비 raw SOTA 경쟁 프레임 금지.
 
+### Least-to-Most / decomposition·planning prompting
+
+- risk:
+  Least-to-Most(및 Plan-and-Solve, Zero-Shot-CoT 류)는 복잡한 문제를 더 쉬운 subproblem으로 분해해 순차적으로 푸는 decompose-first / plan-first prompting을 제시해, `decomposition`, `planning prompting`, `문제 분해 기반 reasoning`을 이미 선점했다.
+- response:
+  우리는 decompose-first/plan-first를 macro strategy 후보(strategy card) 중 하나로만 포함한다. 핵심은 제한된 TTC 안에서 현재 reasoning state·budget을 보고 어떤 strategy card/path family를 선택·중단할지의 의사결정이며, decompose/plan의 추가 generation cost를 TTC budget에 계상한다.
+
+- wording caution:
+  `decomposition / planning prompting을 우리가 처음 제안한다`로 쓰면 안 된다. 특히 우리 CoT_Lv1/Lv2/Lv3·strategy card가 `단순 prompt engineering`으로 보이지 않도록, prompt family를 budget 하 선택·중단 의사결정 단위로 프레이밍해야 한다.
+
 ### rStar-Math
 
 - risk:

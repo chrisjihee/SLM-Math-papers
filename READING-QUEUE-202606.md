@@ -359,6 +359,20 @@
 - Priority: P1
 - Track: main math research
 
+### 30. Least-to-Most Prompting Enables Complex Reasoning in Large Language Models
+
+- Year / Venue: 2023 / ICLR 2023 (arXiv 2205.10625, v1 2022-05)
+- Link: https://arxiv.org/abs/2205.10625
+- Status: strategically-read
+- Target file: `md/2022-least-to-most.md`
+- Source PDF: `paper/2022-least-to-most.pdf`
+- Theme: path_pool_construction
+- 왜 중요한가: 복잡한 문제를 simpler subproblem sequence로 분해해 순차적으로 푸는 decompose-first structured prompting의 대표. macro strategy card를 정의할 때의 boundary reference다.
+- 뽑을 것: decompose-first strategy card, easy-to-hard 난이도 곡선, prompt-diverse vs decompose ablation, 분해 generation cost accounting.
+- 우리와의 관계: 직접 baseline이 아니라 decomposition/structured-prompting boundary reference. 우리 기여는 분해/계획 prompt 자체가 아니라 budget 하 macro strategy allocation·STOP이며, strategy card를 단순 prompt engineering이 아닌 의사결정 단위로 다룬다. (모델 GPT-3 code-davinci-002.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R

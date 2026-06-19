@@ -562,6 +562,33 @@ papers:
     implementation_candidate: "reflection macro strategy card(reflexion_like_retry); no full agentic reproduction"
     notes_for_coding_agent: "Reflexion reinforces agents via verbal feedback (no weight update) with Actor/Evaluator/Self-Reflection + episodic memory, multi-trial; eval on GPT-3.5/GPT-4 (ALFWorld/HotPotQA/HumanEval, not GSM8K). 우리는 agentic multi-trial+memory가 아니라 단일 budget heterogeneous path-family acquisition + STOP이며, math에선 Evaluator를 answer-checking/self-eval로 대체하고 그 cost(memory/trial/LM call)를 TTC budget에 계상."
 
+  - title: "Least-to-Most Prompting Enables Complex Reasoning in Large Language Models"
+    year: 2023
+    venue: "ICLR 2023"
+    url: "https://arxiv.org/abs/2205.10625"
+    code_url: ""
+    source_pdf: "paper/2022-least-to-most.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "GPT-3 code-davinci-002"
+    theme: ["path_pool_construction"]
+    method_type: ["prompting", "inference_time"]
+    reasoning_path_family: ["decompose_first", "structured_prompting"]
+    selection_unit: ["subproblem", "strategy"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["contrastive_positioning", "macro_strategy_candidate", "claim_boundary"]
+    what_to_borrow: "decompose-first strategy card, easy-to-hard 난이도 곡선, prompt-diverse vs decompose ablation, 분해 generation cost accounting, terminology(subproblem decomposition, sequential solving, easy-to-hard generalization)."
+    what_not_to_claim: "decomposition, planning prompting, 문제 분해 기반 reasoning을 우리가 처음 제안한다고 주장하지 말 것; strategy card를 단순 prompt engineering으로 정당화하지 말 것; raw SOTA 경쟁 금지."
+    implementation_candidate: "decompose_first macro strategy card; no full reproduction"
+    notes_for_coding_agent: "Least-to-Most decomposes a problem into a sequence of simpler subproblems solved in order (decompose-first), GPT-3 code-davinci-002, GSM8K/DROP/SCAN. 우리는 단일 decompose-first 고정이 아니라 budget 하에서 어떤 strategy card/path family를 선택·중단할지의 macro strategy allocation이며, decompose 추가 cost를 TTC budget에 계상. strategy card는 단순 prompt engineering이 아니라 의사결정 단위."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"
