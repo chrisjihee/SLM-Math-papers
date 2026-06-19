@@ -163,27 +163,36 @@ cython_debug/
 
 # custom
 gradio_cached_examples
-.cache
+.temp
+*.cache
+.cache*
 .cache_*
 .*-token*
 ~$*.*
 temp.*
 data-*
+.omc
+.omx
 
-# library
-transformers
-DeepSpeed
-chrisbase
-chrisdata
-progiter
+# package source
+package-src
+*-src
 
 # reference
-concept-based-reasoning
-LLM-KG
+LM-based-KG
+SLM-Math-papers
 KSC2025
 
 # output
 mongodb*/
 outputs-*
+outputs*/**/_smoketest-*
 outputs*/**/checkpoint-*
-outputs*/**/*.out
+outputs*/**/global_step*
+outputs*/**/model.*
+outputs*/**/*.safetensors
+outputs*/**/*.bin
+outputs*/**/*.pt
+outputs*/**/runs
+models*
+models*/**/checkpont-*
