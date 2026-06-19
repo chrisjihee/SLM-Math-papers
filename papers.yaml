@@ -480,6 +480,34 @@ papers:
     implementation_candidate: "search-heavy contrastive reference only; no full reproduction. 필요 시 budget-matched ToT-lite 1개를 상한 대비군으로."
     notes_for_coding_agent: "ToT is a thought/node-level explicit tree search (BFS/DFS + self-evaluation), GPT-4 + puzzle tasks(Game of 24/Creative Writing/Mini Crosswords). 우리 차별점은 thought-level search가 아니라 heterogeneous path-family acquisition + STOP + macro strategy allocation under limited TTC이며, search/evaluation cost(LM calls/tree nodes)를 TTC budget에 계상한다. state-evaluation은 route/family-level estimator의 개념적 조상으로만 차용."
 
+  - title: "Graph of Thoughts: Solving Elaborate Problems with Large Language Models"
+    year: 2024
+    venue: "AAAI 2024"
+    url: "https://arxiv.org/abs/2308.09687"
+    doi: "10.1609/aaai.v38i16.29720"
+    code_url: "https://github.com/spcl/graph-of-thoughts"
+    source_pdf: "paper/2023-graph-of-thoughts.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "ChatGPT-3.5 / GPT-3.5"
+    theme: ["structured_graph_reasoning", "search_reflection_rl"]
+    method_type: ["prompting", "inference_time", "search"]
+    reasoning_path_family: ["thought_graph", "graph_structured_reasoning"]
+    selection_unit: ["thought", "vertex", "graph_state"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "graph_of_operations"
+    verifier:
+      uses_verifier: false
+      verifier_type: "self_eval"
+    relation_to_ours: ["contrastive_positioning", "search_boundary_reference", "claim_boundary"]
+    what_to_borrow: "latency–volume(cost–quality) tradeoff framing, IO/CoT/CoT-SC/ToT 비교축, decompose→solve→merge, GoO/GRS·volume-of-a-thought terminology, LM-call/graph-operation cost accounting, cost-matched comparison."
+    what_not_to_claim: "graph-structured reasoning, arbitrary thought graph, aggregation/merging, refinement loop, transformation-based reasoning을 우리가 처음 한다고 주장하지 말 것; CG를 GoT식 graph search/traversal처럼 과장하지 말 것; GoT를 GPT-4 실험으로 잘못 기록하지 말 것(실제 GPT-3.5); raw SOTA 경쟁 금지."
+    implementation_candidate: "graph-structured contrastive reference only; no full reproduction. 필요 시 cost-matched GoT-inspired lightweight comparison(merge/refine 일부)만."
+    notes_for_coding_agent: "GoT models reasoning as an arbitrary directed graph of thoughts (vertices) with generate/aggregate/refine transformations, GoO(Graph of Operations)/GRS(Graph Reasoning State) controller, thought scoring, eval on GPT-3.5(puzzle tasks: sorting/set intersection/keyword counting/document merging). 우리 CG는 graph-preserving traversal이 아니라 linearized structured rationale이며, 우리 기여는 graph reasoning 자체가 아니라 heterogeneous path-family acquisition + STOP + macro strategy allocation under limited TTC다. graph operation cost(generation+aggregation+refinement+scoring)를 TTC budget에 계상."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"

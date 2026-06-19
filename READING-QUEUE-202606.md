@@ -316,10 +316,22 @@
 - Priority: P1
 - Track: main math research
 
-## P2: 유용한 배경
+### 27. Graph of Thoughts: Solving Elaborate Problems with Large Language Models
 
-- Graph of Thoughts — 2023 / arXiv-only / https://arxiv.org/abs/2308.09687
-  왜: graph claim을 어디까지 해야 하는지 구분하는 데 도움.
+- Year / Venue: 2024 / AAAI 2024 (arXiv 2308.09687; v1 2023-08, v4 2024-02)
+- Link: https://arxiv.org/abs/2308.09687
+- DOI: 10.1609/aaai.v38i16.29720
+- Status: strategically-read
+- Target file: `md/2023-graph-of-thoughts.md`
+- Source PDF: `paper/2023-graph-of-thoughts.pdf`
+- Theme: structured_graph_reasoning, search_reflection_rl
+- 왜 중요한가: LLM reasoning을 thought=vertex, dependency=edge의 arbitrary directed graph로 모델링하고 generate/aggregate(merge)/refine transformation으로 실행하는 graph-structured prompting의 대표. 우리 CG 이름과 가장 혼동되는 graph-boundary reference다.
+- 뽑을 것: latency–volume(cost–quality) tradeoff framing, IO/CoT/CoT-SC/ToT 비교축, decompose→solve→merge, GoO/GRS·volume of a thought terminology, LM-call/graph-operation cost accounting.
+- 우리와의 관계: 직접 baseline이 아니라 graph-structured contrastive boundary reference. 우리 CG는 graph-preserving traversal이 아니라 linearized structured rationale이고, 우리 기여는 graph reasoning 자체가 아니라 heterogeneous path-family acquisition + STOP + macro strategy allocation under limited TTC다. full reproduction 비대상. (실험 모델은 GPT-3.5, ToT의 GPT-4와 구분.)
+- Priority: P1
+- Track: main math research
+
+## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
   왜: planning-style reasoning과의 차이를 정리할 때 유용.

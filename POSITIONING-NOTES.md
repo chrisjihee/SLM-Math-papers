@@ -68,6 +68,20 @@
 - wording caution:
   `reasoning search`, `tree/graph search`, `BFS/DFS`, `lookahead`, `backtracking`, `self-evaluation`, `deliberate problem solving`을 우리 novelty로 쓰면 ToT/GoT와 정면충돌한다. CG를 ToT/GoT식 tree/graph search처럼 과장하지 말고, 우리를 "search over a reasoning tree"로 서술하지 말 것. ToT 대비 raw SOTA 경쟁 프레임도 피한다.
 
+### Graph of Thoughts / graph-structured reasoning (CG naming boundary)
+
+- risk:
+  GoT는 LLM reasoning을 thought=vertex, dependency=edge의 arbitrary directed graph로 모델링하고 generate/aggregate(merge)/refine transformation으로 실행해, `graph-structured reasoning`, `arbitrary thought graph`, `aggregation/merging`, `refinement loop`, `transformation-based reasoning`을 이미 선점했다. 특히 우리 `CG(Concept Graph)` 이름 때문에 reviewer가 GoT를 가장 먼저 연상할 수 있어, graph 관련 claim의 혼동 위험이 가장 크다.
+- response:
+  우리는 thought graph 내부 변환·실행이 아니라, 제한된 TTC 안에서 heterogeneous path family를 어떤 순서·budget으로 획득하고 언제 STOP할지 결정하는 lightweight orchestration(route-family / strategy-card / macro action routing)으로 간다. GoT는 full reproduction 대상이 아니라 graph-structured / search-heavy contrastive boundary reference로 두고, graph operation cost(generation+aggregation+refinement+scoring)를 TTC budget에 계상한다. GoT 실험 모델은 GPT-3.5로 정확히 기록한다(ToT의 GPT-4와 구분).
+
+- 명문화(필수):
+  - `CG is a linearized structured rationale, not GoT-style graph-of-thought search/traversal.`
+  - `We should not claim novelty on graph-structured reasoning, arbitrary thought graphs, aggregation/merging, or refinement loops.`
+
+- wording caution:
+  `graph reasoning`, `thought graph`, `arbitrary reasoning graph`, `aggregation/merging`, `refinement loop`, `transformation-based reasoning`을 우리 novelty로 쓰면 GoT/ToT와 정면충돌한다. 우리를 "graph search over thoughts"로 서술하지 말고, CG를 GoT식 graph search처럼 과장하지 말 것. GoT 대비 raw SOTA 경쟁 프레임도 피한다.
+
 ### rStar-Math
 
 - risk:
