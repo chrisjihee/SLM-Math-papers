@@ -331,6 +331,20 @@
 - Priority: P1
 - Track: main math research
 
+### 28. Self-Refine: Iterative Refinement with Self-Feedback
+
+- Year / Venue: 2023 / NeurIPS 2023 (arXiv 2303.17651)
+- Link: https://arxiv.org/abs/2303.17651
+- Status: strategically-read
+- Target file: `md/2023-self-refine.md`
+- Source PDF: `paper/2023-self-refine.pdf`
+- Theme: search_reflection_rl
+- 왜 중요한가: 추가 학습 없이 단일 LLM이 generate→self-feedback→refine을 반복하는 reflection / self-feedback의 대표. reflection을 macro strategy 후보로 다룰 때의 boundary reference다.
+- 뽑을 것: reflection macro-strategy baseline(self_refine_k), parallel SC vs sequential refine budget-matched 비교, iteration/token cost accounting, 과제별 reflection 이득(특히 math 약세).
+- 우리와의 관계: 직접 baseline이 아니라 reflection boundary reference. 우리 기여는 reflection loop 자체가 아니라 heterogeneous path-family acquisition + STOP + budget allocation. Self-Refine의 math 약세로 reflection 무효를 일반화 금지. (모델 GPT-3.5/GPT-4.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R

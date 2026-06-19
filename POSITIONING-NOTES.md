@@ -82,6 +82,16 @@
 - wording caution:
   `graph reasoning`, `thought graph`, `arbitrary reasoning graph`, `aggregation/merging`, `refinement loop`, `transformation-based reasoning`을 우리 novelty로 쓰면 GoT/ToT와 정면충돌한다. 우리를 "graph search over thoughts"로 서술하지 말고, CG를 GoT식 graph search처럼 과장하지 말 것. GoT 대비 raw SOTA 경쟁 프레임도 피한다.
 
+### Self-Refine / reflection / self-feedback
+
+- risk:
+  Self-Refine는 추가 학습 없이 단일 LLM이 generate→self-feedback→refine을 반복하는 iterative self-refinement를 제시해, `reflection`, `self-feedback`, `iterative refinement`를 이미 선점했다.
+- response:
+  우리는 reflection loop 자체를 기여로 두지 않고, 이를 macro strategy 후보(`self_refine_k`) 중 하나로만 포함한다. 핵심은 제한된 TTC 안에서 heterogeneous path family를 어떻게 획득하고 언제 STOP하며 어떤 voting/verification으로 최종 답을 정할지다. reflection cost(generation+feedback+refine)를 TTC budget에 계상하고, parallel sampling과 budget-matched로 공정 비교한다.
+
+- wording caution:
+  `iterative self-refinement / reflection을 우리가 처음 제안한다`, `self-feedback 기반 개선이 우리 기여다`로 쓰면 안 된다. 특히 Self-Refine의 수학(GSM8K) 약세를 근거로 `reflection은 효과 없다`를 일반화하지 말 것(과제·모델·budget 의존).
+
 ### rStar-Math
 
 - risk:

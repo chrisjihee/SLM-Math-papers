@@ -508,6 +508,33 @@ papers:
     implementation_candidate: "graph-structured contrastive reference only; no full reproduction. 필요 시 cost-matched GoT-inspired lightweight comparison(merge/refine 일부)만."
     notes_for_coding_agent: "GoT models reasoning as an arbitrary directed graph of thoughts (vertices) with generate/aggregate/refine transformations, GoO(Graph of Operations)/GRS(Graph Reasoning State) controller, thought scoring, eval on GPT-3.5(puzzle tasks: sorting/set intersection/keyword counting/document merging). 우리 CG는 graph-preserving traversal이 아니라 linearized structured rationale이며, 우리 기여는 graph reasoning 자체가 아니라 heterogeneous path-family acquisition + STOP + macro strategy allocation under limited TTC다. graph operation cost(generation+aggregation+refinement+scoring)를 TTC budget에 계상."
 
+  - title: "Self-Refine: Iterative Refinement with Self-Feedback"
+    year: 2023
+    venue: "NeurIPS 2023"
+    url: "https://arxiv.org/abs/2303.17651"
+    code_url: "https://selfrefine.info/"
+    source_pdf: "paper/2023-self-refine.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "GPT-3.5 / GPT-4"
+    theme: ["search_reflection_rl"]
+    method_type: ["prompting", "inference_time"]
+    reasoning_path_family: ["reflection", "iterative_refinement"]
+    selection_unit: ["path"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "self_feedback"
+    relation_to_ours: ["contrastive_positioning", "macro_strategy_candidate", "claim_boundary"]
+    what_to_borrow: "reflection macro-strategy baseline(self_refine_k), parallel SC vs sequential refine budget-matched 비교, iteration/token cost accounting, 과제별 reflection 이득 분석(특히 math vs 비-math)."
+    what_not_to_claim: "reflection, self-feedback, iterative self-refinement를 우리가 처음 제안한다고 주장하지 말 것; Self-Refine의 math(GSM8K) 약세로 reflection 무효를 일반화하지 말 것; raw SOTA 경쟁 금지."
+    implementation_candidate: "reflection macro strategy card(self_refine_k); no full reproduction"
+    notes_for_coding_agent: "Single LLM as generator+feedback+refiner, iterative loop, no training/RL, eval on GPT-3.5/GPT-4 across 7 tasks incl. Math Reasoning(GSM8K, gain small). 우리 기여는 reflection loop 자체가 아니라 heterogeneous path-family acquisition + STOP + budget allocation이며, reflection은 macro strategy 후보로만 포함하고 generation+feedback+refine cost를 TTC budget에 계상."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"
