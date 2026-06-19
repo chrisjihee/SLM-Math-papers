@@ -92,6 +92,16 @@
 - wording caution:
   `iterative self-refinement / reflection을 우리가 처음 제안한다`, `self-feedback 기반 개선이 우리 기여다`로 쓰면 안 된다. 특히 Self-Refine의 수학(GSM8K) 약세를 근거로 `reflection은 효과 없다`를 일반화하지 말 것(과제·모델·budget 의존).
 
+### Reflexion / verbal-RL / episodic memory
+
+- risk:
+  Reflexion은 weight update 없이 verbal feedback + episodic memory + trial-and-error로 agent를 개선해, `verbal reinforcement`, `self-reflection`, `episodic memory 기반 reflection`, `trial-and-error 개선`을 이미 선점했다(reflection을 단순 prompt가 아니라 feedback/memory 기반 전략으로 형식화).
+- response:
+  우리는 verbal-RL/memory reflection 자체를 기여로 두지 않고 macro strategy 후보(`reflexion_like_retry`)로만 포함한다. agentic multi-trial이 아니라 단일 budget 안의 heterogeneous path-pool 구성·STOP이며, math에선 외부 환경 보상이 없어 Evaluator를 answer-checking/self-eval로 대체해야 하므로 그 신호 비용을 TTC budget에 계상하고 single-budget parallel과 공정 비교한다.
+
+- wording caution:
+  `verbal feedback / episodic memory / self-reflection 기반 개선을 우리가 처음 제안한다`로 쓰면 안 된다. reflection 무효 일반화 금지, Reflexion 대비 raw SOTA 경쟁 프레임 금지.
+
 ### rStar-Math
 
 - risk:

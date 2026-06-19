@@ -345,6 +345,20 @@
 - Priority: P1
 - Track: main math research
 
+### 29. Reflexion: Language Agents with Verbal Reinforcement Learning
+
+- Year / Venue: 2023 / NeurIPS 2023 (arXiv 2303.11366)
+- Link: https://arxiv.org/abs/2303.11366
+- Status: strategically-read
+- Target file: `md/2023-reflexion.md`
+- Source PDF: `paper/2023-reflexion.pdf`
+- Theme: search_reflection_rl
+- 왜 중요한가: weight update 없이 verbal feedback + episodic memory + trial-and-error로 agent를 개선하는 verbal-RL의 대표. reflection을 feedback/memory 기반 전략으로 다룰 때의 boundary reference다.
+- 뽑을 것: reflection macro-strategy(reflexion-like), feedback 신호 종류 ablation, trial/memory/LM-call cost accounting.
+- 우리와의 관계: 직접 baseline이 아니라 reflection/verbal-RL boundary reference. 우리 기여는 reflection·memory 자체가 아니라 단일 budget heterogeneous path-family acquisition + STOP. agentic multi-trial과 구분, math에선 Evaluator를 answer-checking/self-eval로 대체하고 비용을 budget에 계상. (모델 GPT-3.5/GPT-4.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
@@ -352,9 +366,6 @@
 
 - ReST-MCTS* — 2024 / arXiv-only / https://arxiv.org/abs/2406.03816
   왜: PRM-guided tree search self-training reference.
-
-- Reflexion — 2023 / official paper / https://openreview.net/forum?id=vAElhFcKW6
-  왜: reflection negative evidence를 너무 일반화하지 않기 위해 읽어야 한다.
 
 - UniCoTT — 2025 / ICLR 2025 / https://openreview.net/forum?id=3baOKeI2EU
   왜: structured rationale distillation reference.

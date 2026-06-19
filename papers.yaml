@@ -535,6 +535,33 @@ papers:
     implementation_candidate: "reflection macro strategy card(self_refine_k); no full reproduction"
     notes_for_coding_agent: "Single LLM as generator+feedback+refiner, iterative loop, no training/RL, eval on GPT-3.5/GPT-4 across 7 tasks incl. Math Reasoning(GSM8K, gain small). 우리 기여는 reflection loop 자체가 아니라 heterogeneous path-family acquisition + STOP + budget allocation이며, reflection은 macro strategy 후보로만 포함하고 generation+feedback+refine cost를 TTC budget에 계상."
 
+  - title: "Reflexion: Language Agents with Verbal Reinforcement Learning"
+    year: 2023
+    venue: "NeurIPS 2023"
+    url: "https://arxiv.org/abs/2303.11366"
+    code_url: "https://github.com/noahshinn024/reflexion"
+    source_pdf: "paper/2023-reflexion.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "GPT-3.5 / GPT-4"
+    theme: ["search_reflection_rl"]
+    method_type: ["prompting", "inference_time", "agentic"]
+    reasoning_path_family: ["reflection", "verbal_rl", "episodic_memory"]
+    selection_unit: ["trial"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "self_reflection"
+    relation_to_ours: ["contrastive_positioning", "macro_strategy_candidate", "claim_boundary"]
+    what_to_borrow: "reflection macro-strategy(reflexion-like), feedback 신호 종류 ablation(정답/self-eval), trial/memory/LM-call cost accounting, parallel vs sequential 비교."
+    what_not_to_claim: "verbal feedback, self-reflection, episodic memory 기반 reflection, trial-and-error 개선을 우리가 처음 제안한다고 주장하지 말 것; reflection 무효 일반화 금지; raw SOTA 경쟁 금지."
+    implementation_candidate: "reflection macro strategy card(reflexion_like_retry); no full agentic reproduction"
+    notes_for_coding_agent: "Reflexion reinforces agents via verbal feedback (no weight update) with Actor/Evaluator/Self-Reflection + episodic memory, multi-trial; eval on GPT-3.5/GPT-4 (ALFWorld/HotPotQA/HumanEval, not GSM8K). 우리는 agentic multi-trial+memory가 아니라 단일 budget heterogeneous path-family acquisition + STOP이며, math에선 Evaluator를 answer-checking/self-eval로 대체하고 그 cost(memory/trial/LM call)를 TTC budget에 계상."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"
