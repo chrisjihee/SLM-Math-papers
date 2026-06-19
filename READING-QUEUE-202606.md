@@ -204,15 +204,17 @@
 - Priority: P1
 - Track: main math research
 
-### 18. ToRA
+### 18. ToRA: A Tool-Integrated Reasoning Agent for Mathematical Problem Solving
 
-- Year / Venue: 2023 / arXiv-only
+- Year / Venue: 2024 / ICLR 2024 (arXiv 2309.17452는 2023-09 공개)
 - Link: https://arxiv.org/abs/2309.17452
+- Status: strategically-read
+- Target file: `md/2023-tora.md` (CURRENT-READING.md target_file 우선)
 - Theme: math_slm_frontier, path_pool_construction, tool_use
-- 왜 중요한가: tool-integrated math reasoning의 대표다.
-- 뽑을 것: interactive tool trajectories, output space shaping.
-- 우리와의 관계: 향후 `PoT/PAL/tool-assisted` family를 path pool에 넣을 때 중요하다.
-- Priority: P1
+- 왜 중요한가: 자연어 reasoning과 program 실행·tool 호출을 한 trajectory에서 interleave하는 tool-integrated agent의 대표로, PAL/PoT보다 강한 tool-interleaved path family reference다.
+- 뽑을 것: interactive tool trajectories, output space shaping, ToRA/ToRA-Code 7B~70B baseline, GSM8K/MATH + tool-call·exec cost.
+- 우리와의 관계: 직접 재학습 대상이 아니라 P0 tool-use baseline 후보. ToRA-like path를 heterogeneous pool의 한 family로 수용하고, 무엇을 제한 TTC 안에서 언제 추가 획득/STOP할지 결정하는 state-conditioned orchestration으로 차별화한다. tool execution cost를 TTC budget에 포함해야 한다.
+- Priority: P0
 - Track: main math research
 
 ### 19. PAL

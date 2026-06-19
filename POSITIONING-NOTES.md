@@ -128,6 +128,16 @@
 - wording caution:
   `program-based reasoning`, `computation offloading`, `PoT가 CoT보다 낫다`만 전면에 두면 PoT와 지나치게 겹친다. `PoT는 path family`, `우리 기여는 state-conditioned path-family allocation`으로 분리해야 한다.
 
+### ToRA / tool-interleaved paths
+
+- risk:
+  ToRA는 자연어 reasoning과 program 실행·tool 호출을 한 trajectory 안에서 interleave하는 tool-integrated agent를 imitation learning과 output space shaping으로 7B~70B에 학습해, `tool-use reasoning`, `reasoning↔execution interleaving`, `작은 모델이 도구로 MATH를 푼다`를 PAL/PoT보다 강하게 선점했다.
+- response:
+  우리는 ToRA-like tool-interleaved path를 새로 제안하는 것이 아니라, 그것을 heterogeneous path pool의 강한 한 family로 수용하고, `CoT / CG / direct / PAL / PoT / ToRA-like / verifier-guided` 중 무엇을 현재 reasoning state와 남은 budget에서 더 호출하고 언제 STOP할지 결정하는 state-conditioned orchestration으로 가야 한다. 특히 tool-interleaved path는 generation cost뿐 아니라 tool execution cost가 들므로, 이를 TTC budget에 명시적으로 포함해야 한다.
+
+- wording caution:
+  `tool-integrated reasoning`, `reasoning-execution interleaving`, `program execution으로 math를 푼다`만으로 기여를 쓰면 ToRA와 바로 겹친다. `ToRA-like path는 강한 path family`이고, 우리 기여는 `state-conditioned path acquisition / stopping과 tool-cost-aware budget allocation`이라는 점을 분리해서 써야 하며, ToRA 대비 raw MATH/GSM8K SOTA 경쟁 프레임은 피해야 한다.
+
 ### s1
 
 - risk:

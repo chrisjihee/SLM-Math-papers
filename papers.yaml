@@ -404,6 +404,31 @@ papers:
     implementation_candidate: "RUN_POT / SC-PoT / mixed CoT+PoT baseline"
     notes_for_coding_agent: "PoT is a strong executable path family, not a selector. Position it as a candidate in a heterogeneous pool and account for generation + execution cost."
 
+  - title: "ToRA: A Tool-Integrated Reasoning Agent for Mathematical Problem Solving"
+    year: 2024
+    venue: "ICLR 2024"
+    url: "https://arxiv.org/abs/2309.17452"
+    code_url: "https://github.com/microsoft/ToRA"
+    status: "strategically-read"
+    priority: "P0"
+    theme: ["math_reasoning", "tool_use", "path_family"]
+    method_type: ["training", "tool_use", "inference_time"]
+    reasoning_path_family: ["tool_interleaved", "program_execution"]
+    selection_unit: ["trajectory", "tool_call", "path"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["path_family_reference", "tool_use_baseline", "contrastive_positioning"]
+    what_to_borrow: "tool-interleaved path family baseline(ToRA/ToRA-Code 7B~70B), CoT/PAL/PoT 대비축, output space shaping diversity, GSM8K/MATH accuracy + tool-call/execution cost reporting, interleaved rationale-program terminology."
+    what_not_to_claim: "tool-use reasoning, program execution, reasoning↔tool interleaving, 작은 모델이 도구로 math를 푼다를 우리가 처음 제안한다고 주장하지 말 것; raw MATH/GSM8K SOTA 경쟁 프레임 금지."
+    implementation_candidate: "tool-interleaved path family baseline only; no imitation-learning reproduction initially"
+    notes_for_coding_agent: "ToRA is a strong tool-interleaved path family, not a routing/selection method. Position ToRA-like trajectory as one candidate in a heterogeneous pool, and account for generation + tool execution cost in the TTC budget. 우리 차별점은 state-conditioned path acquisition / STOP과 tool-cost-aware allocation이다."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"
