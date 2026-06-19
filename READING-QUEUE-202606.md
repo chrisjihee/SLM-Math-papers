@@ -146,18 +146,19 @@
 - Priority: P0
 - Track: NFM bridge
 
-## P1: 포지셔닝과 baseline 보강에 중요
-
 ### 13. DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning
 
-- Year / Venue: 2025 / arXiv-only
+- Year / Venue: 2025 / arXiv
 - Link: https://arxiv.org/abs/2501.12948
+- Status: strategically-read
 - Theme: math_slm_frontier, search_reflection_rl
-- 왜 중요한가: reasoning RL 계열의 대표 reference다.
-- 뽑을 것: cold-start + RL recipe, readability issue, distillation story.
-- 우리와의 관계: 우리가 직접 재현할 대상은 아니지만 RL-heavy line과의 차이를 분명히 해 준다.
-- Priority: P1
+- 왜 중요한가: human reasoning label 없이 pure RL(GRPO)로 long CoT·self-verification을 창발시키고 1.5B~70B로 distill까지 한 training-heavy / reasoning-RL frontier reference다. 직접 구현할 inference-time allocation baseline은 아니지만, `RL reasoning 유도 / long CoT / self-verification / distilled small reasoner` claim boundary를 강하게 제한한다.
+- 뽑을 것: cold-start + multi-stage RL recipe, GRPO, readability/language-mixing issue, distillation story, R1-Distill backbone baseline, AIME/MATH-500 + thinking-token budget.
+- 우리와의 관계: 직접 재현 대상이 아니라 P0 contrastive frontier reference이자 strong backbone. 우리는 fixed/given backbone 위 state-conditioned heterogeneous path-pool construction / STOP / lightweight orchestration으로 차별화해야 한다.
+- Priority: P0
 - Track: main math research
+
+## P1: 포지셔닝과 baseline 보강에 중요
 
 ### 14. LIMO: Less is More for Reasoning
 

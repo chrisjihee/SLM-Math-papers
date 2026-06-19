@@ -58,6 +58,16 @@
 - wording caution:
   `sLLM math reasoning improvement`, `self-consistency helps`, `tool-integrated reasoning is useful`만으로 기여를 쓰면 DeepSeekMath와 지나치게 겹친다. `fixed homogeneous SC`와 구분되는 `state-conditioned path-pool construction and stopping`을 더 앞에 둬야 한다.
 
+### DeepSeek-R1
+
+- risk:
+  human reasoning label 없이 pure RL(GRPO)만으로 long CoT·self-verification·dynamic strategy adaptation이 창발함을 보이고, 이를 1.5B~70B 소형 모델로 distill까지 했기 때문에 `SLM + 강한 reasoning`, `long CoT`, `self-verification`, `RL로 reasoning capability 유도`, `distilled small reasoner` 같은 claim은 이미 강하게 선점되어 있다.
+- response:
+  우리는 RL/distillation으로 reasoner 자체를 학습하는 training-time 경쟁이 아니라, 그렇게 얻은 fixed/given backbone 위에서 제한된 TTC 안의 heterogeneous reasoning path pool을 state-conditioned하게 구성·선택·중단하는 lightweight inference-time orchestration으로 가야 한다. R1-distilled 모델은 경쟁 대상이 아니라 strong backbone / contrastive frontier로 둔다.
+
+- wording caution:
+  `RL incentivizes reasoning`, `long chain-of-thought`, `self-verification / reflection`, `small distilled reasoner`, `small models can reason with test-time compute`만으로 contribution을 쓰면 DeepSeek-R1과 정면충돌한다. 이 행동들은 R1이 emergent behavior로 이미 보고했으므로, 우리는 `state-conditioned path-family / macro-strategy acquisition and stopping`을 더 앞에 두고 raw math SOTA 경쟁 프레임을 피해야 한다.
+
 ### Learning How Hard to Think
 
 - risk:

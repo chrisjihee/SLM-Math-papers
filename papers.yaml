@@ -29,6 +29,31 @@ papers:
     implementation_candidate: "heavy upper/reference baseline only; no direct reproduction"
     notes_for_coding_agent: "Treat as a high-risk frontier reference. Our safe differentiation is lightweight state-conditioned path-family allocation, not step-level MCTS or self-evolution reproduction."
 
+  - title: "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning"
+    year: 2025
+    venue: "arXiv"
+    url: "https://arxiv.org/abs/2501.12948"
+    code_url: "https://github.com/deepseek-ai/DeepSeek-R1"
+    status: "strategically-read"
+    priority: "P0"
+    theme: ["math_slm_frontier", "search_reflection_rl"]
+    method_type: ["training", "inference_time", "distillation"]
+    reasoning_path_family: ["long_cot", "single_path_sequential_scaling"]
+    selection_unit: ["model", "trajectory"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["contrastive_positioning", "backbone_reference", "threatening_related_work"]
+    what_to_borrow: "R1-Distill-Qwen 1.5B/7B distilled reasoner backbone baseline, AIME/MATH-500 + thinking-token budget reporting, cold-start/GRPO/self-verification terminology, training-time vs inference-time reasoning gain distinction."
+    what_not_to_claim: "RL로 reasoning capability 유도, small distilled reasoner, long CoT/self-verification/reflection, SLM math reasoning with test-time compute, dynamic strategy adaptation을 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "R1-Distill backbone baseline only; no RL or distillation reproduction"
+    notes_for_coding_agent: "Training-heavy reasoning-RL frontier. P0 contrastive reference and strong backbone, NOT a raw SOTA competitor. long CoT/self-verification은 R1의 emergent behavior이며 우리 novelty가 아니다. 우리 차별점은 fixed/given backbone 위 state-conditioned heterogeneous path-pool construction / STOP / lightweight orchestration이다."
+
   - title: "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models"
     year: 2024
     venue: "arXiv"
