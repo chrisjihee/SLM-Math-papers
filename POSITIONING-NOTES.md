@@ -48,6 +48,16 @@
 - wording caution:
   `CoT prompting을 개선한다`, `중간 추론 단계 유도가 새롭다`, `CG가 CoT보다 우월하다`, `prompt에 reasoning을 넣으면 좋아진다`만으로 기여를 쓰면 안 된다. raw GSM8K/MATH SOTA 경쟁 프레임도 피한다.
 
+### Self-Consistency (canonical multi-sample baseline / substrate)
+
+- risk:
+  Self-Consistency는 CoT 이후 가장 기본적인 multi-sample / majority-vote baseline으로, `여러 reasoning path를 샘플링해서 답을 고른다`, `majority voting`, `homogeneous multi-sample reasoning`, `sample scaling`을 이미 선점했다. RASC/CISC/adaptive-TTC 계열은 모두 이 SC substrate 위의 stopping·weighting·confidence 확장이라, SC 영역에서 새로움을 주장하면 이 강한 인접 선행들과 정면충돌한다.
+- response:
+  SC는 우리가 반드시 넘어야 할 fixed homogeneous SC baseline(fixed SC@K)으로 고정하고, 우리 기여는 homogeneous same-prompt sampling이 아니라 heterogeneous path family를 state-conditioned하게 구성하고 언제 STOP할지 결정하는 upstream path-pool 구성으로 둔다. RASC/CISC는 aggregation/stopping 개선으로, 우리는 그보다 앞선 어떤 후보 family를 만들지로 분리한다.
+
+- wording caution:
+  `self-consistency를 도입한다 / 처음 쓴다`, `majority voting으로 답을 고른다`, `여러 path를 샘플링하면 좋아진다`, `sample 수를 늘리면 좋아진다`만으로 기여를 쓰면 안 된다. `fixed homogeneous SC`와 `heterogeneous path-family allocation + STOP`을 명확히 분리하고, SC를 폄하하는 wording도 피한다(필수 baseline).
+
 ### rStar-Math
 
 - risk:

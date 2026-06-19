@@ -42,12 +42,14 @@
 
 ### 4. Self-Consistency Improves Chain of Thought Reasoning in Language Models
 
-- Year / Venue: 2023 / ICLR 2023
+- Year / Venue: 2023 / ICLR 2023 (arXiv 2203.11171는 2022-03 공개)
 - Link: https://openreview.net/forum?id=1PL1NIMMrw
+- Status: strategically-read
+- Target file: `md/2023-self-consistency.md`
 - Theme: sc_efficiency
-- 왜 중요한가: 모든 sampling-based reasoning의 canonical baseline이다.
-- 뽑을 것: self-consistency의 unit, marginalization intuition, sample scaling curve.
-- 우리와의 관계: 반드시 이 baseline을 넘거나 확장해야 한다.
+- 왜 중요한가: CoT 이후 canonical multi-sample / majority-vote baseline이며, RASC/CISC/adaptive-TTC가 그 위에 쌓이는 homogeneous SC substrate다.
+- 뽑을 것: self-consistency의 unit(sample/answer), marginalization intuition, fixed SC@K(1/4/8/16/32/64) origin baseline, Maj@K, sample-scaling curve.
+- 우리와의 관계: 반드시 넘어야 할 fixed homogeneous SC baseline. 우리 기여는 SC 개선이 아니라 heterogeneous path-family를 state-conditioned하게 acquire/STOP하는 upstream path-pool 구성이고, `self-consistency / majority vote 자체`는 우리 novelty가 아니다.
 - Priority: P0
 - Track: main math research
 

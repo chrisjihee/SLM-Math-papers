@@ -134,25 +134,25 @@ papers:
     venue: "ICLR 2023"
     url: "https://openreview.net/forum?id=1PL1NIMMrw"
     code_url: ""
-    status: "read"
+    status: "strategically-read"
     priority: "P0"
     theme: ["sc_efficiency"]
-    method_type: ["inference_time", "prompting"]
-    reasoning_path_family: ["cot"]
-    selection_unit: ["answer"]
+    method_type: ["prompting", "inference_time", "self_consistency"]
+    reasoning_path_family: ["cot", "natural_language_rationale", "homogeneous_sampling"]
+    selection_unit: ["sample", "answer"]
     compute_control:
       adaptive_budget: false
       stopping: false
       reranking: false
-      search: "best_of_n"
+      search: "none"
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["direct_baseline"]
-    what_to_borrow: "majority-vote baseline, diverse reasoning paths intuition."
-    what_not_to_claim: "heterogeneous path selection을 same-prompt SC와 혼동하지 말 것."
-    implementation_candidate: "already baseline"
-    notes_for_coding_agent: "모든 TTC/path-selection 문서에서 baseline으로 언급."
+    relation_to_ours: ["baseline", "origin_multi_sample_baseline", "claim_boundary"]
+    what_to_borrow: "fixed SC@K(K=1/4/8/16/32/64) origin multi-sample baseline, majority-vote(Maj@K), diverse reasoning paths intuition, sample-scaling curve, homogeneous SC vs heterogeneous pool 대비."
+    what_not_to_claim: "self-consistency 자체, majority voting, homogeneous multi-sample reasoning, sample scaling을 우리가 처음 한다고 주장하지 말 것; fixed homogeneous SC와 heterogeneous path-family allocation을 혼동하지 말 것; SC를 폄하하지 말 것."
+    implementation_candidate: "fixed SC@K homogeneous majority-vote baseline"
+    notes_for_coding_agent: "SC is the canonical multi-sample baseline / claim boundary, not a target to beat or a novelty. 모든 TTC/path-selection 문서에서 fixed SC@K를 origin multi-sample baseline으로 고정하고, RASC/CISC는 그 위의 stopping/weighting/confidence 확장으로 둔다. 우리 기여는 upstream heterogeneous path-family acquisition과 state-conditioned STOP이다."
 
   - title: "Reasoning-Aware Self-Consistency: Leveraging Reasoning Paths for Efficient LLM Sampling"
     year: 2025
