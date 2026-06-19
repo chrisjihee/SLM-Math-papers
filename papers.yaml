@@ -589,6 +589,33 @@ papers:
     implementation_candidate: "decompose_first macro strategy card; no full reproduction"
     notes_for_coding_agent: "Least-to-Most decomposes a problem into a sequence of simpler subproblems solved in order (decompose-first), GPT-3 code-davinci-002, GSM8K/DROP/SCAN. 우리는 단일 decompose-first 고정이 아니라 budget 하에서 어떤 strategy card/path family를 선택·중단할지의 macro strategy allocation이며, decompose 추가 cost를 TTC budget에 계상. strategy card는 단순 prompt engineering이 아니라 의사결정 단위."
 
+  - title: "Plan-and-Solve Prompting: Improving Zero-Shot Chain-of-Thought Reasoning by Large Language Models"
+    year: 2023
+    venue: "ACL 2023"
+    url: "https://arxiv.org/abs/2305.04091"
+    code_url: "https://github.com/AGI-Edgerunners/Plan-and-Solve-Prompting"
+    source_pdf: "paper/2023-plan-and-solve.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "GPT-3 text-davinci-003"
+    theme: ["path_pool_construction"]
+    method_type: ["prompting", "inference_time"]
+    reasoning_path_family: ["plan_first", "zero_shot_cot", "structured_prompting"]
+    selection_unit: ["strategy", "prompt"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["contrastive_positioning", "macro_strategy_candidate", "claim_boundary"]
+    what_to_borrow: "plan-first strategy card(PS/PS+), zero-shot-CoT 오류유형(계산/누락/의미) 분해, prompt-diverse vs plan-first ablation, plan generation cost accounting."
+    what_not_to_claim: "plan-first, planning prompting, zero-shot reasoning prompt 개선을 우리가 처음 제안한다고 주장하지 말 것; strategy card를 단순 prompt engineering으로 정당화하지 말 것; raw SOTA 경쟁 금지."
+    implementation_candidate: "plan_first macro strategy card(PS/PS+); no full reproduction"
+    notes_for_coding_agent: "Plan-and-Solve replaces 'Let's think step by step' with a plan-then-solve zero-shot trigger (PS) plus detailed instructions (PS+) to cut calculation/missing-step errors, GPT-3 text-davinci-003. 우리는 단일 plan-first 고정이 아니라 budget 하 macro strategy allocation이며 plan-first는 strategy card 후보. positioning은 Least-to-Most와 공통 decomposition/planning 항목으로 처리."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"

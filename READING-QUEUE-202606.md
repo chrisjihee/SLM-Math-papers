@@ -373,6 +373,20 @@
 - Priority: P1
 - Track: main math research
 
+### 31. Plan-and-Solve Prompting: Improving Zero-Shot Chain-of-Thought Reasoning by Large Language Models
+
+- Year / Venue: 2023 / ACL 2023 (arXiv 2305.04091)
+- Link: https://arxiv.org/abs/2305.04091
+- Status: strategically-read
+- Target file: `md/2023-plan-and-solve.md`
+- Source PDF: `paper/2023-plan-and-solve.pdf`
+- Theme: path_pool_construction
+- 왜 중요한가: Zero-shot-CoT를 개선해 먼저 계획을 세우고 단계별로 수행하는 zero-shot plan-first prompting(PS/PS+)의 대표. plan-first strategy card boundary reference다.
+- 뽑을 것: plan-first strategy card(PS/PS+), zero-shot-CoT 오류유형(계산/누락/의미) 분해, prompt-diverse vs plan-first ablation, plan generation cost accounting.
+- 우리와의 관계: 직접 baseline이 아니라 plan-first/structured-prompting boundary reference. 우리 기여는 plan-first 자체가 아니라 budget 하 macro strategy allocation·STOP이며, strategy card를 의사결정 단위로 다룬다. (모델 GPT-3 text-davinci-003.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
