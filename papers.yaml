@@ -751,6 +751,33 @@ papers:
     implementation_candidate: "analysis reference; ablation confound control only; no reproduction"
     notes_for_coding_agent: "Systematic study of CoT-distillation factors (granularity/format/teacher) over 4 teachers x 7 students x 7 datasets; SLMs behave differently from LLMs, student capacity matters. 우리 route-family 비교에서 distillation/teacher/capacity confound를 통제하는 근거로 사용; 기여는 test-time path-pool allocation."
 
+  - title: "SWITCH: Studying with Teacher for Knowledge Distillation of Large Language Models"
+    year: 2025
+    venue: "NAACL 2025 Findings"
+    url: "https://aclanthology.org/2025.findings-naacl"
+    code_url: ""
+    source_pdf: "paper/2025-switch.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "LLM teacher -> student (instruction-following, 5 datasets, GPT-4 feedback score)"
+    theme: ["structured_graph_reasoning", "distillation"]
+    method_type: ["distillation", "training"]
+    reasoning_path_family: ["structured_rationale"]
+    selection_unit: ["rationale"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["contrastive_positioning", "distillation_boundary", "claim_boundary"]
+    what_to_borrow: "train-inference mismatch·SGO(student-generated outputs) framing, selective(전체가 아닌) teacher intervention 아이디어, distilled backbone substrate, training-time vs inference-time gain 분해."
+    what_not_to_claim: "teacher-student KD, studying-with-teacher, token-level KD dynamics, SGO 개선을 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "distilled backbone substrate only; no SWITCH reproduction"
+    notes_for_coding_agent: "SWITCH: LLM KD with student-generated outputs(SGO); teacher selectively intervenes only on high token-level divergence tokens to avoid misguidance in long sequences; instruction-following (5 datasets, GPT-4 score). venue=NAACL 2025 Findings (legacy filename EMNLP25 is wrong). 우리는 route family 생성(training KD)과 test-time route family 선택을 분리; 기여는 test-time path-pool allocation."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"

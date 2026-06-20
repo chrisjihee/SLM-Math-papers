@@ -502,6 +502,20 @@
 - Priority: P1
 - Track: main math research
 
+### 40. SWITCH: Studying with Teacher for Knowledge Distillation of Large Language Models
+
+- Year / Venue: 2025 / NAACL 2025 Findings (pp. 3733–3746) — ⚠️ legacy 파일명 "(EMNLP25)"는 오기
+- Link: https://aclanthology.org/2025.findings-naacl
+- Status: strategically-read
+- Target file: `md/2025-switch.md`
+- Source PDF: `paper/2025-switch.pdf`
+- Theme: structured_graph_reasoning, distillation
+- 왜 중요한가: LLM KD에서 SGO noise를 teacher의 token-level 선택 개입으로 완화하는 teacher-student KD dynamics의 대표(instruction-following 중심). teacher-guided learning boundary다.
+- 뽑을 것: train-inference mismatch·SGO framing, selective intervention 아이디어, distilled backbone substrate.
+- 우리와의 관계: 직접 baseline이 아니라 KD boundary reference. 우리는 route family 생성(training-time KD)과 test-time route family 선택을 분리하고, 기여는 후자(fixed backbone 위 test-time path allocation). (SNU/LG AI Research.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
