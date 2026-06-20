@@ -913,10 +913,12 @@ papers:
     year: 2023
     venue: "ACL 2023"
     url: "https://aclanthology.org/2023.acl-long.754/"
-    code_url: ""
-    status: "summarized"
-    priority: "background"
-    theme: ["path_pool_construction"]
+    code_url: "https://github.com/yizhongw/self-instruct"
+    source_pdf: "paper/2023-self-instruct.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "vanilla GPT-3 (+33% absolute on SUPERNI)"
+    theme: ["path_pool_construction", "distillation"]
     method_type: ["training"]
     reasoning_path_family: ["direct"]
     selection_unit: ["none"]
@@ -928,11 +930,11 @@ papers:
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["background_only"]
-    what_to_borrow: "synthetic instruction generation background."
-    what_not_to_claim: "current main novelty와 직접 연결된다고 과장하지 말 것."
-    implementation_candidate: "background only"
-    notes_for_coding_agent: "legacy background."
+    relation_to_ours: ["contrastive_positioning", "instruction_tuning_boundary", "claim_boundary"]
+    what_to_borrow: "self-generated data 활용 framing, diversity 필터링, human-data 의존 완화, instruction-tuned backbone substrate, training-time vs inference-time gain 분해."
+    what_not_to_claim: "self-generated instruction, synthetic instruction generation, instruction tuning을 우리가 처음 제안한다고 주장하지 말 것; prompt family/route card를 단순 self-instruction 데이터 생성으로 정당화하지 말 것."
+    implementation_candidate: "instruction-tuned backbone substrate only; no Self-Instruct reproduction"
+    notes_for_coding_agent: "Self-Instruct bootstraps instruction data from the model's own generations (generate instructions->instances->filter->finetune); vanilla GPT-3 +33% on SUPERNI. 우리 prompt family/route card는 training-time instruction data가 아니라 test-time 선택 의사결정 단위; 기여는 test-time path-pool allocation."
 
   - title: "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes"
     year: 2023

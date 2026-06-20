@@ -516,6 +516,20 @@
 - Priority: P1
 - Track: main math research
 
+### 41. Self-Instruct: Aligning Language Models with Self-Generated Instructions
+
+- Year / Venue: 2023 / ACL 2023 (pp. 13484–13508; arXiv 2212.10560)
+- Link: https://aclanthology.org/2023.acl-long.754/
+- Status: strategically-read
+- Target file: `md/2023-self-instruct.md`
+- Source PDF: `paper/2023-self-instruct.pdf`
+- Theme: path_pool_construction, distillation
+- 왜 중요한가: 모델 자체 생성으로 instruction data를 부트스트랩하는 self-generated instruction tuning의 대표. prompt family/route card가 단순 self-instruction으로 보이지 않게 분리하는 boundary다.
+- 뽑을 것: self-generated data 활용·diversity 필터링·instruction-tuned backbone substrate.
+- 우리와의 관계: 직접 baseline이 아니라 instruction-tuning boundary reference. 우리 prompt family/route card는 training-time instruction data가 아니라 test-time 선택 의사결정 단위. (vanilla GPT-3 +33% SUPERNI.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
