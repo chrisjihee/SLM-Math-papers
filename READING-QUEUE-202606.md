@@ -552,6 +552,10 @@
 
 ## P2: 유용한 배경
 
+- TeleResilienceBench: Quantifying Resilience for LLM Reasoning in Telecommunications — 2026 / arXiv 2605.09929 / https://arxiv.org/abs/2605.09929
+  - Status: strategically-read | Priority: P2 (NFM extension/long-term) | target_file: `md/2026-teleresiliencebench.md` | source_pdf: `paper/2026-teleresiliencebench.pdf`
+  - 왜: 결함 있는 부분 reasoning trace를 이어받아 continue+correct하는 reasoning resilience benchmark(7 telecom sub-domain, NC State NextG). 우리 state-conditioned reasoning framing과 가장 가까운 NFM extension. recovery를 우리가 발명한 것처럼 쓰지 말 것; thesis core를 telecom으로 전환 금지. link-check 통과(arXiv 2605.09929).
+
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
   왜: planning-style reasoning과의 차이를 정리할 때 유용.
 

@@ -778,6 +778,33 @@ papers:
     implementation_candidate: "distilled backbone substrate only; no SWITCH reproduction"
     notes_for_coding_agent: "SWITCH: LLM KD with student-generated outputs(SGO); teacher selectively intervenes only on high token-level divergence tokens to avoid misguidance in long sequences; instruction-following (5 datasets, GPT-4 score). venue=NAACL 2025 Findings (legacy filename EMNLP25 is wrong). 우리는 route family 생성(training KD)과 test-time route family 선택을 분리; 기여는 test-time path-pool allocation."
 
+  - title: "TeleResilienceBench: Quantifying Resilience for LLM Reasoning in Telecommunications"
+    year: 2026
+    venue: "arXiv 2605.09929"
+    url: "https://arxiv.org/abs/2605.09929"
+    code_url: "https://github.com/prnshv/TeleResilienceBench"
+    source_pdf: "paper/2026-teleresiliencebench.pdf"
+    status: "strategically-read"
+    priority: "P2"
+    eval_model: "8 LLMs (Qwen3.5, Gemma4, Nemotron-3 families); metric CR% (correction/recovery rate)"
+    theme: ["nfm_telco_bridge"]
+    method_type: ["benchmark", "inference_time"]
+    reasoning_path_family: ["reasoning_recovery", "structured_rationale", "direct"]
+    selection_unit: ["answer", "trace"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["nfm_bridge", "contrastive_positioning", "claim_boundary"]
+    what_to_borrow: "reasoning resilience framing(부분 trace continuation/correction), correction-rate(CR%) metric, midpoint-truncated trace recovery 설정 — 우리 macro-action(verify-then-continue/switch-family/restart) 설계의 개념적 참고."
+    what_not_to_claim: "reasoning resilience/recovery를 우리가 처음 제안/정의한다, telecom resilience를 main thesis로 전환, TeleResilienceBench로 NFM 전체 대표, 우리 state-conditioned framing이 이 benchmark를 일반 해결한다, NFM foundation model/telecom benchmark 구축이 우리 contribution이라고 주장하지 말 것."
+    implementation_candidate: "long-term NFM extension reference only (reasoning recovery / macro-action 참고)"
+    notes_for_coding_agent: "TeleResilienceBench(NC State NextG, NOT Huawei/netop): reasoning resilience = inherit a flawed partial reasoning trace (weak generator failure, truncated at midpoint) and continue+correct; 7 telecom sub-domains(GSMA Open-Telco) + TeleMath auxiliary; 8 models(Qwen3.5/Gemma4/Nemotron-3); metric CR%. 우리 state-conditioned reasoning framing과 가장 가깝지만 NFM extension/long-term으로만 — recovery를 우리가 발명한 것처럼 쓰지 말 것. link-check 통과(arXiv 2605.09929)."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"
