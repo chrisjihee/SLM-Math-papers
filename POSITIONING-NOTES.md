@@ -112,6 +112,16 @@
 - wording caution:
   `decomposition / planning prompting을 우리가 처음 제안한다`로 쓰면 안 된다. 특히 우리 CoT_Lv1/Lv2/Lv3·strategy card가 `단순 prompt engineering`으로 보이지 않도록, prompt family를 budget 하 선택·중단 의사결정 단위로 프레이밍해야 한다.
 
+### Distillation / rationale distillation (CG distillation boundary)
+
+- risk:
+  Distilling Step-by-Step(및 UniCoTT, MAGDi, STaR 류)는 teacher rationale을 작은 student에 증류해 적은 데이터·작은 모델로 reasoning을 끌어올리는 rationale/structured distillation을 제시해, `rationale distillation`, `structured CoT distillation`, `작은 모델 reasoning 향상을 distillation으로`를 이미 선점했다. 우리 과거 `CG distillation` 축이 이 계열과 정면충돌할 위험이 가장 크다.
+- response:
+  우리는 distillation 자체(특히 CG distillation)를 현재 main novelty로 두지 않는다. distillation은 fixed backbone을 얻는 한 방법일 뿐이고, 현재 기여는 그 backbone 위에서 제한된 TTC 안의 heterogeneous reasoning path family를 구성·선택·검증·중단하는 test-time path-pool allocation이다. CG는 삭제하지 않고 여러 structured reasoning path family 중 하나로 보존한다.
+
+- wording caution:
+  `rationale distillation / structured CoT distillation / CG distillation 자체가 우리 기여다`로 쓰면 안 된다. training-time gain(distillation)과 inference-time gain(orchestration)을 분해하고, 우리 novelty는 후자라는 점을 명문화해야 한다.
+
 ### rStar-Math
 
 - risk:

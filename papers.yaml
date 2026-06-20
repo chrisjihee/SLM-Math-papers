@@ -799,10 +799,12 @@ papers:
     year: 2023
     venue: "ACL 2023 Findings"
     url: "https://aclanthology.org/2023.findings-acl.507/"
-    code_url: ""
-    status: "summarized"
-    priority: "background"
-    theme: ["structured_graph_reasoning"]
+    code_url: "https://github.com/google-research/distilling-step-by-step"
+    source_pdf: "paper/2023-distilling-step-by-step.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "teacher PaLM 540B -> student T5 (220M/770M/11B)"
+    theme: ["structured_graph_reasoning", "distillation"]
     method_type: ["distillation", "training"]
     reasoning_path_family: ["cot", "structured_rationale"]
     selection_unit: ["rationale"]
@@ -814,11 +816,11 @@ papers:
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["background_only"]
-    what_to_borrow: "rationale distillation background."
-    what_not_to_claim: "current TTC/path-selection novelty와 혼동하지 말 것."
-    implementation_candidate: "background only"
-    notes_for_coding_agent: "legacy distillation background."
+    relation_to_ours: ["contrastive_positioning", "distillation_boundary", "claim_boundary"]
+    what_to_borrow: "rationale-as-supervision multi-task framing, data-efficiency/student-size metric, distilled student as fixed backbone substrate, training-time vs inference-time gain 분해."
+    what_not_to_claim: "rationale distillation, step-by-step distillation, 작은 모델 rationale 증류로 reasoning 향상, CG distillation 자체를 우리가 처음/핵심 기여로 주장하지 말 것."
+    implementation_candidate: "distilled backbone substrate only; no distillation reproduction"
+    notes_for_coding_agent: "Teacher PaLM 540B -> student T5(220M/770M/11B) multi-task(label + rationale), data-efficient(SVAMP/e-SNLI/ANLI/CQA). 우리 과거 CG distillation 축의 boundary; 현재 기여는 distillation이 아니라 fixed backbone 위 test-time path-pool allocation이며 distillation은 backbone 확보 수단으로만."
 
   - title: "Phased Instruction Fine-Tuning for Large Language Models"
     year: 2024

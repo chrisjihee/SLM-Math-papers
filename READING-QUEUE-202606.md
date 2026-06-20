@@ -404,6 +404,20 @@
 - Priority: P1
 - Track: main math research
 
+### 33. Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes
+
+- Year / Venue: 2023 / ACL 2023 Findings (arXiv 2305.02301)
+- Link: https://arxiv.org/abs/2305.02301
+- Status: strategically-read
+- Target file: `md/2023-distilling-step-by-step.md`
+- Source PDF: `paper/2023-distilling-step-by-step.pdf`
+- Theme: structured_graph_reasoning, distillation
+- 왜 중요한가: teacher rationale을 작은 student에 multi-task로 증류해 적은 데이터·작은 모델로 LLM을 능가한 rationale distillation의 대표. 우리 과거 CG distillation 축의 boundary다.
+- 뽑을 것: rationale-as-supervision multi-task framing, data-efficiency/student-size metric, distilled student를 fixed backbone substrate로, training-time vs inference-time gain 분해.
+- 우리와의 관계: 직접 baseline이 아니라 distillation/rationale boundary reference. 우리 기여는 distillation(특히 CG distillation) 자체가 아니라 fixed backbone 위 test-time path-pool allocation. (teacher PaLM 540B → student T5.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
