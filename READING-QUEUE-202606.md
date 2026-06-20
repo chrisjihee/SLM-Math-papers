@@ -474,6 +474,20 @@
 - Priority: P1
 - Track: main math research
 
+### 38. Mentor-KD: Making Small Language Models Better Multi-step Reasoners
+
+- Year / Venue: 2024 / EMNLP 2024 (arXiv 2410.11325)
+- Link: https://arxiv.org/abs/2410.11325
+- Status: strategically-read
+- Target file: `md/2024-mentor-kd.md`
+- Source PDF: `paper/2024-mentor-kd.pdf`
+- Theme: structured_graph_reasoning, distillation
+- 왜 중요한가: reasoning distillation의 teacher rationale 품질·다양성·soft label 한계를 intermediate mentor로 보강하는 teacher-guided distillation의 대표. SLM multi-step reasoning improvement boundary다.
+- 뽑을 것: teacher rationale 품질·다양성 framing, soft label, mentor augmentation, distilled backbone substrate.
+- 우리와의 관계: 직접 baseline이 아니라 distillation boundary reference. 우리 기여는 training-time KD가 아니라 fixed backbone 위 test-time path-pool allocation. (teacher LLM → small student.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R

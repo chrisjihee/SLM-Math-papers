@@ -697,6 +697,33 @@ papers:
     implementation_candidate: "bootstrapped backbone substrate only; no STaR reproduction"
     notes_for_coding_agent: "STaR self-bootstraps: few-shot generate rationale+answer -> keep correct -> finetune; wrong -> rationalization(answer as hint) -> keep -> finetune; iterate. base GPT-J 6B, GSM8K/CQA. training-time self-improvement; 우리 기여는 fixed backbone 위 test-time path-pool allocation이며 bootstrap은 backbone 확보 수단. rStar-Math self-evolution의 계보 원형."
 
+  - title: "Mentor-KD: Making Small Language Models Better Multi-step Reasoners"
+    year: 2024
+    venue: "EMNLP 2024"
+    url: "https://arxiv.org/abs/2410.11325"
+    code_url: ""
+    source_pdf: "paper/2024-mentor-kd.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "teacher LLM (e.g., GPT-3.5) + intermediate mentor -> small student LM"
+    theme: ["structured_graph_reasoning", "distillation"]
+    method_type: ["distillation", "training"]
+    reasoning_path_family: ["cot", "structured_rationale"]
+    selection_unit: ["rationale"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["contrastive_positioning", "distillation_boundary", "claim_boundary"]
+    what_to_borrow: "teacher rationale 품질·다양성 framing, soft label provision, intermediate mentor augmentation, distilled backbone substrate, training-time vs inference-time gain 분해."
+    what_not_to_claim: "small model multi-step reasoning distillation, teacher-guided rationale augmentation, soft label KD, SLM reasoning improvement를 우리가 처음 제안한다고 주장하지 말 것."
+    implementation_candidate: "distilled backbone substrate only; no Mentor-KD reproduction"
+    notes_for_coding_agent: "Mentor-KD fixes reasoning-distillation limits (teacher rationale data quality + no soft label) via an intermediate-sized task-specific 'mentor' that augments diverse CoT rationales and provides soft labels to the small student; teacher LLM->student, GSM8K/StrategyQA/CSQA. 우리 기여는 training-time KD가 아니라 fixed backbone 위 test-time path-pool allocation이며 distillation은 backbone 확보 수단."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"
