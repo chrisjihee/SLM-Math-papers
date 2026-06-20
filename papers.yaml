@@ -724,6 +724,33 @@ papers:
     implementation_candidate: "distilled backbone substrate only; no Mentor-KD reproduction"
     notes_for_coding_agent: "Mentor-KD fixes reasoning-distillation limits (teacher rationale data quality + no soft label) via an intermediate-sized task-specific 'mentor' that augments diverse CoT rationales and provides soft labels to the small student; teacher LLM->student, GSM8K/StrategyQA/CSQA. 우리 기여는 training-time KD가 아니라 fixed backbone 위 test-time path-pool allocation이며 distillation은 backbone 확보 수단."
 
+  - title: "Unveiling the Key Factors for Distilling Chain-of-Thought Reasoning"
+    year: 2025
+    venue: "ACL 2025 Findings"
+    url: "https://aclanthology.org/2025.findings-acl"
+    code_url: ""
+    source_pdf: "paper/2025-unveiling-cot-distillation.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "4 teacher models x 7 student models x 7 math/commonsense datasets"
+    theme: ["structured_graph_reasoning", "distillation"]
+    method_type: ["distillation", "training"]
+    reasoning_path_family: ["cot", "structured_rationale"]
+    selection_unit: ["rationale"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["contrastive_positioning", "distillation_boundary", "claim_boundary"]
+    what_to_borrow: "distillation confound(granularity/format/teacher/student capacity) 통제 변수, SLM!=LLM 거동, factor 민감도 분석, route-family 비교 ablation 통제 설계 근거."
+    what_not_to_claim: "CoT distillation factor analysis, rationale granularity/format/teacher 선택 효과를 우리가 처음 밝혔다고 주장하지 말 것; route 차이를 confound 미통제 상태로 path-family 효과라 단정하지 말 것."
+    implementation_candidate: "analysis reference; ablation confound control only; no reproduction"
+    notes_for_coding_agent: "Systematic study of CoT-distillation factors (granularity/format/teacher) over 4 teachers x 7 students x 7 datasets; SLMs behave differently from LLMs, student capacity matters. 우리 route-family 비교에서 distillation/teacher/capacity confound를 통제하는 근거로 사용; 기여는 test-time path-pool allocation."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"

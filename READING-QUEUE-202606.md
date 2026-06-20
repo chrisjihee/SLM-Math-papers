@@ -488,6 +488,20 @@
 - Priority: P1
 - Track: main math research
 
+### 39. Unveiling the Key Factors for Distilling Chain-of-Thought Reasoning
+
+- Year / Venue: 2025 / ACL 2025 Findings (pp. 15094–15119)
+- Link: https://aclanthology.org/2025.findings-acl
+- Status: strategically-read
+- Target file: `md/2025-unveiling-cot-distillation.md`
+- Source PDF: `paper/2025-unveiling-cot-distillation.pdf`
+- Theme: structured_graph_reasoning, distillation
+- 왜 중요한가: CoT distillation 성능을 좌우하는 요인(granularity/format/teacher/student capacity)을 대규모 분석한 confound reference. 우리 route-family 비교 ablation의 통제 근거다.
+- 뽑을 것: distillation confound 통제 변수, SLM≠LLM 거동, factor 민감도, ablation 통제 설계.
+- 우리와의 관계: 직접 baseline이 아니라 analysis/confound boundary reference. 우리 기여는 distillation factor 분석이 아니라 fixed backbone 위 test-time path-pool allocation이며, route 비교 시 학습 측 confound를 통제한다. (4 teacher × 7 student × 7 dataset.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
