@@ -297,14 +297,17 @@
 - Priority: P1
 - Track: NFM bridge
 
-### 25. TeleLogs
+### 25. Reasoning Language Models for Root Cause Analysis in 5G Wireless Networks (TeleLogs)
 
-- Year / Venue: 2025 / dataset page + paper link
-- Link: https://huggingface.co/datasets/netop/TeleLogs
+- Year / Venue: 2025 / arXiv 2507.21974 (Huawei)
+- Link: https://arxiv.org/abs/2507.21974 (dataset https://huggingface.co/datasets/netop/TeleLogs)
+- Status: strategically-read
+- Target file: `md/2025-telelogs.md`
+- Source PDF: `paper/2025-telelogs.pdf`
 - Theme: nfm_telco_bridge
-- 왜 중요한가: RCA, verifier, diagnosis path selection 문제로 바로 연결된다.
-- 뽑을 것: symptom-root-cause structure, majority-vote/maj@4 성격, schema needs.
-- 우리와의 관계: math 이후 bridge paper의 2순위 또는 3순위.
+- 왜 중요한가: 5G throughput 저하 RCA benchmark(8 root causes) + LLM RCA framework. verifier·evidence selection·diagnosis path selection으로 연결.
+- 뽑을 것: symptom-root-cause structure, pass@1/maj@4(=SC) 성격, evidence sufficiency·disagreement resolution.
+- 우리와의 관계: NFM bridge stage 3. path family(direct/evidence-first/hypothesis-gen/verifier-route/retrieval) + maj@4 baseline 비교. **thesis core가 RCA/log analysis로 이동하지 않게 주의**(가장 중요).
 - Priority: P1
 - Track: NFM bridge
 

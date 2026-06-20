@@ -887,30 +887,33 @@ papers:
     implementation_candidate: "bridge experiment stage 2 (table-aware path family + cons@16 baseline)"
     notes_for_coding_agent: "TeleTables = NFM bridge stage 2 benchmark: 3GPP table interpretation MCQ, pass@1+cons@16(=SC). 우리 path-pool/STOP/verifier 아이디어를 table 도메인으로 transfer; path family 후보 direct/CoT/table-aware decomposition/retrieval-first/verifier-guided. cons@16은 SC eval protocol이라 compute_control/verifier는 benchmark 자체 기준 모두 false/none. thesis core를 table reasoning으로 격상하지 말 것."
 
-  - title: "TeleLogs"
+  - title: "Reasoning Language Models for Root Cause Analysis in 5G Wireless Networks (TeleLogs)"
     year: 2025
-    venue: "dataset + paper"
-    url: "https://huggingface.co/datasets/netop/TeleLogs"
+    venue: "arXiv 2507.21974"
+    url: "https://arxiv.org/abs/2507.21974"
     code_url: ""
-    status: "unread"
+    source_pdf: "paper/2025-telelogs.pdf"
+    dataset_url: "https://huggingface.co/datasets/netop/TeleLogs"
+    status: "strategically-read"
     priority: "P1"
+    eval_model: "open-source reasoning LLMs + domain adaptation; metric pass@1, maj@4"
     theme: ["nfm_telco_bridge"]
-    method_type: ["inference_time", "routing", "verifier"]
-    reasoning_path_family: ["direct", "rag", "log_rca", "structured_rationale"]
-    selection_unit: ["strategy", "answer"]
+    method_type: ["benchmark", "inference_time", "training"]
+    reasoning_path_family: ["direct", "log_rca", "structured_rationale", "rag"]
+    selection_unit: ["answer", "strategy"]
     compute_control:
-      adaptive_budget: true
+      adaptive_budget: false
       stopping: false
-      reranking: true
+      reranking: false
       search: "none"
     verifier:
-      uses_verifier: true
-      verifier_type: "schema"
+      uses_verifier: false
+      verifier_type: "none"
     relation_to_ours: ["nfm_bridge"]
-    what_to_borrow: "RCA consistency, majority-vote RCA framing."
-    what_not_to_claim: "main thesis core를 RCA로 바꾸지 말 것."
-    implementation_candidate: "bridge experiment stage 3"
-    notes_for_coding_agent: "verifier-style bridge task."
+    what_to_borrow: "RCA evidence sufficiency·causal reasoning·hypothesis confidence framing; pass@1 + maj@4(=SC majority vote@4) metric은 우리 fixed SC@K와 정렬; root-cause disagreement resolution."
+    what_not_to_claim: "RCA/log reasoning을 우리가 처음/일반적으로 해결한다, main thesis를 RCA/log analysis로 전환, TeleLogs로 NFM 전체 대표, maj@4가 우리 기여, NFM foundation model을 우리가 제안한다고 주장하지 말 것."
+    implementation_candidate: "bridge experiment stage 3 (evidence-first path family + maj@4 baseline); telecom adaptation 부담 큼"
+    notes_for_coding_agent: "TeleLogs = NFM bridge stage 3: 5G RCA(throughput degradation, 8 predefined root causes) annotated troubleshooting benchmark + lightweight LLM RCA framework(domain adaptation); pass@1+maj@4(=SC). 우리 verifier/voting/STOP 아이디어를 RCA 도메인으로 transfer; path family 후보 direct/evidence-first/hypothesis-gen/verifier-route/retrieval. maj@4는 SC eval이라 compute_control/verifier는 benchmark 기준 false/none. thesis core를 RCA로 격상하지 말 것(가장 주의)."
 
   - title: "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
     year: 2023
