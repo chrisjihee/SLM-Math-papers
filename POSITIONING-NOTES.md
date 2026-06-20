@@ -122,6 +122,16 @@
 - wording caution:
   `rationale distillation / structured CoT distillation / CG distillation 자체가 우리 기여다`로 쓰면 안 된다. training-time gain(distillation)과 inference-time gain(orchestration)을 분해하고, 우리 novelty는 후자라는 점을 명문화해야 한다.
 
+### Self-Instruct / Phased IFT / instruction tuning (training-time boundary)
+
+- risk:
+  Self-Instruct는 self-generated instruction data / instruction tuning을, Phased Instruction Fine-Tuning은 staged / easy-to-hard instruction tuning curriculum을 이미 선점했다. 우리 prompt/route instruction이나 difficulty-aware 아이디어가 이 training-time 계열로 읽힐 위험이 있다.
+- response:
+  우리는 fixed backbone 위에서 test-time path-family / strategy selection을 한다. prompt/route instruction은 training data generation이 아니라 inference-time action/strategy interface이며, difficulty를 쓰더라도 training curriculum이 아니라 inference-time state-conditioned budget allocation으로 제한한다.
+
+- wording caution:
+  `synthetic instruction generation 자체 / instruction tuning 자체 / phased curriculum 자체가 우리 novelty`로 쓰면 안 된다. instruction tuning은 backbone 확보 수단으로만 두고, 우리 기여는 inference-time path-pool allocation·STOP이라는 점을 분리한다.
+
 ### rStar-Math
 
 - risk:

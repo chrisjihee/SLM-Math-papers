@@ -1,5 +1,10 @@
 # UNIFIED PAPER LIST
 
+> **Status note (2026-06-20):** This file is a secondary/legacy unified index.
+> The canonical paper registry is now `papers.yaml`, and the active reading/status queue is `READING-QUEUE-202606.md` plus root `CURRENT-READING.md`.
+> For current claim boundaries and positioning, use `RELATED-WORK-MATRIX.md` and `POSITIONING-NOTES.md`.
+> Do not infer unread/read status from this file alone.
+
 Last updated: 2026-06-14
 
 이 문서는 현재 `SLM-Math`의 **post-2026-06 taxonomy**에 맞게 논문을 재분류한 통합 목록이다. 목적은 "CG 관련 논문 모음"이 아니라, **math reasoning mainline + TTC/path selection + selective NFM bridge**를 함께 보는 것이다.

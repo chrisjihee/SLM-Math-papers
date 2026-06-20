@@ -1,5 +1,10 @@
 # MUST-READ PLAN
 
+> **Status note (2026-06-20):** This file is a historical must-read plan from the 2026-06-14 framing stage.
+> Several papers listed here have since been strategically read and reflected in `papers.yaml`, `READING-QUEUE-202606.md`, `RELATED-WORK-MATRIX.md`, and `POSITIONING-NOTES.md`.
+> Use `READING-QUEUE-202606.md` and root `CURRENT-READING.md` for the current active queue.
+> Keep this file as historical planning context, not as the source of truth.
+
 Last updated: 2026-06-14
 
 이 문서는 **지금 당장 읽어야 하는 논문만 압축한 canonical shortlist**다. 자세한 큐는 [READING-QUEUE-202606.md](READING-QUEUE-202606.md)를 본다.
