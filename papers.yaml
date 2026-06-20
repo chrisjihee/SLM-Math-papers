@@ -728,10 +728,12 @@ papers:
     year: 2025
     venue: "ICLR 2025 Spotlight"
     url: "https://openreview.net/forum?id=ffLblkoCw8"
-    code_url: ""
-    status: "unread"
+    code_url: "https://github.com/dinobby/MAGDi"
+    source_pdf: "paper/2025-magdi.pdf"
+    status: "strategically-read"
     priority: "P1"
-    theme: ["structured_graph_reasoning"]
+    eval_model: "LLM teachers (multi-agent) -> GNN-augmented small student LM; commonsense+math reasoning"
+    theme: ["structured_graph_reasoning", "distillation"]
     method_type: ["distillation", "training"]
     reasoning_path_family: ["graph", "structured_rationale"]
     selection_unit: ["rationale"]
@@ -743,11 +745,11 @@ papers:
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["background_only", "contrastive_positioning"]
-    what_to_borrow: "graph distillation as true structured target."
-    what_not_to_claim: "우리 current CG가 graph-preserving reasoning이라고 주장하지 말 것."
-    implementation_candidate: "background only"
-    notes_for_coding_agent: "graph claim 절제에 도움."
+    relation_to_ours: ["contrastive_positioning", "distillation_boundary", "claim_boundary"]
+    what_to_borrow: "multi-agent 비용 문제·단일 효율 모델 동기(우리 lightweight 지향과 공명), structured distillation objectives(contrastive correct/incorrect + graph structure), distilled backbone substrate, graph distillation as true graph target reference."
+    what_not_to_claim: "multi-agent interaction graph distillation, graph-structured distillation, GNN-augmented student를 우리가 처음 제안한다고/우리 main novelty라고 주장하지 말 것; 우리 CG가 graph reasoning/graph-preserving distillation이라고 과장하지 말 것."
+    implementation_candidate: "distilled backbone substrate only; no MAGDi/GNN reproduction"
+    notes_for_coding_agent: "MAGDi distills multi-agent debate interactions (as a graph, GNN-augmented student) into a single efficient SLM; commonsense+math. '진짜 graph distillation' 기준점 — 우리 CG는 graph-preserving traversal이 아니라 linearized structured rationale path family로 보존하고 현재 기여는 fixed backbone 위 test-time path-pool allocation. multi-agent 비용 대비 lightweight orchestration 동기로 활용."
 
   - title: "TeleMath: A Benchmark for Large Language Models in Telecom Mathematical Problem Solving"
     year: 2025

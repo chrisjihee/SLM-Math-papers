@@ -460,6 +460,20 @@
 - Priority: P1
 - Track: main math research
 
+### 37. MAGDi: Structured Distillation of Multi-Agent Interaction Graphs Improves Reasoning in Smaller Language Models
+
+- Year / Venue: 2025 / ICLR 2025 Spotlight (OpenReview ffLblkoCw8)
+- Link: https://openreview.net/forum?id=ffLblkoCw8
+- Status: strategically-read
+- Target file: `md/2025-magdi.md`
+- Source PDF: `paper/2025-magdi.pdf`
+- Theme: structured_graph_reasoning, distillation
+- 왜 중요한가: multi-agent LLM 상호작용을 graph로 표현해 GNN-augmented student에 structured distillation하는 '진짜 graph distillation' 기준점. 우리 CG graph claim 절제의 boundary다.
+- 뽑을 것: multi-agent 비용·단일 효율 모델 동기, structured distillation objectives(contrastive + graph structure), distilled backbone substrate.
+- 우리와의 관계: 직접 baseline이 아니라 graph-distillation boundary reference. 우리 CG는 graph-preserving traversal이 아니라 linearized structured rationale path family로 보존하고, 기여는 fixed backbone 위 test-time path-pool allocation. (LLM teachers → GNN-augmented small student.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
@@ -467,9 +481,6 @@
 
 - ReST-MCTS* — 2024 / arXiv-only / https://arxiv.org/abs/2406.03816
   왜: PRM-guided tree search self-training reference.
-
-- MAGDi — 2025 / ICLR 2025 Spotlight / https://openreview.net/forum?id=ffLblkoCw8
-  왜: graph-based distillation이 실제로 무엇을 의미하는지 참고.
 
 - InstructGraph — 2024 / ACL 2024 Findings / https://aclanthology.org/2024.findings-acl.801/
   왜: graph-centric instruction tuning과 preference alignment reference.
