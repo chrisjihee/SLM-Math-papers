@@ -283,14 +283,17 @@
 - Priority: P0
 - Track: main math research
 
-### 24. TeleTables
+### 24. TeleTables: A Benchmark for Large Language Models in Telecom Table Interpretation
 
-- Year / Venue: 2025 / dataset page + paper link
-- Link: https://huggingface.co/datasets/netop/TeleTables
+- Year / Venue: 2026 / arXiv 2601.04202 (Huawei NetOp)
+- Link: https://arxiv.org/abs/2601.04202 (dataset https://huggingface.co/datasets/netop/TeleTables)
+- Status: strategically-read
+- Target file: `md/2026-teletables.md`
+- Source PDF: `paper/2026-teletables.pdf`
 - Theme: nfm_telco_bridge
-- 왜 중요한가: structured/table reasoning bridge의 핵심 benchmark다.
-- 뽑을 것: table interpretation 유형, multi-step table reasoning difficulty.
-- 우리와의 관계: strategy-card를 `table prompt / retrieval-table selection`으로 확장하기 좋다.
+- 왜 중요한가: 3GPP 표준 table을 retrieval·interpretation·multi-step reasoning하는 structured/table reasoning bridge benchmark(500 human-verified MCQ, pass@1+cons@16).
+- 뽑을 것: table interpretation 유형, multi-step table reasoning difficulty, cons@16(=SC) metric, table-evidence 분해.
+- 우리와의 관계: NFM bridge stage 2. path family 후보(direct/CoT/table-aware decomposition/retrieval-first/verifier-guided)와 cons@16 baseline 비교; strategy-card를 table-card로 확장. thesis core(math/TTC)를 table reasoning으로 격상 금지.
 - Priority: P1
 - Track: NFM bridge
 
