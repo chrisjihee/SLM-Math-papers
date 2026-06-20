@@ -45,6 +45,10 @@
   - parallel sampling이 global exploration에 가깝다면, revision은 local refinement에 가깝다.
 - 핵심 formulation은 prompt `q`, compute budget `N`, test-time hyperparameter `θ`에 대해 어떤 output distribution이 유도되는지 보고, 문제별로 accuracy를 최대화하는 `θ`를 선택하는 것이다.
 - 결과적으로 이 논문은 `무조건 더 많이 샘플링`이 아니라 **어떤 문제에 어떤 TTC strategy를 쓰는가**가 중요하다고 주장한다.
+- 핵심 headline 결과(PDF 본문 직접 확인, legacy summary 보강):
+  - compute-optimal 전략은 `best-of-N` 대비 **4×+ 적은 compute**로 동일/상회 성능.
+  - **FLOPs-matched** 비교에서, easy/medium 난이도 문제는 작은 모델 + test-time compute가 **14× 더 큰 모델**을 능가. 단 base model이 못 푸는 매우 어려운 문제는 pretraining(모델 키우기)이 더 유리 → test-time compute와 pretraining은 1:1 교환 불가.
+  - base model: `PaLM 2-S*`, benchmark `MATH`.
 
 ## 5. SLM-Math 관점의 재해석
 
