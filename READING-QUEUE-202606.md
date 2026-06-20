@@ -446,6 +446,20 @@
 - Priority: P1
 - Track: main math research
 
+### 36. UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation
+
+- Year / Venue: 2025 / ICLR 2025 (OpenReview 3baOKeI2EU)
+- Link: https://openreview.net/forum?id=3baOKeI2EU
+- Status: strategically-read
+- Target file: `md/2025-unicott.md`
+- Source PDF: `paper/2025-unicott.pdf`
+- Theme: structured_graph_reasoning, distillation
+- 왜 중요한가: chain·tree·graph 등 다양한 구조의 CoT를 작은 SLM에 통합 증류하는 structural CoT distillation의 대표. 우리 CG distillation 축과 가장 가까운 boundary다.
+- 뽑을 것: structure-aware distillation framing(chain/tree/graph), structured constraints, distilled backbone substrate, training-time vs inference-time gain 분해.
+- 우리와의 관계: 직접 baseline이 아니라 CG distillation boundary reference. 우리 기여는 structural distillation이 아니라 fixed backbone 위 test-time path-pool allocation이며, CG는 structured path family 중 하나로 보존. (LLM teacher → BERT-class SLM.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
@@ -453,9 +467,6 @@
 
 - ReST-MCTS* — 2024 / arXiv-only / https://arxiv.org/abs/2406.03816
   왜: PRM-guided tree search self-training reference.
-
-- UniCoTT — 2025 / ICLR 2025 / https://openreview.net/forum?id=3baOKeI2EU
-  왜: structured rationale distillation reference.
 
 - MAGDi — 2025 / ICLR 2025 Spotlight / https://openreview.net/forum?id=ffLblkoCw8
   왜: graph-based distillation이 실제로 무엇을 의미하는지 참고.

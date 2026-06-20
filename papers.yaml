@@ -701,10 +701,12 @@ papers:
     year: 2025
     venue: "ICLR 2025"
     url: "https://openreview.net/forum?id=3baOKeI2EU"
-    code_url: ""
-    status: "unread"
+    code_url: "https://github.com/mengchuang123/UniCoTT"
+    source_pdf: "paper/2025-unicott.pdf"
+    status: "strategically-read"
     priority: "P1"
-    theme: ["structured_graph_reasoning"]
+    eval_model: "LLM teacher -> small SLM (BERT-class encoder); QA(ScienceQA/OBQA/CommonsenseQA)"
+    theme: ["structured_graph_reasoning", "distillation"]
     method_type: ["distillation", "training"]
     reasoning_path_family: ["structured_rationale", "graph"]
     selection_unit: ["rationale"]
@@ -716,11 +718,11 @@ papers:
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["background_only", "contrastive_positioning"]
-    what_to_borrow: "structured rationale distillation language."
-    what_not_to_claim: "CG structured distillation novelty over UniCoTT."
-    implementation_candidate: "background only"
-    notes_for_coding_agent: "CG를 structured family로 reposition할 때 중요."
+    relation_to_ours: ["contrastive_positioning", "distillation_boundary", "claim_boundary"]
+    what_to_borrow: "structure-aware distillation framing(chain/tree/graph), CoT distillation의 hallucination·구조 무시 문제 제기, structured constraints, training-time vs inference-time gain 분해."
+    what_not_to_claim: "structural CoT distillation, chain/tree/graph rationale 증류, CG distillation·CoT_Lv route 구분을 새 structural distillation으로/우리 main novelty로 주장하지 말 것."
+    implementation_candidate: "distilled backbone substrate only; no UniCoTT reproduction"
+    notes_for_coding_agent: "UniCoTT unifies distillation of diverse structural CoTs(chain/tree/graph) into small SLMs(BERT-class) via iterative construction + structured constraints. 우리 CG distillation 축과 가장 가까운 boundary; CG는 structured rationale path family 중 하나로 보존하고 현재 기여는 fixed backbone 위 test-time path-pool allocation(structure type 학습이 아님)."
 
   - title: "MAGDi: Structured Distillation of Multi-Agent Interaction Graphs Improves Reasoning in Smaller Language Models"
     year: 2025
