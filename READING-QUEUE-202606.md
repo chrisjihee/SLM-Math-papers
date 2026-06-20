@@ -530,6 +530,20 @@
 - Priority: P1
 - Track: main math research
 
+### 42. Phased Instruction Fine-Tuning for Large Language Models
+
+- Year / Venue: 2024 / ACL 2024 Findings (pp. 5735–5748; arXiv 2406.04371)
+- Link: https://aclanthology.org/2024.findings-acl.341/
+- Status: strategically-read
+- Target file: `md/2024-phased-instruction-ft.md`
+- Source PDF: `paper/2024-phased-instruction-ft.pdf`
+- Theme: math_slm_frontier, distillation
+- 왜 중요한가: GPT-4 instruction 난이도 평가로 easy-to-hard 단계적 fine-tuning하는 staged instruction tuning의 대표. difficulty 기반 training curriculum boundary로, 우리 test-time difficulty allocation과 시점 분리가 핵심이다.
+- 뽑을 것: 학습 점진성·GPT-4 difficulty scoring·easy-to-hard framing·instruction-tuned backbone substrate.
+- 우리와의 관계: 직접 baseline이 아니라 instruction-tuning curriculum boundary reference. 둘 다 difficulty를 쓰지만 Phased IFT는 training 시점, 우리는 inference 시점 state-conditioned path-pool allocation. (Llama-2/3, Mistral-7B, Alpaca.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R

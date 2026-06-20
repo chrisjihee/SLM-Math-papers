@@ -967,10 +967,12 @@ papers:
     year: 2024
     venue: "ACL 2024 Findings"
     url: "https://aclanthology.org/2024.findings-acl.341/"
-    code_url: ""
-    status: "summarized"
-    priority: "background"
-    theme: ["math_slm_frontier"]
+    code_url: "https://github.com/xubuvd/PhasedSFT"
+    source_pdf: "paper/2024-phased-instruction-ft.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "Llama-2 7B/13B/70B, Llama3 8/70B, Mistral-7B (Alpaca data)"
+    theme: ["math_slm_frontier", "distillation"]
     method_type: ["training"]
     reasoning_path_family: ["direct"]
     selection_unit: ["none"]
@@ -982,8 +984,8 @@ papers:
     verifier:
       uses_verifier: false
       verifier_type: "none"
-    relation_to_ours: ["background_only"]
-    what_to_borrow: "curriculum training background."
-    what_not_to_claim: "current mainline의 직접 novelty라고 과장하지 말 것."
-    implementation_candidate: "background only"
-    notes_for_coding_agent: "legacy training background."
+    relation_to_ours: ["contrastive_positioning", "instruction_tuning_boundary", "claim_boundary"]
+    what_to_borrow: "instruction-following 학습의 점진성, GPT-4 instruction difficulty scoring, easy-to-hard framing, instruction-tuned backbone substrate, training-time vs inference-time gain 분해."
+    what_not_to_claim: "phased/staged instruction tuning, training curriculum, 난이도 기반 단계화를 우리가 처음 제안한다고 주장하지 말 것; difficulty 기반 training curriculum과 difficulty/state-conditioned test-time allocation을 동일시하지 말 것(시점 분리)."
+    implementation_candidate: "instruction-tuned backbone substrate only; no Phased IFT reproduction"
+    notes_for_coding_agent: "Phased IFT scores instruction difficulty (GPT-4), splits data into increasing-difficulty subsets, fine-tunes easy-to-hard (vs One-off IFT); Llama-2/3, Mistral-7B, Alpaca. 둘 다 difficulty를 쓰지만 Phased IFT는 training 시점 curriculum, 우리는 inference 시점 state-conditioned path-pool allocation — 시점을 분리해 기재."
