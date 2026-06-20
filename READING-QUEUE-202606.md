@@ -432,6 +432,20 @@
 - Priority: P1
 - Track: main math research
 
+### 35. STaR: Bootstrapping Reasoning With Reasoning
+
+- Year / Venue: 2022 / NeurIPS 2022 (arXiv 2203.14465)
+- Link: https://arxiv.org/abs/2203.14465
+- Status: strategically-read
+- Target file: `md/2022-star.md`
+- Source PDF: `paper/2022-star.pdf`
+- Theme: search_reflection_rl, math_slm_frontier
+- 왜 중요한가: self-generated rationale을 정답으로 self-filter해 fine-tune하고 rationalization으로 보강하는 self-bootstrap의 원형. distillation/bootstrapping boundary이자 rStar-Math self-evolution 계보 원형이다.
+- 뽑을 것: self-generation+correctness filtering framing, bootstrap iteration별 gain, bootstrapped backbone substrate, training-time vs inference-time gain 분해.
+- 우리와의 관계: 직접 baseline이 아니라 rationale-bootstrapping boundary reference. 우리 기여는 training-time bootstrapping이 아니라 fixed backbone 위 test-time path-pool allocation. (base GPT-J 6B, GSM8K/CQA.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R

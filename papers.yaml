@@ -670,6 +670,33 @@ papers:
     implementation_candidate: "verifier as final-decision/STOP candidate; no PAV reproduction"
     notes_for_coding_agent: "PAV defines step reward as 'progress' (advantage of reaching correct answer under a prover policy distinct from base), automated, used for test-time search(beam) + RL credit assignment; ORM 대비 acc ~8%↑, compute 1.5-5×↑; Gemma2 2B/9B/27B. 우리 기여는 verifier 자체가 아니라 verifier가 평가할 path-pool의 upstream 구성·STOP·generation-verification budget split이며 verifier compute를 TTC budget에 계상."
 
+  - title: "STaR: Bootstrapping Reasoning With Reasoning"
+    year: 2022
+    venue: "NeurIPS 2022"
+    url: "https://arxiv.org/abs/2203.14465"
+    code_url: ""
+    source_pdf: "paper/2022-star.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "GPT-J 6B (GSM8K/CommonsenseQA/arithmetic)"
+    theme: ["search_reflection_rl", "math_slm_frontier"]
+    method_type: ["training"]
+    reasoning_path_family: ["cot", "self_generated_rationale"]
+    selection_unit: ["rationale"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: false
+      search: "none"
+    verifier:
+      uses_verifier: false
+      verifier_type: "none"
+    relation_to_ours: ["contrastive_positioning", "distillation_boundary", "claim_boundary"]
+    what_to_borrow: "self-generation + correctness filtering framing, rationalization, bootstrap iteration별 gain, bootstrapped backbone substrate, training-time vs inference-time gain 분해."
+    what_not_to_claim: "rationale bootstrapping, self-taught reasoning, self-generated rationale training, 정답 기반 self-filtering self-improvement를 우리가 처음 제안한다고 주장하지 말 것; training-time gain을 inference-time 기여로 혼동 금지."
+    implementation_candidate: "bootstrapped backbone substrate only; no STaR reproduction"
+    notes_for_coding_agent: "STaR self-bootstraps: few-shot generate rationale+answer -> keep correct -> finetune; wrong -> rationalization(answer as hint) -> keep -> finetune; iterate. base GPT-J 6B, GSM8K/CQA. training-time self-improvement; 우리 기여는 fixed backbone 위 test-time path-pool allocation이며 bootstrap은 backbone 확보 수단. rStar-Math self-evolution의 계보 원형."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"
