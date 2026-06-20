@@ -262,6 +262,16 @@
 - wording caution:
   `generative verifier`, `verifier compute scaling`, `best-of-N verification`만으로 기여를 쓰면 ThinkPRM과 너무 겹친다. `state-conditioned path acquisition before verification`을 전면에 둬야 한다.
 
+### Rewarding Progress / PAV (process advantage verifier)
+
+- risk:
+  Rewarding Progress는 process reward를 prover policy 하 "progress"(advantage)로 정의·자동 측정하는 PAV를 제안해, `automated process verifier`, `process reward / progress reward`, `verifier-guided search·RL credit assignment`를 이미 선점했다(human step label 없이, ORM 대비 정확도·compute 효율↑).
+- response:
+  우리는 verifier(PAV·PRM 류)를 final decision 또는 STOP criterion 후보로만 활용하고, main novelty는 verifier가 평가할 candidate pool을 현재 reasoning state에 따라 구성·중단하는 upstream heterogeneous path-pool construction과 generation–verification budget split에 둔다. verifier compute는 TTC budget에 명시적으로 계상한다.
+
+- wording caution:
+  `process verifier / process reward / progress reward / verifier-guided selection을 우리가 처음 제안한다`로 쓰면 안 된다. verifier compute를 무시한 정확도-only 비교 금지, verifier 성능 SOTA 경쟁 금지.
+
 ## 정보과학회 S/A 우수학술대회 기준 제출 전략
 
 - 현재 연구의 1차 target은 `ACL / EMNLP / NAACL / AAAI`다.

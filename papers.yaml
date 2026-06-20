@@ -643,6 +643,33 @@ papers:
     implementation_candidate: "zero-shot-CoT anchor/minimal baseline"
     notes_for_coding_agent: "Zero-shot-CoT origin: appends 'Let's think step by step' (2-stage reasoning+answer extraction), task-agnostic, InstructGPT text-davinci-002/PaLM, GSM8K/MultiArith 등. 우리는 zero-shot-CoT를 path family anchor baseline으로 고정하고 budget 하 heterogeneous path-family acquisition·STOP으로 차별화. small LM에선 zero-shot-CoT 이득이 약화될 수 있음. positioning은 decomposition/planning 공통 항목으로 처리."
 
+  - title: "Rewarding Progress: Scaling Automated Process Verifiers for LLM Reasoning"
+    year: 2024
+    venue: "ICLR 2025"
+    url: "https://arxiv.org/abs/2410.08146"
+    code_url: ""
+    source_pdf: "paper/2025-rewarding-progress.pdf"
+    status: "strategically-read"
+    priority: "P1"
+    eval_model: "Gemma2 2B/9B/27B (GSM8K/MATH)"
+    theme: ["verifier_prm"]
+    method_type: ["verifier", "inference_time", "training"]
+    reasoning_path_family: ["homogeneous_sampling", "verifier_guided_selection"]
+    selection_unit: ["step", "path"]
+    compute_control:
+      adaptive_budget: false
+      stopping: false
+      reranking: true
+      search: "best_of_n_beam"
+    verifier:
+      uses_verifier: true
+      verifier_type: "process"
+    relation_to_ours: ["contrastive_positioning", "verifier_boundary", "claim_boundary"]
+    what_to_borrow: "outcome vs process reward framing, progress/advantage/prover policy 정의, compute-efficiency(verifier overhead) metric, generation-verification budget split, automated(no human step label) verifier."
+    what_not_to_claim: "process verifier, process reward/progress reward, verifier-guided selection, automated process verification을 우리가 처음 제안한다고 주장하지 말 것; verifier compute를 무시한 정확도-only 비교/verifier SOTA 경쟁 금지."
+    implementation_candidate: "verifier as final-decision/STOP candidate; no PAV reproduction"
+    notes_for_coding_agent: "PAV defines step reward as 'progress' (advantage of reaching correct answer under a prover policy distinct from base), automated, used for test-time search(beam) + RL credit assignment; ORM 대비 acc ~8%↑, compute 1.5-5×↑; Gemma2 2B/9B/27B. 우리 기여는 verifier 자체가 아니라 verifier가 평가할 path-pool의 upstream 구성·STOP·generation-verification budget split이며 verifier compute를 TTC budget에 계상."
+
   - title: "UniCoTT: A Unified Framework for Structural Chain-of-Thought Distillation"
     year: 2025
     venue: "ICLR 2025"

@@ -418,6 +418,20 @@
 - Priority: P1
 - Track: main math research
 
+### 34. Rewarding Progress: Scaling Automated Process Verifiers for LLM Reasoning
+
+- Year / Venue: 2024 / ICLR 2025 (arXiv 2410.08146; venue legacy/외부 확정)
+- Link: https://arxiv.org/abs/2410.08146
+- Status: strategically-read
+- Target file: `md/2025-rewarding-progress.md`
+- Source PDF: `paper/2025-rewarding-progress.pdf`
+- Theme: verifier_prm
+- 왜 중요한가: process reward를 prover policy 하 "progress"(advantage)로 정의·자동 측정하는 Process Advantage Verifiers(PAV)의 대표. verifier/process-reward boundary reference다.
+- 뽑을 것: outcome vs process reward framing, progress/advantage/prover policy, compute-efficiency(verifier overhead) metric, generation-verification budget split.
+- 우리와의 관계: 직접 baseline이 아니라 verifier/PRM boundary reference. 우리 기여는 verifier 자체가 아니라 verifier가 평가할 path-pool의 upstream 구성·STOP·budget split. verifier는 final-decision/STOP 후보. (모델 Gemma2 2B/9B/27B.)
+- Priority: P1
+- Track: main math research
+
 ## P2: 유용한 배경
 
 - RAP: Reasoning via Planning — 2023 / official paper / https://openreview.net/forum?id=VTWWvYtF1R
