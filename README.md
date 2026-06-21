@@ -9,13 +9,25 @@
 - `CG`는 삭제하지 않는다. 다만 **여러 structured reasoning path family 중 하나**로 보존한다.
 - `NFM`은 본 thesis의 대체 주제가 아니라, **선별된 application/bridge domain**으로만 다룬다.
 
+## Canonical source of truth (2026-06-21 기준)
+
+현재 corpus의 single source of truth는 아래 5개다. deep-interview / 연구미팅 준비는 이 파일들만 보면 된다.
+
+1. **[papers.yaml](papers.yaml)** — canonical paper registry. 모든 strategically-read 논문의 구조화 metadata(18 필드 + `source_pdf`)가 여기에 있다. (현재 39 entries)
+2. **[READING-QUEUE-202606.md](READING-QUEUE-202606.md)** + root **`CURRENT-READING.md`** — active reading/status queue. unread/read 판단은 이 둘로만 한다.
+3. **[RELATED-WORK-MATRIX.md](RELATED-WORK-MATRIX.md)** — 같은 기준으로 비교한 관련연구 표(novelty risk / 빌려올 요소 / 우리와의 차이).
+4. **[POSITIONING-NOTES.md](POSITIONING-NOTES.md)** — 하면 안 되는 주장, 안전한 제목·contribution framing 메모.
+5. **[CURRENT-FRAME-202606.md](CURRENT-FRAME-202606.md)** — 현재 연구 프레임의 canonical 문서. 어떤 주장까지 가능한지 정리.
+
+논문 노트 본문은 **[md/](md/)** 디렉터리(11섹션 Strategic Reading Note)에 있고, 원본 PDF는 **[paper/](paper/)** 에 있다.
+
 ## 먼저 읽을 파일
 
 1. [CURRENT-FRAME-202606.md](CURRENT-FRAME-202606.md)
    현재 연구 프레임의 canonical 문서다. Axis 1/2와 2026-06 미팅 이후 어떤 주장까지 가능한지 정리한다.
 
-2. [READING-QUEUE-202606.md](READING-QUEUE-202606.md)
-   P0/P1/P2 우선순위로 다시 짠 읽기 큐다. 바로 읽어야 할 논문과 나중에 읽을 논문을 분리한다.
+2. [READING-QUEUE-202606.md](READING-QUEUE-202606.md) + root `CURRENT-READING.md`
+   P0/P1/P2 우선순위 읽기 큐 + 완료/배경 상태. 이 둘이 active queue다.
 
 3. [RELATED-WORK-MATRIX.md](RELATED-WORK-MATRIX.md)
    핵심 논문들을 같은 기준으로 비교한 표다. novelty risk, 빌려올 수 있는 요소, 우리와의 차이를 빠르게 확인할 수 있다.
@@ -31,24 +43,31 @@
 - [PHD-STRATEGY-2026-2027.md](PHD-STRATEGY-2026-2027.md)
   2026-2027 논문화/졸업 전략 문서다. 메인 수학 논문과 NFM 브리지 논문의 관계도 포함한다.
 
-## 읽기/정리용 운영 파일
-
-- [MUST-READ-PLAN.md](MUST-READ-PLAN.md)
-  새 프레임에 맞춘 압축 must-read 목록이다. 빠르게 읽기 시작해야 할 테마별 핵심 논문만 남겼다.
-
-- [UNIFIED-PAPER-LIST.md](UNIFIED-PAPER-LIST.md)
-  현재 taxonomy 기준의 통합 목록이다. math frontier, TTC, verifier, strategy selection, NFM bridge까지 재분류했다.
+## 템플릿 / 가이드
 
 - [PAPER-REVIEW-TEMPLATE.md](PAPER-REVIEW-TEMPLATE.md)
-  새 논문을 읽을 때 바로 복사해 쓸 수 있는 템플릿이다.
+  새 논문을 읽을 때 바로 복사해 쓰는 **11섹션 Strategic Reading Note 템플릿**이다. canonical 원본은 root `prompts/paper-strategic-note-template.md`이며 이 파일은 그 미러다.
+
+## 비-canonical / 보조·역사 문서 (active queue로 쓰지 말 것)
+
+아래 문서들은 보존하되, unread/read 판단이나 active queue로 사용하지 않는다. 각 파일 상단의 status note를 참고한다.
+
+- [MUST-READ-PLAN.md](MUST-READ-PLAN.md) — 2026-06-14 framing 단계의 historical must-read plan. 다수가 이미 strategically-read 완료.
+- [UNIFIED-PAPER-LIST.md](UNIFIED-PAPER-LIST.md) — secondary/legacy 통합 인덱스.
+- [READING-GUIDE-P0.md](READING-GUIDE-P0.md) — 2026-01/early pipeline P0 읽기 가이드 (deprecated).
+- legacy prompts(`paper-search-prompt-*.txt`, `paper-extracting-prompt-*.txt`, `paper-reading-prompt-*.txt`), `contents/` · `reading/` · `summary/`, `paper/` 의 옛 번호 PDF(`01.`~`11.`).
 
 ## 현재 권장 사용 순서
 
 1. `CURRENT-FRAME-202606.md`로 현재 연구 질문과 금지 주장부터 맞춘다.
-2. `MUST-READ-PLAN.md`와 `READING-QUEUE-202606.md`로 읽기 우선순위를 정한다.
-3. 논문을 읽을 때는 `PAPER-REVIEW-TEMPLATE.md`를 사용한다.
+2. `READING-QUEUE-202606.md` + root `CURRENT-READING.md`로 읽기 우선순위/상태를 본다.
+3. 논문을 읽을 때는 `PAPER-REVIEW-TEMPLATE.md`(11섹션)를 사용하고, metadata는 `papers.yaml`에 기록한다.
 4. 논문을 다 읽은 뒤에는 `RELATED-WORK-MATRIX.md`와 `POSITIONING-NOTES.md`를 갱신한다.
 5. NFM 관련 아이디어는 메인 math line이 흔들리지 않는 범위에서만 `NFM-BRIDGE-PLAN.md`에 반영한다.
+
+## Deep-interview 준비 상태
+
+관련연구 corpus는 deep-interview / 2026-06-25 연구미팅에 바로 쓸 수 있을 만큼 정리되었다(39편 strategically-read, papers.yaml/queue/matrix/positioning 정합). 다음 단계는 **새 논문을 더 읽는 것이 아니라 실험 방향(path-pool / STOP / verifier-voting allocation) 수렴**이다. 상세 audit은 [REPO-CORPUS-STATUS-20260621.md](REPO-CORPUS-STATUS-20260621.md) 참고.
 
 ## 역사적 참고
 

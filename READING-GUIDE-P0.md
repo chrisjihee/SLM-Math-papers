@@ -1,6 +1,12 @@
 # 📚 P0 논문 읽기 가이드
 
-> **목표**: 8편의 P0 논문을 체계적으로 읽고, 기존 3편처럼 GPT/Gemini를 활용한 문장별 해석과 보조 설명을 통해 완전히 이해합니다.
+> **Status note (2026-06-21): HISTORICAL / DEPRECATED.**
+> 이 파일은 2026-01 / early pipeline 단계의 P0 읽기 가이드이며 reference로만 보존한다.
+> - 현재 active queue는 `READING-QUEUE-202606.md` + root `CURRENT-READING.md` 이고, canonical registry는 `papers.yaml`이다.
+> - 이 파일의 목록·번호·venue 표기(예: SWITCH를 EMNLP로 적은 것은 오기 — canonical은 **NAACL 2025 Findings**)는 최신 상태와 다를 수 있다.
+> - **unread/read 판단에 이 파일을 사용하지 말 것.** 아래 8편은 모두 이미 strategically-read 완료되어 `papers.yaml`에 반영되어 있다.
+
+> **목표(historical)**: 8편의 P0 논문을 체계적으로 읽고, 기존 3편처럼 GPT/Gemini를 활용한 문장별 해석과 보조 설명을 통해 완전히 이해합니다.
 
 ---
 

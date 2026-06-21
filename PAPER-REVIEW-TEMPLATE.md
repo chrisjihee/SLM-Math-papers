@@ -1,131 +1,72 @@
-# 논문 리뷰 템플릿
+# Strategic Reading Note 템플릿 (11섹션)
 
-## 1. 메타데이터
+> **Canonical 원본:** root `prompts/paper-strategic-note-template.md` 가 이 템플릿의 source of truth다.
+> 이 파일은 paper repo에서 바로 복사해 쓰기 위한 **11섹션 미러**이며, 두 파일은 같은 구조를 유지한다.
+> (2026-06-21 갱신) 이전의 16섹션 리뷰 템플릿은 폐기되었다. 모든 `md/*.md` 노트는 아래 11섹션 구조를 따른다.
 
-- 제목:
-- 저자:
-- 연도:
-- venue / status:
-- 링크:
-- 코드 / 데이터:
-- 읽은 날짜:
-- 상태: `unread | skimming | read | summarized | implemented | baseline`
+## 작성 규칙 (필수)
 
-## 2. 한 줄 요약
+- 섹션명과 순서를 바꾸지 않는다. 11개 섹션을 모두 채운다.
+- 일반 요약이 아니라 SLM-Math의 **novelty risk / what-not-to-claim / baseline / ablation / Related Work 배치**를 중심으로 쓴다.
+- 한국어로 작성하되 논문 제목·method·benchmark·model 이름은 영어 원문을 유지한다.
+- `Source Grounding Log`에는 실제로 확인한 근거(local PDF + page/sha256, arXiv abstract, HF dataset card 등)만 기록한다. 확인하지 못한 source는 적지 않는다.
+- priority는 `CURRENT-READING.md`, `READING-QUEUE-202606.md`, `papers.yaml` 의 현재 분류를 우선 따른다. 변경 제안은 본문에 `재분류 제안`으로만 적고 임의로 바꾸지 않는다.
+- 피해야 할 주장: `CG > CoT`, adaptive TTC 자체 novelty, self-consistency efficiency 자체 novelty, verifier/reranker 도입 자체 novelty, SLM math reasoning 자체 novelty, long-CoT/self-verification 자체 novelty, tool-use reasoning 자체 novelty, heavy MCTS/self-evolution 자체가 우리 contribution.
 
-- 이 논문은 무엇을 하며, 왜 중요한가:
+---
 
-## 3. 문제 설정
+# <Paper Title> review
 
-- 어떤 task를 푸는가:
-- 입력/출력은 무엇인가:
-- main benchmark는 무엇인가:
-- online inference 문제인가, train-time 문제인가:
+## 1. Metadata
 
-## 4. 방법
+- Title:
+- Authors:
+- Year:
+- Venue / Status:
+- Links:
+  - Paper:
+  - GitHub / Model:
+- Code / Data:
+- Source PDF (local, source-of-record): `paper/<slug>.pdf`  (없으면 "없음 — arXiv/HF로 grounding")
+- Source Grounding Log:
+  - PDF: `paper/<slug>.pdf` — N pages, sha256 `...`, pypdf/pymupdf 본문 추출 정상. title/authors/abstract/method/metric 직접 확인.
+  - arXiv abstract / HF dataset card: 교차확인 항목.
+  - arXiv TeX/ar5iv: 사용/미사용. official code URL: 확인/미확인.
+- Paper Type:
+- Reading Status: `strategically-read`
+- Current Priority: `<P0 / P1 / P2>`
 
-- 핵심 아이디어:
-- 모델/파이프라인 개요:
-- supervision source:
-- training recipe:
+## 2. One-line Summary
 
-## 5. test-time compute 관점
+## 3. 핵심 문제 설정
 
-- compute를 늘리는 단위는 무엇인가:
-- sample 수 / reasoning length / search depth / tool use / model routing 중 무엇을 제어하는가:
-- stopping이 있는가:
-- budget-aware policy가 있는가:
+## 4. 핵심 방법
 
-## 6. reasoning path family 관점
+## 5. SLM-Math 관점의 재해석
 
-- path family:
-- homogeneous pool인가, heterogeneous pool인가:
-- path 선택 시점:
-  - reasoning 전
-  - reasoning 중
-  - candidate 생성 후
-- selection unit:
-  - sample
-  - answer
-  - rationale
-  - step
-  - strategy
-  - model
-  - tool
+- (limited TTC / heterogeneous reasoning path pool / state-conditioned macro strategy allocation / STOP / verifier·voting-aware decision 중 무엇과 연결되는가)
+- (selection unit: sample / answer / rationale / step / strategy / model / tool)
+- (NFM이면 thesis core가 아니라 bridge/application 임을 명시)
 
-## 7. verifier / search / routing 관점
+## 6. 우리 연구에 대한 novelty risk
 
-- verifier를 쓰는가:
-- verifier 종류:
-  - outcome
-  - process
-  - preference
-  - generative
-  - schema
-  - evidence
-- search를 쓰는가:
-  - none
-  - best-of-n
-  - tree
-  - mcts
-  - reflection
-- reranker / router / policy model이 있는가:
+- 위협도:
+- 경계(이렇게 쓰면 안 되는 wording):
 
-## 8. 평가 설정
+## 7. 우리가 빌릴 수 있는 것
 
-- 모델 크기:
-- 데이터 규모:
-- 벤치마크:
-- 메트릭:
-- cost/latency 보고 여부:
+- framing / baseline / metric / ablation / terminology:
 
-## 9. 핵심 결과
+## 8. 우리가 하면 안 되는 주장
 
-- 대표 수치:
-- strongest baseline 대비 개선:
-- 무엇이 실제로 main gain을 만들었는가:
+## 9. baseline / ablation 반영 아이디어
 
-## 10. 우리 연구와의 관계
+## 10. Related Work에 넣을 문장 초안
 
-- 직접 baseline인가:
-- 상한선 참고인가:
-- method inspiration인가:
-- contrastive positioning인가:
+## 11. 현재 우선순위와 다음 액션
 
-## 11. 빌려올 것
-
-- 아이디어:
-- 실험 디자인:
-- 지표:
-- ablation 방식:
-
-## 12. 우리가 하면 안 되는 주장
-
-- 이 논문 앞에서 약해지는 주장:
-- novelty가 겹치는 주장:
-- 표현상 주의점:
-
-## 13. 구현 아이디어
-
-- 우리 코드베이스에 바로 옮길 수 있는 것:
-- low-cost pilot 가능 여부:
-- heavy experiment가 필요한지:
-
-## 14. math mainline 관련성
-
-- `GSM8K/GSM8K-kor/MATH`와의 직접 관련성:
-- TTC/path selection과의 관련성:
-- 메인 논문에서 인용할 위치:
-
-## 15. NFM bridge 관련성
-
-- `TeleMath`:
-- `TeleTables`:
-- `TeleLogs`:
-- bridge paper에서 쓸 수 있는지:
-
-## 16. 남는 질문
-
-- 아직 이해 안 된 점:
-- 더 확인할 표/부록:
-- follow-up으로 읽을 논문:
+- 현재 우선순위: `<P0 / P1 / P2>`
+- 위협도: `높음 / 중간 / 낮음`
+- 지금 당장 해야 할 일:
+- 나중으로 미뤄도 되는 일:
+- 한 문장 결론:

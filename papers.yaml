@@ -9,6 +9,7 @@ papers:
     venue: "ICML 2025"
     url: "https://proceedings.mlr.press/v267/guan25f.html"
     code_url: "https://github.com/microsoft/rStar"
+    source_pdf: "paper/2025-rstar-math.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["math_slm_frontier", "search_reflection_rl", "verifier_prm", "adaptive_ttc", "tool_use"]
@@ -59,6 +60,7 @@ papers:
     venue: "arXiv"
     url: "https://arxiv.org/abs/2402.03300"
     code_url: "https://github.com/deepseek-ai/deepseek-math"
+    source_pdf: "paper/2024-deepseekmath.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["math_slm_frontier", "sc_efficiency", "tool_use"]
@@ -84,6 +86,7 @@ papers:
     venue: "EMNLP 2025"
     url: "https://aclanthology.org/2025.emnlp-main.1025/"
     code_url: "https://github.com/simplescaling/s1"
+    source_pdf: "paper/2025-s1-simple-test-time-scaling.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["adaptive_ttc", "sequential_ttc", "math_slm_frontier"]
@@ -159,6 +162,7 @@ papers:
     venue: "NAACL 2025"
     url: "https://aclanthology.org/2025.naacl-long.184/"
     code_url: ""
+    source_pdf: "paper/2025-rasc.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["sc_efficiency", "adaptive_ttc"]
@@ -184,6 +188,7 @@ papers:
     venue: "ACL 2025 Findings"
     url: "https://aclanthology.org/2025.findings-acl.1030/"
     code_url: "https://github.com/taubenfeld/CISC"
+    source_pdf: "paper/2025-confidence-improves-self-consistency.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["sc_efficiency", "adaptive_ttc"]
@@ -209,6 +214,7 @@ papers:
     venue: "ICLR 2025"
     url: "https://openreview.net/forum?id=6qUUgw9bAZ"
     code_url: ""
+    source_pdf: "paper/2025-learning-how-hard-to-think.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["adaptive_ttc", "sc_efficiency"]
@@ -234,6 +240,7 @@ papers:
     venue: "ICLR 2025"
     url: "https://openreview.net/forum?id=4FWAwZtd2n"
     code_url: ""
+    source_pdf: "paper/2025-scaling-llm-test-time-compute-optimally.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["adaptive_ttc", "verifier_prm", "strategy_selection"]
@@ -259,6 +266,7 @@ papers:
     venue: "ICLR 2024"
     url: "https://openreview.net/forum?id=v8L0pN6EOi"
     code_url: "https://github.com/openai/prm800k"
+    source_pdf: "paper/2024-lets-verify-step-by-step.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["verifier_prm"]
@@ -284,6 +292,7 @@ papers:
     venue: "ACL 2024"
     url: "https://aclanthology.org/2024.acl-long.510/"
     code_url: ""
+    source_pdf: "paper/2024-math-shepherd.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["verifier_prm", "search_reflection_rl"]
@@ -309,6 +318,7 @@ papers:
     venue: "arXiv"
     url: "https://arxiv.org/abs/2504.16828"
     code_url: "https://github.com/mukhal/thinkprm"
+    source_pdf: "paper/2025-process-reward-models-that-think.pdf"
     status: "strategically-read"
     priority: "P1"
     theme: ["verifier_prm", "adaptive_ttc", "generative_verifier"]
@@ -334,6 +344,7 @@ papers:
     venue: "NeurIPS 2024"
     url: "https://openreview.net/forum?id=BROvXhmzYK"
     code_url: ""
+    source_pdf: "paper/2024-self-discover.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["path_pool_construction"]
@@ -359,6 +370,7 @@ papers:
     venue: "EMNLP 2023 Findings"
     url: "https://aclanthology.org/2023.findings-emnlp.55/"
     code_url: "https://github.com/XuZhao0/Model-Selection-Reasoning"
+    source_pdf: "paper/2023-automatic-model-selection-with-large-language-models-for-reasoning.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["path_pool_construction", "routing", "sc_efficiency"]
@@ -384,6 +396,7 @@ papers:
     venue: "ICML 2023"
     url: "https://openreview.net/forum?id=M1fd9Z00sj"
     code_url: "https://reasonwithpal.com/"
+    source_pdf: "paper/2023-pal.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["path_pool_construction", "tool_use"]
@@ -409,6 +422,7 @@ papers:
     venue: "TMLR"
     url: "https://openreview.net/forum?id=YfZ4ZPt8zd"
     code_url: "https://github.com/wenhuchen/Program-of-Thoughts"
+    source_pdf: "paper/2023-program-of-thoughts-prompting.pdf"
     status: "strategically-read"
     priority: "P0"
     theme: ["path_pool_construction", "tool_use"]
