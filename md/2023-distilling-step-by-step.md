@@ -13,7 +13,7 @@
 - Source Grounding Log:
   - PDF: `paper/2023-distilling-step-by-step.pdf` — 13 pages, sha256 `100bd0de2606d205f9d9108395d05f82c4f6c848097f89933d42471f4db36ff9`, pypdf/pymupdf 본문 추출 정상(약 50k자). title/authors/abstract/method/benchmarks 직접 확인.
   - arXiv abstract: venue("Accepted to Findings of ACL 2023")·official code 확인.
-  - legacy 자료: `reading/02`, `contents/02` 존재 — 보조 참고만, source-of-record는 PDF 재추출. legacy `paper/02. ….pdf`는 보존(canonical 신규 PDF 추가).
+  - legacy 자료: 문장단위 reading 노트는 `archive/legacy-reading-pipeline-2026-01/reading/02.…`에 historical-only 보존(`contents/02`은 삭제). published Findings-ACL 버전 PDF는 `archive/legacy-paper-filenames/02.…pdf`에 보존(canonical preprint PDF와 sha256 다름). source-of-record는 canonical PDF 재추출.
   - TeX source/ar5iv: 미사용.
 - Paper Type: `training` / `distillation (rationale distillation, multi-task)` — distillation boundary reference
 - Reading Status: `strategically-read`

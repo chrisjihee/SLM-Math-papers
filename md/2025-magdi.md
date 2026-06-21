@@ -11,7 +11,7 @@
   - GitHub / Code (official): https://github.com/dinobby/MAGDi
 - Source PDF (local, source-of-record): `paper/2025-magdi.pdf`
 - Source Grounding Log:
-  - PDF: `paper/2025-magdi.pdf` — 16 pages, sha256 `1f3f4492d356ad7eb728ed6819829faef7410834c89d41fd8af2e52e0dfc5a97`(legacy `paper/09. ….pdf`의 canonical 복사본, 동일 sha256, legacy 보존), pypdf/pymupdf 본문 추출 정상(약 77k자). title/authors/abstract/method/code 직접 확인.
+  - PDF: `paper/2025-magdi.pdf` — 16 pages, sha256 `1f3f4492d356ad7eb728ed6819829faef7410834c89d41fd8af2e52e0dfc5a97`(legacy `paper/09. ….pdf`의 canonical 복사본, 동일 sha256; 중복 legacy 사본은 2026-06-21 cleanup에서 삭제), pypdf/pymupdf 본문 추출 정상(약 77k자). title/authors/abstract/method/code 직접 확인.
   - TeX source/ar5iv: 미사용.
   - 주의: venue(ICLR 2025 Spotlight)·arXiv id(2402.01620으로 알려짐)는 외부/legacy 확정(PDF 텍스트 직접 미표기). benchmark 세부 추가 확인 권장.
 - Paper Type: `training` / `structured distillation of multi-agent interaction graphs (GNN-augmented student)` — graph-distillation boundary reference

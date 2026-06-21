@@ -1,6 +1,0 @@
-jupyter
-ipywidgets
-
-bs4
-
-chrisbase

@@ -11,7 +11,7 @@
   - GitHub / Code (official): 미확인
 - Source PDF (local, source-of-record): `paper/2024-mentor-kd.pdf`
 - Source Grounding Log:
-  - PDF: `paper/2024-mentor-kd.pdf` — 16 pages, sha256 `520a5271e97a97def9782a140dd002bb2ddfa1af2209ac229b02335acd996d7c`(legacy `paper/10. ….pdf`의 canonical 복사본, 동일 sha256, legacy 보존), pypdf/pymupdf 본문 추출 정상(약 64k자). venue("Proceedings of the 2024 Conference on EMNLP")·title·authors·abstract·method 직접 확인.
+  - PDF: `paper/2024-mentor-kd.pdf` — 16 pages, sha256 `520a5271e97a97def9782a140dd002bb2ddfa1af2209ac229b02335acd996d7c`(legacy `paper/10. ….pdf`의 canonical 복사본, 동일 sha256; 중복 legacy 사본은 2026-06-21 cleanup에서 삭제), pypdf/pymupdf 본문 추출 정상(약 64k자). venue("Proceedings of the 2024 Conference on EMNLP")·title·authors·abstract·method 직접 확인.
   - TeX source/ar5iv: 미사용.
   - 주의: arXiv id(2410.11325) 미재확인, official code URL 미확인.
 - Paper Type: `training` / `reasoning distillation (CoT KD via intermediate mentor)` — teacher-guided distillation boundary reference

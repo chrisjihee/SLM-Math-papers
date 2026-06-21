@@ -11,7 +11,7 @@
   - GitHub / Code (official): 미확인
 - Source PDF (local, source-of-record): `paper/2025-unveiling-cot-distillation.pdf`
 - Source Grounding Log:
-  - PDF: `paper/2025-unveiling-cot-distillation.pdf` — 26 pages, sha256 `84ef527dd30709e2699a0ed7681ab927dfb4170b2fff1808b651ca1daddfd488`(legacy `(ACL25) Unveiling….pdf`의 canonical 복사본, 동일 sha256, legacy 보존), pypdf/pymupdf 본문 추출 정상(약 88k자). venue("Findings of ACL 2025")·title·authors·abstract·factors 직접 확인.
+  - PDF: `paper/2025-unveiling-cot-distillation.pdf` — 26 pages, sha256 `84ef527dd30709e2699a0ed7681ab927dfb4170b2fff1808b651ca1daddfd488`(legacy `(ACL25) Unveiling….pdf`의 canonical 복사본, 동일 sha256; 중복 legacy 사본은 2026-06-21 cleanup에서 삭제), pypdf/pymupdf 본문 추출 정상(약 88k자). venue("Findings of ACL 2025")·title·authors·abstract·factors 직접 확인.
   - TeX source/ar5iv: 미사용.
   - 주의: arXiv id·official code URL 미확인.
 - Paper Type: `analysis` / `CoT distillation factor study` — distillation-confound boundary reference

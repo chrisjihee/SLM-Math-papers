@@ -13,7 +13,7 @@
 - Source Grounding Log:
   - PDF: `paper/2025-rewarding-progress.pdf` — 31 pages, sha256 `b6d4572d38985f10bfa418d8db857877a6800a5e85984642a525d60565364864`, pypdf/pymupdf 본문 추출 정상(약 99k자). title/authors/method/models 직접 확인.
   - arXiv abstract: PAV/progress/prover policy·8% gain·1.5–5× compute efficiency 확인.
-  - legacy 자료: `reading/05`, `contents/05`, legacy `paper/05. ….pdf` 존재 — 보조 참고. canonical PDF 신규 추가, legacy 보존.
+  - legacy 자료: 문장단위 reading 노트는 `archive/legacy-reading-pipeline-2026-01/reading/05.…`에 historical-only 보존(`contents/05`은 삭제). published ICLR2025 버전 PDF는 `archive/legacy-paper-filenames/05.…pdf`에 보존(canonical preprint PDF와 sha256 다름). source-of-record는 canonical PDF 재추출.
   - TeX source/ar5iv: 미사용. venue(ICLR 2025)는 외부/legacy 확정.
 - Paper Type: `verifier (process reward / PRM)` / `training + inference-time` — verifier/PRM boundary reference
 - Reading Status: `strategically-read`

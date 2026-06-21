@@ -50,14 +50,14 @@
 
 ## 비-canonical / 보조·역사 문서 (active queue로 쓰지 말 것)
 
-아래 자료는 **(2026-06-21) `archive/` 로 이동**해 보존한다. unread/read 판단이나 active queue로 사용하지 않는다. 개요는 [archive/README.md](archive/README.md) 참고.
+아래 자료는 **`archive/` 에 historical-only로 보존**한다. unread/read 판단이나 active queue로 사용하지 않는다. 개요는 [archive/README.md](archive/README.md) 참고. (2026-06-21 simplification에서 exact-duplicate PDF 11편 + 옛 env/prompt/contents/summary 산출물은 superseded로 삭제.)
 
-- [archive/legacy-plans/MUST-READ-PLAN.md](archive/legacy-plans/MUST-READ-PLAN.md) — 2026-06-14 framing 단계의 historical must-read plan.
-- [archive/legacy-plans/UNIFIED-PAPER-LIST.md](archive/legacy-plans/UNIFIED-PAPER-LIST.md) — secondary/legacy 통합 인덱스.
-- [archive/legacy-plans/READING-GUIDE-P0.md](archive/legacy-plans/READING-GUIDE-P0.md) — 2026-01/early pipeline P0 읽기 가이드 (deprecated).
-- [archive/legacy-reading-pipeline-2026-01/](archive/legacy-reading-pipeline-2026-01/) — 옛 prompts / `contents/` / `reading/` / `summary/` pipeline 산출물.
-- [archive/legacy-paper-filenames/](archive/legacy-paper-filenames/) — canonical-slug PDF와 동일 논문인 옛 번호·괄호명 PDF(13편). canonical PDF는 `paper/` 에 유지.
-- [archive/legacy-reports/](archive/legacy-reports/) — `research-report-0730.txt`, `related-source.txt`, 옛 환경 setup(`requirements.txt`, `setup.sh`).
+- [archive/legacy-plans/](archive/legacy-plans/) — `MUST-READ-PLAN.md`, `UNIFIED-PAPER-LIST.md`, `READING-GUIDE-P0.md` (historical plan/list).
+- [archive/legacy-reading-pipeline-2026-01/reading/](archive/legacy-reading-pipeline-2026-01/reading/) — 옛 문장단위 reading 노트(historical only). prompts/contents/summary는 삭제됨.
+- [archive/legacy-paper-filenames/](archive/legacy-paper-filenames/) — version-different legacy PDF **2편**(Distilling Step-by-Step, Rewarding Progress)만 보존. canonical PDF는 `paper/`.
+- [archive/legacy-reports/](archive/legacy-reports/) — `research-report-0730.txt`, `related-source.txt`, `CONFERENCE-TARGETS-2024-KIISE.md`.
+- [archive/legacy-cg-phase/LEGACY-CG-PAPERS.md](archive/legacy-cg-phase/LEGACY-CG-PAPERS.md) — CG-centric phase 역사 index.
+- [archive/maintenance/CLEANUP-PLAN-20260621.md](archive/maintenance/CLEANUP-PLAN-20260621.md) — 1차 archive split 계획서(역사적).
 
 ## 현재 권장 사용 순서
 

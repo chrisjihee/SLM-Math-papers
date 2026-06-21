@@ -2,7 +2,10 @@
 
 > deep-interview / 2026-06-25 연구미팅 직전, `SLM-Math-papers` corpus의 canonical 상태를 점검·고정한 audit 문서다.
 > 목적은 새 논문을 더 읽는 것이 아니라, 이미 수집·정리한 관련연구 corpus를 바로 쓸 수 있게 canonicalize하는 것이다.
-> 이번 작업에서 legacy 자료는 삭제·rename하지 않았다.
+>
+> **갱신 이력:**
+> - (1차 archive split) legacy 자료를 `archive/` 로 `git mv` 이동(삭제 0).
+> - (2차 simplification, 같은 날) maintenance-cost 축소를 위해 **exact-duplicate legacy PDF 11편 + 옛 env/prompt/contents/summary 산출물 삭제**, 그리고 `CLEANUP-PLAN`/`LEGACY-CG-PAPERS`/`CONFERENCE-TARGETS`를 archive로 이동. version-different legacy PDF 2편(Distilling, Rewarding Progress)과 문장단위 reading 노트는 보존. 삭제/보존 목록은 아래 §11.
 
 ## 0. 현재 canonical research frame
 
@@ -33,7 +36,7 @@
 
 ## 2. Legacy / historical files (보존, active 아님)
 
-> **(2026-06-21 update)** 아래 legacy 자료는 대부분 `archive/` 로 물리 이동했다(`git mv`, 삭제 0). 개요: `archive/README.md`. 상세 계획: `CLEANUP-PLAN-20260621.md`.
+> **(2026-06-21 update)** 아래 legacy 자료는 `archive/` 로 물리 이동했다. 개요: `archive/README.md`. 상세 계획(1차)·simplification 기록: `archive/maintenance/CLEANUP-PLAN-20260621.md`.
 
 | 파일/디렉터리 (현재 위치) | 비고 |
 |---|---|
@@ -42,8 +45,10 @@
 | `archive/legacy-paper-filenames/` (13 PDF) | 옛 번호(`01.`~`11.`) + 괄호명 2개. canonical-slug PDF와 동일 논문(검증 완료). canonical은 `paper/` 유지. |
 | `archive/legacy-plans/MUST-READ-PLAN.md`, `archive/legacy-plans/UNIFIED-PAPER-LIST.md` | non-canonical 보조 인덱스 (상단 status note 보유). |
 | `archive/legacy-plans/READING-GUIDE-P0.md` | 2026-01 P0 읽기 가이드 (deprecated notice 보유). |
-| `archive/legacy-reports/{research-report-0730.txt, related-source.txt, requirements.txt, setup.sh}` | 옛 report / source list / `LM-based-KG-papers` 환경 setup(미사용). |
-| `LEGACY-CG-PAPERS.md`, `CONFERENCE-TARGETS-2024-KIISE.md` (top-level 유지) | 역사적 참고 / venue 전략. |
+| `archive/legacy-reports/{research-report-0730.txt, related-source.txt}` | 옛 report / source list. (`requirements.txt`, `setup.sh`는 2026-06-21 삭제) |
+| `archive/legacy-reports/CONFERENCE-TARGETS-2024-KIISE.md` | venue 전략. core 요약은 top-level `PHD-STRATEGY-2026-2027.md` §7에 보존. |
+| `archive/legacy-cg-phase/LEGACY-CG-PAPERS.md` | CG-centric phase 역사적 index. 링크는 canonical `paper/`·`md/`로 정리됨. |
+| `archive/maintenance/CLEANUP-PLAN-20260621.md` | 1차 archive split 계획서(역사적). |
 
 ## 3. Current note corpus summary
 
@@ -53,27 +58,29 @@
 
 ## 4. Paper PDF corpus summary
 
-- **(2026-06-21 정리 후)** `paper/` = canonical-slug **35개만**. 13개 legacy-named PDF는 `archive/legacy-paper-filenames/` 로 이동.
-- canonical-slug 35개는 `papers.yaml`의 `source_pdf` 35개와 **1:1 매핑**.
+- **(2026-06-21 simplification 후)** `paper/` = canonical-slug **35개만**. `archive/legacy-paper-filenames/`에는 version-different legacy PDF **2개**만 보존(Distilling Step-by-Step, Rewarding Progress). exact-duplicate legacy PDF 11편은 삭제.
+- canonical-slug 35개는 `papers.yaml`의 `source_pdf` 35개와 **1:1 매핑** (전수 resolve 확인).
 - `papers.yaml` 35/39 entries가 `source_pdf` 보유. 나머지 4편(DeepSeek-R1, Chain-of-Thought, Self-Consistency, ToRA)은 **local canonical PDF가 없어** arXiv/원문 grounding으로 둠(추측 추가하지 않음).
-- 2026-06-21 이전 작업에서 **14편**에 `source_pdf`를 신규 연결(아래 §9-A). 모두 PDF 첫 페이지 title을 직접 추출해 entry title과 일치 확인 후 추가(grounded, insertion-only).
+- 그 외 archive PDF 2개: `archive/legacy-reading-pipeline-2026-01/reading/{04R,05R}…pdf`(reading 노트 보조본). → archive PDF 합계 **4개**.
 
 ## 5. Known duplicate PDF policy
 
-- legacy-named PDF(`01.`~`11.` + 괄호명 2개, 총 13개)는 canonical-slug 사본과 **동일 논문**이다(2026-06-21 검증: 11편 sha256 동일, 2편 published↔preprint 버전 차이).
+- 옛 legacy-named PDF 13편은 canonical-slug 사본과 **동일 논문**이었다(검증: 11편 sha256 동일, 2편 published↔preprint 버전 차이).
 - **source-of-record = canonical-slug PDF**(예: `paper/2025-switch.pdf`). `papers.yaml`의 `source_pdf`는 canonical-slug만 가리킨다.
-- legacy-named PDF는 **삭제하지 않고 `archive/legacy-paper-filenames/` 로 이동 보존**. 버전 차이가 있는 2편(Distilling Step-by-Step, Rewarding Progress)은 published 버전 보존용으로 가치가 있어 manifest에 명시.
+- 정책(2026-06-21 simplification): **sha256 완전 동일한 11편은 삭제**(canonical로 완전 대체). **버전이 다른 2편(Distilling Step-by-Step published Findings-ACL, Rewarding Progress published ICLR2025)만 `archive/legacy-paper-filenames/`에 보존** — published 버전 보존 가치.
 
 ## 6. Known legacy filename mismatch
 
-| 항목 | legacy 표기(현재 `archive/legacy-paper-filenames/`) | canonical(검증) |
-|---|---|---|
-| SWITCH | `11. (EMNLP25) SWITCH…pdf` | **NAACL 2025 Findings** (yaml `venue: "NAACL 2025 Findings"`, note에 "legacy filename EMNLP25 is wrong" 기록) |
-| Mentor-KD | `10. (EMNLP24) Mentor-KD…pdf` | EMNLP 2024 (일치) |
-| ThinkPRM(Process Reward Models That Think) | `06. (Arxiv25) …pdf` | arXiv 2025 (일치) |
-| 그 외 `01.`~`09.` | 괄호 venue 표기 | canonical metadata는 `papers.yaml` 기준이 우선 |
+> 옛 legacy 파일명 13편 중 11편은 삭제됨. 아래는 historical 기록(파일명 진실값은 `papers.yaml`/`md/` 기준).
 
-- 원칙: **venue 진실값은 `papers.yaml` / `md/` 노트**가 가지며, legacy 파일명은 참고용일 뿐. 파일명은 rename 금지.
+| 항목 | 옛 legacy 파일명 | canonical(검증) |
+|---|---|---|
+| SWITCH | `11. (EMNLP25) SWITCH…pdf` (삭제됨) | **NAACL 2025 Findings** (yaml `venue: "NAACL 2025 Findings"`, `md/2025-switch.md`에 "legacy filename EMNLP25 is wrong" 기록) |
+| Mentor-KD | `10. (EMNLP24) Mentor-KD…pdf` (삭제됨) | EMNLP 2024 (일치) |
+| ThinkPRM(Process Reward Models That Think) | `06. (Arxiv25) …pdf` (삭제됨) | arXiv 2025 (일치) |
+| Distilling / Rewarding Progress | `02.`/`05.` (archive 보존) | Findings-ACL 2023 / ICLR 2025 (published 버전) |
+
+- 원칙: **venue 진실값은 `papers.yaml` / `md/` 노트**가 가지며, 옛 파일명은 참고용일 뿐.
 
 ## 7. Current source of truth
 
@@ -109,6 +116,18 @@
 - **다음 단계는 새 논문 reading이 아니라 experiment direction convergence다.** 구체적으로: heterogeneous path-pool 구성, state-conditioned macro strategy allocation, STOP policy, generation-verification budget split / voting-aware decision의 실험 설계로 수렴.
 - deep-interview에서 먼저 볼 파일: `CURRENT-FRAME-202606.md` → `POSITIONING-NOTES.md` → `RELATED-WORK-MATRIX.md` → `READING-QUEUE-202606.md`(+root `CURRENT-READING.md`) → `NFM-BRIDGE-PLAN.md`.
 
+## 11. 2026-06-21 simplification — deleted / preserved
+
+**삭제 (총 25개, exact-duplicate / superseded intermediates):**
+- exact-duplicate legacy PDF **11편** (`archive/legacy-paper-filenames/` 의 `01,03,04,06,07,08,09,10,11` + `(ACL25)Unveiling`, `(NAACL25)RASC`) — canonical-slug PDF와 sha256 완전 동일.
+- 옛 환경 setup **2개** (`requirements.txt`, `setup.sh` — `LM-based-KG-papers` conda env, 현재 미사용).
+- 옛 pipeline 산출물 **12개**: prompts 4 (`paper-search/extracting/reading-prompt`), contents 7 (raw 추출 텍스트), summary 1. canonical `md/`로 대체됨.
+
+**보존 (active source of truth 아님, historical):**
+- version-different legacy PDF **2편**: `archive/legacy-paper-filenames/{02 Distilling(Findings-ACL), 05 Rewarding Progress(ICLR2025)}` — published 버전.
+- 문장단위 reading 노트 **7개**: `archive/legacy-reading-pipeline-2026-01/reading/` (04R/05R 보조 PDF 포함). canonical 11섹션 노트의 보조 historical only.
+- archive로 이동: `legacy-plans/`(3), `legacy-reports/`(research-report, related-source, CONFERENCE-TARGETS), `legacy-cg-phase/LEGACY-CG-PAPERS.md`, `maintenance/CLEANUP-PLAN-20260621.md`.
+
 ---
 
-_마지막 갱신: 2026-06-21. 이 문서는 corpus 상태 snapshot이며, 진실값 자체는 §7 문서들이 보유한다._
+_마지막 갱신: 2026-06-21(simplification pass). 이 문서는 corpus 상태 snapshot이며, 진실값 자체는 §7 문서들이 보유한다._

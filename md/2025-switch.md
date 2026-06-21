@@ -11,7 +11,7 @@
   - GitHub / Code (official): 미확인
 - Source PDF (local, source-of-record): `paper/2025-switch.pdf`
 - Source Grounding Log:
-  - PDF: `paper/2025-switch.pdf` — 14 pages, sha256 `79315b3fe37865b45bcc2c7899d21b95340320d4d0f691737e91e6336a75092d`(legacy `paper/11. ….pdf`의 canonical 복사본, 동일 sha256, legacy 보존), pypdf/pymupdf 본문 추출 정상(약 53k자). venue("Findings of … NAACL 2025, pages 3733–3746")·title·authors·abstract·method 직접 확인.
+  - PDF: `paper/2025-switch.pdf` — 14 pages, sha256 `79315b3fe37865b45bcc2c7899d21b95340320d4d0f691737e91e6336a75092d`(legacy `paper/11. ….pdf`의 canonical 복사본, 동일 sha256; 중복 legacy 사본은 2026-06-21 cleanup에서 삭제), pypdf/pymupdf 본문 추출 정상(약 53k자). venue("Findings of … NAACL 2025, pages 3733–3746")·title·authors·abstract·method 직접 확인.
   - TeX source/ar5iv: 미사용.
   - 주의: **venue를 NAACL 2025 Findings로 교정**(legacy 파일명 EMNLP25 오기). arXiv id·official code URL 미확인.
 - Paper Type: `training` / `knowledge distillation (token-level, SGO + selective teacher intervention)` — teacher-student KD boundary reference

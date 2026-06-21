@@ -11,7 +11,7 @@
   - GitHub / Code (official): https://github.com/mengchuang123/UniCoTT
 - Source PDF (local, source-of-record): `paper/2025-unicott.pdf`
 - Source Grounding Log:
-  - PDF: `paper/2025-unicott.pdf` — 25 pages, sha256 `48d96c20975aff4ab6822102fac3fde3e6f4f80f11c6111a6bcf50307d81d559`(legacy `paper/08. ….pdf`의 canonical 복사본, 동일 sha256, legacy 보존), pypdf/pymupdf 본문 추출 정상(약 83k자). venue("Published as a conference paper at ICLR 2025")·title·authors·abstract·method·code 직접 확인.
+  - PDF: `paper/2025-unicott.pdf` — 25 pages, sha256 `48d96c20975aff4ab6822102fac3fde3e6f4f80f11c6111a6bcf50307d81d559`(legacy `paper/08. ….pdf`의 canonical 복사본, 동일 sha256; 중복 legacy 사본은 2026-06-21 cleanup에서 삭제), pypdf/pymupdf 본문 추출 정상(약 83k자). venue("Published as a conference paper at ICLR 2025")·title·authors·abstract·method·code 직접 확인.
   - TeX source/ar5iv: 미사용.
   - 주의: arXiv id 미확인(OpenReview만). benchmark 세부는 추가 확인 권장.
 - Paper Type: `training` / `structural CoT distillation (chain/tree/graph)` — CG distillation boundary reference

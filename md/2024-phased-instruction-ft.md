@@ -11,8 +11,8 @@
   - GitHub / Code (official): https://github.com/xubuvd/PhasedSFT
 - Source PDF (local, source-of-record): `paper/2024-phased-instruction-ft.pdf`
 - Source Grounding Log:
-  - PDF: `paper/2024-phased-instruction-ft.pdf` — 14 pages, sha256 `fa8c89918d11454aad6db577eac98ef580cd40ec50e46b360a48b2e533a86b9d`(legacy `paper/03. ….pdf`의 canonical 복사본, 동일 sha256, legacy 보존), pypdf/pymupdf 본문 추출 정상(약 50k자). venue("Findings of ACL 2024")·title·authors·abstract·method·models·code 직접 확인.
-  - legacy 자료: `reading/03`, `contents/03` 존재(보조). source-of-record는 PDF 재추출.
+  - PDF: `paper/2024-phased-instruction-ft.pdf` — 14 pages, sha256 `fa8c89918d11454aad6db577eac98ef580cd40ec50e46b360a48b2e533a86b9d`(legacy `paper/03. ….pdf`의 canonical 복사본, 동일 sha256; 중복 legacy 사본은 2026-06-21 cleanup에서 삭제), pypdf/pymupdf 본문 추출 정상(약 50k자). venue("Findings of ACL 2024")·title·authors·abstract·method·models·code 직접 확인.
+  - legacy 자료: 문장단위 reading 노트는 `archive/legacy-reading-pipeline-2026-01/reading/03.…`에 historical-only 보존(`contents/03`은 2026-06-21 cleanup에서 삭제). source-of-record는 canonical PDF 재추출.
   - TeX source/ar5iv: 미사용.
 - Paper Type: `training` / `instruction tuning (phased/staged easy-to-hard curriculum)` — instruction-tuning curriculum boundary reference
 - Reading Status: `strategically-read`

@@ -11,8 +11,8 @@
   - GitHub / Code (official): https://github.com/yizhongw/self-instruct
 - Source PDF (local, source-of-record): `paper/2023-self-instruct.pdf`
 - Source Grounding Log:
-  - PDF: `paper/2023-self-instruct.pdf` — 25 pages, sha256 `87f1d8476fa041d0c6b09b9239253ed698c4efac973347aebe83c487eab91c78`(legacy `paper/01. ….pdf`의 canonical 복사본, 동일 sha256, legacy 보존), pypdf/pymupdf 본문 추출 정상(약 90k자). venue("Proceedings of the 61st Annual Meeting of the ACL")·title·authors·abstract·method·code 직접 확인.
-  - legacy 자료: `reading/01`, `contents/01` 존재(보조). source-of-record는 PDF 재추출.
+  - PDF: `paper/2023-self-instruct.pdf` — 25 pages, sha256 `87f1d8476fa041d0c6b09b9239253ed698c4efac973347aebe83c487eab91c78`(legacy `paper/01. ….pdf`의 canonical 복사본, 동일 sha256; 중복 legacy 사본은 2026-06-21 cleanup에서 삭제), pypdf/pymupdf 본문 추출 정상(약 90k자). venue("Proceedings of the 61st Annual Meeting of the ACL")·title·authors·abstract·method·code 직접 확인.
+  - legacy 자료: 문장단위 reading 노트는 `archive/legacy-reading-pipeline-2026-01/reading/01.…`에 historical-only 보존(`contents/01`은 2026-06-21 cleanup에서 삭제). source-of-record는 canonical PDF 재추출.
   - TeX source/ar5iv: 미사용.
 - Paper Type: `training` / `instruction tuning (self-generated instruction bootstrapping)` — instruction-tuning boundary reference
 - Reading Status: `strategically-read`
