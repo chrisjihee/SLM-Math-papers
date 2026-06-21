@@ -50,12 +50,14 @@
 
 ## 비-canonical / 보조·역사 문서 (active queue로 쓰지 말 것)
 
-아래 문서들은 보존하되, unread/read 판단이나 active queue로 사용하지 않는다. 각 파일 상단의 status note를 참고한다.
+아래 자료는 **(2026-06-21) `archive/` 로 이동**해 보존한다. unread/read 판단이나 active queue로 사용하지 않는다. 개요는 [archive/README.md](archive/README.md) 참고.
 
-- [MUST-READ-PLAN.md](MUST-READ-PLAN.md) — 2026-06-14 framing 단계의 historical must-read plan. 다수가 이미 strategically-read 완료.
-- [UNIFIED-PAPER-LIST.md](UNIFIED-PAPER-LIST.md) — secondary/legacy 통합 인덱스.
-- [READING-GUIDE-P0.md](READING-GUIDE-P0.md) — 2026-01/early pipeline P0 읽기 가이드 (deprecated).
-- legacy prompts(`paper-search-prompt-*.txt`, `paper-extracting-prompt-*.txt`, `paper-reading-prompt-*.txt`), `contents/` · `reading/` · `summary/`, `paper/` 의 옛 번호 PDF(`01.`~`11.`).
+- [archive/legacy-plans/MUST-READ-PLAN.md](archive/legacy-plans/MUST-READ-PLAN.md) — 2026-06-14 framing 단계의 historical must-read plan.
+- [archive/legacy-plans/UNIFIED-PAPER-LIST.md](archive/legacy-plans/UNIFIED-PAPER-LIST.md) — secondary/legacy 통합 인덱스.
+- [archive/legacy-plans/READING-GUIDE-P0.md](archive/legacy-plans/READING-GUIDE-P0.md) — 2026-01/early pipeline P0 읽기 가이드 (deprecated).
+- [archive/legacy-reading-pipeline-2026-01/](archive/legacy-reading-pipeline-2026-01/) — 옛 prompts / `contents/` / `reading/` / `summary/` pipeline 산출물.
+- [archive/legacy-paper-filenames/](archive/legacy-paper-filenames/) — canonical-slug PDF와 동일 논문인 옛 번호·괄호명 PDF(13편). canonical PDF는 `paper/` 에 유지.
+- [archive/legacy-reports/](archive/legacy-reports/) — `research-report-0730.txt`, `related-source.txt`, 옛 환경 setup(`requirements.txt`, `setup.sh`).
 
 ## 현재 권장 사용 순서
 

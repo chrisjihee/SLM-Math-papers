@@ -33,15 +33,17 @@
 
 ## 2. Legacy / historical files (보존, active 아님)
 
-| 파일/디렉터리 | 비고 |
+> **(2026-06-21 update)** 아래 legacy 자료는 대부분 `archive/` 로 물리 이동했다(`git mv`, 삭제 0). 개요: `archive/README.md`. 상세 계획: `CLEANUP-PLAN-20260621.md`.
+
+| 파일/디렉터리 (현재 위치) | 비고 |
 |---|---|
-| `paper-search-prompt-2025.08.txt`, `paper-search-prompt-2025.12.txt` | legacy search pipeline prompt. |
-| `paper-extracting-prompt-2026.01.txt`, `paper-reading-prompt-2026.01.txt` | legacy extract/read pipeline prompt. |
-| `contents/` (7), `reading/` (7), `summary/` (1) | 2026-01 pipeline 산출물. |
-| `paper/` 의 `01.`~`11.` 번호 PDF (11개) + `(ACL25) Unveiling…`, `(NAACL25) Reasoning Aware Self-Consistency…` (2개) | legacy-named PDF. canonical-slug 사본 존재. |
-| `MUST-READ-PLAN.md`, `UNIFIED-PAPER-LIST.md` | non-canonical 보조 인덱스 (상단 status note 보유). |
-| `READING-GUIDE-P0.md` | 2026-01 P0 읽기 가이드 (2026-06-21 deprecated notice 추가). |
-| `LEGACY-CG-PAPERS.md`, `CONFERENCE-TARGETS-2024-KIISE.md`, `related-source.txt`, `research-report-0730.txt` | 역사적 참고. |
+| `archive/legacy-reading-pipeline-2026-01/prompts/` (4 txt) | legacy search/extract/read pipeline prompt. |
+| `archive/legacy-reading-pipeline-2026-01/{contents,reading,summary}/` (7/7/1) | 2026-01 pipeline 산출물. |
+| `archive/legacy-paper-filenames/` (13 PDF) | 옛 번호(`01.`~`11.`) + 괄호명 2개. canonical-slug PDF와 동일 논문(검증 완료). canonical은 `paper/` 유지. |
+| `archive/legacy-plans/MUST-READ-PLAN.md`, `archive/legacy-plans/UNIFIED-PAPER-LIST.md` | non-canonical 보조 인덱스 (상단 status note 보유). |
+| `archive/legacy-plans/READING-GUIDE-P0.md` | 2026-01 P0 읽기 가이드 (deprecated notice 보유). |
+| `archive/legacy-reports/{research-report-0730.txt, related-source.txt, requirements.txt, setup.sh}` | 옛 report / source list / `LM-based-KG-papers` 환경 setup(미사용). |
+| `LEGACY-CG-PAPERS.md`, `CONFERENCE-TARGETS-2024-KIISE.md` (top-level 유지) | 역사적 참고 / venue 전략. |
 
 ## 3. Current note corpus summary
 
@@ -51,24 +53,24 @@
 
 ## 4. Paper PDF corpus summary
 
-- `paper/` PDF **48개** = canonical-slug **35** + legacy 번호(`01.`~`11.`) **11** + legacy 괄호명 **2**.
+- **(2026-06-21 정리 후)** `paper/` = canonical-slug **35개만**. 13개 legacy-named PDF는 `archive/legacy-paper-filenames/` 로 이동.
 - canonical-slug 35개는 `papers.yaml`의 `source_pdf` 35개와 **1:1 매핑**.
 - `papers.yaml` 35/39 entries가 `source_pdf` 보유. 나머지 4편(DeepSeek-R1, Chain-of-Thought, Self-Consistency, ToRA)은 **local canonical PDF가 없어** arXiv/원문 grounding으로 둠(추측 추가하지 않음).
-- 2026-06-21 이번 작업에서 **14편**에 `source_pdf`를 신규 연결(아래 §9-A). 모두 PDF 첫 페이지 title을 직접 추출해 entry title과 일치 확인 후 추가(grounded, insertion-only).
+- 2026-06-21 이전 작업에서 **14편**에 `source_pdf`를 신규 연결(아래 §9-A). 모두 PDF 첫 페이지 title을 직접 추출해 entry title과 일치 확인 후 추가(grounded, insertion-only).
 
 ## 5. Known duplicate PDF policy
 
-- legacy-named PDF(`01.`~`11.` + 괄호명 2개, 총 13개)는 canonical-slug 사본이 존재한다.
+- legacy-named PDF(`01.`~`11.` + 괄호명 2개, 총 13개)는 canonical-slug 사본과 **동일 논문**이다(2026-06-21 검증: 11편 sha256 동일, 2편 published↔preprint 버전 차이).
 - **source-of-record = canonical-slug PDF**(예: `paper/2025-switch.pdf`). `papers.yaml`의 `source_pdf`는 canonical-slug만 가리킨다.
-- legacy-named PDF는 **삭제·rename하지 않고 보존**(원본 다운로드 이력/대조용). 중복이지만 의도된 보존이다.
+- legacy-named PDF는 **삭제하지 않고 `archive/legacy-paper-filenames/` 로 이동 보존**. 버전 차이가 있는 2편(Distilling Step-by-Step, Rewarding Progress)은 published 버전 보존용으로 가치가 있어 manifest에 명시.
 
 ## 6. Known legacy filename mismatch
 
-| 항목 | legacy 표기 | canonical(검증) |
+| 항목 | legacy 표기(현재 `archive/legacy-paper-filenames/`) | canonical(검증) |
 |---|---|---|
-| SWITCH | `paper/11. (EMNLP25) SWITCH…pdf` | **NAACL 2025 Findings** (yaml `venue: "NAACL 2025 Findings"`, note에 "legacy filename EMNLP25 is wrong" 기록) |
-| Mentor-KD | `paper/10. (EMNLP24) Mentor-KD…pdf` | EMNLP 2024 (일치) |
-| ThinkPRM(Process Reward Models That Think) | `paper/06. (Arxiv25) …pdf` | arXiv 2025 (일치) |
+| SWITCH | `11. (EMNLP25) SWITCH…pdf` | **NAACL 2025 Findings** (yaml `venue: "NAACL 2025 Findings"`, note에 "legacy filename EMNLP25 is wrong" 기록) |
+| Mentor-KD | `10. (EMNLP24) Mentor-KD…pdf` | EMNLP 2024 (일치) |
+| ThinkPRM(Process Reward Models That Think) | `06. (Arxiv25) …pdf` | arXiv 2025 (일치) |
 | 그 외 `01.`~`09.` | 괄호 venue 표기 | canonical metadata는 `papers.yaml` 기준이 우선 |
 
 - 원칙: **venue 진실값은 `papers.yaml` / `md/` 노트**가 가지며, legacy 파일명은 참고용일 뿐. 파일명은 rename 금지.
@@ -81,12 +83,12 @@
 4. `RELATED-WORK-MATRIX.md` — 관련연구 비교/claim boundary.
 5. `POSITIONING-NOTES.md` — 금지 주장 / framing.
 
-## 8. Files NOT to use as active queue
+## 8. Files NOT to use as active queue (모두 `archive/` 로 이동)
 
-- `MUST-READ-PLAN.md` (historical must-read plan)
-- `UNIFIED-PAPER-LIST.md` (secondary/legacy 통합 인덱스)
-- `READING-GUIDE-P0.md` (2026-01 early pipeline, deprecated)
-- legacy prompts (`paper-search-prompt-*.txt`, `paper-extracting-prompt-*.txt`, `paper-reading-prompt-*.txt`)
+- `archive/legacy-plans/MUST-READ-PLAN.md` (historical must-read plan)
+- `archive/legacy-plans/UNIFIED-PAPER-LIST.md` (secondary/legacy 통합 인덱스)
+- `archive/legacy-plans/READING-GUIDE-P0.md` (2026-01 early pipeline, deprecated)
+- `archive/legacy-reading-pipeline-2026-01/prompts/*` (legacy search/extract/read prompts)
 
 → 위 문서로 unread/read를 판단하지 말 것. 상태 판단은 §7로만.
 
