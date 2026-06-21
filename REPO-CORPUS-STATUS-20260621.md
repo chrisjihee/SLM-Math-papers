@@ -5,7 +5,8 @@
 >
 > **갱신 이력:**
 > - (1차 archive split) legacy 자료를 `archive/` 로 `git mv` 이동(삭제 0).
-> - (2차 simplification, 같은 날) maintenance-cost 축소를 위해 **exact-duplicate legacy PDF 11편 + 옛 env/prompt/contents/summary 산출물 삭제**, 그리고 `CLEANUP-PLAN`/`LEGACY-CG-PAPERS`/`CONFERENCE-TARGETS`를 archive로 이동. version-different legacy PDF 2편(Distilling, Rewarding Progress)과 문장단위 reading 노트는 보존. 삭제/보존 목록은 아래 §11.
+> - (2차 simplification, 같은 날) maintenance-cost 축소를 위해 **exact-duplicate legacy PDF 11편 + 옛 env/search-prompt/contents/summary 산출물 삭제**, 그리고 `CLEANUP-PLAN`/`LEGACY-CG-PAPERS`/`CONFERENCE-TARGETS`를 archive로 이동. version-different legacy PDF 2편(Distilling, Rewarding Progress)과 문장단위 reading 노트는 보존. 삭제/보존 목록은 아래 §11.
+> - (3차, prompt 복원) Gemini focused-reading prompt 2개(`paper-extracting-prompt-2026.01.txt`, `paper-reading-prompt-2026.01.txt`)를 `archive/legacy-reading-pipeline-2026-01/prompts/`에 복원. **optional utility이며 canonical workflow 아님**(§11 참고).
 
 ## 0. 현재 canonical research frame
 
@@ -40,7 +41,7 @@
 
 | 파일/디렉터리 (현재 위치) | 비고 |
 |---|---|
-| `archive/legacy-reading-pipeline-2026-01/prompts/` (4 txt) | legacy search/extract/read pipeline prompt. |
+| `archive/legacy-reading-pipeline-2026-01/prompts/` (2 txt, 복원) | Gemini focused-reading utility(`paper-extracting-prompt`, `paper-reading-prompt`). canonical workflow 아님. search prompt 2개는 삭제. |
 | `archive/legacy-reading-pipeline-2026-01/{contents,reading,summary}/` (7/7/1) | 2026-01 pipeline 산출물. |
 | `archive/legacy-paper-filenames/` (13 PDF) | 옛 번호(`01.`~`11.`) + 괄호명 2개. canonical-slug PDF와 동일 논문(검증 완료). canonical은 `paper/` 유지. |
 | `archive/legacy-plans/MUST-READ-PLAN.md`, `archive/legacy-plans/UNIFIED-PAPER-LIST.md` | non-canonical 보조 인덱스 (상단 status note 보유). |
@@ -95,9 +96,9 @@
 - `archive/legacy-plans/MUST-READ-PLAN.md` (historical must-read plan)
 - `archive/legacy-plans/UNIFIED-PAPER-LIST.md` (secondary/legacy 통합 인덱스)
 - `archive/legacy-plans/READING-GUIDE-P0.md` (2026-01 early pipeline, deprecated)
-- `archive/legacy-reading-pipeline-2026-01/prompts/*` (legacy search/extract/read prompts)
+- `archive/legacy-reading-pipeline-2026-01/prompts/*` (복원된 Gemini focused-reading prompt 2개 — optional utility이며 active queue/canonical workflow 아님)
 
-→ 위 문서로 unread/read를 판단하지 말 것. 상태 판단은 §7로만.
+→ 위 문서로 unread/read를 판단하지 말 것. 상태 판단은 §7로만. prompts는 특정 PDF 심층 독해 시에만 선택적으로 사용.
 
 ## 9. Remaining optional cleanup items (normalization backlog)
 
@@ -118,12 +119,13 @@
 
 ## 11. 2026-06-21 simplification — deleted / preserved
 
-**삭제 (총 25개, exact-duplicate / superseded intermediates):**
+**삭제 (총 23개, exact-duplicate / superseded intermediates):**
 - exact-duplicate legacy PDF **11편** (`archive/legacy-paper-filenames/` 의 `01,03,04,06,07,08,09,10,11` + `(ACL25)Unveiling`, `(NAACL25)RASC`) — canonical-slug PDF와 sha256 완전 동일.
 - 옛 환경 setup **2개** (`requirements.txt`, `setup.sh` — `LM-based-KG-papers` conda env, 현재 미사용).
-- 옛 pipeline 산출물 **12개**: prompts 4 (`paper-search/extracting/reading-prompt`), contents 7 (raw 추출 텍스트), summary 1. canonical `md/`로 대체됨.
+- 옛 pipeline 산출물 **10개**: search prompt 2 (`paper-search-prompt-2025.08/12`), contents 7 (raw 추출 텍스트), summary 1. canonical `md/`로 대체됨.
 
-**보존 (active source of truth 아님, historical):**
+**보존 / 복원 (active source of truth 아님, historical / optional):**
+- **(복원, 2026-06-21)** Gemini focused-reading prompt **2개**: `archive/legacy-reading-pipeline-2026-01/prompts/{paper-extracting-prompt-2026.01.txt, paper-reading-prompt-2026.01.txt}` — 특정 논문 PDF를 Gemini로 매우 깊게 추출·문장 단위 독해할 때만 쓰는 **optional focused-reading utility**. canonical workflow(=`PAPER-REVIEW-TEMPLATE.md` + `md/*.md` 11섹션) 아님. routine registry update / deep-interview에는 미사용.
 - version-different legacy PDF **2편**: `archive/legacy-paper-filenames/{02 Distilling(Findings-ACL), 05 Rewarding Progress(ICLR2025)}` — published 버전.
 - 문장단위 reading 노트 **7개**: `archive/legacy-reading-pipeline-2026-01/reading/` (04R/05R 보조 PDF 포함). canonical 11섹션 노트의 보조 historical only.
 - archive로 이동: `legacy-plans/`(3), `legacy-reports/`(research-report, related-source, CONFERENCE-TARGETS), `legacy-cg-phase/LEGACY-CG-PAPERS.md`, `maintenance/CLEANUP-PLAN-20260621.md`.

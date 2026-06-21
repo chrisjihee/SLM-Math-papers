@@ -53,7 +53,7 @@
 아래 자료는 **`archive/` 에 historical-only로 보존**한다. unread/read 판단이나 active queue로 사용하지 않는다. 개요는 [archive/README.md](archive/README.md) 참고. (2026-06-21 simplification에서 exact-duplicate PDF 11편 + 옛 env/prompt/contents/summary 산출물은 superseded로 삭제.)
 
 - [archive/legacy-plans/](archive/legacy-plans/) — `MUST-READ-PLAN.md`, `UNIFIED-PAPER-LIST.md`, `READING-GUIDE-P0.md` (historical plan/list).
-- [archive/legacy-reading-pipeline-2026-01/reading/](archive/legacy-reading-pipeline-2026-01/reading/) — 옛 문장단위 reading 노트(historical only). prompts/contents/summary는 삭제됨.
+- [archive/legacy-reading-pipeline-2026-01/](archive/legacy-reading-pipeline-2026-01/) — 옛 문장단위 reading 노트(historical only) + 복원된 Gemini focused-reading prompt 2개(`prompts/`, optional utility, canonical 아님). contents/summary와 search prompt는 삭제됨.
 - [archive/legacy-paper-filenames/](archive/legacy-paper-filenames/) — version-different legacy PDF **2편**(Distilling Step-by-Step, Rewarding Progress)만 보존. canonical PDF는 `paper/`.
 - [archive/legacy-reports/](archive/legacy-reports/) — `research-report-0730.txt`, `related-source.txt`, `CONFERENCE-TARGETS-2024-KIISE.md`.
 - [archive/legacy-cg-phase/LEGACY-CG-PAPERS.md](archive/legacy-cg-phase/LEGACY-CG-PAPERS.md) — CG-centric phase 역사 index.
